@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-04",
+  "updated": "2026-11-12",
   "note": "Curated component sources, read at the source on the date above. 'licence' records what was read, not what is assumed. Entries with a 'registry' url are searchable by scripts/find-components.js; the public directory at https://ui.shadcn.com/r/registries.json covers the other 500 registries.",
   "components": [
     {
@@ -208,6 +208,27 @@
       "licence-read": "BoardUI/boardui repository licence and the registry item paths, 2026-11-04",
       "install": "pnpm dlx boardui@latest init, then pnpm dlx boardui@latest add <name>",
       "notes": "88 registry items with titles and descriptions, so search matches meaning, not only names. Built on react-aria-components, not Radix: check that before mixing it with shadcn primitives. Strongest for dashboards and agent screens (agent-chat, agent-thinking, agent-log, composer-loader, data-table, app-shell). 22 of the 88 items are absent from the MIT repository, among them modal, toast, popover, skeleton, accordion, data-table and app-shell. The registry serves their full source over HTTP with no authentication, but a Pro licence key exists (boardui login <key>) and holds a per-machine seat, so those 22 are reachable without being licensed. Take one only after the terms are stated."
+    },
+    {
+      "id": "@astryx",
+      "url": "https://astryx.atmeta.com",
+      "for": [
+        "primitives",
+        "form",
+        "table",
+        "dialog",
+        "navigation",
+        "chat",
+        "richtext",
+        "theme"
+      ],
+      "stack": "react19+stylex",
+      "licence": "MIT",
+      "licence-read": "meta/astryx LICENSE, Meta Platforms, 2026-11-12",
+      "install": "pnpm dlx shadcn@latest add @astryx/component-button, or pnpm add @astryxdesign/core @stylexjs/stylex @astryxdesign/theme-neutral and then pnpm dlx @astryxdesign/cli init",
+      "notes": "Meta's own design system, in beta at 0.7.14 on 2026-11-12. MIT in meta/astryx's LICENSE and on npm for core, cli and the theme packages. Its registry is shadcn-spec and in the public directory as @astryx, healthy at 98.7 with 1,004 items on 2026-11-12: 189 components, 675 blocks, 83 hooks and 57 pages, every one with a description, so search matches meaning. Item names carry their kind, so the item is component-button, not button, and its type is registry:component rather than registry:ui: the search covers both by default, but pass --type any to reach its blocks, pages and hooks. A component installs as a re-export of the npm package rather than as copied source, so taking one brings the whole system: react and react-dom >=19, @stylexjs/stylex ^0.19.0, and its own reset and stylesheet. Blocks, examples and pages do copy editable source. Its own CLI searches the same catalogue with pnpm dlx @astryxdesign/cli search <term> --json, and every command takes --json. Never run bare npx astryx: the unscoped name is an unrelated package. The 180-component and 13,000-app figures on its home page are the vendor's own and were not counted.",
+      "registry": "https://astryx.atmeta.com/shadcn/{name}.json",
+      "catalogue": "https://astryx.atmeta.com/shadcn/registry.json"
     }
   ],
   "screens": [
@@ -250,6 +271,23 @@
       "licence-read": "21st.dev/community/libraries and 21st.dev/pricing, 2026-10-27",
       "install": "account needed",
       "notes": "An index of 167 libraries, useful for finding a library by name. The free plan allows 2 copies a day; MCP component retrieval starts at the Builder plan, $6 a month billed yearly. Most of the libraries it indexes are also in the shadcn directory, which is free and scriptable, so search there first."
+    },
+    {
+      "id": "astryx-templates",
+      "url": "https://astryx.atmeta.com/templates",
+      "for": [
+        "dashboard",
+        "login",
+        "checkout",
+        "account-settings",
+        "ai-chat",
+        "product-page",
+        "gallery"
+      ],
+      "stack": "react19+stylex",
+      "licence": "MIT",
+      "licence-read": "meta/astryx LICENSE, Meta Platforms, 2026-11-12",
+      "install": "pnpm dlx shadcn@latest add @astryx/template-checkout-wizard"
     }
   ],
   "patterns": [

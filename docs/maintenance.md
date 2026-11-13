@@ -29,6 +29,10 @@ Rules the validator enforces, and why each exists:
   reaches a client.
 - `registry` must contain `{name}`; it is a template the search fills in.
   Leave it out for a source you copy from by hand, like hyperui.
+- Check which `type` the catalogue's items carry. `find-components.js`
+  searches `registry:ui` and `registry:component` by default, and a registry
+  that files its components under another type answers every request while
+  returning nothing. `@astryx` did until 2026-11-12.
 - `catalogue` overrides where the catalogue is fetched from. Only needed when
   it is not `<base>/registry.json` — shadcn's own index is at `/r/index.json`.
 - A url cannot be both listed and rejected.
@@ -134,8 +138,8 @@ human-readable rule can say who it hurts.
 
 Worth adding, in rough order of value, each absent today: card rows off a
 shared line; sibling control heights; inner and outer corner radii that are
-not concentric; padding asymmetry; grid rows with one lone item; focus
-indicators removed with nothing in their place. The last one needs driving
+not concentric; grid rows with one lone item; focus indicators removed with
+nothing in their place. The last one needs driving
 focus through the page, so it belongs with the journey walk rather than with a
 single evaluation.
 
@@ -150,12 +154,15 @@ apply without arguing. For example: `outer = inner + padding`, `scale(.96)`,
 ease-out under 300ms, and never a staged entrance on a repeated
 interaction.
 
-Keep three things out. Anything that reduces to taste. Anything that applies
-to one framework only. Anything `measure.js` already enforces, since it owns
-the measurable parts.
+Keep two things out. Anything that reduces to taste, and anything that applies
+to one framework only. Where `measure.js` measures a craft value, craft.md
+still states the rule and marks it **measured**, so the fault and its pixels
+carry one name in both places. That replaces the earlier rule that craft.md
+leave the measurable parts to the script: a rule nobody reads before the edit
+is a rule nobody follows. Changed on 2026-11-12.
 
 When a value is added, say where it was read. The page's attribution section
-and `NOTICE` both name its two sources. A value with no provenance cannot be
+and `NOTICE` both name its three sources. A value with no provenance cannot be
 told apart from a preference.
 
 **Known gap, recorded rather than fixed.** Nothing enforces this file. Stage

@@ -2,8 +2,9 @@
 
 The mechanics behind stage 8 of `ui-design` and the browser work in
 `ui-review`. Everything stated as observed here was run on 2026-10-27 against
-Playwright MCP 0.0.83; check it again rather than trusting this page if a tool
-behaves differently.
+Playwright MCP 0.0.83, apart from Filming motion below, which was run on
+2026-11-12 against Chrome 157. Check it again rather than trusting this page
+if a tool behaves differently.
 
 ## Check what is available before planning around it
 
@@ -121,6 +122,92 @@ browser_take_screenshot(filename: ".pxe-audit/shot-375.png", fullPage: true, sca
   a screenshot hides: a 500 behind a spinner, an uncaught error after a click.
 - Realistic input means the long name, the apostrophe, the five-digit number
   and the empty submit, not `test test`.
+
+## Filming motion
+
+A screenshot cannot show a pop, a jump, an entrance that fires on every
+keystroke, or a surface that lifts before the press. Three things catch those,
+and none of them needs a new dependency. Everything below was run on
+2026-11-12 through Playwright MCP against Chrome 157, and the numbers quoted
+are what it returned.
+
+**Slow the animation down from the page, then screenshot it.** The browser's
+own animation panel is not reachable from a tool call; `getAnimations` is:
+
+```js
+() => document.getAnimations().map((animation) => {
+  animation.updatePlaybackRate(0.1);
+  return animation.constructor.name;
+})
+```
+
+A 600ms transition reported itself as one `CSSTransition` and took the new
+rate, so a 60ms press becomes a 600ms one with every frame reachable by an
+ordinary `browser_take_screenshot`. Call it after the interaction starts: an
+animation that has not begun is not in the list.
+
+**Sample the geometry every frame instead of guessing the interval.** A
+contact sheet through the MCP server has no fixed cadence, because each
+screenshot is a round trip. Numbers do not need one:
+
+```js
+() => new Promise((resolve) => {
+  const target = document.querySelector("[data-watch]");
+  if (!target) { resolve({ error: "nothing carries data-watch" }); return; }
+  const samples = [];
+  const start = performance.now();
+  const tick = () => {
+    const box = target.getBoundingClientRect();
+    samples.push([Math.round(performance.now() - start), Math.round(box.left), Math.round(box.top)]);
+    if (performance.now() - start < 900) requestAnimationFrame(tick);
+    else resolve({
+      frames: samples.length,
+      biggestStep: Math.max(...samples.slice(1).map(([, x], i) => Math.abs(x - samples[i][1]))),
+      samples,
+    });
+  };
+  requestAnimationFrame(tick);
+})
+```
+
+Mark the element with `data-watch` first. Without the guard, a page with
+nothing marked throws inside the frame callback, the promise never settles,
+and the tool call times out instead of telling you why. `biggestStep` watches
+`left` only: read `samples` for a vertical jump.
+
+This sampler returned 112 frames over its 900ms window on 2026-11-12, with a
+largest step of 5px between two frames. Report what your own run returned,
+with the window it sampled, rather than quoting a frame count on its own: the
+count is the display's refresh rate as much as the page's. A step much larger
+than its neighbours is the jump a sheet of screenshots misses, and a run of
+identical positions followed by one large step is a clock or a layout thrash
+rather than an animation.
+
+**One trap worth knowing, because it produces a false pass.** A probe that
+appends an element and sets its end state in the same task sees no animation
+at all: `document.getAnimations()` returned 0, and the element was already at
+its final position on the first frame. Read a computed style between the two
+writes — `getComputedStyle(element).transform` — and the transition runs.
+Report "no animation found" only from a probe that does that.
+
+**What to film, whichever route you use.**
+
+- Every appear and disappear, slowed. A hidden element that still takes clicks
+  and an exit that never plays both look fine at full speed.
+- A press, from pointer down to settle. The surface must not lift before the
+  press lands.
+- A full loop plus the start of the next one, for anything that repeats. The
+  seam is where a reset with no cause shows up.
+- The resting state after the pointer leaves, not only the hover state.
+- Reduced motion, with `browser_emulate_media(reducedMotion: "reduce")`. The
+  content has to be complete and visible at rest. An element left invisible
+  because its entrance never ran is the failure this check exists for, and it
+  is invisible in every other pass.
+- Dark mode, with `browser_emulate_media(colorScheme: "dark")`, and back.
+
+Then say which browser and width each claim came from. A clean capture proves
+the geometry held. Whether the sequence is the right one is still a judgement,
+and the report says who made it.
 
 ## Capturing a state that needs setting up
 

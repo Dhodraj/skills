@@ -22,6 +22,51 @@ On 2026-11-04 the same two commands report `36 passed, 0 failed`,
 8 rejected, no problems`. The counts moved because sources were added after
 this run, not because anything regressed.
 
+On 2026-11-12, after the geometry faults were added to `measure.js`, the runs
+report `52 passed, 0 failed` offline and `55 passed, 0 failed` with
+`--network`, and `sources.json: 19 sources (11 searchable), 8 rejected, no
+problems`. The sixteen new checks keep the fixture and the script in step. The
+source count moved because `@astryx` and its templates were added the same
+day. What the script returns is a browser result, below.
+
+### The geometry faults, measured in a browser
+
+Run on 2026-11-12 through Playwright MCP against Chrome 157. Each fixture was
+loaded at 1440 wide, and `scripts/measure.js` was evaluated in it. Counts are
+`clipped / tightInsets / unevenPadding / nearTangents / wrappedUnits`:
+
+| Fixture | Result |
+|---|---|
+| `geometry-faults.html` | 1 / 1 / 1 / 2 / 2. The faults each panel was built to carry, including two near-tangents in the panel built for them and two split units, one with its unit in a span |
+| `dashboard-after.html` | 0 / 0 / 0 / 0 / 0 |
+| `dashboard-before.html` | 0 / 0 / 0 / 12 / 0. Twelve from one cause: a 3px gap between each tile's figure and its delta |
+| `landing.html` | 0 / 0 / 0 / 1 / 0. The wordmark's top edge misses the nav's by 2px |
+
+Six false positives were found this way and fixed before the detectors were
+kept:
+
+- The page body reported uneven padding, because a two-column grid leaves the
+  right side wide. `body` and `html` are now excluded, and a left-against-right
+  difference is only reported when the content fills at least half the width.
+- Every card stretched by its grid row reported a cramped bottom. Only a
+  cramped edge is reported now; space to spare is a different fault.
+- A table header reported a 0px inset, because its cell box reaches the
+  panel's edge while its text does not. Insets are measured from the ink.
+
+- An ordinary wrapped sentence in a table cell reported as a wrapped unit. The
+  check now finds the figure and the unit, puts a range round each and compares
+  the line each landed on. A clock time is excluded.
+- A stat tile whose label, figure and delta are separate blocks reported as a
+  wrapped unit. A figure on one line and a delta on the next look like a split
+  unit. The figure and the unit now have to share one inline flow.
+- Every row of baseline-aligned text of two sizes reported a bottom-edge
+  near-tangent, three on the clean fixture alone. Bottom edges are no longer
+  compared.
+
+The last two were found after an independent review of the change, by running
+the detectors again rather than by reading them. The first run's figures,
+`1 / 1 / 1 / 2 / 1` with a 12 and a 1, were taken before those three fixes.
+
 Two defects were found by the suite and fixed while writing it: `grep`
 treating a pattern starting with a dash as an option, and the search script
 deriving a registry's catalogue url without resolving a `{style}` segment,

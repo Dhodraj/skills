@@ -1,6 +1,7 @@
 # Source research
 
-Every URL supplied for this work, read on 2026-10-27. Repository facts come
+Every URL supplied for this work, read on 2026-10-27, and one more read on
+2026-11-12 in a third round at the end of this file. Repository facts come
 from the GitHub API; page facts come from the page itself; licence facts come
 from the licence file or the page that states the licence.
 
@@ -30,6 +31,8 @@ destinations are named under each entry.
 | transitions.dev | Exclude from sources.json — no licence, no price stated |
 | rareui.com, originkit.dev, beautifului.dev, libraries.dev orbs | Exclude — no licence, or nothing on the page to act on |
 | agentation.com | Exclude — not a component source |
+| benjitaylor/skills, stageshow | Adapt — its spacing, alignment and icon numbers, and filming motion rather than inferring it; its faux-UI purpose is left out |
+| meta/astryx | Integrate — curated component and screens source, MIT read at the file; its registry needed a new default item type to be searchable |
 
 ## Design intelligence, visual quality and critique
 
@@ -448,6 +451,81 @@ layout: depth, motion, optical correctness.
 **Honesty note on this round**: four of the twenty entries in the catalogue's
 design domain were opened. The rest are named above or not at all. A verdict
 is given only where the source itself was read.
+
+## A third round: stageshow, read 2026-11-12
+
+One URL was supplied: `https://github.com/benjitaylor/skills/blob/main/stageshow/SKILL.md`.
+The repository was cloned at depth 1 and read on disk, not from the page.
+
+### benjitaylor/skills, the stageshow skill
+
+- **Identity**: `benjitaylor/skills`, one skill in it, `stageshow`, version
+  1.1.1 in its own front matter. `stageshow/LICENSE` is the MIT licence,
+  copyright 2026 Benji Taylor. Verified by reading both files.
+- **What it is**: a skill for building faux product UI. It draws a believable
+  interface in React and CSS. The result is a still illustration for a
+  marketing page, or a short animated demo with a cursor. It ships a React kit (31
+  files under `kit/`), 70 examples, a Vite playground, 15 reference documents
+  and 12 Node scripts, 5.6MB in all.
+- **Verdict**: adapt its generic rules, take nothing else. Its purpose is the
+  opposite of this skill's. `gates.md` rule 37 forbids a drawn browser window,
+  phone frame or terminal in a real product, and stageshow exists to draw them
+  well. The kit, the examples, the playground and the framing rules all serve
+  that purpose. None of them has a place here.
+- **What was taken**: the spacing and alignment numbers, the emphasis rules
+  and four icon rules, into `references/craft.md`. The idea that five of those
+  numbers can be measured, into `scripts/measure.js`. The practice of filming
+  motion rather than inferring it, into `references/playwright.md`.
+  `.claude/skills/ui-design/NOTICE` lists each one.
+- **What was not taken**: its `scripts/film-checks.mjs` (2,120 lines) and
+  `film.mjs` (664 lines), the machinery behind its rehearsal gate.
+  They need `playwright-core` and a page built on its own `Stage` component,
+  so neither runs against an ordinary product page. The mechanics written into
+  `playwright.md` instead are `document.getAnimations()`,
+  `updatePlaybackRate` and a `requestAnimationFrame` sampler, measured through
+  the Playwright MCP server against Chrome 157 on 2026-11-12.
+- **Its own attribution**: `stageshow/NOTICE.md` records that the app icons in
+  `assets/app-icons.ts` and the brand artwork in `kit/brands/` are not covered
+  by its MIT licence. Nothing from either directory was read into this skill.
+
+## A fourth round: Astryx, read 2026-11-12
+
+One URL was supplied: `https://astryx.atmeta.com/`. The site, the npm registry,
+the GitHub API and the public shadcn directory were all read.
+
+### meta/astryx (Astryx Design System)
+
+- **Identity**: `meta/astryx`, MIT in its own `LICENSE` file, copyright 2026
+  Meta Platforms, Inc. 26,244 stars, last push 2026-11-12. The site says
+  "Currently in Beta", built on React 19+ and StyleX.
+- **Packages**: `@astryxdesign/core`, `@astryxdesign/cli` and
+  `@astryxdesign/theme-neutral` are all at 0.7.14 and all MIT on npm.
+  Core's peers are `react` and `react-dom` >=19.0.0 and
+  `@stylexjs/stylex` ^0.19.0.
+- **Registry**: it is in the public shadcn directory as `@astryx`, with
+  `https://astryx.atmeta.com/shadcn/{name}.json` and a catalogue at
+  `/shadcn/registry.json`. Status healthy, score 98.7, 1,004 items. The
+  catalogue holds 189 `registry:component`, 675 `registry:block`, 83
+  `registry:hook` and 57 `registry:page`, every one with a description.
+- **Verdict**: integrate, as a curated component source and a screens source.
+  The licence was read at the file, the notes carry what the catalogue does
+  not, and it is the only curated registry using `registry:component`.
+- **What it cost to make usable**: `find-components.js` searched
+  `registry:ui` only, so all 1,004 items were invisible while the registry
+  answered. Its default now covers `registry:ui` and `registry:component`. No
+  other curated registry publishes `registry:component`, so nothing else
+  changes.
+- **Two things a reader needs**: a component installs as a re-export of the
+  npm package, not as copied source. Taking one brings React 19, StyleX and
+  its stylesheet with it. Blocks, examples and pages do copy editable source.
+  And bare `npx astryx` resolves to an unrelated npm package: the site says so
+  itself.
+- **Not verified**: the "over 180 components" and "powers over 13,000 apps"
+  figures on the home page, which are the vendor's own. The component count
+  is close to the catalogue's 189, the app count has no source. `/docs/working-with-ai`
+  answers with HTTP 200 but was not read. No MCP server name was found on the
+  pages read, though the home page says agents can reach it "from the command
+  line or MCP".
 
 ## What could not be verified
 

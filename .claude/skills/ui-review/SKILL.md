@@ -83,6 +83,25 @@ text contrast, target sizes, controls with no accessible name, heading order,
 unsized media and text below 12px. It also returns a census of the type sizes,
 radii, shadows and font families the page really uses.
 
+It reports five geometry faults by name, each one a rule in
+[craft.md](../ui-design/references/craft.md), Spacing and alignment:
+
+| Fault | What the number means |
+|---|---|
+| `clipped` | A mark sliced by a container that hides overflow. A crop marked `data-crop` is exempt, and truncation with an ellipsis is not counted |
+| `tightInsets` | Ink closer than 8px to the edge of the surface it sits on, where 12px is the rule. Measured from the text, not from its box. A dense table or a chip set tighter than 8px on purpose reports here too |
+| `unevenPadding` | A panel of at least 120 by 80 with two or more children whose content is cramped against one edge, or whose left and right gaps differ while the content fills the width. A panel with room below its content is not reported |
+| `nearTangents` | Sibling edges 0.5 to 3.5px apart: a gap that neither closes nor clears a step of the scale, or two left, right or top edges that were meant to line up. Bottom edges are not compared, because baseline-aligned text of two sizes misses by a pixel or two when it is right |
+| `wrappedUnits` | A figure split from its unit, or a currency sign from its digits, over two lines. It puts a range round each and compares the line they landed on, and it reads through a child span, so `42 <span>GB</span>` counts |
+
+Against the skill's own fixtures on 2026-11-12, at 1440 in Chrome 157,
+`dashboard-after.html` returned zero of all five and `geometry-faults.html`
+returned `1 / 1 / 1 / 2 / 2`: the faults each panel was built to carry.
+`docs/testing-report.md` has every count. No real application, no 375 width
+and no dark surface has been measured yet, so a count on one of those is new
+ground. A page with a dozen `nearTangents` from one cause is one finding with
+twelve occurrences.
+
 Every number the script returns is a candidate, not a finding. Confirm it on
 the render, decide whether it harms a customer, and fold one cause into one
 finding.
@@ -91,7 +110,7 @@ finding.
 
 The script cannot see hierarchy, rhythm, crowding, visual weight or whether
 the page is any good. Open every screenshot at every width and walk these
-seven. Each one is a failure that renders wrong while the source reads fine.
+eight. Each one is a failure that renders wrong while the source reads fine.
 
 1. **Placement.** Is the main element where it belongs? Centre what should be
    centred and align the rest to the grid. Is there a large empty region
@@ -111,8 +130,18 @@ seven. Each one is a failure that renders wrong while the source reads fine.
 7. **State.** Look at every state step 5 rendered, not only the one the
    fixtures gave you. A state that is correct in the DOM and ugly on screen
    fails here. Step 5 decides which states to render; this check judges them.
+8. **The named geometry faults.** Open the screenshot at each place the script
+   named a `clipped`, `tightInsets`, `unevenPadding`, `nearTangents` or
+   `wrappedUnits` candidate and decide whether it harms a reader. File a
+   confirmed one under check 2 where it is containment and check 6 where it is
+   rhythm: a clip is a Warning, and a miss of a pixel or two is Polish. Three
+   of them have an innocent explanation worth checking first: a deliberate
+   crop, a chip whose vertical padding is tight on purpose, and a grid that
+   stretched a panel taller than its content. The rest of `craft.md`, Spacing and
+   alignment is eye work: a dot outside its row, a body starting under an
+   avatar instead of at the name, a title spread from its own subtitle.
 
-Say which of the seven each finding is. Where you could not render, say so
+Say which of the eight each finding is. Where you could not render, say so
 rather than judging from the source.
 
 ## 5. Walk it as a customer
@@ -194,6 +223,12 @@ What each of the others catches, and where it is easy to get wrong:
 - Focus and hover are yours to try by hand. Tab through the instances rather
   than simulating a focus state in a harness, which can hold a ring the
   keyboard would never show.
+- **Anything that moves is filmed, not inferred.** Slow it down and capture
+  every appear, disappear, press and loop seam, then reduced motion.
+  [playwright.md](../ui-design/references/playwright.md), Filming motion, has
+  the mechanics. A hidden element that still takes clicks, an entrance that
+  fires on every keystroke and an element left invisible under reduced motion
+  all read as correct in the source and in a still.
 
 **The mistakes.** Submit the form empty, and with one field wrong. Press the
 primary action twice. Go back mid-flow, then forward. Reload halfway through. Open a
@@ -240,7 +275,7 @@ Never by how easy the fix is.
 |---|---|
 | **Blocker** | Stops a core task, loses data, misleads: the primary action unreachable, a keyboard trap, a figure that misstates the data, a success message for a failure, a form that prints "Sent" with nothing behind it |
 | **Critical** | Major harm on a common path: body or action text below 4.5:1, horizontal scrolling at 375, a missing empty or error state on a primary flow, a control with no accessible name, a placeholder used as the only label, an invented metric or testimonial |
-| **Warning** | Degrades the experience: off-system spacing, values off a shared scale, weak hierarchy, duplicated actions, a forgettable public page |
+| **Warning** | Degrades the experience: off-system spacing, values off a shared scale, weak hierarchy, duplicated actions, words or a mark clipped by their own container, a forgettable public page |
 | **Polish** | Refinement: a widow, nested corners, a few pixels of asymmetry |
 
 Torn between two, take the lower and say why. An inflated review gets ignored.

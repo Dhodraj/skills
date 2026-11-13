@@ -105,13 +105,16 @@ Plus `scripts/check-sources.js` and `tests/run.sh`.
   them gets less. Each reference says what to do instead, but the fallback is
   thinner than the real thing.
 - `measure.js` has to be passed to `browser_evaluate` as a string, which
-  costs tokens on the first measurement of each page. It leaves itself on the
-  page as `window.pxeMeasure` so the later widths cost one line, but a page
-  reload means pasting it again.
-- `measure.js` measures less than `uicheck.py` does. It does not check
-  card-row alignment, baselines, gutters, concentric corners or padding
-  asymmetry. Those are left to the look, and to that skill where it is
-  installed.
+  costs tokens on the first measurement of each page. The geometry checks of
+  2026-11-12 took it from 13,689 to 28,232 characters, so that first paste is
+  now about twice what it was. It leaves itself on the page as
+  `window.pxeMeasure` so the later widths cost one line, but a page reload
+  means pasting it again.
+- `measure.js` measures less than `uicheck.py` does. On 2026-11-12 it gained
+  five geometry checks from `stageshow`: clipping, tight insets, padding
+  asymmetry, near-tangents and a wrapped unit. Padding asymmetry is no longer
+  only a matter for the look. Baselines, gutters, concentric corners and
+  alignment compared across rows are still unmeasured.
 - Nothing enforces `craft.md` or `gates.md`. Both are read at stage 7 and
   then relied on. The demo in `demo/` was built to them by hand, and the
   difference is visible against `demo/console-plain.html`. An agent that

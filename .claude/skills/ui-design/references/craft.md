@@ -27,8 +27,9 @@ dirt.
   0 8px 20px -6px oklch(0 0 0 / .09);
 ```
 
-On a dark surface the ambient layers are invisible: drop to a single white
-ring, `0 0 0 1px oklch(1 0 0 / .1)`.
+On a dark surface the ambient layers are invisible. Raise a secondary panel
+by a step of surface colour instead, and drop the lift to a single white ring,
+`0 0 0 1px oklch(1 0 0 / .1)`.
 
 Keep a border where it separates: dividers, table rules, input outlines,
 selected and focus states.
@@ -39,6 +40,111 @@ selected and focus states.
 look pinched. It is the commonest reason a screen feels off while every value
 in it is defensible. Above about 24px of padding the two are separate
 surfaces, and each picks its own radius.
+
+## Spacing and alignment
+
+The rules below are the ones a screenshot can be held to a number against.
+`scripts/measure.js` reports the five marked **measured** by name, so a review
+cites the fault and its pixels rather than its taste. The rest are read off the
+render by eye.
+
+- **Words keep a 12px inset** from the edge of a window, card, panel, row or
+  hovered fill. Under 8px reads as touching (**measured**: `tight inset`). A
+  fill, a rule or an image may bleed to the edge. Words do not.
+- **Carry the inset round the bottom.** A comfortable top does not excuse a
+  cramped action. Content sitting about a third closer to one edge than to the
+  sides is the usual form of it (**measured**: `uneven padding`).
+- **Nothing is clipped by a container that hides overflow** (**measured**:
+  `clipped`): an avatar half outside its card, a value sliced by a column, an
+  action cut off at a panel's edge. A crop at the page's own edge is
+  deliberate; one inside the page is a defect. Mark a crop you chose with
+  `data-crop`, which the script then leaves alone. The script compares border
+  boxes, so a sliced focus ring and a word cut inside its own box are both eye
+  work.
+- **No near-tangents** (**measured**: `near-tangent`). Two edges 1 to 3px
+  apart read as an accident. Line them up exactly, or part them by a step of
+  the project's spacing scale. The script's window is 0.5 to 3.5px between
+  sibling boxes, and it compares left, right and top edges, not bottom ones:
+  text of two sizes in a row sits a pixel or two apart at the foot when its
+  baselines are right.
+- **A unit stays with its number** (**measured**: `unit wrapped`). `42 GB`
+  broken over two lines, or a currency sign alone on the first line, says the
+  box was never sized for its content.
+- **A control keeps 8 to 12px from the field, line or card edge above it.**
+  On the field it reads as attached to it; well past 12px it drifts away from
+  the thing it acts on. A floating card — a comment popup, a toast — pads the
+  same all round, measured to the avatar's and the button's own edges rather
+  than to their text.
+- **A title over its subtitle is one item**: in a row, a card header or a
+  list item, 4 to 6px of ink between the lines, which is a 1.3 line height
+  plus about 2px of gap. Past 10px they read as two things. Display type sets
+  its own gap from its own scale. The air around the pair comes from the row's
+  padding.
+- **Whitespace groups.** A title sits closer to its own metadata than to the
+  next record. Never spread lines equally to fill the height available.
+- **Row padding is 12px, 8px in a dense list**, and whatever the target needs
+  where a thumb is expected: `gates.md` rule 11, and Hit areas below. In a
+  dense list a one-line row three times taller than its own text is a fault,
+  not generosity.
+- **A dot, a badge or a ring is not a column.** It sits in the gutter or on
+  the avatar, 6px clear of the text and the avatar's edge, and fully inside
+  the row's inset. Halos and focus rings stay inside the content edge too.
+- **Columns line up down the list.** One grid template with fixed tracks for
+  every row. Optional content leaves its track empty instead of closing the
+  gap, so nothing shifts from row to row.
+- **A body under an avatar row starts at the name's edge**, not under the
+  avatar.
+- **Content clears the bar above it.** The first heading on a page sits at
+  least the content's side inset below a toolbar's rule, never just under it.
+- **Fix overflow by fitting the content, not by widening the container**, and
+  re-measure the padding afterwards. A control hugs its content: `flex: 1`
+  with the contents at one end is a lopsided control, not a wide one. A fixed
+  box in a flex row takes `flex: none`, or it gets squeezed.
+- **Centre a label on its letters, not on its line box.** Capitals sit low in
+  a plain line box, so a word beside an icon, a label in a pill and an initial
+  in an avatar all read low. Trim it where the engine supports it:
+
+  ```css
+  .label { text-box: trim-both cap alphabetic; }
+  ```
+
+  `CSS.supports("text-box", "trim-both cap alphabetic")` returned `true` in
+  Chrome 157 on 2026-11-12, measured through the Playwright MCP browser. Guard
+  it with `@supports` and fall back to a 1px nudge: it is not in every engine.
+- **A centred amount centres its digits.** `$45` centred as one string sits
+  right of centre to the eye. Centre the digits and hang the sign outside
+  them, at `right: 100%` of the digit box. A figure that rolls rolls the
+  digits only.
+- **A popover draws its ring inset**, so its sides line up with the field's,
+  and it holds still once open. An open popover whose list changes height
+  drags its anchor with it and loses the reader's place.
+- **A link has no hover surface; a control has a surface visible at rest.**
+  Hover and selected fills are inset and rounded, with the negative margin on
+  the list rather than on the row.
+- **A trigger keeps its pressed look while its popover is open.** Give the
+  open trigger what the hovered one gets, through whatever state the project
+  already carries, or the open menu appears to belong to nothing.
+
+## Emphasis, and what not to use for it
+
+- **Never ring the thing you want looked at.** An accent ring and a soft halo
+  around the card the screen is about reads as a focus state nobody gave it,
+  and a coloured dot beside its label is a mark with no meaning. Lift it the
+  way the product would: its own surface, the raised shadow, the label in the
+  accent. A ring belongs to a field that really has focus.
+- **No redundant tonal border.** Try the fill alone first. Keep it where it
+  separates, where it carries a state, and where it is what gives a field or
+  control its 3:1 edge: Depth is a shadow, structure is a border above lists
+  the places, and `gates.md` rule 5 is the floor.
+- **A filled button keeps its own colour under the pointer** — one step of
+  that colour, never a swap to grey. Success is the one change of hue it is
+  allowed.
+- **Nothing translucent overlaps.** Stacked chips, overlapping cards and
+  facepiles take opaque fills. Two see-through fills over each other read as
+  dirt, and the stack order stops being readable.
+- **The heaviest mark on the screen sits on what the screen is about.** A 2px
+  rule under a label nobody needs outranks the figure beside it, and the eye
+  believes the ink, not the intent.
 
 ## Motion
 
@@ -197,9 +303,24 @@ A table, a run list or a dependency view is not a landing page.
 ## Icons
 
 Match the stroke to the text it sits beside: 1.5px next to regular, 2px next
-to semibold. One icon set per surface. One SVG per icon, coloured through
-`currentColor`, with states from CSS — never a second asset. Outline is the
-default; fill marks the active state.
+to semibold. One icon set per surface, at one size: 14 to 16px on a dense
+product surface, larger where the type is larger. One
+SVG per icon, coloured through `currentColor`, with states from CSS — never a
+second asset. Outline is the default; fill marks the active state.
+
+- **Never a glyph drawn by hand.** Its weight never matches its neighbours,
+  and that mismatch is the first tell of a generated interface. Take it from
+  the product's own set, or leave it out.
+- **At 14px and under, and in a tinted tile, use the filled style.** A thin
+  outline goes wiry at that size. This narrows the rule above: on a surface
+  built from small icons, every icon is filled and the active one is marked by
+  colour or weight instead.
+- **Filled and outline glyphs never sit side by side** in one navigation,
+  list or toolbar, whichever style the surface chose.
+- **An icon is one opaque colour.** Fade it with `opacity` on the `svg`, never
+  with a second tone inside it. Duotone reads as two icons.
+- **Even glyphs in even boxes.** An odd-sized icon centred in an even box
+  lands on a half pixel, and it snaps into place when a transition ends.
 
 ## Hit areas
 
@@ -227,7 +348,14 @@ weight.
 
 Slow the interface down: replay motion at 10% in the browser's animation
 panel and walk hover, focus, active, loading and empty. What looks wrong at
-10% is what feels wrong at full speed.
+10% is what feels wrong at full speed. Driving it from a script instead,
+including the frame-by-frame capture of a press and the appear-and-disappear
+sampling that a single screenshot cannot show, is in
+[playwright.md](playwright.md), Filming motion.
+
+A clean capture is not an approval. The frames prove geometry; whether the
+sequence is the right one is still a judgement someone has to make, and say
+they made.
 
 Report findings as a table with Before, After and Why columns, never as loose
 `Before:` and `After:` lines.
@@ -235,5 +363,6 @@ Report findings as a table with Before, After and Why columns, never as loose
 ## Attribution
 
 The values on this page are adapted from
-`jakubkrehel/make-interfaces-feel-better` and `emilkowalski/skills`, both
-MIT. [NOTICE](../NOTICE) records what was taken and what was changed.
+`jakubkrehel/make-interfaces-feel-better`, `emilkowalski/skills` and
+`benjitaylor/skills` (its `stageshow` skill), all MIT.
+[NOTICE](../NOTICE) records what was taken and what was changed.

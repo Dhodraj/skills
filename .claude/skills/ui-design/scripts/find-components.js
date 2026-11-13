@@ -18,8 +18,12 @@
 // Usage:
 //   find-components.js <term> [term...] [options]
 //
-//   --type <t>        registry item type, repeatable. Default registry:ui.
-//                     Pass "any" for every type.
+//   --type <t>        registry item type, repeatable. Default registry:ui and
+//                     registry:component, which is the same thing under
+//                     another name: @astryx uses it for all 189 of its
+//                     components and no other curated registry uses it at
+//                     all. Pass "any" for every type, which also brings
+//                     blocks, pages and hooks.
 //   --limit <n>       items to print. Default 20.
 //   --registries <n>  extra directory registries to search. Default 12.
 //   --curated-only    search only sources.json, no directory.
@@ -72,7 +76,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("-")) throw new Error(`unknown option ${arg}`);
     else options.terms.push(arg);
   }
-  if (options.types.length === 0) options.types = ["registry:ui"];
+  if (options.types.length === 0) options.types = ["registry:ui", "registry:component"];
   if (!Number.isFinite(options.limit) || options.limit < 1) throw new Error("--limit must be a positive number");
   if (!Number.isFinite(options.registries) || options.registries < 0) throw new Error("--registries must be 0 or more");
   return options;

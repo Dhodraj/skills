@@ -86,6 +86,42 @@ Taken as ideas, reworded and reduced:
   references/craft.md in our own words; none of its animation recipes,
   component guidance or prose is reused.
 
+- benjitaylor/skills, the stageshow skill, MIT.
+  https://github.com/benjitaylor/skills/tree/main/stageshow
+  Read in full on 2026-11-12, at the repository.
+  Taken into references/craft.md: the spacing and alignment numbers and the
+  faults they name — the 12px word inset and 8px floor, 8 to 12px between a
+  control and the edge above it, 4 to 6px of ink between a title and its
+  subtitle, 12px row padding and the three-times-its-text row, a status mark
+  6px clear and inside the row's inset, one grid template down a list, no two
+  edges 1 to 3px apart, a unit kept with its number, a body aligned to the
+  name rather than the avatar, centring a label on its cap height and an
+  amount on its digits, fitting content rather than widening a container,
+  flex: none on a fixed box, and a popover that holds still once open. Also
+  the emphasis rules: no accent ring standing in for hierarchy, no redundant
+  tonal border, a filled button keeping its own colour under the pointer, and
+  nothing translucent overlapping. Also four icon rules: one size per surface,
+  filled at 14px and under, no filled glyph beside an outline one, and one
+  opaque colour per icon.
+  Taken into scripts/measure.js: that these are the parts of craft that are
+  numbers, and five of them worth measuring — clipped, tight inset, uneven
+  padding, near-tangent and a wrapped unit. The detectors were written for
+  this skill against our own fixtures; none of its code is reused, and its
+  film scripts need playwright-core and a React kit that this skill does not
+  have.
+  Taken into references/playwright.md: that motion is filmed rather than
+  inferred, that every appear and disappear is sampled closely, that a loop is
+  captured with the start of the next one, and that a clean capture is not an
+  approval. The mechanics here are getAnimations and a requestAnimationFrame
+  sampler through the Playwright MCP server, which was measured on 2026-11-12,
+  not its film.mjs.
+  Not taken: the whole purpose of the skill. Stageshow builds faux product UI
+  as illustration, which gates.md rule 37 forbids in a real product, and its
+  kit, examples, playground, teaching pairs and framing rules all serve that
+  purpose. Its faux-specific rules are not here: no masthead for a fictional
+  name, word budgets, placeholder bars, drawn device chrome, or a faux app's
+  title as a div rather than a heading.
+
 - google-labs-code/design.md, Apache-2.0.
   https://github.com/google-labs-code/design.md
   Taken: the DESIGN.md token schema used in references/design-system.md — the

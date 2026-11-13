@@ -146,9 +146,11 @@ edit, every time, including a small one.
 
 `gates.md` is the floor: the defaults every model falls into, and what to do
 instead. `craft.md` is the layer above it. Depth as a shadow rather than a
-border. Concentric radii. Ease-out under 300ms. Entrances that fire once and
-never on a repeated interaction. Tabular figures. Two parts of a screen
-connected, so the customer sees they are one thing.
+border. Concentric radii. The spacing and alignment numbers: a 12px inset on
+words, 4 to 6px of ink between a title and its subtitle, a dot 6px clear and
+inside the row, no two edges a pixel or two apart. Ease-out under 300ms. Entrances that
+fire once and never on a repeated interaction. Tabular figures. Two parts of a
+screen connected, so the customer sees they are one thing.
 
 Build the most important screen, or the hero, **alone and first**. Review it
 before building the rest, with fresh eyes: a subagent with no memory of the
@@ -160,7 +162,10 @@ Not a source review. Start the application, open it in a browser, and use it
 from the real entry point as the customer would.
 
 [references/playwright.md](references/playwright.md) holds the mechanics and
-what to do when the application will not start here.
+what to do when the application will not start here, including how to slow an
+animation down and sample it frame by frame. Anything that moves is filmed:
+a still cannot show a pop, a jump, or an element left invisible because its
+entrance never ran.
 
 Look at the screenshots. Reading a file list is not looking.
 

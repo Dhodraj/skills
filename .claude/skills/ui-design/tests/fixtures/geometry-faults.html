@@ -1,0 +1,110 @@
+<!doctype html>
+<!--
+  A fixture, not an example to copy. Each panel carries one of the five
+  geometry faults scripts/measure.js reports, so the script can be checked
+  against a page whose faults are known:
+
+    #clip     an avatar sliced by a card that hides its overflow
+    #inset    a label 3px from its card's edge, where 12px is the rule
+    #padding  28px above the content and 6px below it, with 20px sides
+    #tangent  two tiles 2px apart, and two headings whose left edges miss by 2px
+    #wrapped  two stats whose units fall to a second line, one of them in its
+              own span, beside prose that wraps and is not a fault
+
+  The last panel, #sound, carries none of them and must stay clean.
+  tests/run.sh asserts the markup; docs/testing-report.md records what the
+  script returned against it in a browser.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geometry faults — fixture</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px; display: grid; gap: 24px;
+         grid-template-columns: repeat(2, 320px);
+         font: 14px/1.4 -apple-system, "Segoe UI", Roboto, sans-serif;
+         background: #f4f5f7; color: #1e2127; }
+  /* align-self: start, so each card is its own height: a card stretched by its
+     grid row would report space below its content that nobody chose. */
+  .card { background: #fff; border: 1px solid #e4e6ea; border-radius: 10px;
+          align-self: start; }
+  h2 { font-size: 13px; font-weight: 600; margin: 0 0 8px; }
+
+  /* clipped: the avatar hangs over the card's edge, and the card hides it. */
+  #clip { padding: 16px; overflow: hidden; position: relative; height: 96px; }
+  #clip .avatar { position: absolute; top: 40px; left: -14px; width: 40px;
+                  height: 40px; border-radius: 50%; background: #c7ccd4; }
+
+  /* tight inset: 3px from the left edge, where 12px is the rule. */
+  #inset { padding: 16px 3px 16px 3px; }
+
+  /* uneven padding: 28px above, 6px below, 20px either side. */
+  #padding { padding: 28px 20px 6px; }
+  #padding .figure { font-size: 28px; font-weight: 600; }
+  /* No bottom margin, so the 6px of padding is the whole gap under the text. */
+  #padding p { margin: 0; }
+
+  /* near-tangent: a 2px gap between the tiles, and two headings whose left
+     edges miss by 2px. */
+  #tangent { padding: 16px; }
+  #tangent .tiles { display: flex; gap: 2px; }
+  #tangent .tile { flex: 1; height: 56px; background: #eef0f3; border-radius: 6px; }
+  #tangent .rows { margin-top: 12px; }
+  #tangent .rows p { margin: 0 0 6px; }
+  #tangent .rows p + p { margin-left: 2px; }
+
+  /* unit wrapped: the box is too narrow to hold "128 GB" on one line. */
+  #wrapped { padding: 16px; }
+  #wrapped .stat { width: 42px; font-size: 20px; font-weight: 600; }
+  /* The prose wraps too. Only a figure split from its unit is a fault. */
+  #wrapped .prose { width: 90px; margin: 8px 0 0; }
+
+  /* sound: nothing here breaks a rule in craft.md. */
+  #sound { padding: 16px; }
+  #sound .row { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+  #sound .row + .row { border-top: 1px solid #eceef1; }
+  #sound .dot { width: 8px; height: 8px; border-radius: 50%; background: #2f7d4f; flex: none; }
+</style>
+</head>
+<body>
+
+<section class="card" id="clip">
+  <h2>Clipped mark</h2>
+  <p>The avatar below is sliced by this card.</p>
+  <div class="avatar"></div>
+</section>
+
+<section class="card" id="inset">
+  <h2>Tight inset</h2>
+  <p>This sentence sits 3px from the card edge.</p>
+</section>
+
+<section class="card" id="padding">
+  <h2>Uneven padding</h2>
+  <div class="figure">1,284</div>
+  <p>Runs completed this week.</p>
+</section>
+
+<section class="card" id="tangent">
+  <h2>Near-tangent</h2>
+  <div class="tiles"><div class="tile"></div><div class="tile"></div></div>
+  <div class="rows"><p>Dispatch queue</p><p>Operator list</p></div>
+</section>
+
+<section class="card" id="wrapped">
+  <h2>Wrapped unit</h2>
+  <div class="stat">128 GB</div>
+  <div class="stat">64 <span>TB</span></div>
+  <p class="prose">A sentence this narrow column wraps, which is not a fault.</p>
+</section>
+
+<section class="card" id="sound">
+  <h2>Nothing wrong here</h2>
+  <div class="row"><span class="dot"></span><span>Running</span></div>
+  <div class="row"><span class="dot"></span><span>Queued</span></div>
+</section>
+
+</body>
+</html>

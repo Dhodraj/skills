@@ -114,7 +114,7 @@ has "and it exits 2" "$out" "exit=2"
 
 # ------------------------------------------------------------------- fixtures
 
-for fixture in dashboard-before.html dashboard-after.html; do
+for fixture in dashboard-before.html dashboard-after.html geometry-faults.html; do
   if [[ -f "$here/fixtures/$fixture" ]]; then pass=$((pass+1)); else
     fail=$((fail+1)); printf 'FAIL fixture %s is missing\n' "$fixture"; fi
 done
@@ -129,6 +129,26 @@ has   "the after fixture names its row controls"      "$after"  'aria-label="Act
 for id in 000418-GLA 000419-EDI 000420-ABD 000421-INV 000422-GLA; do
   has "run $id kept its row control" "$after" "Actions for run RUN-2026-10-27-$id"
 done
+
+# The geometry fixture has to carry one of each fault, and the script has to
+# look for all five. What the script returns against it is a browser result,
+# recorded in docs/testing-report.md; this only keeps the pair in step.
+geometry="$(cat "$here/fixtures/geometry-faults.html")"
+has "the geometry fixture hides an overflowing avatar" "$geometry" "overflow: hidden"
+has "it carries a 3px inset"        "$geometry" "padding: 16px 3px 16px 3px"
+has "it carries a cramped bottom"   "$geometry" "padding: 28px 20px 6px"
+has "it carries a 2px gap"          "$geometry" "gap: 2px"
+has "it carries a wrapped unit"     "$geometry" "128 GB"
+has "and one with its unit in a span" "$geometry" "64 <span>TB</span>"
+has "and prose that wraps without being a fault" "$geometry" 'class="prose"'
+has "it carries a panel with no fault" "$geometry" 'id="sound"'
+
+measure="$(cat "$skill/scripts/measure.js")"
+for fault in clipped tightInsets unevenPadding nearTangents wrappedUnits; do
+  has "measure.js reports $fault" "$measure" "$fault: $fault.length"
+done
+has "measure.js exempts a chosen crop" "$measure" 'hasAttribute("data-crop")'
+has "craft.md names the measured faults" "$(cat "$skill/references/craft.md")" "measured\*\*: \`tight inset\`"
 
 # --------------------------------------------------------------------- network
 
