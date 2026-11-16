@@ -73,7 +73,7 @@ working in. After the move, these skills load in this repo only through the
 symlinks in the home directory. If that proves wrong in practice, the
 fallback is a `.claude/skills/<name>` symlink into `skills/ui/<name>`.
 
-## Stage 2: the lists that must agree
+## Stage 2: the lists that must agree (done, 2026-11-17)
 
 Upstream requires every promoted skill to appear in the top-level `README.md`
 and in its bucket's `README.md`, with the name linked to its `SKILL.md`.

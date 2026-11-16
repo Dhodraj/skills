@@ -30,6 +30,10 @@ skills/ui/
     SKILL.md                     review what exists, in two modes and two scopes
     references/
       changes.md                 reviewing a change rather than a screen
+  README.md                      the three skills, grouped by how they start
+scripts/
+  link-skills.sh                 symlink every skill into the local skill directories
+  list-skills.sh                 print every SKILL.md path
 docs/
   source-research.md             every supplied url, read on 2026-10-27, with four later rounds
   adr-0001-architecture.md       why this shape
