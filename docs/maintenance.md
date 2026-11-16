@@ -136,6 +136,11 @@ It returns measurements, never verdicts. Keep it that way: a check that
 decides whether something is a problem belongs in `ui-review`, where a
 human-readable rule can say who it hurts.
 
+For the same reason, never write a stop condition against it. It returns no
+verdict, and four of its census counts are never zero on a rendered page, so
+"no fault" has nothing to refer to. A loop ends on the Floor list in
+`gates.md`, because that is a list a reader can walk.
+
 Worth adding, in rough order of value, each absent today: card rows off a
 shared line; sibling control heights; inner and outer corner radii that are
 not concentric; grid rows with one lone item; focus indicators removed with

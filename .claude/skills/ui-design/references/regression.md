@@ -39,6 +39,12 @@ edit:
 | A screen or a flow | The journey walk at 1440 and 375, the area's tests, then the full suite once |
 | A shared component or a token | Every screen that uses it. Find them: `rg -l '<ComponentName>' --glob '!node_modules'` |
 
+Scale the re-look the same way. A fix to one component's own styles is looked
+at again at the width and in the state it was filed at, plus 375 if it moved
+anything. A fix to a token, a shared component or a layout rule is looked at
+again everywhere that uses it. Either way, open the full set of widths and
+states once at the end.
+
 Then, once, at the end: the project's own full check — type check, lint,
 tests, build. Not after every edit.
 

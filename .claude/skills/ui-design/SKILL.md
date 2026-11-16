@@ -183,6 +183,13 @@ journey, checks the result against `DESIGN.md`, and sorts findings by harm.
 Fix in severity order. A change you cannot justify against the outcome in
 stage 2 is scope nobody asked for. Say what you left alone and why.
 
+**The pass ends on the list, not on the screenshot.** Re-measure and re-walk
+after each fix, and keep going while a fix is still turning up something new.
+Reaching stage 10 needs the Floor list of `gates.md` walked and clear; a
+screenshot that looks right is not that walk. Where a Floor breach survives
+three rounds of fixing, stop and ask rather than hand it back as a finding
+left with a reason.
+
 Then [references/regression.md](references/regression.md): identify the
 journeys that already worked before touching the code, and separate failures
 your change caused from failures that were already there.

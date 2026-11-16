@@ -133,7 +133,7 @@ Full instructions: [docs/install-and-invoke.md](docs/install-and-invoke.md).
       playwright.md                 browser mechanics
       regression.md                 telling your failures from existing ones
     scripts/                        registry search, page measurement, validation
-    tests/                          85 offline tests, 88 with --network
+    tests/                          93 offline tests, 96 with --network
   ui-find/                          natural language to a real component
   ui-review/                        measure, walk, judge against the system
     references/changes.md           reviewing a change, not a screen

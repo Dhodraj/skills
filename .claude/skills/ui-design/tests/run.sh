@@ -203,6 +203,18 @@ has "ui-review keeps the floor out of a waiver" "$(cat "$skill/../ui-review/SKIL
 has "craft.md excepts the dark lift ring"      "$craft" "lift ring above is the exception"
 has "its travel ladder matches its keyframe"   "$craft" "10 to 12px for a page"
 
+design_skill="$(cat "$skill/SKILL.md")"
+review_skill="$(cat "$skill/../ui-review/SKILL.md")"
+has "stage 9 states the loop's exit"           "$design_skill" "ends on the list, not on the screenshot"
+has "a screenshot is not the Floor walk"       "$design_skill" "is not that walk"
+has "a surviving Floor breach is escalated"    "$design_skill" "stop and ask rather than hand it back"
+hasnt "no pass cap accepts a Floor breach"     "$design_skill" "Three passes is the limit"
+has "no score is the reason to stop"           "$review_skill" "never a score as the reason to stop"
+has "and says why a self-set score fails"      "$review_skill" "the number certifies itself"
+regression="$(cat "$skill/references/regression.md")"
+has "the re-look scales to the edit"           "$regression" "Scale the re-look the same way"
+has "a wide edit is re-looked everywhere"      "$regression" "everywhere that uses it"
+
 # --------------------------------------------------------------------- network
 
 if (( network )); then

@@ -379,8 +379,10 @@ empty first use <result> · empty by filter <result> · loading <result>
 Record what is sound. A review that lists only faults invites a rewrite of
 things that were right.
 
-No score out of 100. A number invites arguing about the number instead of
-fixing the blocker, and the severity list already carries the order.
+No score, out of ten or a hundred, and never a score as the reason to stop:
+here the scorer is the builder, so the number certifies itself. The severity
+list already carries the order, and a number invites arguing about the number
+instead of fixing the blocker.
 
 ## 11. In review-and-fix mode
 

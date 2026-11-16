@@ -56,6 +56,30 @@ lines above a new rule forbidding a line lighter than its surface. And 10 to
 leaked too: `ui-review` told the reviewer to skip anything `DESIGN.md` allows,
 and that covered a Floor breach.
 
+On 2026-11-16 stage 9 of `ui-design` got an exit condition. The score ban in
+`ui-review` was widened to cover a score used as a reason to stop.
+`regression.md` got a rule that scales the re-look to the reach of the edit.
+The runs report `93 passed, 0 failed` offline and `96 passed, 0 failed` with
+`--network`.
+
+The eight new checks are traceability again. Seven of them find nothing in the
+version before the change, so each one proves the line it names. The eighth is
+a guard rather than a proof. It checks that a hard pass cap is absent, and it
+passed before the change as well.
+
+Two instruction checks ran. The first returned the wording applied to the two
+skills, and it rejected three parts of the first draft. An exit condition
+written against `measure.js` is unverifiable, because the script returns no
+verdict. A three-pass cap that ends in a report is a loosening, because it
+lets a Floor breach ship once the passes are spent. A claim that a self-set
+score rises as the work gets tiring is measured nowhere.
+
+The second check rejected the capture rule as first written. A re-look scoped
+to where a finding was filed misses what the fix itself breaks elsewhere. The
+finding format records no width and no state, so the rule had nothing to refer
+to. The applied rule scopes the re-look by the reach of the edit, which is
+always known.
+
 ### The geometry faults, measured in a browser
 
 Run on 2026-11-12 through Playwright MCP against Chrome 157. Each fixture was

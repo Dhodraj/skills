@@ -23,7 +23,7 @@
       measure.js                 measures a rendered page, in the browser
       check-sources.js           validates sources.json
     tests/
-      run.sh                     85 offline tests, 88 with --network
+      run.sh                     93 offline tests, 96 with --network
       fixtures/                  the dashboard before and after, a landing page, the geometry faults
   ui-find/SKILL.md               find a component instead of writing one
   ui-review/
