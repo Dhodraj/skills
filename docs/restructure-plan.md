@@ -42,7 +42,7 @@ Three counts set the limits of the copy:
 | Changesets and `CHANGELOG.md` | yes, with pnpm |
 | This plan | `docs/restructure-plan.md` |
 
-## Stage 1: move the tree
+## Stage 1: move the tree (done, 2026-11-17)
 
 Move each skill with `git mv`, so history follows:
 

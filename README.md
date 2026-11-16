@@ -56,7 +56,7 @@ Search the project first, then 508 shadcn-spec registries, with no account
 and no MCP server:
 
 ```bash
-node .claude/skills/ui-design/scripts/find-components.js \
+node skills/ui/ui-design/scripts/find-components.js \
   timeline stepper activity --limit 10
 ```
 
@@ -105,10 +105,14 @@ the user picks a direction.
 
 ```bash
 git clone git@github.com:Dhodraj/ui-skills.git
-cp -R ui-skills/.claude/skills/* ~/.claude/skills/
+cd ui-skills
+./scripts/link-skills.sh
 ```
 
-Or copy the three skill folders into any project's `.claude/skills/`.
+It symlinks every skill under `skills/` into `~/.claude/skills` and
+`~/.claude-personal/skills`, so a `git pull` updates them. To copy instead,
+copy any folder under `skills/ui/` into `~/.claude/skills/`, or into another
+project's `.claude/skills/`.
 
 Needs Node 20 or newer. Network for registry search, which falls back to a
 cached `--curated-only` search without it. A Playwright MCP server for stages
@@ -120,7 +124,7 @@ Full instructions: [docs/install-and-invoke.md](docs/install-and-invoke.md).
 ## What is in here
 
 ```
-.claude/skills/
+skills/ui/
   ui-design/                        the entry point, 11 stages
     references/
       design-system.md              the DESIGN.md format, and both routes in
@@ -175,5 +179,5 @@ say so on their own face.
 
 ## Licence
 
-MIT. [NOTICE](.claude/skills/ui-design/NOTICE) lists every source adapted,
+MIT. [NOTICE](skills/ui/ui-design/NOTICE) lists every source adapted,
 with its licence. No file from any of them is copied.

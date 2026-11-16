@@ -40,15 +40,15 @@ Rules the validator enforces, and why each exists:
 Then:
 
 ```bash
-node .claude/skills/ui-design/scripts/check-sources.js
-node .claude/skills/ui-design/scripts/check-sources.js --links
-./.claude/skills/ui-design/tests/run.sh --network
+node skills/ui/ui-design/scripts/check-sources.js
+node skills/ui/ui-design/scripts/check-sources.js --links
+./skills/ui/ui-design/tests/run.sh --network
 ```
 
 Check the new source is actually reachable before trusting it:
 
 ```bash
-node .claude/skills/ui-design/scripts/find-components.js \
+node skills/ui/ui-design/scripts/find-components.js \
   button --curated-only | grep '@example'
 ```
 

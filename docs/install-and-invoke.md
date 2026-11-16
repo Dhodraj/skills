@@ -3,7 +3,7 @@
 ## What is here
 
 ```
-.claude/skills/
+skills/ui/
   ui-design/
     SKILL.md                     the entry point and the eleven stages
     NOTICE                       what was borrowed, from where, under which licence
@@ -55,17 +55,22 @@ cd demo && python3 -I -m http.server 8731 --bind 127.0.0.1
 
 ## Install
 
-### This project
-
-Nothing to do. Claude Code reads `.claude/skills/` in the working directory.
-Confirm with `/skills` or by asking for one by name.
-
 ### Every project on this machine
 
 ```bash
-cp -R "$REPO/.claude/skills/ui-design" ~/.claude/skills/
-cp -R "$REPO/.claude/skills/ui-find" ~/.claude/skills/
-cp -R "$REPO/.claude/skills/ui-review" ~/.claude/skills/
+./scripts/link-skills.sh
+```
+
+It symlinks every skill under `skills/` into `~/.claude/skills` and
+`~/.claude-personal/skills`. A symlink means a `git pull` updates the
+installed skill. Re-run it after you add, remove, or rename a skill.
+
+To copy instead of linking:
+
+```bash
+cp -R "$REPO/skills/ui/ui-design" ~/.claude/skills/
+cp -R "$REPO/skills/ui/ui-find" ~/.claude/skills/
+cp -R "$REPO/skills/ui/ui-review" ~/.claude/skills/
 ```
 
 On this machine `~/.claude` is installed from `~/Claude-System`, so the right
@@ -129,7 +134,7 @@ Or in plain words, which is what the descriptions are written for:
 ## Run the scripts directly
 
 ```bash
-S=.claude/skills/ui-design
+S=skills/ui/ui-design
 
 node $S/scripts/find-components.js timeline stepper --limit 15
 node $S/scripts/find-components.js data table filter --curated-only

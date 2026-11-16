@@ -478,7 +478,7 @@ The repository was cloned at depth 1 and read on disk, not from the page.
   and four icon rules, into `references/craft.md`. The idea that five of those
   numbers can be measured, into `scripts/measure.js`. The practice of filming
   motion rather than inferring it, into `references/playwright.md`.
-  `.claude/skills/ui-design/NOTICE` lists each one.
+  `skills/ui/ui-design/NOTICE` lists each one.
 - **What was not taken**: its `scripts/film-checks.mjs` (2,120 lines) and
   `film.mjs` (664 lines), the machinery behind its rehearsal gate.
   They need `playwright-core` and a page built on its own `Stage` component,
