@@ -102,6 +102,27 @@ and no dark surface has been measured yet, so a count on one of those is new
 ground. A page with a dozen `nearTangents` from one cause is one finding with
 twelve occurrences.
 
+Then check that nothing covers a control. Each visible control and link must
+be the top element at its centre: `document.elementFromPoint(x, y)` returns it
+or a child. Run this with `browser_evaluate` at each width, after each scroll:
+
+```js
+() => [...document.querySelectorAll('a, button, input, select, textarea, summary, [role=button], [role=link], [role=tab]')].filter(e => { const r = e.getBoundingClientRect(), x = r.x + r.width / 2, y = r.y + r.height / 2; if (!r.width || !r.height || y < 0 || y > innerHeight || x < 0 || x > innerWidth) return false; const t = document.elementFromPoint(x, y); for (let n = t; n; n = n.parentElement) if (/sticky|fixed/.test(getComputedStyle(n).position) && n.matches('header, [role=banner]')) return false; return !t || !((e.closest('a, button, label, summary, [role=button], [role=link], [role=tab], [data-node], [role=group]') ?? e).contains(t) || t.contains(e)); }).map(e => e.outerHTML.slice(0, 120))
+```
+
+Report each one it returns as fault `covered`. It skips an element under a
+sticky or fixed page header (`header`, `[role=banner]`) after a scroll. A fixed
+toast, banner or dialog over a control is still a finding. It also skips an
+element covered by part of its own control, node or card (`[data-node]`,
+`[role=group]`), such as an icon under its own label. It skips an element its
+cover holds, such as an icon that lets clicks through to its parent. If the
+page draws a graph, add its node class to that list, such as
+`.react-flow__node`.
+
+Run it again with the first list of controls replaced by
+`svg, img, [role=img], p, span, li, dt, dd, td` to check each text, icon and
+mark in a panel, key or legend.
+
 Every number the script returns is a candidate, not a finding. Confirm it on
 the render, decide whether it harms a customer, and fold one cause into one
 finding.
