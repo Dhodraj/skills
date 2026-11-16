@@ -94,6 +94,12 @@ Deal **three** directions, not one. A single proposal is the model's default
 aesthetic wearing a rationale. Each direction gets a name, the anchor hue, the
 type pairing, the density and the one memorable thing, in four lines.
 
+One of the three may be
+[references/tactile.md](references/tactile.md), a direction already decided
+down to its tokens, for a dense product whose controls are pressed all day.
+Deal it only beside two taken from the product's own world, and never as the
+default.
+
 Then stop and put them to the user with the interactive question tool. This is
 an approval gate: do not build past it on an assumption. Where the user says
 "you pick", pick one, say which and why in one line, and carry on.

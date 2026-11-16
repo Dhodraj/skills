@@ -162,8 +162,19 @@ leave the measurable parts to the script: a rule nobody reads before the edit
 is a rule nobody follows. Changed on 2026-11-12.
 
 When a value is added, say where it was read. The page's attribution section
-and `NOTICE` both name its three sources. A value with no provenance cannot be
+and `NOTICE` both name its four sources. A value with no provenance cannot be
 told apart from a preference.
+
+A value that holds only inside one house style is a third thing to keep out.
+It goes to a direction file instead. The test: would the rule still be right
+on a marketing page, an editorial surface and a console? An answer of "only on
+a console" makes it a density or a style decision.
+`references/tactile.md` is the shape such a decision takes here.
+
+Where a source disagrees with a line already on the page, both readings go on
+the page. Each one carries the reason it holds, as the shadow-colour
+disagreement does. A hidden conflict surfaces later as a rule that looks
+arbitrary.
 
 **Known gap, recorded rather than fixed.** Nothing enforces this file. Stage
 G tells the agent to read it before every UI edit, then relies on that. The
@@ -172,6 +183,39 @@ same screen without it, and both pass every automated check. To close this,
 copy the shape `taste-skill` uses: make the agent produce three directions,
 choose one with a written reason, then judge the result cold against a list
 of default looks before calling it done.
+
+## Add or change a direction with values
+
+`references/tactile.md` is the only one so far. Adding a second, or changing
+this one:
+
+- **It is dealt as one of three, never alone and never by default.**
+  `references/directions.md` says so, and `SKILL.md` stage 3 repeats it. A
+  direction file that becomes the automatic answer is the default aesthetic the
+  skill was written to prevent.
+- **Every override is listed in the file, with the rule it overrides.** A
+  direction may override a number in `directions.md` or a Reflex rule in
+  `gates.md`. `tests/run.sh` checks that each rule a direction claims to
+  override still exists under the number it names. It cannot check that the
+  list is complete, so read the numbers table and the Reflex list against the
+  direction line by line. The first version of `tactile.md` listed three of
+  the nine numbers and three of the five Reflex rules it contradicted.
+- **Say where the floor beats the look, rather than claiming it never
+  happens.** A borrowed style breaks a Floor rule somewhere. A borderless
+  field has no 3:1 edge. A quiet placeholder misses 4.5:1. A 22px icon is
+  under 24 × 24, and a height reveal animates `height`. Name each place and
+  say what to build instead. "It overrides no Floor rule" is the sentence to
+  distrust.
+- **The waiver is only legitimate once `DESIGN.md` records it.** That is
+  already how `gates.md` works; a direction does not get a second mechanism.
+  `ui-review` reads `DESIGN.md` first and skips what it allows, so the waiver
+  list is also what a review stops looking at. On 2026-11-13 that bullet was
+  tightened to exclude the Floor tier, which is what makes the mechanism safe
+  to write a whole list into.
+- **Say where its contrast fails.** A borrowed palette usually has two or
+  three steps that miss 4.5:1. Name those steps, and name what to do instead,
+  as the neutral-scale section does. Otherwise a file that looks authoritative
+  breaks the Floor rule.
 
 ## When the entry point gets long
 

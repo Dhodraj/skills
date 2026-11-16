@@ -150,6 +150,59 @@ done
 has "measure.js exempts a chosen crop" "$measure" 'hasAttribute("data-crop")'
 has "craft.md names the measured faults" "$(cat "$skill/references/craft.md")" "measured\*\*: \`tight inset\`"
 
+# ------------------------------------------------------------------ references
+# The tactile direction is loaded only when it is picked, so nothing reads it
+# by accident. These keep its claims traceable: a file that says it overrides a
+# rule has to name a rule that exists.
+
+if [[ -f "$skill/references/tactile.md" ]]; then pass=$((pass+1)); else
+  fail=$((fail+1)); printf 'FAIL references/tactile.md is missing\n'; fi
+
+tactile="$(cat "$skill/references/tactile.md")"
+craft="$(cat "$skill/references/craft.md")"
+gates="$(cat "$skill/references/gates.md")"
+
+has "the direction names its source"      "$tactile" "kosta4a/tactile-design"
+has "it lists what it overrides"          "$tactile" "gates.md\` 39"
+has "it keeps the Floor rules"            "$tactile" "A Floor rule outranks it"
+has "it carries its own never-ship list"  "$tactile" "## Never ship, in this direction"
+has "it names the sheet flick threshold"  "$tactile" "0.11 px/ms"
+has "directions.md deals it as one of three" "$(cat "$skill/references/directions.md")" "It is still one of three"
+has "SKILL.md points at it from stage 3"  "$(cat "$skill/SKILL.md")" "references/tactile.md"
+has "craft.md points at it"               "$craft" "tactile.md"
+has "NOTICE records the source"           "$(cat "$skill/NOTICE")" "kosta4a/tactile-design, MIT"
+
+# What the direction overrides has to exist where it says it does.
+has "gates.md still forbids text under 16px" "$gates" "^39\. \*\*Running text below 16px"
+has "gates.md still forbids overshoot"       "$gates" "^35\. \*\*Overshoot easing"
+has "gates.md still forbids the default face" "$gates" "^29\. \*\*The default system face"
+
+# The craft rules taken from the same source.
+has "gates.md rule 48 is the copy punctuation" "$gates" "^48\. \*\*Title Case"
+has "rule 49 is the button label"              "$gates" "^49\. \*\*A button label"
+has "rule 50 is the confirmation"              "$gates" "^50\. \*\*A confirmation"
+has "Floor rule 3 covers a premature label"    "$gates" "before the real"
+has "craft.md carries the worst-case values"   "$craft" "## The shortest and longest real value"
+has "craft.md carries the touch rules"         "$craft" "## Touch, where the pointer is a finger"
+has "craft.md records the shadow disagreement" "$craft" "holds the opposite on shadow colour"
+has "craft.md presses by target size"          "$craft" '`.92` at 22px'
+has "craft.md carries the sheet numbers"       "$craft" "0.11 px/ms"
+
+# A direction may bend a number. The floor outranks it, and the file has to say
+# where its own look loses to a Floor rule rather than claiming it never does.
+has "the direction yields to a Floor rule"     "$tactile" "Floor rule wins and the look"
+has "it names the field edge rule"             "$tactile" "A field needs a 3:1 edge"
+has "it names the target rule"                 "$tactile" "gates.md\` 11"
+has "it names the height rule"                 "$tactile" "does not animate \`height\`"
+has "it writes targets in px, not points"      "$tactile" "44pt\` in CSS is 58.7px"
+hasnt "its never-ship list stops repeating gates 48" "$tactile" "Title Case labels"
+has "directions.md counts the overrides"       "$(cat "$skill/references/directions.md")" "nine rows of the"
+has "and names the Reflex rules"               "$(cat "$skill/references/directions.md")" "25, 29, 35, 38 and 39"
+has "ui-review keeps the floor out of a waiver" "$(cat "$skill/../ui-review/SKILL.md")" "waive a Floor rule in"
+
+has "craft.md excepts the dark lift ring"      "$craft" "lift ring above is the exception"
+has "its travel ladder matches its keyframe"   "$craft" "10 to 12px for a page"
+
 # --------------------------------------------------------------------- network
 
 if (( network )); then

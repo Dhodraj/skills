@@ -208,7 +208,10 @@ Start from these defaults and change them for a reason, not for variety:
 
 These are starting values, not a house style. The direction the user picks at
 stage 3 overrides any of them, and `Do's and Don'ts` records the override so
-the next session does not undo it.
+the next session does not undo it. A direction that arrives with its own
+values, such as [tactile.md](tactile.md), brings a list of overrides with it;
+every one of them goes into `Do's and Don'ts` on the pick, because an override
+nobody wrote down is drift the next review will file as a finding.
 
 ## The one thing this file is for
 

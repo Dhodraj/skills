@@ -122,6 +122,54 @@ Taken as ideas, reworded and reduced:
   name, word budgets, placeholder bars, drawn device chrome, or a faux app's
   title as a div rather than a heading.
 
+- kosta4a/tactile-design, MIT, "Copyright (c) 2026 the tactile-design
+  authors". https://github.com/kosta4a/tactile-design
+  Read in full on 2026-11-13, at the repository: its LICENSE, README, SKILL.md
+  and the seven reference files (about 180KB). Its landing page at
+  www.4hands.dev/tactile-design states no licence and carries no values; the
+  LICENSE in the repository is the licence that was read.
+  Taken into references/tactile.md, as a named direction rather than a rule:
+  its house style with its values, which it calls tactile, layered and quiet.
+  The twelve-step neutral and its jobs, the surface roles, the step-shift
+  rule, the fill-edge-drop recipe drawn from the parent surface, the crisp
+  shadow ladder, the radius ladder from one control radius, the type scale and
+  the one-weight rule, the control recipes and sizes, the motion tokens and
+  durations, the phone sizes and the sheet, and its never-ship list. Rewritten
+  in this skill's own words and shortened to about a fifth of the source; the
+  hex values of Radix sand are not reproduced, and the file says to measure
+  steps 9 and 10 rather than trusting them.
+  Taken into references/craft.md, as style-independent craft: the worst-case
+  data rules (32 characters then truncate, compact notation past six digits,
+  an en dash for a missing value, Intl.PluralRules, min-width: 0), the touch
+  rules (hover under a fine pointer only, the press carrying the hover look,
+  no tap highlight, touch-action, overscroll-behavior, 100dvh, safe-area
+  insets, 16px fields), the sheet drag numbers (4px slop, velocity over the
+  last 100ms, close past min(64px, 15%) or a 0.11 px/ms flick, the upward
+  rubber band and the two pointer-capture traps), the travel and blur ladders,
+  the press-scale ladder by target size, and reduced motion as softening
+  rather than deletion. Its curve for user-caused motion,
+  cubic-bezier(.23, 1, .32, 1), is the one already in this file from another
+  source, which is evidence for it rather than a new rule.
+  Taken into references/gates.md: three copy rules, numbered 48 to 50 —
+  sentence case with a real ellipsis and no em dash, a button label that is a
+  verb plus its object, and a confirmation that states its consequence. Also a
+  clause in Floor rule 3: a label shown before the real state is known is a
+  false result.
+  Where it disagrees: it draws every light shadow in the neutral's darkest
+  ink, where references/craft.md calls for pure black at low alpha. Both
+  readings are recorded in craft.md rather than one being hidden. It also
+  overrides four rows of the numbers table in references/directions.md and two
+  Reflex rules in references/gates.md; tactile.md lists each override, and a
+  waiver is only legitimate once DESIGN.md records it.
+  Not taken: the 160KB of per-component detail, which stays in the source and
+  is pointed at from tactile.md rather than copied; the Radix sand hex values;
+  its Tailwind v4 mapping; and its claim on a default typeface, because
+  gates.md rule 29 holds that a display face is a decision.
+  Its own credits, carried forward: motion principles and the sheet drag
+  conventions follow Emil Kowalski (animations.dev), the twelve-step scale
+  structure is Radix Colors, and the touch-target and sheet conventions are
+  Apple's Human Interface Guidelines.
+
 - google-labs-code/design.md, Apache-2.0.
   https://github.com/google-labs-code/design.md
   Taken: the DESIGN.md token schema used in references/design-system.md — the

@@ -46,6 +46,15 @@ the stage needs it: the design system format, the gates, product thinking,
 directions, craft, the journey and its states, browser mechanics, regression
 checks.
 
+`references/tactile.md` was added on 2026-11-13. A user's choice loads it,
+rather than a stage: it is one direction with its values already decided,
+adapted from `kosta4a/tactile-design` (MIT). A
+direction with values is a different thing from a rule. Keeping it in its own
+file is what stops it becoming the default aesthetic that
+`references/directions.md` exists to prevent. Its style-independent craft went
+into `craft.md` and `gates.md` instead, where it applies whatever the project
+looks like.
+
 On 2026-11-01 that referencing was reversed. Depending on a second repository
 for the numbers made `ui-design` unusable without it, so `rules.md`, the
 dense-screen rules and `inspect`'s seven checks were absorbed, and
@@ -115,6 +124,12 @@ Plus `scripts/check-sources.js` and `tests/run.sh`.
   asymmetry, near-tangents and a wrapped unit. Padding asymmetry is no longer
   only a matter for the look. Baselines, gutters, concentric corners and
   alignment compared across rows are still unmeasured.
+- `craft.md` is read before every UI edit, so every rule added to it is paid
+  for on every build. On 2026-11-13 it went from 368 to 467 lines, about a
+  quarter longer. That bought the worst-case data table, the touch rules and
+  the sheet drag numbers. The test for a new rule is whether it holds whatever
+  the project looks like. One house's taste belongs in a direction file
+  instead, loaded only when that direction is picked.
 - Nothing enforces `craft.md` or `gates.md`. Both are read at stage 7 and
   then relied on. The demo in `demo/` was built to them by hand, and the
   difference is visible against `demo/console-plain.html`. An agent that

@@ -77,7 +77,7 @@ surrounding chrome to measure around.
 Measure at 1440, 1024 and 375.
 [playwright.md](../ui-design/references/playwright.md) has the mechanics.
 
-Pass the whole contents of `.claude/skills/ui-design/scripts/measure.js` as the
+Pass the whole contents of [measure.js](../ui-design/scripts/measure.js) as the
 `function` argument of `browser_evaluate`, once per width. It returns overflow,
 text contrast, target sizes, controls with no accessible name, heading order,
 unsized media and text below 12px. It also returns a census of the type sizes,
@@ -310,9 +310,13 @@ cause is the finding and the occurrences are its evidence.
 - **Deliberate, consistent choices.** A dense 32px control row on a
   pointer-first console, a labelled zoomed axis, an established domain
   convention. Ask about it; do not score it.
-- **Anything `DESIGN.md` explicitly allows.** The project's own system
-  outranks the general floor. Where the two disagree, say so once and follow
-  `DESIGN.md`.
+- **Anything `DESIGN.md` explicitly allows, except a Floor rule.** The
+  project's own system outranks the Reflex and Finish tiers; where those
+  disagree, say so once and follow `DESIGN.md`. A `DESIGN.md` entry does not
+  waive a Floor rule in `gates.md`, because those are about truth and access:
+  contrast, focus, accessible names, status, reduced motion, targets, a
+  pointer-free path. Flag a Floor breach even where the design system asked
+  for it, and name the entry that asked.
 - **Wiring a static page cannot have**: a `#` link, a form with no endpoint.
   List those once, unscored, as wiring to confirm. The exception is a result
   that is false, such as a filter that relabels the view but not the data.

@@ -1,7 +1,7 @@
 # Source research
 
-Every URL supplied for this work, read on 2026-10-27, and one more read on
-2026-11-12 in a third round at the end of this file. Repository facts come
+Every URL supplied for this work, read on 2026-10-27, with later rounds at the
+end of this file: a third and fourth on 2026-11-12 and a fifth on 2026-11-13. Repository facts come
 from the GitHub API; page facts come from the page itself; licence facts come
 from the licence file or the page that states the licence.
 
@@ -33,6 +33,8 @@ destinations are named under each entry.
 | agentation.com | Exclude — not a component source |
 | benjitaylor/skills, stageshow | Adapt — its spacing, alignment and icon numbers, and filming motion rather than inferring it; its faux-UI purpose is left out |
 | meta/astryx | Integrate — curated component and screens source, MIT read at the file; its registry needed a new default item type to be searchable |
+| kosta4a/tactile-design | Adapt — its house style becomes a named direction the user picks, and its style-independent craft joins craft.md and gates.md |
+| 4hands.dev/tactile-design | Reference — the skill's landing page. No licence and no values on it; the repository's LICENSE is what was read |
 
 ## Design intelligence, visual quality and critique
 
@@ -526,6 +528,61 @@ the GitHub API and the public shadcn directory were all read.
   answers with HTTP 200 but was not read. No MCP server name was found on the
   pages read, though the home page says agents can reach it "from the command
   line or MCP".
+
+## A fifth round: tactile-design, read 2026-11-13
+
+### kosta4a/tactile-design
+
+- **Where it came from**: the URL supplied was
+  `https://www.4hands.dev/tactile-design`, a landing page for a free UI design
+  skill. The page states no licence. It also shows no values: its own text
+  names "timings and springs", and no duration, curve or px figure appears on
+  it. It links the repository, which is where the rules are.
+- **Licence**: MIT, read at
+  `https://raw.githubusercontent.com/kosta4a/tactile-design/HEAD/LICENSE`.
+  "Copyright (c) 2026 the tactile-design authors". The repository says it takes
+  no pull requests and that a fork may adapt it freely under the licence.
+- **Size and shape**: 10 files, about 180KB. `SKILL.md` (18KB) holds the
+  posture, a decision order, the rules at a glance as tables, and a 29-item
+  never-ship list. Seven reference files: `tokens.md` (36KB),
+  `buttons-and-controls.md` (30KB), `decisions.md` (27KB),
+  `surfaces-and-layering.md` (23KB), `motion.md` (18KB),
+  `layout-and-hierarchy.md` (15KB) and `mobile.md` (14KB). Read in full: the
+  LICENSE, README and SKILL.md. Then tokens.md §1–11, motion.md §3–5 and
+  §9–10, mobile.md §1–4 and §7–10, and layout-and-hierarchy.md §7–12.
+- **What it is**: one opinionated house style, distilled from one production
+  dashboard, which it calls tactile, layered and quiet. It names roles and
+  ratios rather than hex codes, and ships Radix sand, Inter and a 13px base as
+  the defaults to remap.
+- **Verdict**: adapt, in two parts. Its house style became
+  `references/tactile.md`, a direction the user picks at stage 3. A style with
+  values cannot be a rule for every project: it would make every project look
+  like that dashboard. Its style-independent craft joined
+  `references/craft.md`. That page gained the worst-case data table, the touch
+  rules and the sheet drag numbers. It also gained the travel and blur
+  ladders, the press-scale ladder, and reduced motion as softening. `references/gates.md` gained three
+  copy rules and a clause in Floor rule 3.
+- **What it contradicts here**, all of it recorded rather than hidden. Four
+  rows of the numbers table in `directions.md`: 16px body, two weights,
+  nothing shadowed at rest, and text under 16px. Two Reflex rules in
+  `gates.md`: rule 29 on the default face and rule 35 on overshoot. And
+  `craft.md` on shadow colour. It draws every light shadow in the neutral's
+  darkest ink, where this skill calls for pure black at low alpha.
+  Every override is a Reflex rule or a number, which `gates.md` already allows
+  `DESIGN.md` to waive. No Floor rule is touched.
+- **Where its own numbers come from**: it credits Emil Kowalski for the
+  motion principles and the sheet drag conventions. It credits Radix Colors
+  for the twelve-step structure, and Apple's Human Interface Guidelines for
+  targets and sheets. `emilkowalski/skills` is already a source here. That is
+  why its curve for user-caused motion, `cubic-bezier(.23, 1, .32, 1)`, was in
+  `craft.md` before this round.
+- **Not verified**: the three remaining reference files
+  (`buttons-and-controls.md`, `surfaces-and-layering.md`, `decisions.md`) were
+  downloaded and their headings listed, but not read line by line. Nothing in
+  `tactile.md` is attributed to them beyond the control recipes that
+  `SKILL.md` states itself. The install command the repository gives for the
+  `vercel-labs/skills` CLI was not run: this repository installs by symlink,
+  and never with npm.
 
 ## What could not be verified
 

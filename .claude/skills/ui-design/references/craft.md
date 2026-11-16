@@ -31,6 +31,22 @@ On a dark surface the ambient layers are invisible. Raise a secondary panel
 by a step of surface colour instead, and drop the lift to a single white ring,
 `0 0 0 1px oklch(1 0 0 / .1)`.
 
+> `tactile-design` holds the opposite on shadow colour: every light shadow in
+> the neutral's darkest ink, never pure black, so one tinted shadow colour
+> serves the product. Both cannot hold. The rule here is for a shadow spread
+> wide enough to pick up what is under it; theirs is for a tight ring and a
+> 1px drop, where there is no spread to pick anything up. Where `DESIGN.md`
+> sets a shadow ink, follow it, and keep the alpha low either way.
+
+**A structural line in dark steps darker, never lighter.** A divider, a table
+rule, an input outline and every drop sit one step darker than the obvious
+match of their light counterpart. A drop lighter than its surface reads as a
+glow, which is the clearest tell of a theme flipped by a script rather than
+designed. The white lift ring above is the exception, because it replaces a
+shadow that cannot be seen and is the elevation cue itself rather than
+structure: keep it to one ring at about 10%, and never put a second lighter
+line under an edge that already has one.
+
 Keep a border where it separates: dividers, table rules, input outlines,
 selected and focus states.
 
@@ -162,12 +178,20 @@ render by eye.
   `top` or `width` costs layout on every frame.
 - Never from `scale(0)`. Nothing in the world appears from nothing. Start at
   `0.9` to `0.96`, with opacity.
-- Press gives `scale(.96)`. Exactly that: below `0.95` reads as a flinch.
+- Press gives `scale(.96)` on a button-sized target. Below `0.95` reads as a
+  flinch at that size, but the figure is a distance, not a ratio: 4% of a 22px
+  row icon is under a pixel and reads as nothing. So the squeeze follows the
+  target: `.99` on a card, `.97` to `.96` on a button, `.92` at 22px.
 - Exits are shorter than enters, 150ms against 300ms, and softer. Use a small
   fixed `translateY`, never the element's full height.
 - Honour `prefers-reduced-motion` by collapsing durations to 1ms, not by
   leaving elements invisible. Setting a duration to zero is also enough. This
-  is an accommodation for vestibular disorders, not a preference.
+  is an accommodation for vestibular disorders, not a preference. Softening
+  also satisfies it and usually reads better: travel, blur, scale and spin
+  become a 150 to 200ms opacity crossfade, a height change goes instant, a
+  loop that carries state keeps only its opacity pulse, capped at a few
+  cycles, and a press scale may stay, because it is feedback rather than
+  travel.
 - A hidden element must stop intercepting clicks. Pair `opacity: 0` with
   `visibility: hidden` or `pointer-events: none`, or an invisible layer eats
   the press and nothing appears to happen.
@@ -206,6 +230,13 @@ specs are licensed for use in your own work, so take a number, not a spec.
 Stagger a staged entrance by ~100ms per region, combining `opacity`,
 `translateY(10–12px)` and `blur(4–5px)` over 400–560ms. For a headline,
 split it into words at ~70–80ms each.
+
+Travel follows the size of the thing that moves, not the drama wanted: 4px for
+a small menu, 6px for a label swap, 8px for a block, 10 to 12px for a page
+section, 16px for a modal card, 24px for a toast leaving. Blur follows the size of what
+swaps, not the distance it covers: 2px on small text, 4px on a panel or an
+icon, 6px on headline text, 8px on a large panel entering. A flat, quiet
+surface can skip the blur and only fade and rise.
 
 ```css
 @keyframes rise {
@@ -268,6 +299,31 @@ play a clip.
   closes only by dragging traps anyone who cannot drag. This is the rule
   gesture work breaks most often.
 
+A sheet dragged by a thumb is the case worth having numbers for, because four
+of them decide whether it feels native:
+
+- **Slop, 4px.** A press anywhere on the sheet becomes a drag only once it has
+  moved 4px. Until then it is a tap on the row or button under it, and a tap
+  stays a tap. On the grab handle a press is a drag at once.
+- **Velocity over the last 100ms**, not over the whole gesture, or a slow pull
+  that ends with a flick is read as slow.
+- **Close past `min(64px, 15% of its height)`, or on a flick faster than
+  0.11 px/ms.** A distance cap beside the fraction is what makes a short pull
+  enough on a tall sheet; a fraction alone asks for a longer and longer pull
+  as the sheet grows. This is the release rule above read for a sheet: a
+  sheet's job is to leave, so what commits it is a short pull rather than 70%
+  of its travel. Otherwise spring back, and let a press that catches it
+  mid-spring take it from where it is.
+- **Upward drag only gives**, tiring out towards 32px:
+  `offset = (1 - 1 / (d * 0.55 / 32 + 1)) * 32`. One rubber band in the
+  product is a limit you can feel; two is a page that wobbles.
+
+Two traps come with it. Swallow the click that ends a drag, or the row it
+began on fires; and ignore a `lostpointercapture` whose target is not the
+sheet, or the browser's own capture to the element under the finger cancels
+every drag as it starts. Drag with the `translate` property, so it stacks on
+the entrance and exit `transform`.
+
 ## Type and numbers
 
 - `font-variant-numeric: tabular-nums` on anything that changes: a count, a
@@ -292,6 +348,55 @@ A table, a run list or a dependency view is not a landing page.
 - Every column earns its width. A column nobody reads is a column to drop.
 - An action that applies to a row lives in that row, not only in a bar above
   it.
+
+## The shortest and longest real value
+
+Build against the real range, never against the sample. Every rule below is
+cheaper to apply while writing the component than to retrofit once a customer
+has found it.
+
+These hold wherever a surface shows records: a table, a list, a rail, a card
+of data. Editorial and marketing text wraps instead, and a headline is never
+truncated. A long identifier truncates in the middle, as Dense screens says
+above; free text truncates at the end.
+
+| Case | Rule |
+|---|---|
+| Free text in a cell: a name, an email, a URL | one line, hugging up to about 32 characters, then end-truncate with a real ellipsis. The full value goes in a tooltip and stays selectable |
+| A name in a rail, a breadcrumb, a dialog title | the same, at the container's width |
+| A description in a card | clamp to two lines |
+| A figure over six digits | `Intl.NumberFormat(locale, { notation: "compact" })`, with the full value in a tooltip |
+| A missing or null value | an en dash in the faint ink, never an empty cell and never `0` |
+| A count | plural forms through `Intl.PluralRules`, not an `s` glued on |
+| A flex child holding text | `min-width: 0`, or it refuses to truncate at all |
+
+Then preview the component with its shortest and its longest real value before
+calling it done. A layout that moves when the long value arrives is the defect
+this prevents.
+
+## Touch, where the pointer is a finger
+
+A phone layout is not the desktop layout squeezed. These apply on any touch
+screen, tablets included, through `(pointer: coarse)` rather than a width.
+
+- **Hover belongs to a mouse.** Put every hover style under
+  `(hover: hover) and (pointer: fine)`, or it sticks after a tap and the
+  customer sees a row highlighted for no reason.
+- **Give the press the hover look instead**, under `(pointer: coarse)`, so
+  every control answers a finger the way a native one does.
+- `-webkit-tap-highlight-color: transparent`, so the control's own press is
+  the feedback.
+- `touch-action: manipulation` on controls, which removes the double-tap
+  delay.
+- `user-select: none` on controls only. Content and links stay selectable.
+- `overscroll-behavior: none`, so the page neither bounces nor chains its
+  scroll to whatever is behind it.
+- `100dvh`, never `100vh`, and `env(safe-area-inset-*)` on every bar, sheet
+  and fixed action row.
+- **16px text in a field on any touch screen.** iOS zooms into anything
+  smaller and stays zoomed.
+- **No hover-only information.** An info tip opens on tap, and the reason a
+  control is disabled is text under it.
 
 ## Optical, not geometric
 
@@ -362,7 +467,11 @@ Report findings as a table with Before, After and Why columns, never as loose
 
 ## Attribution
 
-The values on this page are adapted from
-`jakubkrehel/make-interfaces-feel-better`, `emilkowalski/skills` and
-`benjitaylor/skills` (its `stageshow` skill), all MIT.
-[NOTICE](../NOTICE) records what was taken and what was changed.
+The values on this page are adapted from four MIT sources:
+`jakubkrehel/make-interfaces-feel-better`, `emilkowalski/skills`,
+`benjitaylor/skills` (its `stageshow` skill) and `kosta4a/tactile-design`. The
+two sources in Where to look up a motion value are not among them, and that
+section states their terms. [NOTICE](../NOTICE) records what was taken and what was changed.
+`tactile-design`'s own house style, with its values already decided, is
+[tactile.md](tactile.md), and it is a direction the user picks rather than a
+rule on this page.

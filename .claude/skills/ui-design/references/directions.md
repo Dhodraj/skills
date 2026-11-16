@@ -89,6 +89,32 @@ saying which one it overrules is part of the proposal.
 Contrast ratios are WCAG 2.2 AA. 24 × 24 is WCAG 2.5.8. The 44px target is
 Apple's Human Interface Guidelines.
 
+## A direction that comes with values
+
+[tactile.md](tactile.md) is one direction already decided down to its tokens:
+tactile, layered and quiet, for a dense product whose controls are pressed all
+day. It is loaded only when the user picks it, or asks for it by name.
+
+It exists because deciding a direction from nothing and deciding it against a
+worked example are different costs, and a console is the surface a model gets
+wrong most. Three rules hold:
+
+- **It is still one of three.** Dealing it alone is dealing one direction. It
+  goes into the three where the product suits it, against two taken from the
+  product's own world, and the user picks.
+- **It is not the default.** A marketing page, an editorial surface or a brand
+  that carries the screen gets nothing from a 13px base and a 0.5px line.
+- **It overrides numbers and Reflex rules, never Floor rules.** It contradicts
+  nine rows of the table above — body text, line length, heading line height,
+  type sizes, font weights, the spacing scale, the number of greys, the shades
+  of a brand colour, and shadows at rest — and five `gates.md` Reflex rules:
+  25, 29, 35, 38 and 39. Each override is listed in that file with its reason,
+  and on a pick every one of them goes into `DESIGN.md`, which is what
+  `gates.md` requires before a Reflex rule bends. Three more rows of the table
+  — text contrast, boundary contrast and tap targets — are Floor rules in
+  `gates.md`, so they are not overrides at all: there the Floor rule wins and
+  the look gives way, and that file says what to build instead.
+
 ## What to decide, and write down as values
 
 - **Identity and audience.** Who the surface is for and what it should feel

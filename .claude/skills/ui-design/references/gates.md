@@ -6,8 +6,10 @@ The floor. Read this immediately before the first UI edit, with
 Every rule here exists because a model reaches for it by default. None is a
 matter of taste; each one names a real customer harmed, or a real claim that
 turns out to be false. The three-tier shape and several of the rules are
-adapted from `Nutlope/hallmark` (MIT) and `nexu-io/open-design` (Apache-2.0).
-[NOTICE](../NOTICE) records what came from where.
+adapted from `Nutlope/hallmark` (MIT) and `nexu-io/open-design` (Apache-2.0);
+the three copy rules at the end of the Reflex list, and the clause in Floor
+rule 3, come from `kosta4a/tactile-design` (MIT). [NOTICE](../NOTICE) records what came from
+where.
 
 ## The three tiers
 
@@ -38,7 +40,10 @@ front of a customer.
    connected yet.
 3. **No false result.** A filter that relabels the view without filtering the
    data, a status that does not track the system, a success message for a
-   failure. These are blockers, not polish.
+   failure. These are blockers, not polish. A label shown before the real
+   state is known is the same defect: say "Loading…" and keep the control
+   disabled until the system answers, rather than showing the state you
+   expect.
 4. **No invented customer research.** A persona, a quotation or a usability
    finding that nobody produced never goes in a report. See
    [product-thinking.md](product-thinking.md).
@@ -170,6 +175,18 @@ Each of these is what the training data holds, not what the product needs.
     say what a thing is and what it belongs to. Keep a second line only where
     it carries what the layout cannot: a unit, a limit, a consequence, a
     deadline. Delete the rest.
+48. **Title Case on a label, three dots for an ellipsis, or an em dash in UI
+    copy.** Sentence case throughout, with capitals kept for product names and
+    acronyms. A real ellipsis character, so a loading label reads
+    "Opening…". A plain dash or a full stop where an em dash was reached
+    for.
+49. **A button label that is not a verb plus its object.** "Create project",
+    "Copy command", "Edit limits". "Submit", "OK" and "Continue" name no
+    object, so the customer reads the heading again to find out what the
+    button does.
+50. **A confirmation that does not state the consequence.** "This will remove
+    access for 3 members", not "Are you sure?". The count and the object are
+    what the customer is deciding about.
 
 ## Finish: answer each, never blocked by it
 

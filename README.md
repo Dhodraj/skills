@@ -127,12 +127,13 @@ Full instructions: [docs/install-and-invoke.md](docs/install-and-invoke.md).
       gates.md                      the floor, in three tiers
       craft.md                      the layer above the floor
       directions.md                 dealing three, and the approval gate
+      tactile.md                    one direction with its values, on a pick
       product-thinking.md           outcome, customer, evidence vs invention
       journey-and-states.md         the states one fixture hides
       playwright.md                 browser mechanics
       regression.md                 telling your failures from existing ones
     scripts/                        registry search, page measurement, validation
-    tests/                          36 offline tests, 39 with --network
+    tests/                          85 offline tests, 88 with --network
   ui-find/                          natural language to a real component
   ui-review/                        measure, walk, judge against the system
     references/changes.md           reviewing a change, not a screen

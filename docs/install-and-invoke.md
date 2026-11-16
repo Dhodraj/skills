@@ -13,6 +13,7 @@
       gates.md                   the floor, in three tiers: floor, reflex, finish
       product-thinking.md        business, customer and product questions; evidence rules
       directions.md              dealing three directions, the numbers, no default aesthetic
+      tactile.md                 one direction with its values already decided, loaded on a pick
       craft.md                   depth, motion, optical correctness: the layer under layout
       journey-and-states.md      the journey table and the states a fixture hides
       playwright.md              browser mechanics, and what is blocked here
@@ -22,15 +23,15 @@
       measure.js                 measures a rendered page, in the browser
       check-sources.js           validates sources.json
     tests/
-      run.sh                     36 offline tests, 39 with --network
-      fixtures/                  the dashboard before and after, and a landing page
+      run.sh                     85 offline tests, 88 with --network
+      fixtures/                  the dashboard before and after, a landing page, the geometry faults
   ui-find/SKILL.md               find a component instead of writing one
   ui-review/
     SKILL.md                     review what exists, in two modes and two scopes
     references/
       changes.md                 reviewing a change rather than a screen
 docs/
-  source-research.md             every supplied url, read on 2026-10-27
+  source-research.md             every supplied url, read on 2026-10-27, with four later rounds
   adr-0001-architecture.md       why this shape
   testing-report.md              what was run and what came back
   examples.md                    worked invocations

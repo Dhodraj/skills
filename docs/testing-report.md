@@ -29,6 +29,33 @@ problems`. The sixteen new checks keep the fixture and the script in step. The
 source count moved because `@astryx` and its templates were added the same
 day. What the script returns is a browser result, below.
 
+On 2026-11-13 the tactile direction was added, and the instruction check's
+findings were fixed. The runs report `85 passed, 0 failed` offline and
+`88 passed, 0 failed` with `--network`, and
+`sources.json` is unchanged at `19 sources (11 searchable), 8 rejected, no
+problems`.
+
+The thirty-three new checks are about traceability rather than behaviour. Each
+rule `references/tactile.md` claims to override has to still exist under the
+number it names. The direction has to say where a Floor rule beats its own
+look. The craft and gates rules taken from the same source have to be on the
+page. Nothing new was measured in a browser for that change, and nothing in it
+changes what `measure.js` returns.
+
+An instruction check on the change returned four blocking findings, each
+verified against the files before it was fixed.
+
+The direction claimed to override no Floor rule. Its borderless field had no
+3:1 edge, and its placeholders sat at 3.40 to 3.87:1. Its 22px row icon was
+under 24 × 24, and its height reveal animated `height`. Its override table listed
+three of the nine numbers and three of the five Reflex rules it contradicts.
+
+`craft.md` contradicted itself twice. A white lift ring in dark stood ten
+lines above a new rule forbidding a line lighter than its surface. And 10 to
+12px of travel sat six lines above 16px for the same move. The waiver route
+leaked too: `ui-review` told the reviewer to skip anything `DESIGN.md` allows,
+and that covered a Floor breach.
+
 ### The geometry faults, measured in a browser
 
 Run on 2026-11-12 through Playwright MCP against Chrome 157. Each fixture was
