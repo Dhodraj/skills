@@ -1,16 +1,15 @@
 # skills
 
-Agent skills for Claude Code that check the real result. The UI skills open
-the running product before they call a screen done. The review skill builds a
-coverage matrix before it calls work complete. The orchestration skills keep
-parallel agents and long runs inside the limits you set.
+![Dhodraj/skills: habits for your coding agent. A growing set of agent skills for Claude Code.](shared/brand/banner.svg)
 
-![The same prompt on a stock install (top) and with ui-design (bottom)](shared/docs/images/ab-1-wide.png)
+A growing set of agent skills for Claude Code. Each skill teaches the agent
+one habit a careful engineer already has. One opens the running product
+before it calls a screen done. Another writes down every limit you set before
+a long run. The skills are grouped in buckets by the kind of work they cover.
 
-The same prompt, the same model, run twice. We measured both pages in a
-browser at 1440 px. Contrast failures went from 23 to 0. Text under 12 px went
-from 47 to 0. Console errors went from 1 to 0. The method and every number are in
-[the A/B test](shared/docs/ab-test.md).
+The [ui README](ui/README.md#the-same-prompt-with-and-without-the-skill) shows
+one prompt built twice, with and without `ui-design`, and what a browser
+measured on each.
 
 ## The skills
 
