@@ -27,8 +27,9 @@ failure stays open as a discussion, not a change.
    bash ui/ui-design/tests/run.sh --network
    ```
 
-3. If you add, rename or remove a skill, update its bucket `README.md` and
-   the table in the root `README.md`. Run `bash shared/scripts/list-skills.sh`
+3. If you add, rename or remove a skill, update its bucket `README.md`, the
+   table in the root `README.md` and the `skills` list in
+   `.claude-plugin/plugin.json`. Run `bash shared/scripts/list-skills.sh`
    to see every skill.
 4. If you adapt text or code from another project, name it in the skill's
    `NOTICE` file, with its licence.

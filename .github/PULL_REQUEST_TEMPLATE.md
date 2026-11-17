@@ -9,7 +9,7 @@
 ## Checklist
 
 - [ ] The skill folder is `<bucket>/<name>/`, and `name:` in `SKILL.md` matches the folder name.
-- [ ] The bucket `README.md` and the root `README.md` table list every skill I added, renamed or removed.
+- [ ] The bucket `README.md`, the root `README.md` table and `.claude-plugin/plugin.json` list every skill I added, renamed or removed.
 - [ ] I ran `bash ui/ui-design/tests/run.sh` if I changed `ui/ui-design`, and it passed.
 - [ ] `NOTICE` names every source I adapted, with its licence.
 - [ ] The change has no secrets, tokens, personal paths or private data.

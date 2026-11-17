@@ -22,6 +22,9 @@ The user then asked for the files a public repository needs. `.github/` now
 holds `CONTRIBUTING.md`, `SECURITY.md`, a pull request template and two issue
 templates, so those two rows left the deferred table.
 
+Stage 5 is partly done: `.claude-plugin/plugin.json` lists all six skills, so
+APM can install them as one dependency. `marketplace.json` is still to do.
+
 Nothing in the plan is done yet. Each stage below is a commit.
 
 ## Questions, answered

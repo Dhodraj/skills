@@ -1,0 +1,24 @@
+{
+  "name": "skills",
+  "version": "0.1.0",
+  "description": "Habits for your coding agent: a growing set of agent skills for Claude Code.",
+  "author": {
+    "name": "Dhodraj",
+    "url": "https://github.com/Dhodraj"
+  },
+  "repository": "https://github.com/Dhodraj/skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "claude-code",
+    "agent-skills"
+  ],
+  "skills": [
+    "./orchestration/colony-orchestrate",
+    "./orchestration/constraint-ledger",
+    "./review/staff-review",
+    "./ui/ui-design",
+    "./ui/ui-find",
+    "./ui/ui-review"
+  ]
+}
