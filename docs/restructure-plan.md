@@ -1,9 +1,15 @@
 # Restructure plan: adopt the mattpocock/skills layout
 
 This repo moves to the shape of `mattpocock/skills`. The skills move to
-`skills/ui/<name>/`. The repo gains a contract, a scope bar, a rejected-ideas
+`<bucket>/<name>/` at the repo root. The repo gains a contract, a scope bar, a rejected-ideas
 folder, a human page per skill, cross-agent manifests, a plugin manifest and
 versioned releases. Prose loses its em dashes.
+
+Changed on 2026-11-17, after stage 2: the user moved the buckets to the repo
+root, so `skills/ui/` became `ui/`. The user also added two buckets from
+Claude-System: `review` (`staff-review`) and `orchestration`
+(`colony-orchestrate`, `constraint-ledger`). Stages 1 and 2 below describe
+the old path. Later stages use the new one and cover all six skills.
 
 Nothing in the plan is done yet. Each stage below is a commit.
 
@@ -35,7 +41,7 @@ Three counts set the limits of the copy:
 
 | Decision | Chosen |
 |---|---|
-| Skill path | `skills/ui/<name>/SKILL.md` |
+| Skill path | `<bucket>/<name>/SKILL.md`, buckets at the repo root |
 | Em dashes | removed repo-wide, in their own commit |
 | Plugin manifests | yes |
 | `agents/openai.yaml` and the invocation split | yes |
@@ -145,13 +151,13 @@ interface:
   short_description: "Test-driven red-green-refactor"
 ```
 
-All three skills stay model-invoked. The depth table at `SKILL.md:17` scales
+All six skills stay model-invoked. The depth table at `SKILL.md:17` scales
 a copy edit down to three stages, so a wrong start costs little. A
 user-invoked design skill would not run when it should. Add the three
 `agents/openai.yaml` files and record that decision.
 
 **Verify:** no file gains `disable-model-invocation`. Each
-`agents/openai.yaml` parses as YAML. `skills/ui/README.md` says the same
+`agents/openai.yaml` parses as YAML. Each bucket `README.md` says the same
 thing.
 
 ## Stage 5: the plugin manifests
@@ -159,7 +165,7 @@ thing.
 Upstream ships `.claude-plugin/plugin.json` with a `skills` array of 27
 paths, and `.claude-plugin/marketplace.json` describing its own marketplace.
 
-- Write both, named `skills` to match the remote, with three skill paths
+- Write both, named `skills` to match the remote, with six skill paths
   and the MIT licence this repo already carries.
 - Keep the version in step with `package.json`.
 
@@ -278,7 +284,7 @@ this file. Run `node ~/.claude/scripts/writing-check.js` on each file changed.
 
 | Deferred | Reason |
 |---|---|
-| `in-progress/`, `misc/`, `deprecated/` buckets | three skills, one domain |
+| `in-progress/`, `misc/`, `deprecated/` buckets | no skill needs them; the buckets are `ui`, `review` and `orchestration` |
 | `GLOSSARY.md` | no jargon a reader of the skills cannot already see |
 | `.github/ISSUE_TEMPLATE/` and the three workflows | this repo takes no public issues yet |
 | `CONTRIBUTING.md` | one author |
@@ -299,7 +305,7 @@ longer exists. An absence upstream is not a convention.
 The order is the stage numbers. Stages 1 and 2 are done.
 
 Stage 3 comes next, because the rejections are the most valuable import and
-nothing depends on them. Stages 4 to 6 all point into `skills/ui/`, so none
+nothing depends on them. Stages 4 to 6 all point into the bucket folders, so none
 could start before stage 1. Stage 7, the contract, waits until the decisions
 its blocks state are settled. Stage 9 touches the most files and conflicts
 with any concurrent edit, so it runs last and alone.

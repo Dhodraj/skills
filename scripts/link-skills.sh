@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Dev-only script for maintainers of this repo. It is not an installer.
 #
-# Links every skill under skills/ into the local skill directories this
+# Links every skill (<bucket>/<name>/SKILL.md) into the local skill directories this
 # machine reads:
 #   - ~/.claude/skills
 #   - ~/.claude-personal/skills
@@ -19,10 +19,10 @@ while IFS= read -r -d '' skill_md; do
   src="$(dirname "$skill_md")"
   names+=("$(basename "$src")")
   srcs+=("$src")
-done < <(find "$REPO/skills" -name SKILL.md -not -path '*/node_modules/*' -print0)
+done < <(find "$REPO" -mindepth 3 -maxdepth 3 -name SKILL.md -not -path "$REPO/.*" -print0)
 
 if [ "${#names[@]}" -eq 0 ]; then
-  echo "error: no SKILL.md found under $REPO/skills" >&2
+  echo "error: no <bucket>/<name>/SKILL.md found in $REPO" >&2
   exit 1
 fi
 
@@ -47,8 +47,10 @@ for DEST in "${DESTS[@]}"; do
     src="${srcs[$i]}"
     target="$DEST/$name"
 
+    # A real folder there belongs to another installer (APM, install.sh). Leave it.
     if [ -e "$target" ] && [ ! -L "$target" ]; then
-      rm -rf "$target"
+      echo "skipped $name: $target is a real folder, not a link ($DEST)" >&2
+      continue
     fi
 
     ln -sfn "$src" "$target"

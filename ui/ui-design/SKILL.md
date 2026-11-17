@@ -121,7 +121,7 @@ finished screen fails on contact with a customer.
 Run `ui-find`, or its script directly:
 
 ```bash
-node skills/ui/ui-design/scripts/find-components.js <terms> --limit 15
+node ui/ui-design/scripts/find-components.js <terms> --limit 15
 ```
 
 Search the project's own components first. A second implementation of a

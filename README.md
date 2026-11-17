@@ -1,6 +1,7 @@
 # skills
 
-Three agent skills for Claude Code. They make a coding agent decide what a
+Agent skills for Claude Code, in three buckets: `ui`, `review` and
+`orchestration`. The three `ui` skills make a coding agent decide what a
 screen is for before writing it. They write the design system down before
 building against it. They open the running product before calling it done.
 
@@ -11,9 +12,17 @@ forgettable.
 
 | Skill | Say | What it does |
 |---|---|---|
-| [`ui-design`](skills/ui/ui-design/SKILL.md) | "Make the pipeline health screen modern" | Writes `DESIGN.md` when the project has none, deals three directions and gets one picked, builds a mock when you want one, then builds the real thing |
-| [`ui-find`](skills/ui/ui-find/SKILL.md) | "Find me a timeline component with expandable logs" | Searches the project, then 508 registries, reads the real code and the real licence |
-| [`ui-review`](skills/ui/ui-review/SKILL.md) | "Audit this dashboard", "review my branch" | Measures the live render or the Storybook, walks the journey, checks it against your design principles. Also reviews what a diff, branch or pull request did to an interface. Changes no files unless asked |
+| [`ui-design`](ui/ui-design/SKILL.md) | "Make the pipeline health screen modern" | Writes `DESIGN.md` when the project has none, deals three directions and gets one picked, builds a mock when you want one, then builds the real thing |
+| [`ui-find`](ui/ui-find/SKILL.md) | "Find me a timeline component with expandable logs" | Searches the project, then 508 registries, reads the real code and the real licence |
+| [`ui-review`](ui/ui-review/SKILL.md) | "Audit this dashboard", "review my branch" | Measures the live render or the Storybook, walks the journey, checks it against your design principles. Also reviews what a diff, branch or pull request did to an interface. Changes no files unless asked |
+
+The other two buckets:
+
+| Skill | Bucket | What it does |
+|---|---|---|
+| [`staff-review`](review/staff-review/SKILL.md) | `review` | Reviews substantial work the way a staff engineer would, and asks before each further round |
+| [`colony-orchestrate`](orchestration/colony-orchestrate/SKILL.md) | `orchestration` | Splits work across sub-agents, sessions, workers or worktrees, and keeps the pieces from colliding |
+| [`constraint-ledger`](orchestration/constraint-ledger/SKILL.md) | `orchestration` | Keeps every constraint the user stated in a file that later turns read |
 
 ## What ui-design does
 
@@ -56,7 +65,7 @@ Search the project first, then 508 shadcn-spec registries, with no account
 and no MCP server:
 
 ```bash
-node skills/ui/ui-design/scripts/find-components.js \
+node ui/ui-design/scripts/find-components.js \
   timeline stepper activity --limit 10
 ```
 
@@ -109,9 +118,9 @@ cd skills
 ./scripts/link-skills.sh
 ```
 
-It symlinks every skill under `skills/` into `~/.claude/skills` and
+It symlinks every skill, at `<bucket>/<name>/`, into `~/.claude/skills` and
 `~/.claude-personal/skills`, so a `git pull` updates them. To copy instead,
-copy any folder under `skills/ui/` into `~/.claude/skills/`, or into another
+copy any folder under `ui/` into `~/.claude/skills/`, or into another
 project's `.claude/skills/`.
 
 Needs Node 20 or newer. Network for registry search, which falls back to a
@@ -124,7 +133,7 @@ Full instructions: [docs/install-and-invoke.md](docs/install-and-invoke.md).
 ## What is in here
 
 ```
-skills/ui/
+ui/
   ui-design/                        the entry point, 11 stages
     references/
       design-system.md              the DESIGN.md format, and both routes in
@@ -142,6 +151,13 @@ skills/ui/
   ui-review/                        measure, walk, judge against the system
     references/changes.md           reviewing a change, not a screen
   README.md                         the three skills, grouped by how they start
+review/
+  staff-review/                     a staff engineer's review, round by round
+  README.md                         the bucket's skills
+orchestration/
+  colony-orchestrate/               split work across agents without collisions
+  constraint-ledger/                keep the user's constraints in a file
+  README.md                         the bucket's skills
 scripts/                            link the skills locally, list every SKILL.md
 docs/                               research, architecture decision, testing
                                     report, examples, maintenance
@@ -181,5 +197,5 @@ say so on their own face.
 
 ## Licence
 
-MIT. [NOTICE](skills/ui/ui-design/NOTICE) lists every source adapted,
+MIT. [NOTICE](ui/ui-design/NOTICE) lists every source adapted,
 with its licence. No file from any of them is copied.

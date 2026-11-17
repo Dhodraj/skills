@@ -59,7 +59,7 @@ the project's checks, and report what was verified and what was not.
 `ui-find` splits that into requirements, searches the project, then:
 
 ```
-$ node skills/ui/ui-design/scripts/find-components.js \
+$ node ui/ui-design/scripts/find-components.js \
     timeline stepper activity --limit 10 --registries 16
 
 @stepper   stepper              15  not read: check at the source
