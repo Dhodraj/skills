@@ -27,9 +27,9 @@ Both builds are in this repository: `shared/demo/ab/stock/index.html` and
 `shared/demo/ab/with-skill/index.html`, with the design system the skilled arm wrote
 at `shared/demo/ab/with-skill/DESIGN.md`.
 
-![The same prompt, at 1440](images/ab-1-wide.png)
+![The same prompt, at 1440](../images/ab-1-wide.png)
 
-![The same prompt, at 375](images/ab-2-phone.png)
+![The same prompt, at 375](../images/ab-2-phone.png)
 
 ## Measured at 1440
 

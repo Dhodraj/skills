@@ -9,7 +9,7 @@ The brief asks for a skill that makes an agent think like a business owner, a
 product manager, a customer, a designer, a critic, a frontend engineer and a
 QA engineer, rather than like someone implementing a ticket. Twenty-two
 sources were supplied to draw on; the reading is in
-[source-research.md](source-research.md).
+[source-research.md](../research/source-research.md).
 
 Two facts about this machine shaped the design more than anything in the
 brief.
@@ -132,7 +132,7 @@ Plus `scripts/check-sources.js` and `tests/run.sh`.
   instead, loaded only when that direction is picked.
 - Nothing enforces `craft.md` or `gates.md`. Both are read at stage 7 and
   then relied on. The demo in `shared/demo/` was built to them by hand, and the
-  difference is visible against `shared/demo/console-plain.html`. An agent that
+  difference is visible against `shared/demo/console/console-plain.html`. An agent that
   skips those files produces the plain version and still passes every
   automated check. `DESIGN.md` is the one exception, because
   `pnpm dlx @google/design.md lint` is a real gate with a non-zero exit code.

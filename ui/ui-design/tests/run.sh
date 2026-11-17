@@ -132,7 +132,7 @@ done
 
 # The geometry fixture has to carry one of each fault, and the script has to
 # look for all five. What the script returns against it is a browser result,
-# recorded in shared/docs/testing-report.md; this only keeps the pair in step.
+# recorded in shared/docs/research/testing-report.md; this only keeps the pair in step.
 geometry="$(cat "$here/fixtures/geometry-faults.html")"
 has "the geometry fixture hides an overflowing avatar" "$geometry" "overflow: hidden"
 has "it carries a 3px inset"        "$geometry" "padding: 16px 3px 16px 3px"

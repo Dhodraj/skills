@@ -182,7 +182,7 @@ decision was already made.
 ## Open decisions
 
 1. Which findings to fix, and in what order.
-2. What becomes of `shared/docs/restructure-plan.md`, which still says
+2. What becomes of `shared/docs/decisions/restructure-plan.md`, which still says
    `skills/ui` in seven places and does not know about `review/` or
    `orchestration/`.
 3. Whether to relaunch the coverage matrix.

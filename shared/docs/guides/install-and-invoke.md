@@ -42,18 +42,31 @@ shared/
   scripts/
     link-skills.sh                 symlink every skill into the local skill directories
     list-skills.sh                 print every SKILL.md path
+  brand/
+    banner.svg                     the README banner
+    social-preview.png             the same design, for GitHub's social preview
   docs/
-    source-research.md             every supplied url, read on 2026-10-27, with four later rounds
-    adr-0001-architecture.md       why this shape
-    testing-report.md              what was run and what came back
-    examples.md                    worked invocations
-    maintenance.md                 adding a source, refreshing the research
+    decisions/
+      adr-0001-architecture.md     why this shape
+      restructure-plan.md          the plan to adopt the upstream skills layout
+    guides/
+      install-and-invoke.md        this file
+      examples.md                  worked invocations
+      maintenance.md               adding a source, refreshing the research
+    research/
+      source-research.md           every supplied url, read on 2026-10-27, with four later rounds
+      ab-test.md                   one prompt built with and without ui-design
+      testing-report.md            what was run and what came back
+      interrogation-2026-11-17.md  eight findings against the ui skills, not yet fixed
+    images/                        figures the docs and READMEs show
   demo/
-    console.html                   a dispatch console built through the stages
-    landing.html                   its public page, same direction
-    console-shot.png               the console, used as the landing page's proof
-    console-plain.html             the same console before the craft pass
-    console-light.html             the craft pass before the dark band
+    ab/                            the two A/B builds and their screenshots
+    console/
+      console.html                 a dispatch console built through the stages
+      landing.html                 its public page, same direction
+      console-shot.png             the console, used as the landing page's proof
+      console-plain.html           the same console before the craft pass
+      console-light.html           the craft pass before the dark band
 ```
 
 `shared/demo/` is not part of the skill. It is what the skill produced, kept so the
@@ -62,7 +75,7 @@ output can be looked at, and so `console-plain.html` can be put beside
 Playwright MCP server blocks `file:` urls:
 
 ```bash
-cd shared/demo && python3 -I -m http.server 8731 --bind 127.0.0.1
+cd shared/demo/console && python3 -I -m http.server 8731 --bind 127.0.0.1
 ```
 
 ## Install

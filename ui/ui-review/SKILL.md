@@ -97,7 +97,7 @@ It reports five geometry faults by name, each one a rule in
 Against the skill's own fixtures on 2026-11-12, at 1440 in Chrome 157,
 `dashboard-after.html` returned zero of all five and `geometry-faults.html`
 returned `1 / 1 / 1 / 2 / 2`: the faults each panel was built to carry.
-`shared/docs/testing-report.md` has every count. No real application, no 375 width
+`shared/docs/research/testing-report.md` has every count. No real application, no 375 width
 and no dark surface has been measured yet, so a count on one of those is new
 ground. A page with a dozen `nearTangents` from one cause is one finding with
 twelve occurrences.

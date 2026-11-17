@@ -62,7 +62,7 @@ Three counts set the limits of the copy:
 | A docs page per skill | dropped, no site to publish it to |
 | Splitting `craft.md` by moment | deferred, recorded as such |
 | `CLAUDE.md` size | four blocks, 60 lines at most |
-| This plan | `docs/restructure-plan.md` |
+| This plan | `docs/decisions/restructure-plan.md` |
 
 ## Stage 1: move the tree (done, 2026-11-17)
 
@@ -103,7 +103,7 @@ Entries group under **User-invoked** and **Model-invoked**.
 
 - Write `skills/ui/README.md` with one line per skill.
 - Rewrite the `README.md` file tree for the new paths.
-- Fix `docs/install-and-invoke.md`, which prints the old tree and the test
+- Fix `docs/guides/install-and-invoke.md`, which prints the old tree and the test
   counts.
 
 **Verify:** `scripts/list-skills.sh` output matches both README files.
@@ -117,7 +117,7 @@ after the concept.
 
 `.out-of-scope/` is the single home for a rejection. Where a rejection came
 from one of the three removed trail learnings, the file states it and names
-the learning's path at commit `eb962f7`. `docs/testing-report.md` keeps its commands, counts and browser
+the learning's path at commit `eb962f7`. `docs/research/testing-report.md` keeps its commands, counts and browser
 measurements. Its two narrative passages move here: the four blocking
 instruction-check findings from 2026-11-13, and the three parts rejected on
 2026-11-16.
@@ -215,7 +215,7 @@ sentence links to `docs/`.
 
 - Write `CLAUDE.md` with four blocks and nothing else.
 - Write `AGENTS.md` containing `CLAUDE.md`.
-- Leave the reasoning in `docs/maintenance.md` and link to it.
+- Leave the reasoning in `docs/guides/maintenance.md` and link to it.
 
 Block one, the six invariants:
 
@@ -240,19 +240,19 @@ Rendered page copy is not repo prose: `demo/*.html` and
 This stage runs late, because three of its four blocks state decisions the
 other stages make.
 
-**Verify:** `wc -l CLAUDE.md` is at most 60. Read `docs/maintenance.md` and
+**Verify:** `wc -l CLAUDE.md` is at most 60. Read `docs/guides/maintenance.md` and
 confirm no invariant sits only there.
 
 ## Stage 8: the decision records
 
 Upstream keeps shared procedures and ADRs in `.agents/`. This repo already
-has `docs/adr-0001-architecture.md`.
+has `docs/decisions/adr-0001-architecture.md`.
 
 Every ADR stays in `docs/`, numbered on from `0001`. There is no
 `.agents/adr/`, because two homes guarantee a session writes into the wrong
 one.
 
-- Add `docs/adr-0002-upstream-layout.md` recording this plan.
+- Add `docs/decisions/adr-0002-upstream-layout.md` recording this plan.
 - Add `.agents/invocation.md` with the rule from the invocation stage.
 - `.agents/` holds shared procedure files only.
 
@@ -281,7 +281,7 @@ scope:
 scope.
 
 That leaves about 122 in prose to rewrite. The heaviest files are
-`docs/source-research.md` at 40, `docs/testing-report.md` at 16 and
+`docs/research/source-research.md` at 40, `docs/research/testing-report.md` at 16 and
 `references/directions.md` at 12.
 
 **Verify:** search with `git ls-files -z | xargs -0 grep -c $'\u2014'`. It

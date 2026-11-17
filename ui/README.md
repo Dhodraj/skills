@@ -55,7 +55,7 @@ That prompt, twice. Same model. Once on a stock install, once with
 Measured in a browser at 1440: contrast failures 23 to 0, text under 12px 47
 to 0, console errors 1 to 0. The method, the rest of the numbers, and the one
 measurement that went the other way are in
-[shared/docs/ab-test.md](../shared/docs/ab-test.md).
+[shared/docs/research/ab-test.md](../shared/docs/research/ab-test.md).
 
 ## Component discovery
 
@@ -113,11 +113,11 @@ the user picks a direction.
 Look at the demo yourself:
 
 ```bash
-cd ../shared/demo && python3 -m http.server 8731
+cd ../shared/demo/console && python3 -m http.server 8731
 # then open http://127.0.0.1:8731/console.html
 ```
 
-`shared/demo/console-plain.html` is the same console before the craft pass. Put them
+`shared/demo/console/console-plain.html` is the same console before the craft pass. Put them
 side by side.
 
 ## Limits

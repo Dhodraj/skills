@@ -47,7 +47,7 @@ cp -R skills/ui/ui-design ~/.claude/skills/
 The UI skills need Node 20 or newer. `ui-design` and `ui-review` use a
 Playwright MCP server if one is set up. Without one, they fall back to
 headless Chrome and mark every journey claim as unverified. Full details are
-in [install and invoke](shared/docs/install-and-invoke.md).
+in [install and invoke](shared/docs/guides/install-and-invoke.md).
 
 ## Try it in five minutes
 
@@ -65,7 +65,8 @@ ui/                 ui-design, ui-find, ui-review
 review/             staff-review
 orchestration/      colony-orchestrate, constraint-ledger
 shared/
-  docs/             research, design decisions, the A/B test, testing report
+  brand/            the banner and the social preview image
+  docs/             decisions/, guides/, research/ and images/
   demo/             pages the UI skills built, with sample data
   scripts/          link-skills.sh and list-skills.sh, for maintainers
 ```
