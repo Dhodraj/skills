@@ -54,8 +54,10 @@ node ../ui-design/scripts/find-components.js \
 
 Options that matter:
 
-- `--curated-only` searches only the read-and-licensed sources in
-  [sources.json](../ui-design/sources.json);
+- `--curated-only` searches only the sources in
+  [sources.json](../ui-design/sources.json), rather than the long tail. It is
+  not a licence filter. Some entries there carry no licence that was read, so
+  read the licence column on every hit before you ship one;
 - `--registries <n>` widens the long tail;
 - `--type any` includes blocks, hooks and whole pages, not only
   `registry:ui`;

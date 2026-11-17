@@ -80,6 +80,45 @@ finding format records no width and no state, so the rule had nothing to refer
 to. The applied rule scopes the re-look by the reach of the edit, which is
 always known.
 
+On 2026-11-17 an interrogation found eight faults in the skills, and all eight
+were fixed. The runs report `113 passed, 0 failed` offline and
+`116 passed, 0 failed` with `--network`. `check-sources.js` now prints a
+second line: `6 with no licence read`.
+
+Four were holes in `measure.js`, each confirmed in Chrome before and after the
+fix.
+
+- A translucent ink was dropped from the contrast check. It is now composited
+  over the background behind it, then measured. So `rgba(0, 0, 0, .18)`
+  reports at 1.53:1, next to the solid grey it matches on screen.
+- A `value` attribute made a text input count as named. Under HTML-AAM it
+  names a button only. Both unlabelled fields now report in both lists.
+- The visually hidden table header filed 8 clipped faults at 375. A container
+  that hides its own content from the screen is no longer a clip, so the
+  count is 0.
+- Every control under 44px was flagged. The floor is now 24, and 44 only
+  where a thumb is expected. The reference fixture went from 9 of 9 controls
+  flagged to none at 1440.
+
+Three were test assertions that passed with the thing they name deleted. Each
+was rewritten, and each now fails without its fix. The colour-only status
+check counts the coloured marks, then the marks with a word beside them. It no
+longer greps for a class the fixture never used. The avatar check asserts the
+element as well as the rule that clips it. The detector checks run three per
+detector: the key, the push that fills it, and a loop over the real element
+list.
+
+The last was a prose claim. `--curated-only` was described as searching the
+read-and-licensed sources, and the top hit of a curated search carries no
+licence. The flag now says what it does, which is to search the curated file
+rather than the long tail.
+
+Two figures were checked for regression and both hold. The geometry fixture
+still returns `1 / 1 / 1 / 2 / 2` at 1440, and the real clip still reports. At
+375 the reference fixture now reports 9 controls under 44px. That is a breach
+of `gates.md` 11 at phone width, and a defect in the fixture rather than in
+the script.
+
 ### The geometry faults, measured in a browser
 
 Run on 2026-11-12 through Playwright MCP against Chrome 157. Each fixture was

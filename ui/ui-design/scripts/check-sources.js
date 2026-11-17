@@ -80,10 +80,22 @@ const report = (code) => {
   if (problems.length === 0) {
     const counted = (list) => (data[list] || []).length;
     const searchable = (data.components || []).filter((entry) => entry.registry).length;
+    // A licence-read note proves somebody looked. It does not prove they
+    // found a licence, and `--curated-only` is not a licence filter, so the
+    // count of unread licences belongs in the verdict rather than in nobody's
+    // head. Not a problem: an unlicensed source is a decision for the user.
+    const unread = [...(data.components || []), ...(data.screens || []), ...(data.patterns || [])]
+      .filter((entry) => /not (stated|read)|no component licence/i.test(String(entry.licence || "")));
     console.log(
       `sources.json: ${counted("components") + counted("screens") + counted("patterns")} sources ` +
       `(${searchable} searchable), ${counted("rejected")} rejected, no problems`,
     );
+    if (unread.length) {
+      console.log(
+        `  ${unread.length} with no licence read, which needs the user's decision before shipping: ` +
+        unread.map((entry) => entry.id).join(", "),
+      );
+    }
   } else {
     for (const problem of problems) console.error(problem);
   }

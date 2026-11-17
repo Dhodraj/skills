@@ -83,12 +83,17 @@ text contrast, target sizes, controls with no accessible name, heading order,
 unsized media and text below 12px. It also returns a census of the type sizes,
 radii, shadows and font families the page really uses.
 
+Two fields say which floor it applied. `targetFloor` is 24 or 44, and
+`thumbExpected` says why: a coarse pointer, or a viewport at or under 768px.
+Cite the floor beside the number, because a 36px control is correct on a
+pointer-first console and a failure on a phone.
+
 It reports five geometry faults by name, each one a rule in
 [craft.md](../ui-design/references/craft.md), Spacing and alignment:
 
 | Fault | What the number means |
 |---|---|
-| `clipped` | A mark sliced by a container that hides overflow. A crop marked `data-crop` is exempt, and truncation with an ellipsis is not counted |
+| `clipped` | A mark sliced by a container that hides overflow. Three things are exempt: a crop marked `data-crop`, truncation with an ellipsis, and a container that hides its own content from the screen, such as the visually hidden pattern that keeps a table header or a skip link for a screen reader |
 | `tightInsets` | Ink closer than 8px to the edge of the surface it sits on, where 12px is the rule. Measured from the text, not from its box. A dense table or a chip set tighter than 8px on purpose reports here too |
 | `unevenPadding` | A panel of at least 120 by 80 with two or more children whose content is cramped against one edge, or whose left and right gaps differ while the content fills the width. A panel with room below its content is not reported |
 | `nearTangents` | Sibling edges 0.5 to 3.5px apart: a gap that neither closes nor clears a step of the scale, or two left, right or top edges that were meant to line up. Bottom edges are not compared, because baseline-aligned text of two sizes misses by a pixel or two when it is right |

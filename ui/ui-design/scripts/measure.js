@@ -30,14 +30,20 @@
 // with one cause into one finding.
 //
 // Limits, which belong in any report that cites it: it reads the page as it
-// stands, so a state nobody opened is not measured. Contrast is computed from
-// the nearest opaque background colour, so text over an image or a gradient
-// comes back as "unmeasured" rather than wrong. It cannot see hierarchy,
+// stands, so a state nobody opened is not measured. Contrast is computed
+// against the nearest opaque background colour, so text over an image or a
+// gradient comes back as "unmeasured" rather than wrong. A translucent ink is
+// composited over that background first and then measured, so an `rgba()`
+// colour is a real result rather than a skipped one. It cannot see hierarchy,
 // rhythm, crowding or whether the page is any good.
 //
 // Thresholds: an inset under 8px, a panel at least 120 by 80 with two or more
 // children, sibling edges 0.5 to 3.5px apart, 24 siblings per parent and 60
-// near-tangents in all. data-crop exempts a container from the clipping check.
+// near-tangents in all. A target is measured against 24 by 24, and against 44
+// by 44 where a thumb is expected: a coarse pointer, or a viewport at or under
+// 768px. data-crop exempts a container from the clipping check, and so does a
+// container that hides its own content from the screen, such as the visually
+// hidden pattern.
 () => {
   const measure = () => {
   const SAMPLE = 12;
@@ -124,6 +130,16 @@
       })),
   };
 
+  // A translucent ink is what the reader sees once it composites over the
+  // surface behind it, so that is what gets measured. Reading the declared
+  // colour instead would skip every `rgba()` and every `text-black/40`.
+  const composite = (foreground, background) => ({
+    r: Math.round(foreground.r * foreground.a + background.r * (1 - foreground.a)),
+    g: Math.round(foreground.g * foreground.a + background.g * (1 - foreground.a)),
+    b: Math.round(foreground.b * foreground.a + background.b * (1 - foreground.a)),
+    a: 1,
+  });
+
   // 2. Text contrast against the nearest opaque background.
   const textNodes = all.filter((element) => {
     if (!element.firstChild) return false;
@@ -135,8 +151,8 @@
   const unmeasuredContrast = [];
   for (const element of textNodes) {
     const style = getComputedStyle(element);
-    const foreground = parseColour(style.color);
-    if (!foreground || foreground.a < 1) continue;
+    const declared = parseColour(style.color);
+    if (!declared) continue;
     const behind = backgroundBehind(element);
     const size = parseFloat(style.fontSize);
     const weight = Number(style.fontWeight) || 400;
@@ -145,6 +161,9 @@
       unmeasuredContrast.push({ selector: describe(element), reason: behind.unmeasured, text: text(element) });
       continue;
     }
+    // Fully transparent ink paints nothing, so there is nothing to measure.
+    if (declared.a === 0) continue;
+    const foreground = declared.a < 1 ? composite(declared, behind.colour) : declared;
     const ratio = contrast(foreground, behind.colour);
     const required = large ? 3 : 4.5;
     if (ratio < required) {
@@ -155,6 +174,9 @@
         required,
         fontSize: Math.round(size * 10) / 10,
         colour: style.color,
+        measured: declared.a < 1
+          ? `rgb(${foreground.r}, ${foreground.g}, ${foreground.b}) after compositing`
+          : undefined,
         background: `rgb(${behind.colour.r}, ${behind.colour.g}, ${behind.colour.b})`,
       });
     }
@@ -190,7 +212,12 @@
     if (title && title.trim()) return title.trim();
     const image = element.querySelector("img[alt]");
     if (image && image.getAttribute("alt").trim()) return image.getAttribute("alt").trim();
-    if (element.tagName === "INPUT" && element.getAttribute("value")) return element.getAttribute("value");
+    // Under HTML-AAM, `value` is a name source for a button, submit or reset
+    // input only. On a text field it is the content, not a label.
+    const buttonish = ["button", "submit", "reset"];
+    if (element.tagName === "INPUT"
+        && buttonish.includes((element.getAttribute("type") || "").toLowerCase())
+        && element.getAttribute("value")) return element.getAttribute("value");
     return null;
   };
 
@@ -206,27 +233,35 @@
   const smallTargets = [];
   const unnamedControls = [];
   const placeholderOnly = [];
+  // gates.md 11: 24 x 24 is the floor everywhere, and 44 x 44 applies where a
+  // thumb is expected. A coarse pointer says so outright; a viewport at or
+  // under 768px is a phone whatever the pointer reports. Measuring every
+  // control against 44 on a pointer-first console flags the whole page, which
+  // is the same as measuring nothing.
+  const thumbExpected = (typeof window.matchMedia === "function"
+      && window.matchMedia("(pointer: coarse)").matches)
+    || viewport.width <= 768;
+  const targetFloor = thumbExpected ? 44 : 24;
   for (const element of interactive) {
     const box = element.getBoundingClientRect();
     const name = accessibleName(element);
     if (!name) {
       unnamedControls.push({ selector: describe(element), html: element.outerHTML.slice(0, 120) });
     }
-    if (!inlineLink(element) && (box.width < 24 || box.height < 24)) {
+    // A visually hidden control, such as a skip link, is exempt from WCAG
+    // 2.5.8 and is required practice rather than a 1px target.
+    const visuallyHidden = box.width <= 2 || box.height <= 2;
+    if (!inlineLink(element) && !visuallyHidden
+        && (box.width < targetFloor || box.height < targetFloor)) {
       smallTargets.push({
         selector: describe(element),
         name,
         width: Math.round(box.width),
         height: Math.round(box.height),
-        below: "24x24 (WCAG 2.5.8)",
-      });
-    } else if (!inlineLink(element) && (box.width < 44 || box.height < 44)) {
-      smallTargets.push({
-        selector: describe(element),
-        name,
-        width: Math.round(box.width),
-        height: Math.round(box.height),
-        below: "44x44 (Apple HIG comfortable target)",
+        below: `${targetFloor}x${targetFloor}`,
+        rule: thumbExpected
+          ? "44x44 where a thumb is expected (gates.md 11)"
+          : "24x24 minimum (WCAG 2.5.8)",
       });
     }
     if ((element.tagName === "INPUT" || element.tagName === "TEXTAREA") &&
@@ -351,6 +386,16 @@
       if (node.hasAttribute("data-crop")) break;
       const style = getComputedStyle(node);
       const inner = innerBox(node);
+      // A container that hides its content from the screen on purpose is not
+      // slicing a mark, because none of it is on screen to slice. The
+      // visually hidden pattern is a 1px box with overflow hidden, which is
+      // how a responsive table header or a skip link stays available to a
+      // screen reader. Reporting it would file a fault against the markup
+      // that exists for access.
+      const hidesFromScreen = inner.bottom - inner.top <= 2
+        || inner.right - inner.left <= 2
+        || style.clip === "rect(0px, 0px, 0px, 0px)";
+      if (hidesFromScreen) break;
       const sides = [];
       if (hidesOverflow(style.overflowY)) {
         if (box.top < inner.top - 1) sides.push("top");
@@ -576,6 +621,8 @@
     title: document.title,
     viewport,
     measuredAt: new Date().toISOString(),
+    targetFloor,
+    thumbExpected,
     counts: {
       elements: all.length,
       interactive: interactive.length,

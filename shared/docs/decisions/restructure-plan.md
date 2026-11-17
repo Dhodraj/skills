@@ -89,7 +89,7 @@ Add `scripts/list-skills.sh`, which is six lines upstream and prints every
 `SKILL.md` path.
 
 **Verify:** run `bash skills/ui/ui-design/tests/run.sh`, which resolves its
-own directory and must still report 93 passed. Run it again with `--network`
+own directory and must still report 113 passed. Run it again with `--network`
 for 96. Run `scripts/link-skills.sh` and read back all six symlinks with
 `ls -l`. Then start a session in another folder and confirm a skill loads.
 
@@ -306,7 +306,7 @@ largest set is five. `ui-design` has nine references, three scripts and four
 fixtures. Flat gives sixteen files in one directory, so `references/`,
 `scripts/` and `tests/` stay.
 
-**Dropping the tests.** Upstream has none. This repo has 93 offline and 96
+**Dropping the tests.** Upstream has none. This repo has 113 offline and 116
 with `--network`, and they catch a rule that names a gate number which no
 longer exists. An absence upstream is not a convention.
 

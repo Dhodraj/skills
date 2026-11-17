@@ -122,7 +122,13 @@ done
 before="$(cat "$here/fixtures/dashboard-before.html")"
 after="$(cat "$here/fixtures/dashboard-after.html")"
 has   "the before fixture carries colour-only status" "$before" 'class="dot'
-hasnt "the after fixture has no colour-only status"   "$after"  'class="dot'
+# Floor rule 8: status never by colour alone. Count the coloured marks, then
+# count the ones with a word after them. Greping for the before fixture's
+# class name proved nothing, because the after fixture never uses it.
+marks="$(grep -o 'class="mark"></span>' "$here/fixtures/dashboard-after.html" | wc -l | tr -d ' ')"
+worded="$(grep -o 'class="mark"></span>[A-Za-z]' "$here/fixtures/dashboard-after.html" | wc -l | tr -d ' ')"
+ok "every coloured status mark carries a word" "$worded" "$marks"
+hasnt "no status mark closes with no word" "$after" 'class="mark"></span></span>'
 has   "the before fixture scrolls sideways by design" "$before" 'min-width: 760px'
 has   "the after fixture names its row controls"      "$after"  'aria-label="Actions for run'
 # Every run in the before fixture still has its row control in the after one.
@@ -134,7 +140,10 @@ done
 # look for all five. What the script returns against it is a browser result,
 # recorded in shared/docs/research/testing-report.md; this only keeps the pair in step.
 geometry="$(cat "$here/fixtures/geometry-faults.html")"
-has "the geometry fixture hides an overflowing avatar" "$geometry" "overflow: hidden"
+# The pair is the element and the rule that clips it. Testing only the rule
+# left the check green with the overflowing element deleted.
+has "the geometry fixture carries the overflowing avatar" "$geometry" 'class="avatar"'
+has "and its container hides overflow"                    "$geometry" "overflow: hidden"
 has "it carries a 3px inset"        "$geometry" "padding: 16px 3px 16px 3px"
 has "it carries a cramped bottom"   "$geometry" "padding: 28px 20px 6px"
 has "it carries a 2px gap"          "$geometry" "gap: 2px"
@@ -144,10 +153,31 @@ has "and prose that wraps without being a fault" "$geometry" 'class="prose"'
 has "it carries a panel with no fault" "$geometry" 'id="sound"'
 
 measure="$(cat "$skill/scripts/measure.js")"
+# Three checks per detector, because one was not enough: the key in the
+# returned counts, the push that fills it, and a loop that walks the real
+# element list. Emptying the loop to `of []` left the single check green.
 for fault in clipped tightInsets unevenPadding nearTangents wrappedUnits; do
-  has "measure.js reports $fault" "$measure" "$fault: $fault.length"
+  has "measure.js reports $fault"      "$measure" "$fault: $fault.length"
+  has "and fills $fault from a render" "$measure" "$fault.push("
 done
+hasnt "no detector loops over an empty list" "$measure" "of \[\])"
+has "the clipped detector walks every element" "$measure" "for (const element of all)"
 has "measure.js exempts a chosen crop" "$measure" 'hasAttribute("data-crop")'
+# The four holes found on 2026-11-17. Each names the rule it now follows.
+has "contrast composites a translucent ink"   "$measure" "const composite = (foreground, background)"
+has "and measures the composited value"       "$measure" "declared.a < 1 ? composite(declared"
+has "a value attribute names only a button"   "$measure" "buttonish.includes("
+has "a container that hides is not a clip"    "$measure" "hidesFromScreen"
+has "the target floor follows the pointer"    "$measure" "thumbExpected ? 44 : 24"
+has "and a visually hidden control is exempt" "$measure" "visuallyHidden"
+hasnt "no blanket 44px floor is left"         "$measure" "44x44 (Apple HIG comfortable target)"
+# The curated flag is not a licence filter, and both files now say so.
+findskill="$(cat "$skill/../ui-find/SKILL.md")"
+has   "ui-find says the curated flag is not a licence filter" "$findskill" "not a licence filter"
+hasnt "and no longer calls those sources licensed"            "$findskill" "read-and-licensed"
+has "check-sources counts the licences nobody read" "$(cat "$check")" "with no licence read"
+real="$(node "$check" 2>&1)"
+has "and the real file reports that count" "$real" "6 with no licence read"
 has "craft.md names the measured faults" "$(cat "$skill/references/craft.md")" "measured\*\*: \`tight inset\`"
 
 # ------------------------------------------------------------------ references
