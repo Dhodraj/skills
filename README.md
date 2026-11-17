@@ -1,4 +1,4 @@
-# ui-skills
+# skills
 
 Three agent skills for Claude Code. They make a coding agent decide what a
 screen is for before writing it. They write the design system down before
@@ -104,8 +104,8 @@ the user picks a direction.
 ## Install
 
 ```bash
-git clone git@github.com:Dhodraj/ui-skills.git
-cd ui-skills
+git clone git@github.com:Dhodraj/skills.git
+cd skills
 ./scripts/link-skills.sh
 ```
 

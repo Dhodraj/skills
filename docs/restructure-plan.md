@@ -40,7 +40,7 @@ Three counts set the limits of the copy:
 | Plugin manifests | yes |
 | `agents/openai.yaml` and the invocation split | yes |
 | Changesets and `CHANGELOG.md` | yes, with pnpm, private at `0.1.0` |
-| Package and plugin name | `ui-skills`, matching the remote |
+| Package and plugin name | `skills`, matching the remote |
 | ADR home | `docs/` only, no `.agents/adr/` |
 | A docs page per skill | dropped, no site to publish it to |
 | Splitting `craft.md` by moment | deferred, recorded as such |
@@ -159,7 +159,7 @@ thing.
 Upstream ships `.claude-plugin/plugin.json` with a `skills` array of 27
 paths, and `.claude-plugin/marketplace.json` describing its own marketplace.
 
-- Write both, named `ui-skills` to match the remote, with three skill paths
+- Write both, named `skills` to match the remote, with three skill paths
   and the MIT licence this repo already carries.
 - Keep the version in step with `package.json`.
 
@@ -178,11 +178,11 @@ into `plugin.json`.
 Upstream sets `"packageManager": "npm@10.9.4"`. This machine forbids npm, so
 the equivalent here is pnpm, and every command runs as `pnpm` or `pnpm dlx`.
 
-- Write `package.json`, named `ui-skills`, `private: true`, MIT, version
+- Write `package.json`, named `skills`, `private: true`, MIT, version
   `0.1.0`. The version exists only to keep `plugin.json` in step; nothing is
   published to a registry.
 - Add `.changeset/config.json` with `baseBranch` set to `main` and the
-  GitHub changelog pointed at `Dhodraj/ui-skills`.
+  GitHub changelog pointed at `Dhodraj/skills`.
 - Add `scripts/sync-plugin-version.mjs`.
 - Install the two changesets dev dependencies, which needs approval first.
 
