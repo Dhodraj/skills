@@ -44,8 +44,8 @@ product's own world, search for components before writing any, and build
 every state rather than the happy path. Stage G reads
 `references/craft.md` first, every time: depth as a shadow rather than a
 border, concentric radii, ease-out under 300ms, an entrance that fires once
-and never on a repeated interaction, tabular figures. `demo/console.html` is
-what that stage produced here, and `demo/console-plain.html` is the same
+and never on a repeated interaction, tabular figures. `shared/demo/console.html` is
+what that stage produced here, and `shared/demo/console-plain.html` is the same
 screen without it.
 
 **Stages H to L** start the application, walk the journey, measure, fix, run

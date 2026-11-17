@@ -10,7 +10,7 @@ set -euo pipefail
 # Each entry is a symlink into this repo, so a `git pull` keeps the installed
 # skills current. Re-run after adding, removing, or renaming a skill.
 
-REPO="$(cd "$(dirname "$0")/.." && pwd)"
+REPO="$(cd "$(dirname "$0")/../.." && pwd)"
 DESTS=("$HOME/.claude/skills" "$HOME/.claude-personal/skills")
 
 names=()

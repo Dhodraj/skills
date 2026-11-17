@@ -23,9 +23,9 @@ No audience. No states. No design direction. No acceptance criteria.
 | Could look at its own render | No. A fresh install has no browser tooling | Yes |
 | Could ask anything | No | No |
 
-Both builds are in this repository: `demo/ab/stock/index.html` and
-`demo/ab/with-skill/index.html`, with the design system the skilled arm wrote
-at `demo/ab/with-skill/DESIGN.md`.
+Both builds are in this repository: `shared/demo/ab/stock/index.html` and
+`shared/demo/ab/with-skill/index.html`, with the design system the skilled arm wrote
+at `shared/demo/ab/with-skill/DESIGN.md`.
 
 ![The same prompt, at 1440](images/ab-1-wide.png)
 

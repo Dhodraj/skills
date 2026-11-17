@@ -1,201 +1,93 @@
 # skills
 
-Agent skills for Claude Code, in three buckets: `ui`, `review` and
-`orchestration`. The three `ui` skills make a coding agent decide what a
-screen is for before writing it. They write the design system down before
-building against it. They open the running product before calling it done.
+Agent skills for Claude Code that check the real result. The UI skills open
+the running product before they call a screen done. The review skill builds a
+coverage matrix before it calls work complete. The orchestration skills keep
+parallel agents and long runs inside the limits you set.
 
-The problem is not that an agent cannot write frontend code. It is that an
-agent writes the ticket rather than the product. It satisfies the words of a
-request, never opens the result, and ships a screen that is correct and
-forgettable.
+![The same prompt on a stock install (top) and with ui-design (bottom)](shared/docs/images/ab-1-wide.png)
 
-| Skill | Say | What it does |
-|---|---|---|
-| [`ui-design`](ui/ui-design/SKILL.md) | "Make the pipeline health screen modern" | Writes `DESIGN.md` when the project has none, deals three directions and gets one picked, builds a mock when you want one, then builds the real thing |
-| [`ui-find`](ui/ui-find/SKILL.md) | "Find me a timeline component with expandable logs" | Searches the project, then 508 registries, reads the real code and the real licence |
-| [`ui-review`](ui/ui-review/SKILL.md) | "Audit this dashboard", "review my branch" | Measures the live render or the Storybook, walks the journey, checks it against your design principles. Also reviews what a diff, branch or pull request did to an interface. Changes no files unless asked |
+The same prompt, the same model, run twice. We measured both pages in a
+browser at 1440 px. Contrast failures went from 23 to 0. Text under 12 px went
+from 47 to 0. Console errors went from 1 to 0. The method and every number are in
+[the A/B test](shared/docs/ab-test.md).
 
-The other two buckets:
+## The skills
 
-| Skill | Bucket | What it does |
-|---|---|---|
-| [`staff-review`](review/staff-review/SKILL.md) | `review` | Reviews substantial work the way a staff engineer would, and asks before each further round |
-| [`colony-orchestrate`](orchestration/colony-orchestrate/SKILL.md) | `orchestration` | Splits work across sub-agents, sessions, workers or worktrees, and keeps the pieces from colliding |
-| [`constraint-ledger`](orchestration/constraint-ledger/SKILL.md) | `orchestration` | Keeps every constraint the user stated in a file that later turns read |
+| Skill | Bucket | Say | What it does |
+|---|---|---|---|
+| [`ui-design`](ui/ui-design/SKILL.md) | [`ui`](ui/README.md) | "Make the pipeline health screen modern" | Writes the design system down, offers three directions for you to pick from, builds, then walks the running app and fixes what it measures |
+| [`ui-find`](ui/ui-find/SKILL.md) | [`ui`](ui/README.md) | "Find me a timeline component with expandable logs" | Searches the project, then 508 component registries, and reads the real code and licence before it suggests anything |
+| [`ui-review`](ui/ui-review/SKILL.md) | [`ui`](ui/README.md) | "Audit this dashboard", "review my branch" | Measures the live render, walks the journey and checks it against your design principles. Changes no files unless asked |
+| [`staff-review`](review/staff-review/SKILL.md) | [`review`](review/README.md) | "Would a tech lead approve this?" | Reviews substantial work the way a staff engineer would: a coverage matrix, a fresh reviewer, fixes, and a question before each further round |
+| [`colony-orchestrate`](orchestration/colony-orchestrate/SKILL.md) | [`orchestration`](orchestration/README.md) | "Split this across agents" | Splits work across sub-agents, sessions or worktrees, and keeps the pieces from colliding |
+| [`constraint-ledger`](orchestration/constraint-ledger/SKILL.md) | [`orchestration`](orchestration/README.md) | "Work on this while I'm away" | Writes every constraint you state to a file, so it survives long runs and compaction |
 
-## What ui-design does
-
-Eleven stages that scale to the size of the change. A copy edit runs three of
-them. A new surface runs all eleven, with the direction approved before any
-code is written.
-
-| | |
-|---|---|
-| 0 to 1 | Read what exists. Find or write `DESIGN.md`, and gate it with `pnpm dlx @google/design.md lint` |
-| 2 to 3 | Name the business outcome and criteria checkable in a browser. Deal three visual directions and stop for the user to pick one |
-| 4 to 5 | Map the journey and every state a single fixture hides. Search 508 component registries before writing a component |
-| 6 to 7 | Mock or build direct. Build against the gates and the craft rules, most important screen alone and first, reviewed cold |
-| 8 to 9 | Start the application, walk it as the customer with real clicks and typing, measure, fix in severity order, check for regressions |
-| 10 | Report what was verified, by what means, and what was not |
-
-Two of those stages are hard stops. The agent does not build past the
-direction nobody picked, and does not call a mock finished without being told.
-
-## The same prompt, with and without the skill
-
-> Build a data platform observability console. It should show pipeline runs,
-> data lineage, table freshness, and incidents.
-
-That prompt, twice. Same model. Once on a stock install, once with
-`ui-design`.
-
-![Without the skill](docs/images/without-skill.png)
-
-![With the skill](docs/images/with-skill.png)
-
-Measured in a browser at 1440: contrast failures 23 to 0, text under 12px 47
-to 0, console errors 1 to 0. The method, the rest of the numbers, and the one
-measurement that went the other way are in
-[docs/ab-test.md](docs/ab-test.md).
-
-## Component discovery
-
-Search the project first, then 508 shadcn-spec registries, with no account
-and no MCP server:
-
-```bash
-node ui/ui-design/scripts/find-components.js \
-  timeline stepper activity --limit 10
-```
-
-```
-@uiarc     timeline   13  not stated on the site's pages that were read
-    Follow what happened, newest first, grouped by day.
-   deps: lucide-react, motion; files: 2
-    read: pnpm dlx shadcn@latest view @uiarc/timeline
-@reui      timeline   13  MIT
-   deps: @base-ui/react, cn; files: 1
-    read: pnpm dlx shadcn@latest view @reui/timeline
-searched 24 registries for: timeline, stepper, activity
-licences marked "check at the source" were not read; read one before shipping a component
-```
-
-The score is a text match, not a judgement. Candidates are then read: their
-real code, states, keyboard handling, dependencies and licence. They are
-ranked by fit, licence, stack, design system, accessibility and install cost,
-in that order. A licence that is not stated anywhere is a blocker, not a
-footnote.
-
-## The design system comes first
-
-A review with no stated principles is taste, and taste loses arguments. So
-`ui-design` writes the principles down before it builds, into one `DESIGN.md`
-at the project root, and `ui-review` measures against that file.
-
-Two layers. Tokens in YAML, which the linter and the Tailwind export read.
-Then ten prose sections, carrying what tokens cannot: the mood, the
-guardrails, what happens at a phone width, and the brief a future agent
-gets.
-
-```bash
-pnpm dlx @google/design.md lint DESIGN.md      # broken refs, missing primary,
-                                          # any colour pair below 4.5:1
-pnpm dlx @google/design.md export --format css-tailwind
-```
-
-Two routes in. Where the project already has tokens, a theme or a live
-product, the file **records what is there**. Values come out of the code, or
-off the rendered page as computed values. Never estimated from a screenshot.
-Where there is nothing, the file is a proposal, and stays marked as one until
-the user picks a direction.
+Each skill starts on its own when the work matches its description. You can
+also name it.
 
 ## Install
 
-```bash
-git clone git@github.com:Dhodraj/skills.git
-cd skills
-./scripts/link-skills.sh
-```
-
-It symlinks every skill, at `<bucket>/<name>/`, into `~/.claude/skills` and
-`~/.claude-personal/skills`, so a `git pull` updates them. To copy instead,
-copy any folder under `ui/` into `~/.claude/skills/`, or into another
-project's `.claude/skills/`.
-
-Needs Node 20 or newer. Network for registry search, which falls back to a
-cached `--curated-only` search without it. A Playwright MCP server for stages
-8 and 9. Without one, renders fall back to headless Chrome, and every journey
-claim is reported unverified.
-
-Full instructions: [docs/install-and-invoke.md](docs/install-and-invoke.md).
-
-## What is in here
-
-```
-ui/
-  ui-design/                        the entry point, 11 stages
-    references/
-      design-system.md              the DESIGN.md format, and both routes in
-      gates.md                      the floor, in three tiers
-      craft.md                      the layer above the floor
-      directions.md                 dealing three, and the approval gate
-      tactile.md                    one direction with its values, on a pick
-      product-thinking.md           outcome, customer, evidence vs invention
-      journey-and-states.md         the states one fixture hides
-      playwright.md                 browser mechanics
-      regression.md                 telling your failures from existing ones
-    scripts/                        registry search, page measurement, validation
-    tests/                          93 offline tests, 96 with --network
-  ui-find/                          natural language to a real component
-  ui-review/                        measure, walk, judge against the system
-    references/changes.md           reviewing a change, not a screen
-  README.md                         the three skills, grouped by how they start
-review/
-  staff-review/                     a staff engineer's review, round by round
-  README.md                         the bucket's skills
-orchestration/
-  colony-orchestrate/               split work across agents without collisions
-  constraint-ledger/                keep the user's constraints in a file
-  README.md                         the bucket's skills
-scripts/                            link the skills locally, list every SKILL.md
-docs/                               research, architecture decision, testing
-                                    report, examples, maintenance
-demo/                               what the skill produced, and the two
-                                    earlier states of it
-```
-
-Look at the demo yourself:
+Install one skill with [APM](https://github.com/microsoft/apm):
 
 ```bash
-cd demo && python3 -m http.server 8731
-# then open http://127.0.0.1:8731/console.html
+apm install -g Dhodraj/skills/ui/ui-design
 ```
 
-`demo/console-plain.html` is the same console before the craft pass. Put them
-side by side.
+Change the path to install another skill, for example
+`Dhodraj/skills/review/staff-review`. Add `#<commit>` to pin a version. To
+update, run `apm update`.
+
+Without APM, copy a skill folder into `~/.claude/skills/`:
+
+```bash
+git clone https://github.com/Dhodraj/skills.git
+cp -R skills/ui/ui-design ~/.claude/skills/
+```
+
+The UI skills need Node 20 or newer. `ui-design` and `ui-review` use a
+Playwright MCP server if one is set up. Without one, they fall back to
+headless Chrome and mark every journey claim as unverified. Full details are
+in [install and invoke](shared/docs/install-and-invoke.md).
+
+## Try it in five minutes
+
+1. Install `ui-review`.
+2. Start your web app, then open Claude Code in its project.
+3. Ask: "Review the main screen of this app."
+
+It opens the running page in a browser, measures it, walks the journey and
+reports each problem with its evidence and severity. It changes no files.
+
+## How the repository is laid out
+
+```
+ui/                 ui-design, ui-find, ui-review
+review/             staff-review
+orchestration/      colony-orchestrate, constraint-ledger
+shared/
+  docs/             research, design decisions, the A/B test, testing report
+  demo/             pages the UI skills built, with sample data
+  scripts/          link-skills.sh and list-skills.sh, for maintainers
+```
+
+Each bucket has a `README.md` with its skills. Each skill is one folder with a
+`SKILL.md`, and some have `references/`, `scripts/` and `tests/`.
 
 ## Limits
 
-- The gates and the craft rules are instructions, not mechanisms. An agent
-  that skips those files still passes every automated check. `DESIGN.md` is
-  the only part with a linter behind it.
-- Nothing can force the three directions to differ on a real axis. Three
-  shades of one idea would pass the stage.
-- The Storybook path in `ui-review` has not been run against a real
-  Storybook.
-- `pnpm dlx @google/design.md lint` has not been run against a file these
-  skills generated. The one at `demo/ab/with-skill/DESIGN.md` was written
-  without network access.
-- No component has been installed into a project through `ui-find`, and no
-  application with a dev server, sign-in and live data has been driven.
-- Walking a journey is not customer research. It finds friction. It says
-  nothing about what customers do.
+The skills are instructions, not mechanisms. An agent that skips a step still
+passes every automated check. The [ui README](ui/README.md#limits) lists what
+is not tested yet.
 
-Every figure, run, depot and customer in `demo/` is sample data, and the pages
-say so on their own face.
+## Contributing
+
+Issues and pull requests are welcome. Read
+[CONTRIBUTING](.github/CONTRIBUTING.md) and the
+[code of conduct](.github/CODE_OF_CONDUCT.md) first. To report a security problem,
+follow [SECURITY](.github/SECURITY.md) and do not open a public issue.
 
 ## Licence
 
-MIT. [NOTICE](ui/ui-design/NOTICE) lists every source adapted,
-with its licence. No file from any of them is copied.
+MIT, see [LICENSE](LICENSE). [NOTICE](ui/ui-design/NOTICE) lists every source
+the UI skills adapted, with its licence.

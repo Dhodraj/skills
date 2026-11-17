@@ -97,7 +97,7 @@ quietly overwriting it: the old reading explains decisions already made.
 
 ## Refresh the research
 
-`docs/source-research.md` carries one date and every verdict. Revisit a
+`shared/docs/source-research.md` carries one date and every verdict. Revisit a
 verdict when:
 
 - A source read as **exclude** publishes a licence. rareui.com, originkit.dev,
@@ -183,7 +183,7 @@ arbitrary.
 
 **Known gap, recorded rather than fixed.** Nothing enforces this file. Stage
 G tells the agent to read it before every UI edit, then relies on that. The
-demo in `demo/` was built to it by hand. `demo/console-plain.html` is the
+demo in `shared/demo/` was built to it by hand. `shared/demo/console-plain.html` is the
 same screen without it, and both pass every automated check. To close this,
 copy the shape `taste-skill` uses: make the agent produce three directions,
 choose one with a written reason, then judge the result cold against a list

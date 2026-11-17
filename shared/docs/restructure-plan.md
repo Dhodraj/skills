@@ -11,6 +11,17 @@ Claude-System: `review` (`staff-review`) and `orchestration`
 (`colony-orchestrate`, `constraint-ledger`). Stages 1 and 2 below describe
 the old path. Later stages use the new one and cover all six skills.
 
+Also on 2026-11-17, the user moved `docs/`, `demo/` and `scripts/` into
+`shared/`, so the repo root holds only the skill buckets, `README.md` and
+`LICENSE`. Read `docs/`, `demo/` and `scripts/` below as `shared/docs/`,
+`shared/demo/` and `shared/scripts/`. The user also removed trail from this
+repo: `.trail/` and its session hook are gone. Its three learnings are in git
+history at commit `eb962f7`.
+
+The user then asked for the files a public repository needs. `.github/` now
+holds `CONTRIBUTING.md`, `SECURITY.md`, a pull request template and two issue
+templates, so those two rows left the deferred table.
+
 Nothing in the plan is done yet. Each stage below is a commit.
 
 ## Questions, answered
@@ -104,9 +115,9 @@ describes an observed failure in a real session, and fits the philosophy.
 Each rejected concept gets one file in `.out-of-scope/`, named in kebab-case
 after the concept.
 
-`.out-of-scope/` is the single home for a rejection. A learning is never
-edited, so a file links to a `.trail/learnings/` entry rather than restating
-it. `docs/testing-report.md` keeps its commands, counts and browser
+`.out-of-scope/` is the single home for a rejection. Where a rejection came
+from one of the three removed trail learnings, the file states it and names
+the learning's path at commit `eb962f7`. `docs/testing-report.md` keeps its commands, counts and browser
 measurements. Its two narrative passages move here: the four blocking
 instruction-check findings from 2026-11-13, and the three parts rejected on
 2026-11-16.
@@ -224,8 +235,7 @@ Running both installs every skill twice.
 
 Block four, the prose rule. No em dash in repo prose, headings included.
 Rendered page copy is not repo prose: `demo/*.html` and
-`tests/fixtures/*.html` are out of scope, as is the vendored
-`.trail/hook.cjs`.
+`tests/fixtures/*.html` are out of scope.
 
 This stage runs late, because three of its four blocks state decisions the
 other stages make.
@@ -266,8 +276,6 @@ scope:
   text on a screen rather than repo prose.
 - `tests/fixtures/*.html` holds six across four files, also rendered page
   copy, and changing one could change what a test measures.
-- `.trail/hook.cjs` is a vendored file from another tool.
-- `.trail/learnings/*.md` are never edited.
 
 `adr-0001`'s own title carries one, and a heading is repo prose, so it is in
 scope.
@@ -286,8 +294,7 @@ this file. Run `node ~/.claude/scripts/writing-check.js` on each file changed.
 |---|---|
 | `in-progress/`, `misc/`, `deprecated/` buckets | no skill needs them; the buckets are `ui`, `review` and `orchestration` |
 | `GLOSSARY.md` | no jargon a reader of the skills cannot already see |
-| `.github/ISSUE_TEMPLATE/` and the three workflows | this repo takes no public issues yet |
-| `CONTRIBUTING.md` | one author |
+| The three upstream workflows | no CI yet |
 
 ## Rejected, with the reason
 

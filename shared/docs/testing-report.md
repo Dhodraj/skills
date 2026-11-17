@@ -315,10 +315,10 @@ product's own output, the planned window drawn against where the run has got
 to. Rejected by name: a dark theme as the default, and the grid of equal
 cards.
 
-**Built**: `demo/console.html` and `demo/landing.html`, one visual system
+**Built**: `shared/demo/console.html` and `shared/demo/landing.html`, one visual system
 across both. Two earlier states are kept beside them, so the difference can
-be looked at rather than described. `demo/console-plain.html` is the console
-before the craft pass. `demo/console-light.html` is the craft pass before the
+be looked at rather than described. `shared/demo/console-plain.html` is the console
+before the craft pass. `shared/demo/console-light.html` is the craft pass before the
 dark band.
 
 ### What the measurement found, and what only the look found

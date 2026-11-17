@@ -131,8 +131,8 @@ Plus `scripts/check-sources.js` and `tests/run.sh`.
   the project looks like. One house's taste belongs in a direction file
   instead, loaded only when that direction is picked.
 - Nothing enforces `craft.md` or `gates.md`. Both are read at stage 7 and
-  then relied on. The demo in `demo/` was built to them by hand, and the
-  difference is visible against `demo/console-plain.html`. An agent that
+  then relied on. The demo in `shared/demo/` was built to them by hand, and the
+  difference is visible against `shared/demo/console-plain.html`. An agent that
   skips those files produces the plain version and still passes every
   automated check. `DESIGN.md` is the one exception, because
   `pnpm dlx @google/design.md lint` is a real gate with a non-zero exit code.

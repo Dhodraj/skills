@@ -38,30 +38,31 @@ orchestration/
   colony-orchestrate/SKILL.md    split work across agents without collisions
   constraint-ledger/SKILL.md     keep the user's constraints in a file
   README.md                      the bucket's skills
-scripts/
-  link-skills.sh                 symlink every skill into the local skill directories
-  list-skills.sh                 print every SKILL.md path
-docs/
-  source-research.md             every supplied url, read on 2026-10-27, with four later rounds
-  adr-0001-architecture.md       why this shape
-  testing-report.md              what was run and what came back
-  examples.md                    worked invocations
-  maintenance.md                 adding a source, refreshing the research
-demo/
-  console.html                   a dispatch console built through the stages
-  landing.html                   its public page, same direction
-  console-shot.png               the console, used as the landing page's proof
-  console-plain.html             the same console before the craft pass
-  console-light.html             the craft pass before the dark band
+shared/
+  scripts/
+    link-skills.sh                 symlink every skill into the local skill directories
+    list-skills.sh                 print every SKILL.md path
+  docs/
+    source-research.md             every supplied url, read on 2026-10-27, with four later rounds
+    adr-0001-architecture.md       why this shape
+    testing-report.md              what was run and what came back
+    examples.md                    worked invocations
+    maintenance.md                 adding a source, refreshing the research
+  demo/
+    console.html                   a dispatch console built through the stages
+    landing.html                   its public page, same direction
+    console-shot.png               the console, used as the landing page's proof
+    console-plain.html             the same console before the craft pass
+    console-light.html             the craft pass before the dark band
 ```
 
-`demo/` is not part of the skill. It is what the skill produced, kept so the
+`shared/demo/` is not part of the skill. It is what the skill produced, kept so the
 output can be looked at, and so `console-plain.html` can be put beside
 `console.html` to see what the craft pass changed. Serve it over HTTP — the
 Playwright MCP server blocks `file:` urls:
 
 ```bash
-cd demo && python3 -I -m http.server 8731 --bind 127.0.0.1
+cd shared/demo && python3 -I -m http.server 8731 --bind 127.0.0.1
 ```
 
 ## Install
@@ -69,7 +70,7 @@ cd demo && python3 -I -m http.server 8731 --bind 127.0.0.1
 ### Every project on this machine
 
 ```bash
-./scripts/link-skills.sh
+./shared/scripts/link-skills.sh
 ```
 
 It symlinks every skill, at `<bucket>/<name>/`, into `~/.claude/skills` and
