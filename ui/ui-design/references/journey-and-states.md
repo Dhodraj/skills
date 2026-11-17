@@ -55,6 +55,14 @@ Fixtures decide what gets designed, so make them real:
 - Real identifiers, including the long ugly one.
 - Real names, including the one with an apostrophe and the one that is 60
   characters long.
+- A name in a script that is not Latin: stacked diacritics that a tight
+  `line-height` with `overflow: hidden` clips, a CJK name with no spaces, so
+  initials logic that splits on a space finds one word, and an Arabic name
+  that needs `dir="auto"` or the punctuation lands on the wrong side.
+- A name that starts with an emoji. `.charAt(0)` returns half a surrogate
+  pair. A joined sequence has a `.length` of 5 or more, and 7 once a skin
+  tone joins it, so slicing by index cuts it into pieces. Count and slice
+  with `[...value]`.
 - Real numbers, including zero, a negative, and one that needs five digits
   plus a currency.
 - Real timestamps, including today, yesterday and two years ago.

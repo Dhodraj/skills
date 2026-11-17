@@ -119,6 +119,27 @@ still returns `1 / 1 / 1 / 2 / 2` at 1440, and the real clip still reports. At
 of `gates.md` 11 at phone width, and a defect in the fixture rather than in
 the script.
 
+Later on 2026-11-17 the merge with `emilkowalski/skills` landed, reduced by an
+instruction check from 103 proposed lines to 12. The runs report
+`132 passed, 0 failed` offline and `135 passed, 0 failed` with `--network`.
+
+Nineteen checks were added. Fourteen fail when every merged file is reverted,
+so each proves the line it names. Three are guards that pass either way: two
+keep the drawer curve and the absent-value rule out of `craft.md`, and one
+keeps `ease-drawer` in `tactile.md`. Two more check that
+`.out-of-scope/README.md` lists every rejection and that each carries a date.
+
+The check refused six of the nine proposed items, and three of its reasons
+were errors of mine rather than faults in the source. I proposed a frequency
+table that restates what `craft.md` already says about a repeated
+interaction. I proposed a rule never to animate a keyboard-initiated action,
+which contradicts the line it was to sit beside. I proposed a drawer curve
+`tactile.md` already carries.
+
+I also stated that a joined emoji has a
+`.length` of 7 or more. Measured with `node -e`, a two-person sequence is 5.
+Seven needs a skin tone.
+
 ### The geometry faults, measured in a browser
 
 Run on 2026-11-12 through Playwright MCP against Chrome 157. Each fixture was

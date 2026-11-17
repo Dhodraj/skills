@@ -79,12 +79,31 @@ Taken as ideas, reworded and reduced:
   verdict, and the teardown, state-machine, break, variant and
   explain-interface skills.
 
-- emilkowalski/skills, MIT. https://github.com/emilkowalski/skills
-  Taken: ease-out over ease-in and why, the duration bands per interaction,
-  never animating from scale(0), and transitions for interruptible state
-  against keyframes for sequences. Changed: reduced to the motion section of
-  references/craft.md in our own words; none of its animation recipes,
-  component guidance or prose is reused.
+- emilkowalski/skills, MIT, Copyright (c) 2026 Emil Kowalski.
+  https://github.com/emilkowalski/skills
+  Read first for the motion rules, then again at commit 64eb3de on
+  2026-11-17 for the performance and worst-case material.
+  Taken into references/craft.md, Motion: ease-out over ease-in and why, the
+  duration bands per interaction, never animating from scale(0), transitions
+  for interruptible state against keyframes for sequences, and anchoring a
+  popover's scale to its trigger rather than its centre.
+  Taken into ui-review/references/performance.md: the symptom table, the
+  16.7ms and 8ms frame budgets, writing to a ref rather than through React
+  state, the inherited CSS variable trap, the 20px cap on an animated blur,
+  and the discipline on will-change.
+  Taken into references/journey-and-states.md: the worst-case name values,
+  a script that is not Latin and a name that starts with an emoji.
+  Changed: rewritten in our own words throughout. Three of its figures were
+  corrected or dropped. A joined emoji is 5 code units, not 7 or more. The
+  claim that 120Hz is most phones carried no source and is gone. The
+  will-change rule was gated on measured dropped frames, which nothing here
+  can produce, so it is gated on the visible pixel shift instead.
+  Not taken: its frequency table, which restates what craft.md already says
+  about a repeated interaction; its rule never to animate a
+  keyboard-initiated action, which contradicts craft.md allowing a colour or
+  opacity change under 150ms on a keystroke; its drawer curve, which
+  references/tactile.md already carries as ease-drawer; and its Swift, Expo,
+  native and apple-design skills, which are outside what these skills cover.
 
 - benjitaylor/skills, the stageshow skill, MIT.
   https://github.com/benjitaylor/skills/tree/main/stageshow

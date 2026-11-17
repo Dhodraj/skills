@@ -178,6 +178,13 @@ render by eye.
   `top` or `width` costs layout on every frame.
 - Never from `scale(0)`. Nothing in the world appears from nothing. Start at
   `0.9` to `0.96`, with opacity.
+- **Scale a popover from its trigger, not its centre.** Set
+  `transform-origin` from the trigger's position, which Base UI and Radix
+  both expose as a variable. A modal is exempt, because it appears in the
+  middle of the viewport, so `transform-origin: center` is correct there.
+- When the motion is right and the frames are not, the symptom table, the
+  frame budget and the React trap are in
+  [ui-review/references/performance.md](../../ui-review/references/performance.md).
 - Press gives `scale(.96)` on a button-sized target. Below `0.95` reads as a
   flinch at that size, but the figure is a distance, not a ratio: 4% of a 22px
   row icon is under a pixel and reads as nothing. So the squeeze follows the
@@ -245,10 +252,14 @@ surface can skip the blur and only fade and rise.
 }
 ```
 
-That is for an infrequent arrival: a first paint, a success state, an empty
-state. Never for a repeated interaction. A row hover, a keystroke or a tab
-change that animates costs the customer attention on every trigger. Those get
-instant feedback, or a colour or opacity change under 150ms.
+Frequency decides how much motion is allowed, before any curve or duration,
+and it applies to every kind of motion, not only an entrance. An arrival the
+customer meets once, such as a first paint, a success state or an empty state,
+can be staged. A repeated interaction cannot. A row hover, a keystroke, a tab
+change or a command palette costs attention on every trigger, so it gets
+instant feedback, or a colour or opacity change under 150ms, with no travel,
+blur or stagger. Anything the customer triggers all day takes the settled end
+of every range above.
 
 Below the first screen, reveal a section the first time it arrives and never
 again, with an `IntersectionObserver` that unobserves on the first hit. The

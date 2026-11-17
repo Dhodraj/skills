@@ -178,6 +178,7 @@ hasnt "and no longer calls those sources licensed"            "$findskill" "read
 has "check-sources counts the licences nobody read" "$(cat "$check")" "with no licence read"
 real="$(node "$check" 2>&1)"
 has "and the real file reports that count" "$real" "6 with no licence read"
+
 has "craft.md names the measured faults" "$(cat "$skill/references/craft.md")" "measured\*\*: \`tight inset\`"
 
 # ------------------------------------------------------------------ references
@@ -244,6 +245,54 @@ has "and says why a self-set score fails"      "$review_skill" "the number certi
 regression="$(cat "$skill/references/regression.md")"
 has "the re-look scales to the edit"           "$regression" "Scale the re-look the same way"
 has "a wide edit is re-looked everywhere"      "$regression" "everywhere that uses it"
+
+# ------ what was taken from emilkowalski/skills on 2026-11-17, and what was not
+journey="$(cat "$skill/references/journey-and-states.md")"
+perf_path="$skill/../ui-review/references/performance.md"
+if [[ -f "$perf_path" ]]; then
+  pass=$((pass+1))
+else
+  fail=$((fail+1)); printf 'FAIL ui-review/references/performance.md is missing
+'
+fi
+perf="$(cat "$perf_path" 2>/dev/null)"
+has "craft.md anchors a popover to its trigger"      "$craft"   "transform-origin"
+has "and excepts the modal from it"                  "$craft"   "middle of the viewport"
+has "craft.md gates motion by frequency, not only entrances" "$craft" "every kind of motion"
+has "and points at the performance reference"        "$craft"   "performance.md"
+hasnt "the drawer curve stays out of craft.md"       "$craft"   "cubic-bezier(.32, .72, 0, 1)"
+has "tactile.md still owns ease-drawer"              "$tactile" "cubic-bezier(.32, .72, 0, 1)"
+has "performance.md budgets the 120Hz frame"         "$perf"    "8ms"
+has "performance.md names the React trap"            "$perf"    "ref.current.style"
+has "performance.md caps an animated blur"           "$perf"    "under 20px"
+has "performance.md gates will-change on the shift"  "$perf"    "only once you have seen that shift"
+has "the review motion step points at it"            "$review_skill" "performance.md"
+has "journey-and-states covers a non-Latin script"   "$journey" 'dir="auto"'
+has "and counts an emoji by code point"              "$journey" '\[\.\.\.value\]'
+hasnt "craft.md does not restate the absent value"   "$craft"   "only an email"
+has "NOTICE records the performance material"        "$(cat "$skill/NOTICE")" "performance.md: the symptom table"
+has "and records what was refused"                   "$(cat "$skill/NOTICE")" "Not taken: its frequency table"
+
+# Every rejection has a file, and the index names every file. An index that
+# drifts is a rejection nobody finds, which is how one gets proposed again.
+oos="$skill/../../.out-of-scope"
+if [[ -d "$oos" ]]; then
+  missing=0
+  for entry in "$oos"/*.md; do
+    name="$(basename "$entry")"
+    [[ "$name" == "README.md" ]] && continue
+    grep -q -- "($name)" "$oos/README.md" || { missing=$((missing+1)); printf '  not in the index: %s\n' "$name"; }
+  done
+  ok "the out-of-scope index lists every file" "$missing" "0"
+  dated=0
+  for entry in "$oos"/*.md; do
+    [[ "$(basename "$entry")" == "README.md" ]] && continue
+    grep -q "^Decided 20" "$entry" || dated=$((dated+1))
+  done
+  ok "and every rejection carries a date" "$dated" "0"
+else
+  fail=$((fail+2)); printf 'FAIL .out-of-scope is missing\n'
+fi
 
 # --------------------------------------------------------------------- network
 

@@ -73,6 +73,8 @@ shared/
 
 Each bucket has a `README.md` with its skills. Each skill is one folder with a
 `SKILL.md`, and some have `references/`, `scripts/` and `tests/`.
+Every rule this repository refused has a file in `.out-of-scope/`,
+with the date it was decided.
 
 ## Limits
 

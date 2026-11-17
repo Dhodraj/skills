@@ -255,6 +255,10 @@ What each of the others catches, and where it is easy to get wrong:
   the mechanics. A hidden element that still takes clicks, an entrance that
   fires on every keystroke and an element left invisible under reduced motion
   all read as correct in the source and in a still.
+- **Motion that stutters is a separate finding from motion that is wrong.**
+  [references/performance.md](references/performance.md) has the symptom
+  table, the frame budget and the two traps that animate `transform` and
+  still drop frames. Name the cause before proposing a fix.
 
 **The mistakes.** Submit the form empty, and with one field wrong. Press the
 primary action twice. Go back mid-flow, then forward. Reload halfway through. Open a

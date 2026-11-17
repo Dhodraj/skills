@@ -23,13 +23,14 @@ ui/
       measure.js                 measures a rendered page, in the browser
       check-sources.js           validates sources.json
     tests/
-      run.sh                     113 offline tests, 116 with --network
+      run.sh                     132 offline tests, 135 with --network
       fixtures/                  the dashboard before and after, a landing page, the geometry faults
   ui-find/SKILL.md               find a component instead of writing one
   ui-review/
     SKILL.md                     review what exists, in two modes and two scopes
     references/
       changes.md                 reviewing a change rather than a screen
+      performance.md             motion that is right and still drops frames
   README.md                      the three skills, grouped by how they start
 review/
   staff-review/SKILL.md          a staff engineer's review, round by round

@@ -111,7 +111,7 @@ Entries group under **User-invoked** and **Model-invoked**.
 
 **Verify:** `scripts/list-skills.sh` output matches both README files.
 
-## Stage 3: the bar, and the ideas already rejected
+## Stage 3: the bar, and the ideas already rejected (files done, 2026-11-17)
 
 Upstream `SCOPE.md` holds a two-part bar. An idea stays open only if it
 describes an observed failure in a real session, and fits the philosophy.
@@ -129,7 +129,7 @@ Each file carries four parts: what was proposed, why it was rejected, what to
 do instead, and the date it was decided. An undated rejection cannot be
 reopened on new evidence.
 
-Ten files to write, each from a decision this repo already made:
+Ten files came from decisions this repo made earlier:
 
 | File | What it rejects |
 |---|---|
@@ -148,8 +148,15 @@ An eleventh records a deferral rather than a rejection:
 `splitting-craft-md-by-moment.md`. The split is unproven and invites a rule
 landing in the half nobody loaded, so it waits for a measured need.
 
-**Verify:** every file carries the four parts and a date. `SCOPE.md` links
-all eleven.
+The merge with `emilkowalski/skills` added two more on 2026-11-17. One is a
+borrowed rule that restates our own. The other is a rule that contradicts the
+line it was added beside. Thirteen files in all, with
+`.out-of-scope/README.md` as the index.
+
+`SCOPE.md` is still to write. The index stands in for it meanwhile.
+
+**Verify:** `tests/run.sh` checks that the index lists every file and that
+every file carries a date. Both pass.
 
 ## Stage 4: the invocation split
 
@@ -306,7 +313,7 @@ largest set is five. `ui-design` has nine references, three scripts and four
 fixtures. Flat gives sixteen files in one directory, so `references/`,
 `scripts/` and `tests/` stay.
 
-**Dropping the tests.** Upstream has none. This repo has 113 offline and 116
+**Dropping the tests.** Upstream has none. This repo has 132 offline and 135
 with `--network`, and they catch a rule that names a gate number which no
 longer exists. An absence upstream is not a convention.
 
