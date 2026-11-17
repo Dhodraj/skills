@@ -57,7 +57,6 @@ shared/
       source-research.md           every supplied url, read on 2026-10-27, with four later rounds
       ab-test.md                   one prompt built with and without ui-design
       testing-report.md            what was run and what came back
-      interrogation-2026-11-17.md  eight findings against the ui skills, not yet fixed
     images/                        figures the docs and READMEs show
   demo/
     ab/                            the two A/B builds and their screenshots

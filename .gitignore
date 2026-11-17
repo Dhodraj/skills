@@ -7,3 +7,6 @@
 /.mcp.json
 /.memsearch/
 /.ignore
+
+# Working notes kept on this machine only.
+/shared/docs/interrogation-*.md
