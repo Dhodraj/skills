@@ -1,6 +1,6 @@
 ---
 name: ui-review
-description: "Review a user interface that already exists and report what harms its customers, with evidence and severity. Use when asked to audit, review, critique or check a page, screen, dashboard, component or flow, to test a journey such as signup or checkout, to check a screen on a phone, or before claiming a change works. Also use to review what a change did to an interface: a diff, a branch, a pull request or uncommitted work. Also use when the user says a product looks off, looks AI-generated, feels dated or asks whether it is ready to ship. Works against a running application or a Storybook, measures the live render, walks the journey as a customer, checks the result against the project's design principles, and sorts findings by harm. Two modes: review only, which changes no files, and review and fix."
+description: "Review a user interface that already exists and report what harms its customers, with evidence and severity. Use when asked to audit, review, critique or check a page, screen, dashboard, component or flow, or to audit a whole product across every screen and state, to test a journey such as signup or checkout, to check a screen on a phone, or before claiming a change works. Also use to review what a change did to an interface: a diff, a branch, a pull request or uncommitted work. Also use when the user says a product looks off, looks AI-generated, feels dated or asks whether it is ready to ship. Works against a running application or a Storybook, measures the live render, walks the journey as a customer, checks the result against the project's design principles, and sorts findings by harm. Two modes: review only, which changes no files, and review and fix."
 ---
 
 # UI review
@@ -16,14 +16,15 @@ State the mode in the first line of the reply. A review-only request never
 becomes a redesign because the findings were bad. Where fixing is the obvious
 next step, finish the report and offer it.
 
-## Scope: a surface, or a change
+## Scope: a surface, a change, or a whole product
 
-Two scopes, which answer different questions.
+Three scopes, which answer different questions.
 
 | Scope | Asked by | Answers |
 |---|---|---|
 | A surface | "review this page", "audit the dashboard", "is this ready" | Is this interface good |
 | A change | "review my diff", "review this branch", "review pr 482", "did I break anything" | Did this change make it worse |
+| A whole product | "audit the whole product", "check every screen", "find what is wrong across the UI" | Where across the product does an element break a principle |
 
 A change scope is not a surface scope with a filter. It resolves a base
 commit and expands the changed files to the surfaces they render in. It
@@ -31,6 +32,12 @@ then reads the lines the change removed, and statuses every finding by
 what caused it.
 Read [references/changes.md](references/changes.md) and work through it, then
 return here for the measuring, the looking and the severity.
+
+A whole-product scope takes every screen and state from the code, asks each
+element every principle that applies to it, compares elements across screens,
+and has a fresh reviewer check each finding. Read
+[references/product.md](references/product.md) and work through it, then
+return here for the measuring, the severity and the finding format.
 
 Where the request names no scope and the tree is dirty or ahead of its base,
 ask which the user meant. The two reports are not interchangeable.
@@ -136,7 +143,7 @@ finding.
 
 The script cannot see hierarchy, rhythm, crowding, visual weight or whether
 the page is any good. Open every screenshot at every width and walk these
-eight. Each one is a failure that renders wrong while the source reads fine.
+nine. Each one is a failure that renders wrong while the source reads fine.
 
 1. **Placement.** Is the main element where it belongs? Centre what should be
    centred and align the rest to the grid. Is there a large empty region
@@ -167,7 +174,11 @@ eight. Each one is a failure that renders wrong while the source reads fine.
    alignment is eye work: a dot outside its row, a body starting under an
    avatar instead of at the name, a title spread from its own subtitle.
 
-Say which of the eight each finding is. Where you could not render, say so
+9. **Meaning.** For each element a person can see or press, ask the rows the
+   [references/principles.md](references/principles.md) index lists for its
+   kind: look rows here, act rows in the step 5 walk.
+
+Say which of the nine each finding is. Where you could not render, say so
 rather than judging from the source.
 
 ## 5. Walk it as a customer
@@ -341,6 +352,7 @@ cause is the finding and the occurrences are its evidence.
 ```
 C2. Run status shown by colour alone  (.run-row .status, 40 rows)
 Kind:   accessibility
+Principle: 1.4.1  (optional: the principles.md row the finding breaks)
 Found:  status is a coloured dot with no word or shape; green and amber
         measure 2.9:1 against the row background
 Why:    a colour-blind dispatcher cannot tell a late run from a running one,
@@ -360,7 +372,7 @@ In a change scope, every finding also carries a `Status` line of `introduced`,
 ```
 # UI review: <surface or change>
 Mode:  review only | review and fix
-Scope: a surface | a change
+Scope: a surface | a change | a whole product
 Measured against: <DESIGN.md | the token file | gates.md and craft.md alone>
 Checked: <widths, axes run, journeys walked, target, browser>
 Axes dropped: <axis, and the cue that failed>
