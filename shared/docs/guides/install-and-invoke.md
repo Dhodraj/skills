@@ -38,6 +38,7 @@ review/
 orchestration/
   colony-orchestrate/SKILL.md    split work across agents without collisions
   constraint-ledger/SKILL.md     keep the user's constraints in a file
+  who-builds/SKILL.md            pick the model for each sub-agent
   README.md                      the bucket's skills
 shared/
   scripts/
