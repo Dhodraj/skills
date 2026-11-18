@@ -90,6 +90,8 @@ text contrast, target sizes, controls with no accessible name, heading order,
 unsized media and text below 12px. It also returns a census of the type sizes,
 radii, shadows and font families the page really uses.
 
+Then run every sweep in [references/sweeps.md](references/sweeps.md).
+
 Two fields say which floor it applied. `targetFloor` is 24 or 44, and
 `thumbExpected` says why: a coarse pointer, or a viewport at or under 768px.
 Cite the floor beside the number, because a 36px control is correct on a
@@ -142,8 +144,10 @@ finding.
 ## 4. Look at the screenshots, in this order
 
 The script cannot see hierarchy, rhythm, crowding, visual weight or whether
-the page is any good. Open every screenshot at every width and walk these
-nine. Each one is a failure that renders wrong while the source reads fine.
+the page is any good. First run
+[critique.md](../ui-design/references/critique.md) on each screenshot, one at
+a time. Then open every screenshot at every width and walk these nine. Each
+one is a failure that renders wrong while the source reads fine.
 
 1. **Placement.** Is the main element where it belongs? Centre what should be
    centred and align the rest to the grid. Is there a large empty region
@@ -175,11 +179,11 @@ nine. Each one is a failure that renders wrong while the source reads fine.
    avatar instead of at the name, a title spread from its own subtitle.
 
 9. **Meaning.** For each element a person can see or press, ask the rows the
-   [references/principles.md](references/principles.md) index lists for its
+   [principles.md](../ui-design/references/principles.md) index lists for its
    kind: look rows here, act rows in the step 5 walk.
 
-Say which of the nine each finding is. Where you could not render, say so
-rather than judging from the source.
+Say which of the nine each finding is, or `critique`. Where you could not
+render, say so rather than judging from the source.
 
 ## 5. Walk it as a customer
 
@@ -319,7 +323,9 @@ Never by how easy the fix is.
 | **Warning** | Degrades the experience: off-system spacing, values off a shared scale, weak hierarchy, duplicated actions, words or a mark clipped by their own container, a forgettable public page |
 | **Polish** | Refinement: a widow, nested corners, a few pixels of asymmetry |
 
-Torn between two, take the lower and say why. An inflated review gets ignored.
+Torn between two, take the lower and say why, but never below Warning for a
+fault class in [sweeps.md](references/sweeps.md). An inflated review gets
+ignored.
 
 Order the report by harm, then by how many customers meet it, then by how
 often, then by business consequence. Where two findings share a cause, the
@@ -327,9 +333,6 @@ cause is the finding and the occurrences are its evidence.
 
 ## 8. What not to flag
 
-- **Deliberate, consistent choices.** A dense 32px control row on a
-  pointer-first console, a labelled zoomed axis, an established domain
-  convention. Ask about it; do not score it.
 - **Anything `DESIGN.md` explicitly allows, except a Floor rule.** The
   project's own system outranks the Reflex and Finish tiers; where those
   disagree, say so once and follow `DESIGN.md`. A `DESIGN.md` entry does not
@@ -337,6 +340,7 @@ cause is the finding and the occurrences are its evidence.
   contrast, focus, accessible names, status, reduced motion, targets, a
   pointer-free path. Flag a Floor breach even where the design system asked
   for it, and name the entry that asked.
+  Cite the line. "Consistent" or "deliberate" alone never drops a finding.
 - **Wiring a static page cannot have**: a `#` link, a form with no endpoint.
   List those once, unscored, as wiring to confirm. The exception is a result
   that is false, such as a filter that relabels the view but not the data.

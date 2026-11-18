@@ -29,29 +29,33 @@ Write the grid first: one row per screen and state, each cell "to render",
 
 ## 2. Each cell
 
-Render the cell at 1440 and 375 and run step 3 of the main skill. List every
-element a person can see or press. An element left off the list is an element
-nobody judged.
+Render the cell at 1440 and 375 and run step 3 of the main skill. Then judge
+it in three layers, in this order:
 
-Ask each element the rows the [principles.md](principles.md) index lists for
-its kind. Record, per cell,
-the element kinds found and the row IDs skipped for each kind. A principle never
-asked anywhere goes under "Not checked" with the reason.
+1. **The critique.** Run [critique.md](../../ui-design/references/critique.md)
+   on each screenshot, one at a time.
+2. **The principle rows.** List every element a person can see or press. An
+   element left off the list is an element nobody judged. Ask each element
+   the rows the [principles.md](../../ui-design/references/principles.md)
+   index lists for its kind. Record the element kinds found and the row IDs
+   skipped for each kind. A principle never asked anywhere goes under "Not
+   checked" with the reason. Then ask of the arrangement:
 
-Then ask of the arrangement:
-
-- **Mapping and proximity (principles.md 2.5, 3.5).** A cancel or remove
-  control placed apart from its item, and one icon set on two different
-  edges in one panel, are findings. Check alignment against `craft.md`,
-  Spacing and alignment.
-- **Repeated chores (principles.md 1.7).** For example, clear every
-  finished item, retry every failed one, or select all. A repeated chore with
-  no control is a finding.
+   - **Mapping and proximity (principles.md 2.5, 3.5).** A cancel or remove
+     control placed apart from its item, and one icon set on two different
+     edges in one panel, are findings. Check alignment against `craft.md`,
+     Spacing and alignment.
+   - **Repeated chores (principles.md 1.7).** For example, clear every
+     finished item, retry every failed one, or select all. A repeated chore
+     with no control is a finding.
+3. **The measured sweeps.** Section 3 of the main skill ran the sweeps;
+   confirm their hits here.
 
 ## 3. Compare across the product
 
 After every cell, build these tables from the element lists, and work through
-the "Principles a single element cannot show" section of principles.md:
+the "Principles a single element cannot show" section of
+[principles.md](../../ui-design/references/principles.md):
 
 | Table | One row per | A fault looks like |
 |---|---|---|
@@ -60,8 +64,8 @@ the "Principles a single element cannot show" section of principles.md:
 | Action labels | action | One action named differently on two screens |
 | Placement | action | One action placed differently on two screens |
 
-The main skill's step 8 still applies: a deliberate, consistent choice is a
-question, not a finding.
+The main skill's step 8 still applies: drop a finding only where the design
+system states the choice in writing, and cite the line.
 
 ## 4. Verify with a fresh reviewer
 

@@ -158,6 +158,10 @@ inside the row, no two edges a pixel or two apart. Ease-out under 300ms. Entranc
 fire once and never on a repeated interaction. Tabular figures. Two parts of a
 screen connected, so the customer sees they are one thing.
 
+For each element you place, ask the rows the
+[references/principles.md](references/principles.md) index lists for its
+kind: look rows while building it, act rows in the stage 8 walk.
+
 Build the most important screen, or the hero, **alone and first**. Review it
 before building the rest, with fresh eyes: a subagent with no memory of the
 decisions catches what you cannot. Then build the remainder.
@@ -189,6 +193,12 @@ Reaching stage 10 needs the Floor list of `gates.md` walked and clear; a
 screenshot that looks right is not that walk. Where a Floor breach survives
 three rounds of fixing, stop and ask rather than hand it back as a finding
 left with a reason.
+
+`ui-review` runs [references/critique.md](references/critique.md) first. In
+this loop, run the critique again on every state and width a fix reaches, in
+a subagent with no memory of the build. Stop when a pass returns no candidate
+that holds, or after three passes. After the third pass, a candidate that
+still holds and breaks a Floor rule goes to the user as a question, as above.
 
 Then [references/regression.md](references/regression.md): identify the
 journeys that already worked before touching the code, and separate failures
