@@ -10,3 +10,6 @@
 
 # Working notes kept on this machine only.
 /shared/docs/interrogation-*.md
+
+# trail cache, written per folder on this machine.
+/graft/.cache/
