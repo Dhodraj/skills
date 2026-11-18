@@ -13,6 +13,8 @@ You can also name it.
 - [`constraint-ledger`](constraint-ledger/SKILL.md): keep every constraint the
   user stated in a file that later turns read, through long runs and
   compaction.
+- [`who-builds`](who-builds/SKILL.md): pick opus, sonnet or haiku for each
+  sub-agent, write its brief for that model, and have opus review the result.
 
 ## User-invoked
 
