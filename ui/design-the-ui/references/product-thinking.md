@@ -1,12 +1,12 @@
 # Product thinking
 
-Loaded at stage A. It decides what gets built, which is the cheapest decision
+Loaded at stage 2. It decides what gets built, which is the cheapest decision
 to get right and the most expensive to get wrong.
 
 ## The three answers
 
-Two lines each. Write them down; they are what stage C's acceptance criteria
-are derived from and what stage L reports against.
+Two lines each. Write them down; the stage 2 acceptance criteria
+are derived from them, and stage 10 reports against them.
 
 ### Business
 

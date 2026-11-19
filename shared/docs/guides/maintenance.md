@@ -6,12 +6,14 @@ below.
 
 ## Add a component source
 
-One object in `sources.json`, under `components`, `screens` or `patterns`:
+One object in the `sources` array of `sources.json`, placed with the others of its tier:
 
 ```json
 {
   "id": "@example",
   "url": "https://example.dev",
+  "tier": "use",
+  "kind": "component",
   "registry": "https://example.dev/r/{name}.json",
   "for": ["table", "filter"],
   "stack": "react+tailwind+shadcn",
@@ -24,6 +26,13 @@ One object in `sources.json`, under `components`, `screens` or `patterns`:
 
 Rules the validator enforces, and why each exists:
 
+- `tier` is one of the five that `tiers` in `sources.json` defines: `use`,
+  `credit`, `check-licence`, `inspiration` or `browse-only`. The tier says what
+  may be copied, so an entry without one cannot be used safely.
+- `kind` is one of the known kinds, such as `component`, `screen` or `motion`.
+- A `check-licence` entry needs `condition`: what the user must check before
+  anything from it ships.
+- A `credit` entry needs `credit`: where the attribution goes.
 - `licence-read` is required. A licence with no note saying where it was read
   cannot be told apart from a guess, and a guessed licence is the one that
   reaches a client.

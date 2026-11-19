@@ -1,6 +1,7 @@
 # Craft
 
-Loaded at stage 7, immediately before any UI edit. The numbers in
+Loaded at stage 7, at the depth the `design-the-ui` depth table names: the
+sections a component touches, or the whole file for a screen. The numbers in
 [directions.md](directions.md) stop a screen being wrong. These stop it being
 forgettable. A correct screen and a screen people like are not the same
 screen, and the difference is almost always a pile of small things.
@@ -124,9 +125,8 @@ render by eye.
   .label { text-box: trim-both cap alphabetic; }
   ```
 
-  `CSS.supports("text-box", "trim-both cap alphabetic")` returned `true` in
-  Chrome 157 on 2026-11-12, measured through the Playwright MCP browser. Guard
-  it with `@supports` and fall back to a 1px nudge: it is not in every engine.
+  Guard it with `@supports` and fall back to a 1px nudge: it is not in every
+  engine.
 - **A centred amount centres its digits.** `$45` centred as one string sits
   right of centre to the eye. Centre the digits and hang the sign outside
   them, at `right: 100%` of the digit box. A figure that rolls rolls the
@@ -170,9 +170,11 @@ render by eye.
 - Under 300ms. Press feedback 100 to 160ms, tooltips 125 to 200ms, dropdowns
   150 to 250ms, a drawer up to 500ms. A 180ms transition feels faster than a
   400ms one, because it is.
-- Transitions for state, keyframes for sequences. A CSS transition can be
-  interrupted mid-flight; a keyframe restarts from zero. So anything the
-  customer can reverse is a transition: hover, open, select.
+- Transitions for state, never keyframes for anything the customer can
+  reverse. A CSS transition can be interrupted mid-flight; a keyframe restarts
+  from zero. So hover, open and select are transitions. In a project with a
+  motion library, sequences, entrances and scroll-driven motion are springs
+  from that one library: [motion.md](motion.md).
 - Never `transition: all`. Name the properties. Animate `transform`,
   `opacity` and `filter`, which the GPU composites. Animating `height`,
   `top` or `width` costs layout on every frame.
@@ -192,12 +194,12 @@ render by eye.
 - Exits are shorter than enters, 150ms against 300ms, and softer. Use a small
   fixed `translateY`, never the element's full height.
 - Honour `prefers-reduced-motion` by collapsing durations to 1ms, not by
-  leaving elements invisible. Setting a duration to zero is also enough. This
-  is an accommodation for vestibular disorders, not a preference. Softening
-  also satisfies it and usually reads better: travel, blur, scale and spin
-  become a 150 to 200ms opacity crossfade, a height change goes instant, a
-  loop that carries state keeps only its opacity pulse, capped at a few
-  cycles, and a press scale may stay, because it is feedback rather than
+  leaving elements invisible. Setting a transition's duration to zero is also
+  enough. This is an accommodation for vestibular disorders, not a preference.
+  Softening also satisfies it and usually reads better: travel, blur, scale
+  and spin become a 150 to 200ms opacity crossfade, a height change goes
+  instant, a loop that carries state keeps only its opacity pulse, capped at a
+  few cycles, and a press scale may stay, because it is feedback rather than
   travel.
 - A hidden element must stop intercepting clicks. Pair `opacity: 0` with
   `visibility: hidden` or `pointer-events: none`, or an invisible layer eats
@@ -209,28 +211,19 @@ render by eye.
 
 ## Where to look up a motion value
 
-`https://kinetics.colorion.co` publishes 162 interface animations with their
-real CSS, read on 2026-11-01. Useful for the shape of an effect you have
-already decided to build, and its easing curves agree with the ones above:
-its glide is `cubic-bezier(0.16, 1, 0.3, 1)` and its overshoot is
-`cubic-bezier(0.34, 1.56, 0.64, 1)`.
+`https://kinetics.colorion.co` publishes interface animations with their real
+CSS. Use it for the shape of an effect you have already decided to build. Its
+glide is `cubic-bezier(0.16, 1, 0.3, 1)` and its overshoot is
+`cubic-bezier(0.34, 1.56, 0.64, 1)`, which agree with the curves above.
 
-Two things to fix in anything copied from there. **No snippet carries a
-`prefers-reduced-motion` rule**, and several loop forever, so each one fails
-the floor rule above until you add one. And no licence is stated on the site:
-its parent's terms cover colour palettes, not this code. Take a value, not a
-file, until somebody states the terms.
+`UI Motion Prompts` describes mobile micro-interactions as written specs, with
+timings, spring constants and thresholds. One spec per set is free; the rest
+are paid.
 
-`UI Motion Prompts` describes 378 mobile micro-interactions as written specs,
-each with its real timings, spring constants and thresholds. It was read on
-2026-11-03 at `https://nameless-water-00e7.z66nry86gf.workers.dev`. That is a
-`workers.dev` host and may move. The maker is `@ui_motion_prompts` on
-Instagram and sells the set at `conceptless.gumroad.com/l/pack`.
-
-One spec per set is free and the rest are paid. The gesture rules below were
-drawn from the free ones. It carries the same two defects as kinetics: no spec
-mentions `prefers-reduced-motion`, and every demo loops forever. Only the free
-specs are licensed for use in your own work, so take a number, not a spec.
+From either source, take a value, not a file: neither states terms that cover
+copying its code. **No snippet from either carries a `prefers-reduced-motion`
+rule**, and many loop forever, so each fails the floor rule above until you add
+one.
 
 ## Entrances, and where they are allowed
 
@@ -476,13 +469,12 @@ they made.
 Report findings as a table with Before, After and Why columns, never as loose
 `Before:` and `After:` lines.
 
-## Attribution
+## A house style with its values decided
+
+[tactile.md](tactile.md) is a whole direction with its values already set. The
+user picks it at stage 3; it is not a rule on this page.
 
 The values on this page are adapted from four MIT sources:
 `jakubkrehel/make-interfaces-feel-better`, `emilkowalski/skills`,
-`benjitaylor/skills` (its `stageshow` skill) and `kosta4a/tactile-design`. The
-two sources in Where to look up a motion value are not among them, and that
-section states their terms. [NOTICE](../NOTICE) records what was taken and what was changed.
-`tactile-design`'s own house style, with its values already decided, is
-[tactile.md](tactile.md), and it is a direction the user picks rather than a
-rule on this page.
+`benjitaylor/skills` and `kosta4a/tactile-design`. [NOTICE](../NOTICE)
+records what was taken and what was changed.

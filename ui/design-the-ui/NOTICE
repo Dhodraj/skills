@@ -2,7 +2,8 @@ skills
 
 Nothing here is a copy of another skill's files. What follows is what was read
 on 2026-10-27, what was taken as an idea, and how it was changed. Every source
-below was read at the source; shared/docs/research/source-research.md records the reading.
+below was read at the source. shared/docs/research/source-research.md records
+the earlier readings; each later source says what was read in its own entry.
 
 Taken as ideas, reworded and reduced:
 
@@ -239,6 +240,64 @@ Taken as ideas, reworded and reduced:
   references/gates.md and references/craft.md without any GSAP dependency.
   GSAP became free for all uses, every plugin included, after Webflow's
   acquisition; confirmed at gsap.com/pricing.
+
+- heydamir/unslop, by Damir Sokolovsky (@heydamir), CC BY 4.0.
+  https://github.com/heydamir/unslop
+  https://creativecommons.org/licenses/by/4.0/
+  Read on 2026-11-19: skills/unslop/SKILL.md and references/signs.md. Taken
+  into references/slop-signs.md: the signs list, each sign paired with its
+  fix, in its groups. Also the order of the fix passes. Changed: reworded in
+  most lines; some sign lists kept close to the original. A sign that
+  references/gates.md already covers points at the rule instead of restating
+  it. Two fixes changed to fit the rules here: heading weights run 400 to 600,
+  and a pulse bound to a live state may stay. The credit is kept at the top
+  and foot of that file, as the licence requires. Not taken: its direction and
+  approval steps, which stage 3 of SKILL.md already covers. Also not taken:
+  its hero image generation, its story video and snapshot scripts, and five
+  reference files that were not read. The skill is not installed, because its
+  name clashes with the writing skill called unslop.
+
+- felipebasurto/unslop-ui, MIT, Copyright (c) 2026 Felipe Basurto.
+  https://github.com/felipebasurto/unslop-ui
+  Read on 2026-11-19: skills/unslop-ui/SKILL.md, rules U1 to U20.
+  Taken into references/gates.md: rule 51 from U4, U5 and U13, and rule 52
+  from U12, U14, U15 and U16. Also the staccato slogan in rule 43 (U8) and
+  the form label clause in rule 47 (U7). Taken into
+  review-the-ui/references/copy.md: a check for each of U1 to U16, mapped to
+  the gates.md rule that holds it. Also the real-state test for badges, dots
+  and status words, the icon exceptions, and its fixing guardrails. Changed:
+  rewritten, and merged so that no rule appears twice. U1, U2, U3, U6, U9,
+  U10 and U11 were already rules here and only gained a check. Not taken:
+  U17 to U20, which gates.md and references/slop-signs.md already cover. Also
+  not taken: the five-word limit on headings, which is a house number rather
+  than a harm. Its counting script, report table and Python loader were not
+  taken either; the loader runs on every call and was not run.
+
+- textura-agency/ai-design-vault, the Unlicense.
+  https://github.com/textura-agency/ai-design-vault
+  Read on 2026-11-19: six notes in obsidian/frontend/ (motion-system,
+  motion-bindings, text-motion, smooth-scroll, design-system,
+  html-semantics). Also four skills (motion-system, figma-to-section,
+  qa-verify, optimize-3d-scene) and the last one's references/patterns.md.
+  Taken into references/motion.md: one motion library per project, and how
+  to choose it. The five tests a library must pass, and the stack defaults.
+  Springs rather than keyframes, with CSS transitions kept for discrete
+  state. The four primitives, their modes and the scroll position grammar.
+  The one shared render loop. Motion that changes appearance, never
+  presence. The split-text method, the smooth-scroll rules and the checks.
+  Taken into references/design-system.md: the three token tiers. Taken into
+  references/markup.md: the semantic HTML rules. Taken into
+  references/figma.md: the Figma steps, and the fidelity checks from
+  qa-verify. Taken into references/3d-scene.md: the order of fixes for a
+  WebGL scene, and its numbers. Changed: rewritten and shortened. Its
+  stack.json, verify.sh, ADR and vault conventions became DESIGN.md and the
+  checks in these skills. The reduced-motion table was written here. None of
+  the motion libraries in sources.json handles reduced motion, so every
+  animation now ships with its own path. Its keyframe ban was narrowed to
+  projects with a motion library. So craft.md's CSS entrance still serves a
+  page without one. Not taken: its SEO, AEO, CMS, database, auth, migration
+  and shipping material, and its stack profile. Its code is pointed at, not
+  copied.
 
 Read and deliberately not adapted:
 

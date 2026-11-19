@@ -1,11 +1,20 @@
 {
   "version": 1,
-  "updated": "2026-11-12",
-  "note": "Curated component sources, read at the source on the date above. 'licence' records what was read, not what is assumed. Entries with a 'registry' url are searchable by scripts/find-components.js; the public directory at https://ui.shadcn.com/r/registries.json covers the other 500 registries.",
-  "components": [
+  "updated": "2026-11-19",
+  "note": "Curated sources, ordered by reuse tier, each read at the source on the date in its licence-read note. 'licence' records what was read, not what is assumed. 'tier' says what may be copied, and 'tiers' below defines each one. 'kind' says what the source is. Entries of kind component with a 'registry' url are searchable by scripts/find-components.js; the public directory at https://ui.shadcn.com/r/registries.json covers the other registries.",
+  "tiers": {
+    "use": "The licence allows copying, changing and shipping (MIT, Apache-2.0, Unlicense). Pull a component in and change it to fit.",
+    "credit": "Use is allowed with attribution (CC-BY-4.0). The entry's credit field says where the credit goes.",
+    "check-licence": "A condition limits use: non-commercial only, paid above a company size, AGPL parts, no LICENSE file, no resale, or no licence stated. The entry's condition field says what it is. Tell the user before anything from it ships.",
+    "inspiration": "Look for direction. Copy no code and no assets.",
+    "browse-only": "robots.txt blocks Claude's crawlers. Agents never fetch it. The user browses it and pastes in what they want."
+  },
+  "sources": [
     {
       "id": "@shadcn",
       "url": "https://ui.shadcn.com",
+      "tier": "use",
+      "kind": "component",
       "registry": "https://ui.shadcn.com/r/{name}.json",
       "catalogue": "https://ui.shadcn.com/r/index.json",
       "for": [
@@ -24,26 +33,10 @@
       "notes": "The CLI's default registry; needs no namespace. Its 65 catalogue items are primitives with no descriptions, so search matches names only. Whole screens live at /blocks, which the catalogue does not list."
     },
     {
-      "id": "@coss",
-      "url": "https://coss.com/ui",
-      "registry": "https://coss.com/ui/r/{name}.json",
-      "for": [
-        "primitives",
-        "form",
-        "combobox",
-        "date-picker",
-        "table",
-        "command"
-      ],
-      "stack": "react+tailwind+base-ui",
-      "licence": "MIT for the UI packages; AGPL-3.0 is the repository default",
-      "licence-read": "cosscom/ui LICENSING.md and apps/origin/LICENSE.md, 2026-10-27",
-      "install": "pnpm dlx shadcn@latest add @coss/<name>",
-      "notes": "Cal.com's design system, built on Base UI, and the home of the former Origin UI (apps/origin). LICENSING.md puts apps/origin/ and apps/ui/ under MIT and everything else under AGPL-3.0, so check which directory a component comes from before shipping it."
-    },
-    {
       "id": "@reui",
       "url": "https://reui.io",
+      "tier": "use",
+      "kind": "component",
       "registry": "https://reui.io/r/{style}/{name}.json",
       "for": [
         "data-grid",
@@ -61,6 +54,8 @@
     {
       "id": "@kibo-ui",
       "url": "https://www.kibo-ui.com",
+      "tier": "use",
+      "kind": "component",
       "registry": "https://www.kibo-ui.com/r/{name}.json",
       "for": [
         "table",
@@ -78,6 +73,8 @@
     {
       "id": "@magicui",
       "url": "https://magicui.design",
+      "tier": "use",
+      "kind": "component",
       "registry": "https://magicui.design/r/{name}",
       "for": [
         "marketing-effect",
@@ -93,8 +90,406 @@
       "notes": "250 catalogue items, of which 170 are demos. Public pages, not consoles. Magic UI Pro is a separate paid product at $199 once."
     },
     {
+      "id": "@hyperui",
+      "url": "https://hyperui.dev",
+      "tier": "use",
+      "kind": "component",
+      "registry": null,
+      "for": [
+        "plain-tailwind",
+        "marketing-section",
+        "form"
+      ],
+      "stack": "tailwind, no react",
+      "licence": "MIT",
+      "licence-read": "markmead/hyperui repository licence, 2026-10-27",
+      "install": "copy from the page",
+      "notes": "Markup, not components. Right where the project has no React."
+    },
+    {
+      "id": "tremor",
+      "url": "https://tremor.so",
+      "tier": "use",
+      "kind": "component",
+      "registry": null,
+      "for": [
+        "chart",
+        "kpi",
+        "spark-chart"
+      ],
+      "stack": "react+tailwind",
+      "licence": "Apache-2.0",
+      "licence-read": "tremorlabs/tremor repository licence and the npm record for @tremor/react, 2026-10-27",
+      "install": "copy from the page; Tremor Raw has no CLI",
+      "notes": "Slowing down: the repository was last pushed 2025-10-10 and @tremor/react 3.18.7 was last published 2025-01-13. It is not in the shadcn registry directory. Prefer @reui charts or a chart built on Recharts for new work, and say why if you choose Tremor."
+    },
+    {
+      "id": "@astryx",
+      "url": "https://astryx.atmeta.com",
+      "tier": "use",
+      "kind": "component",
+      "for": [
+        "primitives",
+        "form",
+        "table",
+        "dialog",
+        "navigation",
+        "chat",
+        "richtext",
+        "theme"
+      ],
+      "stack": "react19+stylex",
+      "licence": "MIT",
+      "licence-read": "meta/astryx LICENSE, Meta Platforms, 2026-11-12",
+      "install": "pnpm dlx shadcn@latest add @astryx/component-button, or pnpm add @astryxdesign/core @stylexjs/stylex @astryxdesign/theme-neutral and then pnpm dlx @astryxdesign/cli init",
+      "notes": "Meta's own design system, in beta at 0.7.14 on 2026-11-12. MIT in meta/astryx's LICENSE and on npm for core, cli and the theme packages. Its registry is shadcn-spec and in the public directory as @astryx, healthy at 98.7 with 1,004 items on 2026-11-12: 189 components, 675 blocks, 83 hooks and 57 pages, every one with a description, so search matches meaning. Item names carry their kind, so the item is component-button, not button, and its type is registry:component rather than registry:ui: the search covers both by default, but pass --type any to reach its blocks, pages and hooks. A component installs as a re-export of the npm package rather than as copied source, so taking one brings the whole system: react and react-dom >=19, @stylexjs/stylex ^0.19.0, and its own reset and stylesheet. Blocks, examples and pages do copy editable source. Its own CLI searches the same catalogue with pnpm dlx @astryxdesign/cli search <term> --json, and every command takes --json. Never run bare npx astryx: the unscoped name is an unrelated package. The 180-component and 13,000-app figures on its home page are the vendor's own and were not counted.",
+      "registry": "https://astryx.atmeta.com/shadcn/{name}.json",
+      "catalogue": "https://astryx.atmeta.com/shadcn/registry.json"
+    },
+    {
+      "id": "shadcn-blocks",
+      "url": "https://ui.shadcn.com/blocks",
+      "tier": "use",
+      "kind": "screen",
+      "for": [
+        "dashboard",
+        "sidebar",
+        "login",
+        "calendar-screen"
+      ],
+      "stack": "react+tailwind+shadcn",
+      "licence": "MIT",
+      "licence-read": "shadcn-ui/ui repository licence, 2026-10-27",
+      "install": "pnpm dlx shadcn@latest add dashboard-01"
+    },
+    {
+      "id": "astryx-templates",
+      "url": "https://astryx.atmeta.com/templates",
+      "tier": "use",
+      "kind": "screen",
+      "for": [
+        "dashboard",
+        "login",
+        "checkout",
+        "account-settings",
+        "ai-chat",
+        "product-page",
+        "gallery"
+      ],
+      "stack": "react19+stylex",
+      "licence": "MIT",
+      "licence-read": "meta/astryx LICENSE, Meta Platforms, 2026-11-12",
+      "install": "pnpm dlx shadcn@latest add @astryx/template-checkout-wizard"
+    },
+    {
+      "id": "carbon-empty-states",
+      "url": "https://carbondesignsystem.com/patterns/empty-states-pattern/",
+      "tier": "use",
+      "kind": "pattern",
+      "for": [
+        "empty-state"
+      ],
+      "stack": "any",
+      "licence": "Apache-2.0",
+      "licence-read": "carbon-design-system/carbon-website repository licence, read through the GitHub API; the page is src/pages/patterns/empty-states-pattern in that repository, 2026-11-19"
+    },
+    {
+      "id": "primer-ui-patterns",
+      "url": "https://primer.style/product/ui-patterns/",
+      "tier": "use",
+      "kind": "pattern",
+      "for": [
+        "loading",
+        "saving",
+        "feedback",
+        "progressive-disclosure"
+      ],
+      "stack": "any",
+      "licence": "MIT",
+      "licence-read": "primer/design repository licence, read through the GitHub API; the ui-patterns pages are content/ui-patterns in that repository, 2026-11-19"
+    },
+    {
+      "id": "animejs",
+      "url": "https://github.com/juliangarnier/anime",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "timeline",
+        "svg-animation",
+        "stagger"
+      ],
+      "stack": "any, plain JavaScript",
+      "licence": "MIT",
+      "licence-read": "juliangarnier/anime repository licence and README, read through the GitHub API, 2026-11-19",
+      "install": "pnpm add animejs",
+      "react": "none found",
+      "notes": "A JavaScript animation engine. No prefers-reduced-motion handling in its README: write the reduce path yourself."
+    },
+    {
+      "id": "lottie-web",
+      "url": "https://github.com/airbnb/lottie-web",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "after-effects",
+        "illustration-animation",
+        "icon-animation"
+      ],
+      "stack": "any, plain JavaScript",
+      "licence": "MIT",
+      "licence-read": "airbnb/lottie-web repository licence and README, read through the GitHub API, 2026-11-19",
+      "install": "pnpm add lottie-web",
+      "react": "lottie-react (third-party, MIT); react-lottie-player (MIT) is the other common one",
+      "notes": "Plays After Effects animations exported as Bodymovin JSON, as SVG, canvas or HTML. Its title and description options name the SVG for assistive technology. No prefers-reduced-motion handling: write the reduce path yourself."
+    },
+    {
+      "id": "tsparticles",
+      "url": "https://github.com/tsparticles/tsparticles",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "particles",
+        "confetti",
+        "fireworks",
+        "background"
+      ],
+      "stack": "any, plain JavaScript",
+      "licence": "MIT",
+      "licence-read": "tsparticles/tsparticles repository licence and README, read through the GitHub API, 2026-11-19",
+      "install": "pnpm add @tsparticles/engine @tsparticles/slim",
+      "react": "@tsparticles/react (official, MIT)",
+      "notes": "Particle, confetti and firework effects. The README installs the engine plus one bundle; slim is the common default. It reads prefers-reduced-motion, but its default only slows the particles: set motion.disable to true for a still frame (markdown/Options/Motion.md, read 2026-11-19)."
+    },
+    {
+      "id": "roughjs",
+      "url": "https://github.com/rough-stuff/rough",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "hand-drawn",
+        "sketch",
+        "illustration"
+      ],
+      "stack": "any, canvas or SVG",
+      "licence": "MIT",
+      "licence-read": "rough-stuff/rough repository licence and README, read through the GitHub API, 2026-11-19",
+      "install": "pnpm add roughjs",
+      "react": "react-rough-fiber (third-party, MIT, an early version)",
+      "notes": "Draws shapes in a sketchy, hand-drawn style. It is a drawing style, not an animation library: it has no animation loop of its own, so animate its strokes with the project's motion library. The README states under 9 kB. Last release 4.6.6 on 2023-11-20, last push 2024-07-28."
+    },
+    {
+      "id": "flubber",
+      "url": "https://github.com/veltman/flubber",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "svg-morph",
+        "shape-tween"
+      ],
+      "stack": "any, SVG",
+      "licence": "MIT",
+      "licence-read": "veltman/flubber repository licence and README, read through the GitHub API, 2026-11-19",
+      "install": "pnpm add flubber",
+      "react": "none found",
+      "notes": "Interpolates between two SVG shapes so a morph stays smooth. Last release 0.4.2 on 2018-03-01, last push 2022-11-08."
+    },
+    {
+      "id": "react-spring",
+      "url": "https://github.com/pmndrs/react-spring",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "spring",
+        "entrance",
+        "scroll-driven",
+        "sequence"
+      ],
+      "stack": "react",
+      "licence": "MIT",
+      "licence-read": "pmndrs/react-spring repository licence read through the GitHub API, and the npm record with pnpm view, 2026-11-19",
+      "install": "pnpm add @react-spring/web",
+      "react": "it is the React package",
+      "notes": "The default spring library for React in references/motion.md."
+    },
+    {
+      "id": "motion",
+      "url": "https://github.com/motiondivision/motion",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "spring",
+        "entrance",
+        "scroll-driven",
+        "sequence"
+      ],
+      "stack": "any, plain JavaScript; React through motion/react",
+      "licence": "MIT",
+      "licence-read": "motiondivision/motion repository licence read through the GitHub API, and the npm record with pnpm view, 2026-11-19",
+      "install": "pnpm add motion",
+      "react": "the motion/react export of the same package",
+      "notes": "The default spring library for Solid, Angular and plain HTML in references/motion.md."
+    },
+    {
+      "id": "motion-v",
+      "url": "https://github.com/motiondivision/motion-vue",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "spring",
+        "entrance",
+        "scroll-driven",
+        "sequence"
+      ],
+      "stack": "vue",
+      "licence": "MIT",
+      "licence-read": "motiondivision/motion-vue repository licence read through the GitHub API, and the npm record with pnpm view, 2026-11-19",
+      "install": "pnpm add motion-v",
+      "react": "none: Vue only",
+      "notes": "One of the two Vue defaults in references/motion.md."
+    },
+    {
+      "id": "vueuse-motion",
+      "url": "https://github.com/vueuse/motion",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "spring",
+        "entrance",
+        "sequence"
+      ],
+      "stack": "vue",
+      "licence": "MIT",
+      "licence-read": "vueuse/motion repository licence read through the GitHub API, and the npm record with pnpm view, 2026-11-19",
+      "install": "pnpm add @vueuse/motion",
+      "react": "none: Vue only",
+      "notes": "One of the two Vue defaults in references/motion.md."
+    },
+    {
+      "id": "lenis",
+      "url": "https://github.com/darkroomengineering/lenis",
+      "tier": "use",
+      "kind": "motion",
+      "for": [
+        "smooth-scroll"
+      ],
+      "stack": "any, plain JavaScript",
+      "licence": "MIT",
+      "licence-read": "darkroomengineering/lenis repository licence read through the GitHub API, and the npm record with pnpm view, 2026-11-19",
+      "install": "pnpm add lenis",
+      "react": "lenis/react, in the same package",
+      "notes": "Smooth scroll, the default in references/motion.md. Drive it from the project's one render loop."
+    },
+    {
+      "id": "motion-canvas",
+      "url": "https://github.com/motion-canvas/motion-canvas",
+      "tier": "use",
+      "kind": "video",
+      "for": [
+        "explainer-video",
+        "code-animation"
+      ],
+      "stack": "typescript, renders to video",
+      "licence": "MIT",
+      "licence-read": "motion-canvas/motion-canvas repository licence and README, read through the GitHub API, 2026-11-19",
+      "install": "pnpm add @motion-canvas/core @motion-canvas/2d",
+      "react": "none; @motion-canvas/player (MIT) is a custom element that plays an exported animation in a page",
+      "notes": "Animations written in TypeScript with a live editor, rendered to video offline. @motion-canvas/core 3.17.2 was published 2024-12-14."
+    },
+    {
+      "id": "webgl-fluid-simulation",
+      "url": "https://github.com/PavelDoGreat/WebGL-Fluid-Simulation",
+      "tier": "use",
+      "kind": "shader",
+      "for": [
+        "fluid",
+        "background",
+        "interactive-effect"
+      ],
+      "stack": "WebGL, plain JavaScript",
+      "licence": "MIT",
+      "licence-read": "PavelDoGreat/WebGL-Fluid-Simulation repository licence and README, read through the GitHub API, 2026-11-19",
+      "install": "no npm package: copy the source",
+      "react": "none",
+      "notes": "A fluid simulation page that works on phones. It is a demo, not a library: copied code is code the project owns. Last push 2024-11-12."
+    },
+    {
+      "id": "unslop-ui",
+      "url": "https://github.com/felipebasurto/unslop-ui",
+      "tier": "use",
+      "kind": "ruleset",
+      "for": [
+        "ui-copy",
+        "chart-copy",
+        "decoration"
+      ],
+      "stack": "any",
+      "licence": "MIT",
+      "licence-read": "felipebasurto/unslop-ui LICENSE, Copyright (c) 2026 Felipe Basurto, 2026-11-19",
+      "install": "not installed: folded in",
+      "notes": "Rules U1 to U20 are merged into references/gates.md and review-the-ui/references/copy.md. Not installed: its SKILL.md runs a Python loader on every call."
+    },
+    {
+      "id": "ai-design-vault",
+      "url": "https://github.com/textura-agency/ai-design-vault",
+      "tier": "use",
+      "kind": "ruleset",
+      "for": [
+        "motion-system",
+        "tokens",
+        "markup",
+        "figma",
+        "3d-performance"
+      ],
+      "stack": "any",
+      "licence": "Unlicense",
+      "licence-read": "textura-agency/ai-design-vault LICENSE.md, 2026-11-19",
+      "install": "not installed: folded in",
+      "notes": "Its motion, token, markup, Figma, QA and 3D scene notes are folded into references/motion.md, design-system.md, markup.md, figma.md and 3d-scene.md. Its SEO, CMS, database, auth and shipping material is not used."
+    },
+    {
+      "id": "heydamir-unslop",
+      "url": "https://github.com/heydamir/unslop",
+      "tier": "credit",
+      "kind": "ruleset",
+      "credit": "Damir Sokolovsky (@heydamir), CC BY 4.0: in NOTICE, and at the top and foot of references/slop-signs.md",
+      "for": [
+        "ai-look",
+        "audit",
+        "redesign"
+      ],
+      "stack": "any",
+      "licence": "CC-BY-4.0",
+      "licence-read": "heydamir/unslop LICENSE and the credit line in references/signs.md, 2026-11-19",
+      "install": "not installed: folded in",
+      "notes": "Its signs list is adapted in references/slop-signs.md. The skill itself is not installed: its name clashes with the writing skill called unslop."
+    },
+    {
+      "id": "@coss",
+      "url": "https://coss.com/ui",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "LICENSING.md puts apps/origin/ and apps/ui/ under MIT and everything else under AGPL-3.0. Ship a component only from those two directories, or tell the user the AGPL terms first.",
+      "registry": "https://coss.com/ui/r/{name}.json",
+      "for": [
+        "primitives",
+        "form",
+        "combobox",
+        "date-picker",
+        "table",
+        "command"
+      ],
+      "stack": "react+tailwind+base-ui",
+      "licence": "MIT for the UI packages; AGPL-3.0 is the repository default",
+      "licence-read": "cosscom/ui LICENSING.md and apps/origin/LICENSE.md, 2026-10-27",
+      "install": "pnpm dlx shadcn@latest add @coss/<name>",
+      "notes": "Cal.com's design system, built on Base UI, and the home of the former Origin UI (apps/origin). LICENSING.md puts apps/origin/ and apps/ui/ under MIT and everything else under AGPL-3.0, so check which directory a component comes from before shipping it."
+    },
+    {
       "id": "@react-bits",
       "url": "https://reactbits.dev",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "MIT with Commons Clause: a component may ship inside a product, but may not be sold or redistributed on its own, in a template or in a kit.",
       "registry": "https://reactbits.dev/r/{name}.json",
       "for": [
         "animation",
@@ -111,6 +506,9 @@
     {
       "id": "@uiarc",
       "url": "https://uiarc.dev",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "Free components and blocks are MIT. Arc Pro source needs a bought licence, which allows end products but not redistributing or reselling the source, or a product whose main value is the components. Ship a Pro item only if the user has the licence.",
       "registry": "https://uiarc.dev/r/{name}.json",
       "for": [
         "animation",
@@ -120,14 +518,17 @@
         "hero"
       ],
       "stack": "react+tailwind+shadcn",
-      "licence": "not stated on the site's pages that were read",
-      "licence-read": "uiarc.dev home page, 2026-10-27",
+      "licence": "MIT for the free components and blocks; Arc Pro source under the Arc Pro licence",
+      "licence-read": "uiarc.dev/license, 2026-11-19",
       "install": "pnpm dlx shadcn@latest add @uiarc/<name>",
       "notes": "120 components and 22 blocks free, no account. Arc Pro adds 68 components and 91 blocks for $249 once. Ships an llms.txt and an MCP server: claude mcp add --transport http arc https://uiarc.dev/api/mcp"
     },
     {
       "id": "@23rd",
       "url": "https://23rd.dev",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "Licence not found at 23rd.dev/terms, in the registry item JSON, or in the radiumcoders/23rd.dev repository. Ask the user before anything from it ships.",
       "registry": "https://23rd.dev/r/{name}.json",
       "for": [
         "shader",
@@ -135,14 +536,17 @@
         "interactive-effect"
       ],
       "stack": "react",
-      "licence": "not stated on the home page",
-      "licence-read": "23rd.dev home page, 2026-10-27",
+      "licence": "not found: the terms point to a licence shipped with each item, and none was found",
+      "licence-read": "23rd.dev/terms, the registry item JSON at 23rd.dev/r/<name>.json (no licence field), and radiumcoders/23rd.dev (no LICENSE file, no licence in package.json or the README), 2026-11-19",
       "install": "pnpm dlx shadcn@latest add @23rd/<name>",
       "notes": "20 catalogue items: shaders, gradients, orbs. One visual trick each, for a public page. No MCP or API is advertised."
     },
     {
       "id": "@aceternity",
       "url": "https://ui.aceternity.com",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "Aceternity Licence: an item may ship inside an end product, for yourself or a client. It may not be redistributed, or sold as an item, a derivative or a template on any marketplace. Check the item's description for third-party parts under another licence.",
       "registry": "https://ui.aceternity.com/registry/{name}.json",
       "for": [
         "marketing-effect",
@@ -150,44 +554,17 @@
         "card-effect"
       ],
       "stack": "react+tailwind+motion",
-      "licence": "not stated on the pricing page",
-      "licence-read": "ui.aceternity.com/pricing, 2026-10-27",
+      "licence": "Aceternity Licence: unlimited end products for yourself or clients; no redistributing the items or their source files, and no selling the items, their derivatives or templates made from them on any marketplace. Some items carry third-party parts under their own licence",
+      "licence-read": "ui.aceternity.com/licence, 2026-11-19",
       "install": "pnpm dlx shadcn@latest add @aceternity/<name>",
       "notes": "100+ free components with MCP access; blocks and templates are paid at $169 for a year, $199 lifetime or $1,590 for a team of ten. The directory marked its registry health 'degraded' on 2026-10-27."
     },
     {
-      "id": "@hyperui",
-      "url": "https://hyperui.dev",
-      "registry": null,
-      "for": [
-        "plain-tailwind",
-        "marketing-section",
-        "form"
-      ],
-      "stack": "tailwind, no react",
-      "licence": "MIT",
-      "licence-read": "markmead/hyperui repository licence, 2026-10-27",
-      "install": "copy from the page",
-      "notes": "Markup, not components. Right where the project has no React."
-    },
-    {
-      "id": "tremor",
-      "url": "https://tremor.so",
-      "registry": null,
-      "for": [
-        "chart",
-        "kpi",
-        "spark-chart"
-      ],
-      "stack": "react+tailwind",
-      "licence": "Apache-2.0",
-      "licence-read": "tremorlabs/tremor repository licence and the npm record for @tremor/react, 2026-10-27",
-      "install": "copy from the page; Tremor Raw has no CLI",
-      "notes": "Slowing down: the repository was last pushed 2025-10-10 and @tremor/react 3.18.7 was last published 2025-01-13. It is not in the shadcn registry directory. Prefer @reui charts or a chart built on Recharts for new work, and say why if you choose Tremor."
-    },
-    {
       "id": "@boardui",
       "url": "https://www.boardui.com",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "66 items are MIT in BoardUI/boardui. The other 22, among them modal, toast, popover, skeleton, accordion, data-table and app-shell, sit behind a Pro licence key. Ship only an item that is in the MIT repository, unless the user has the licence.",
       "registry": "https://www.boardui.com/r/{name}.json",
       "for": [
         "dashboard",
@@ -210,109 +587,170 @@
       "notes": "88 registry items with titles and descriptions, so search matches meaning, not only names. Built on react-aria-components, not Radix: check that before mixing it with shadcn primitives. Strongest for dashboards and agent screens (agent-chat, agent-thinking, agent-log, composer-loader, data-table, app-shell). 22 of the 88 items are absent from the MIT repository, among them modal, toast, popover, skeleton, accordion, data-table and app-shell. The registry serves their full source over HTTP with no authentication, but a Pro licence key exists (boardui login <key>) and holds a per-machine seat, so those 22 are reachable without being licensed. Take one only after the terms are stated."
     },
     {
-      "id": "@astryx",
-      "url": "https://astryx.atmeta.com",
-      "for": [
-        "primitives",
-        "form",
-        "table",
-        "dialog",
-        "navigation",
-        "chat",
-        "richtext",
-        "theme"
-      ],
-      "stack": "react19+stylex",
-      "licence": "MIT",
-      "licence-read": "meta/astryx LICENSE, Meta Platforms, 2026-11-12",
-      "install": "pnpm dlx shadcn@latest add @astryx/component-button, or pnpm add @astryxdesign/core @stylexjs/stylex @astryxdesign/theme-neutral and then pnpm dlx @astryxdesign/cli init",
-      "notes": "Meta's own design system, in beta at 0.7.14 on 2026-11-12. MIT in meta/astryx's LICENSE and on npm for core, cli and the theme packages. Its registry is shadcn-spec and in the public directory as @astryx, healthy at 98.7 with 1,004 items on 2026-11-12: 189 components, 675 blocks, 83 hooks and 57 pages, every one with a description, so search matches meaning. Item names carry their kind, so the item is component-button, not button, and its type is registry:component rather than registry:ui: the search covers both by default, but pass --type any to reach its blocks, pages and hooks. A component installs as a re-export of the npm package rather than as copied source, so taking one brings the whole system: react and react-dom >=19, @stylexjs/stylex ^0.19.0, and its own reset and stylesheet. Blocks, examples and pages do copy editable source. Its own CLI searches the same catalogue with pnpm dlx @astryxdesign/cli search <term> --json, and every command takes --json. Never run bare npx astryx: the unscoped name is an unrelated package. The 180-component and 13,000-app figures on its home page are the vendor's own and were not counted.",
-      "registry": "https://astryx.atmeta.com/shadcn/{name}.json",
-      "catalogue": "https://astryx.atmeta.com/shadcn/registry.json"
-    }
-  ],
-  "screens": [
-    {
-      "id": "shadcn-blocks",
-      "url": "https://ui.shadcn.com/blocks",
-      "for": [
-        "dashboard",
-        "sidebar",
-        "login",
-        "calendar-screen"
-      ],
-      "stack": "react+tailwind+shadcn",
-      "licence": "MIT",
-      "licence-read": "shadcn-ui/ui repository licence, 2026-10-27",
-      "install": "pnpm dlx shadcn@latest add dashboard-01"
-    },
-    {
       "id": "component-gallery",
       "url": "https://component.gallery",
+      "tier": "check-licence",
+      "kind": "screen",
+      "condition": "Licence not found at component.gallery/about, on its home page, or in the inbn/component-gallery repository. Read it for what a component is called and does; copy no code or text.",
       "for": [
         "pattern-reference",
         "naming",
         "component-api"
       ],
       "stack": "any",
-      "licence": "not stated",
-      "licence-read": "component.gallery home page, 2026-10-27",
+      "licence": "not found: no licence on the site or in its repository",
+      "licence-read": "component.gallery/about, the home page footer, and inbn/component-gallery (no licence on GitHub), 2026-11-19",
       "install": "read, do not install",
       "notes": "60 components, 95 design systems and 2,671 examples of how real design systems build each one, by Iain Bean. Search is Pagefind; there is no API or MCP. Read it to decide what a component should do and be called, not to get code."
     },
     {
       "id": "21st",
       "url": "https://21st.dev/community/libraries",
+      "tier": "check-licence",
+      "kind": "screen",
+      "condition": "The terms allow use only through the 21st.dev platform, and forbid redistributing, selling or licensing its content without 21st Labs' authorisation. Take a component from its own library under that library's licence, with credit to the author, rather than from 21st.dev.",
       "for": [
         "library-discovery"
       ],
       "stack": "react+tailwind+shadcn",
-      "licence": "no component licence stated",
-      "licence-read": "21st.dev/community/libraries and 21st.dev/pricing, 2026-10-27",
+      "licence": "21st.dev terms: content is viewed and used only through the 21st.dev platform; redistributing, selling or licensing marketplace content needs 21st Labs' authorisation; each open-source component keeps its own licence and credit",
+      "licence-read": "21st.dev/terms, 2026-11-19",
       "install": "account needed",
       "notes": "An index of 167 libraries, useful for finding a library by name. The free plan allows 2 copies a day; MCP component retrieval starts at the Builder plan, $6 a month billed yearly. Most of the libraries it indexes are also in the shadcn directory, which is free and scriptable, so search there first."
     },
     {
-      "id": "astryx-templates",
-      "url": "https://astryx.atmeta.com/templates",
+      "id": "zdog",
+      "url": "https://github.com/metafizzy/zdog",
+      "tier": "check-licence",
+      "kind": "motion",
+      "condition": "The repository has no LICENSE file. MIT is stated only in its README and on npm. Tell the user before it ships in a company product.",
       "for": [
-        "dashboard",
-        "login",
-        "checkout",
-        "account-settings",
-        "ai-chat",
-        "product-page",
-        "gallery"
+        "pseudo-3d",
+        "illustration",
+        "canvas"
       ],
-      "stack": "react19+stylex",
-      "licence": "MIT",
-      "licence-read": "meta/astryx LICENSE, Meta Platforms, 2026-11-12",
-      "install": "pnpm dlx shadcn@latest add @astryx/template-checkout-wizard"
-    }
-  ],
-  "patterns": [
-    {
-      "id": "carbon-empty-states",
-      "url": "https://carbondesignsystem.com/patterns/empty-states-pattern/",
-      "for": [
-        "empty-state"
-      ],
-      "stack": "any",
-      "licence": "Apache-2.0 for the design system",
-      "licence-read": "not re-read on 2026-10-27; inherited from an earlier list by the same author"
+      "stack": "any, canvas or SVG",
+      "licence": "MIT according to the README and npm; no LICENSE file in the repository",
+      "licence-read": "metafizzy/zdog: GitHub licence endpoint 404, README and npm record, 2026-11-19",
+      "install": "pnpm add zdog",
+      "react": "react-zdog (third-party, MIT)",
+      "notes": "A flat, round pseudo-3D engine. Last release 1.1.3 on 2022-01-22, last push 2023-07-18. No prefers-reduced-motion handling: write the reduce path yourself."
     },
     {
-      "id": "primer-ui-patterns",
-      "url": "https://primer.style/product/ui-patterns/",
+      "id": "theatre",
+      "url": "https://github.com/theatre-js/theatre",
+      "tier": "check-licence",
+      "kind": "motion",
+      "condition": "@theatre/core is Apache-2.0. @theatre/studio is AGPL-3.0: keep it a dev dependency, out of the shipped bundle. The public repository has had no push since 2024-08 and its README says development moved to a private repository: say so before choosing it.",
       "for": [
-        "loading",
-        "saving",
-        "feedback",
-        "progressive-disclosure"
+        "timeline-editor",
+        "3d-animation",
+        "sequenced-motion"
+      ],
+      "stack": "any, plain JavaScript",
+      "licence": "Apache-2.0 for @theatre/core; AGPL-3.0-only for @theatre/studio",
+      "licence-read": "theatre-js/theatre README, GitHub licence and the npm record for @theatre/studio, 2026-11-19",
+      "install": "pnpm add @theatre/core, and the editor with pnpm add -D @theatre/studio",
+      "react": "@theatre/r3f (Apache-2.0), for react-three-fiber only",
+      "notes": "A motion design editor plus the runtime that plays what it records. @theatre/core 0.7.2 was published 2024-05-19."
+    },
+    {
+      "id": "lygia",
+      "url": "https://github.com/patriciogonzalezvivo/lygia",
+      "tier": "check-licence",
+      "kind": "shader",
+      "condition": "Prosperity License 3.0 allows non-commercial use only. Commercial use needs the Patron License (sponsors and contributors) or a paid permanent licence tied to one version. Tell the user before it ships in a commercial product.",
+      "for": [
+        "shader-functions",
+        "noise",
+        "lighting",
+        "colour"
+      ],
+      "stack": "GLSL, HLSL, Metal, WGSL, CUDA",
+      "licence": "Prosperity License 3.0 and Patron License, dual",
+      "licence-read": "patriciogonzalezvivo/lygia README and the npm record, 2026-11-19",
+      "install": "pnpm add lygia",
+      "react": "none: shader code inside your own WebGL setup",
+      "notes": "A granular shader function library in several shading languages."
+    },
+    {
+      "id": "remotion",
+      "url": "https://github.com/remotion-dev/remotion",
+      "tier": "check-licence",
+      "kind": "video",
+      "condition": "Free for individuals, non-profits, evaluation and for-profit companies with up to 3 employees. A larger for-profit company needs a company licence (LICENSE.md). Ask the user which applies before it ships.",
+      "for": [
+        "programmatic-video",
+        "video-in-app"
+      ],
+      "stack": "react",
+      "licence": "Remotion License: free up to 3 employees, company licence above",
+      "licence-read": "remotion-dev/remotion LICENSE.md and README, 2026-11-19",
+      "install": "pnpm add remotion, or scaffold with pnpm dlx create-video@latest",
+      "react": "it is React; @remotion/player embeds a composition in a React app, under the same licence",
+      "notes": "Makes videos with React components. Rendering to video runs offline; the player runs in the page."
+    },
+    {
+      "id": "footer-design",
+      "url": "https://footer.design",
+      "tier": "inspiration",
+      "kind": "gallery",
+      "for": [
+        "footer"
       ],
       "stack": "any",
-      "licence": "not read",
-      "licence-read": "not re-read on 2026-10-27; inherited from an earlier list by the same author"
+      "licence": "not stated: /info has no terms and no reuse text",
+      "licence-read": "footer.design home page and /info, 2026-11-19",
+      "install": "browse only",
+      "notes": "Screenshots of real footers with style filters, each linking out to its site. robots.txt allows all crawlers."
+    },
+    {
+      "id": "cta-gallery",
+      "url": "https://cta.gallery",
+      "tier": "inspiration",
+      "kind": "gallery",
+      "for": [
+        "call-to-action",
+        "cta"
+      ],
+      "stack": "any",
+      "licence": "not stated: /about has no terms",
+      "licence-read": "cta.gallery home page and /about, 2026-11-19",
+      "install": "browse only",
+      "notes": "Calls to action sorted by industry, mode and category. robots.txt allows all crawlers."
+    },
+    {
+      "id": "scrolltide",
+      "url": "https://www.scrolltide.co",
+      "tier": "inspiration",
+      "kind": "gallery",
+      "for": [
+        "scroll-animation",
+        "landing-template",
+        "shader",
+        "section"
+      ],
+      "stack": "next.js",
+      "licence": "paid plans grant a limited, non-transferable licence and forbid reselling, redistributing or sublicensing any template or prompt; free items are not covered separately",
+      "licence-read": "scrolltide.co/terms section 3, read through a fetch tool's summary on 2026-11-19; re-read the raw page before relying on it",
+      "install": "browse only",
+      "notes": "Scroll-driven templates, components and shaders with paste-in AI prompts. Use the free previews for direction only; copy no code, prompt, preview video or screenshot."
+    },
+    {
+      "id": "refero-styles",
+      "url": "https://styles.refero.design",
+      "tier": "browse-only",
+      "kind": "gallery",
+      "for": [
+        "design-system",
+        "tokens",
+        "direction"
+      ],
+      "stack": "any",
+      "licence": "not found: /terms returns 404",
+      "licence-read": "styles.refero.design robots.txt and home page, 2026-11-19",
+      "install": "the user browses it",
+      "notes": "Colours, type, spacing and a DESIGN.md per site, for over 2,000 sites. robots.txt disallows ClaudeBot, Claude-Web and anthropic-ai, so agents never fetch it. The user browses it and pastes in what they want."
     }
   ],
   "rejected": [

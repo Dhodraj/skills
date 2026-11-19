@@ -1,10 +1,8 @@
 # Driving the browser
 
 The mechanics behind stage 8 of `design-the-ui` and the browser work in
-`review-the-ui`. Everything stated as observed here was run on 2026-10-27 against
-Playwright MCP 0.0.83, apart from Filming motion below, which was run on
-2026-11-12 against Chrome 157. Check it again rather than trusting this page
-if a tool behaves differently.
+`review-the-ui`. If a tool behaves differently from this page, trust the tool
+and check again.
 
 ## Check what is available before planning around it
 
@@ -50,12 +48,11 @@ written up as though the page had been seen.
   ```bash
   python3 -I -m http.server 8731 --bind 127.0.0.1 >/tmp/pxe-server.log 2>&1 &
   ```
-
-  Record the port and the process, and stop it when the walk ends.
 - **Output paths must sit inside the workspace root.** `browser_evaluate`'s
   and `browser_take_screenshot`'s `filename` is rejected for a path outside
-  it, `/tmp` included. Write to something like `.pxe-audit/` in the repository
-  and add it to `.gitignore`.
+  it, `/tmp` included. Write to something like `.pxe-audit/` in the
+  repository. In review-only mode, leave `.gitignore` alone and name the
+  folder in the report as evidence the user may keep or delete.
 - **`browser_run_code_unsafe` cannot read files.** Its sandbox has no
   `require`, no `process`, no `__dirname` and no dynamic `import`, so a
   Node-side driver that loads a script from disk does not work. It is also
@@ -127,9 +124,7 @@ browser_take_screenshot(filename: ".pxe-audit/shot-375.png", fullPage: true, sca
 
 A screenshot cannot show a pop, a jump, an entrance that fires on every
 keystroke, or a surface that lifts before the press. Three things catch those,
-and none of them needs a new dependency. Everything below was run on
-2026-11-12 through Playwright MCP against Chrome 157, and the numbers quoted
-are what it returned.
+and none of them needs a new dependency.
 
 **Slow the animation down from the page, then screenshot it.** The browser's
 own animation panel is not reachable from a tool call; `getAnimations` is:
@@ -148,37 +143,15 @@ animation that has not begun is not in the list.
 
 **Sample the geometry every frame instead of guessing the interval.** A
 contact sheet through the MCP server has no fixed cadence, because each
-screenshot is a round trip. Numbers do not need one:
+screenshot is a round trip. Numbers do not need one. Mark the element with
+`data-watch`, then pass the whole contents of
+[frames.js](../scripts/frames.js) as the `function` argument of
+`browser_evaluate`. It samples the element's position on every frame for
+900ms. `biggestStep` watches `left` only: read `samples` for a vertical jump.
 
-```js
-() => new Promise((resolve) => {
-  const target = document.querySelector("[data-watch]");
-  if (!target) { resolve({ error: "nothing carries data-watch" }); return; }
-  const samples = [];
-  const start = performance.now();
-  const tick = () => {
-    const box = target.getBoundingClientRect();
-    samples.push([Math.round(performance.now() - start), Math.round(box.left), Math.round(box.top)]);
-    if (performance.now() - start < 900) requestAnimationFrame(tick);
-    else resolve({
-      frames: samples.length,
-      biggestStep: Math.max(...samples.slice(1).map(([, x], i) => Math.abs(x - samples[i][1]))),
-      samples,
-    });
-  };
-  requestAnimationFrame(tick);
-})
-```
-
-Mark the element with `data-watch` first. Without the guard, a page with
-nothing marked throws inside the frame callback, the promise never settles,
-and the tool call times out instead of telling you why. `biggestStep` watches
-`left` only: read `samples` for a vertical jump.
-
-This sampler returned 112 frames over its 900ms window on 2026-11-12, with a
-largest step of 5px between two frames. Report what your own run returned,
-with the window it sampled, rather than quoting a frame count on its own: the
-count is the display's refresh rate as much as the page's. A step much larger
+Report what your run returned, with the window it sampled, rather than a
+frame count on its own: the count is the display's refresh rate as much as the
+page's. A step much larger
 than its neighbours is the jump a sheet of screenshots misses, and a run of
 identical positions followed by one large step is a clock or a layout thrash
 rather than an animation.
@@ -220,5 +193,7 @@ response, say in the report that it was faked.
 
 Close the page when the walk is finished, and stop every server and process
 started for it. Leave the repository as it was apart from the files the task
-was meant to change; add the audit output directory to `.gitignore` rather
-than committing screenshots nobody asked for.
+was meant to change. When the task may change files, add the audit output
+directory to `.gitignore` rather than committing screenshots nobody asked for.
+In review-only mode, change no files; the output directory is the one thing
+left, named in the report.

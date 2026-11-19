@@ -2,9 +2,10 @@
 // Searches shadcn-spec component registries for items matching search terms.
 //
 // Two sources of registries, in this order:
-//   1. sources.json next to this script: the curated list, with a read licence.
-//   2. https://ui.shadcn.com/r/registries.json: the public directory, 500+
-//      registries with a health score. Used for the long tail.
+//   1. sources.json next to this script: the curated list, with a read licence
+//      and a reuse tier. Only entries of kind "component" are searched.
+//   2. https://ui.shadcn.com/r/registries.json: the public directory of
+//      registries, each with a health score. Used for the long tail.
 //
 // Each registry publishes a catalogue at <base>/registry.json holding every
 // item with its name, type, title, description and dependencies. This script
@@ -20,10 +21,9 @@
 //
 //   --type <t>        registry item type, repeatable. Default registry:ui and
 //                     registry:component, which is the same thing under
-//                     another name: @astryx uses it for all 189 of its
-//                     components and no other curated registry uses it at
-//                     all. Pass "any" for every type, which also brings
-//                     blocks, pages and hooks.
+//                     another name used by some registries. Pass "any"
+//                     for every type, which also brings blocks, pages and
+//                     hooks.
 //   --limit <n>       items to print. Default 20.
 //   --registries <n>  extra directory registries to search. Default 12.
 //   --curated-only    search only sources.json, no directory.
@@ -128,7 +128,7 @@ function readSources(scriptDir) {
   const file = path.join(scriptDir, "..", "sources.json");
   try {
     const data = JSON.parse(fs.readFileSync(file, "utf8"));
-    return (data.components || []).filter((entry) => entry.registry);
+    return (data.sources || []).filter((entry) => entry.kind === "component" && entry.registry);
   } catch {
     return [];
   }
@@ -229,6 +229,7 @@ async function searchRegistry(source, options) {
       registryDependencies: item.registryDependencies || [],
       files: Array.isArray(item.files) ? item.files.length : 0,
       licence: source.licence,
+      tier: source.tier || null,
       health: source.health || null,
       origin: source.origin,
       homepage: source.url || (Array.isArray(catalogue) ? null : catalogue.homepage) || null,
@@ -251,7 +252,7 @@ function printTable(rows, notes) {
     const flag = row.demo ? " [demo]" : "";
     console.log(
       `${row.registry.padEnd(registryWidth)}  ${row.name.padEnd(nameWidth)}  ` +
-      `${String(row.score).padStart(3)}  ${row.licence}${flag}`,
+      `${String(row.score).padStart(3)}  ${row.tier ? `[${row.tier}] ` : ""}${row.licence}${flag}`,
     );
     if (row.description) console.log(`    ${row.description}`);
     const deps = row.dependencies.length ? ` deps: ${row.dependencies.join(", ")}` : " deps: none";
@@ -270,7 +271,7 @@ async function main() {
     process.exit(2);
   }
   if (options.help || options.terms.length === 0) {
-    console.log(fs.readFileSync(__filename, "utf8").split("\n").slice(1, 30).join("\n").replace(/^\/\/ ?/gm, ""));
+    console.log(fs.readFileSync(__filename, "utf8").match(/^(?:\/\/.*\n)+/m)[0].replace(/^\/\/ ?/gm, "").trimEnd());
     process.exit(options.help ? 0 : 2);
   }
   options.terms = options.terms.map((term) => term.toLowerCase());

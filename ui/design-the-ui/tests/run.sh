@@ -4,9 +4,8 @@
 #   ./tests/run.sh            the offline tests: no network, no browser
 #   ./tests/run.sh --network  also search the real registries
 #
-# The browser checks are not here: measure.js runs inside a page, and the
-# testing report records what it returned against the fixtures in
-# tests/fixtures/.
+# measure.js runs inside a page, so these tests check its source and the
+# fixtures in tests/fixtures/, not what it returns in a browser.
 # No `-e`: a failing assertion must be counted and reported, not abort the run.
 set -uo pipefail
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -32,9 +31,10 @@ code() { node "$check" "$1" >/dev/null 2>&1; echo $?; }
 # ---------------------------------------------------------------- sources.json
 
 good='{"version":1,"updated":"2026-10-27",
- "components":[{"id":"@a","url":"https://a.test","registry":"https://a.test/r/{name}.json",
-   "for":["table"],"stack":"react","licence":"MIT","licence-read":"a/LICENSE, 2026-10-27"}],
- "screens":[{"id":"b","url":"https://b.test","for":["dashboard"],"stack":"react",
+ "sources":[{"id":"@a","url":"https://a.test","registry":"https://a.test/r/{name}.json",
+   "tier":"use","kind":"component",
+   "for":["table"],"stack":"react","licence":"MIT","licence-read":"a/LICENSE, 2026-10-27"},
+  {"id":"b","url":"https://b.test","tier":"use","kind":"screen","for":["dashboard"],"stack":"react",
    "licence":"MIT","licence-read":"b/LICENSE, 2026-10-27"}],
  "rejected":[{"url":"https://c.test","reason":"paid"}]}'
 
@@ -49,35 +49,35 @@ exec(sys.argv[1])
 open('$tmp/bad.json','w').write(json.dumps(d))
 " "$1"; }
 
-bad "d['components'][0].pop('licence')"
+bad "d['sources'][0].pop('licence')"
 ok  "a missing licence fails" "$(code "$tmp/bad.json")" "1"
 has "it names the field" "$(run "$tmp/bad.json")" "has no licence"
 
-bad "d['components'][0].pop('licence-read')"
+bad "d['sources'][0].pop('licence-read')"
 has "a licence with no reading note is caught" "$(run "$tmp/bad.json")" "no licence-read note"
 
-bad "d['components'][0]['registry']='https://a.test/r/button.json'"
+bad "d['sources'][0]['registry']='https://a.test/r/button.json'"
 has "a registry url without {name} is caught" "$(run "$tmp/bad.json")" "must contain {name}"
 
-bad "d['components'][0]['catalogue']='r/index.json'"
+bad "d['sources'][0]['catalogue']='r/index.json'"
 has "a catalogue that is not a url is caught" "$(run "$tmp/bad.json")" "catalogue is not a url"
 
-bad "d['screens'][0]['id']='@a'"
+bad "d['sources'][1]['id']='@a'"
 has "a repeated id is caught" "$(run "$tmp/bad.json")" "repeats"
 
-bad "d['screens'][0]['url']='https://a.test'"
+bad "d['sources'][1]['url']='https://a.test'"
 has "a repeated url is caught" "$(run "$tmp/bad.json")" "repeats"
 
 bad "d['rejected'].append({'url':'https://a.test','reason':'x'})"
 has "a source that is also rejected is caught" "$(run "$tmp/bad.json")" "also listed"
 
-bad "d['components'][0]['url']='a.test'"
+bad "d['sources'][0]['url']='a.test'"
 has "a url without a scheme is caught" "$(run "$tmp/bad.json")" "not a url"
 
-bad "d['components'][0]['for']=[]"
+bad "d['sources'][0]['for']=[]"
 has "an empty for list is caught" "$(run "$tmp/bad.json")" "is empty"
 
-bad "d['components'][0]['for']='table'"
+bad "d['sources'][0]['for']='table'"
 has "a for that is not an array is caught" "$(run "$tmp/bad.json")" "must be an array"
 
 bad "d['updated']='27-10-2026'"
@@ -86,8 +86,37 @@ has "a bad date is caught" "$(run "$tmp/bad.json")" "YYYY-MM-DD"
 bad "d['version']=2"
 has "a wrong version is caught" "$(run "$tmp/bad.json")" "version must be 1"
 
+# The reuse tier decides what may be copied, so every entry needs one, and a
+# tier that asks for a licence check has to say what the check is.
+bad "d['sources'][0].pop('tier')"
+ok  "an entry without a tier fails" "$(code "$tmp/bad.json")" "1"
+has "it names the missing tier" "$(run "$tmp/bad.json")" "has no tier"
+
+bad "d['sources'][0]['tier']='free'"
+has "an unknown tier is caught" "$(run "$tmp/bad.json")" "unknown tier"
+
+bad "d['sources'][0]['tier']='check-licence'"
+has "a check-licence entry without a condition is caught" "$(run "$tmp/bad.json")" "no condition"
+
+bad "d['sources'][0]['tier']='check-licence'; d['sources'][0]['condition']='non-commercial only'"
+ok  "a check-licence entry with its condition passes" "$(code "$tmp/bad.json")" "0"
+
+bad "d['sources'][0]['tier']='credit'"
+has "a credit entry that does not say where the credit goes is caught" "$(run "$tmp/bad.json")" "no credit saying"
+
+bad "d['sources'][0]['kind']='widget'"
+has "an unknown kind is caught" "$(run "$tmp/bad.json")" "unknown kind"
+
 bad "d['rejected'][0].pop('reason')"
 has "a rejection without a reason is caught" "$(run "$tmp/bad.json")" "has no reason"
+
+# A browse-only site is never fetched, not even by the link check. The only
+# entry points at a closed local port, so a fetch would fail with "did not answer".
+bad "d['sources']=[{'id':'look','url':'http://127.0.0.1:9/','tier':'browse-only','kind':'gallery','for':['x'],'stack':'any','licence':'not found','licence-read':'x'}]"
+out="$(node "$check" "$tmp/bad.json" --links 2>&1; echo "exit=$?")"
+has "the link check skips a browse-only site" "$out" "not fetched: browse-only"
+hasnt "and does not fetch it" "$out" "did not answer"
+has "and still passes" "$out" "exit=0"
 
 printf 'not json' > "$tmp/broken.json"
 ok "an unreadable file exits 2" "$(code "$tmp/broken.json")" "2"
@@ -100,6 +129,9 @@ ok "the shipped file is valid" "$(code "$skill/sources.json")" "0"
 usage="$(node "$find_components" 2>&1; echo "exit=$?")"
 has "no terms prints the usage" "$usage" "Usage:"
 has "no terms exits 2" "$usage" "exit=2"
+help="$(node "$find_components" --help 2>&1)"
+has "--help names the cache folder" "$help" "--cache-dir"
+has "--help ends with the exit codes" "$help" "Exit 0 with results"
 has "an unknown option is rejected" "$(node "$find_components" x --nope 2>&1)" "unknown option"
 has "a bad limit is rejected" "$(node "$find_components" x --limit 0 2>&1)" "--limit must be"
 
@@ -137,8 +169,8 @@ for id in 000418-GLA 000419-EDI 000420-ABD 000421-INV 000422-GLA; do
 done
 
 # The geometry fixture has to carry one of each fault, and the script has to
-# look for all five. What the script returns against it is a browser result,
-# recorded in shared/docs/research/testing-report.md; this only keeps the pair in step.
+# look for all five. What the script returns against it is a browser result;
+# this only keeps the pair in step.
 geometry="$(cat "$here/fixtures/geometry-faults.html")"
 # The pair is the element and the rule that clips it. Testing only the rule
 # left the check green with the overflowing element deleted.
@@ -163,7 +195,7 @@ done
 hasnt "no detector loops over an empty list" "$measure" "of \[\])"
 has "the clipped detector walks every element" "$measure" "for (const element of all)"
 has "measure.js exempts a chosen crop" "$measure" 'hasAttribute("data-crop")'
-# The four holes found on 2026-11-17. Each names the rule it now follows.
+# Four detector rules, each named by the code that applies it.
 has "contrast composites a translucent ink"   "$measure" "const composite = (foreground, background)"
 has "and measures the composited value"       "$measure" "declared.a < 1 ? composite(declared"
 has "a value attribute names only a button"   "$measure" "buttonish.includes("
@@ -171,13 +203,22 @@ has "a container that hides is not a clip"    "$measure" "hidesFromScreen"
 has "the target floor follows the pointer"    "$measure" "thumbExpected ? 44 : 24"
 has "and a visually hidden control is exempt" "$measure" "visuallyHidden"
 hasnt "no blanket 44px floor is left"         "$measure" "44x44 (Apple HIG comfortable target)"
+
+# covered.js runs against a fake page in node; each line is one case.
+while read -r verdict name; do
+  if [[ "$verdict" == "ok" ]]; then pass=$((pass+1)); else fail=$((fail+1)); printf 'FAIL covered.js: %s\n' "$verdict $name"; fi
+done < <(node "$here/covered.test.js" 2>&1 || echo "FAIL the covered.js test did not finish")
+# frames.js runs against a fake clock in node; each line is one case.
+while read -r verdict name; do
+  if [[ "$verdict" == "ok" ]]; then pass=$((pass+1)); else fail=$((fail+1)); printf 'FAIL frames.js: %s\n' "$verdict $name"; fi
+done < <(node "$here/frames.test.js" 2>&1 || echo "FAIL the frames.js test did not finish")
 # The curated flag is not a licence filter, and both files now say so.
 findskill="$(cat "$skill/../find-a-component/SKILL.md")"
 has   "find-a-component says the curated flag is not a licence filter" "$findskill" "not a licence filter"
 hasnt "and no longer calls those sources licensed"            "$findskill" "read-and-licensed"
 has "check-sources counts the licences nobody read" "$(cat "$check")" "with no licence read"
 real="$(node "$check" 2>&1)"
-has "and the real file reports that count" "$real" "6 with no licence read"
+has "and the real file reports that count" "$real" "2 with no licence read"
 
 has "craft.md names the measured faults" "$(cat "$skill/references/craft.md")" "measured\*\*: \`tight inset\`"
 
@@ -246,7 +287,7 @@ regression="$(cat "$skill/references/regression.md")"
 has "the re-look scales to the edit"           "$regression" "Scale the re-look the same way"
 has "a wide edit is re-looked everywhere"      "$regression" "everywhere that uses it"
 
-# ------ what was taken from emilkowalski/skills on 2026-11-17, and what was not
+# ------------------------------------------ motion and performance material
 journey="$(cat "$skill/references/journey-and-states.md")"
 perf_path="$skill/../review-the-ui/references/performance.md"
 if [[ -f "$perf_path" ]]; then
@@ -272,6 +313,22 @@ has "and counts an emoji by code point"              "$journey" '\[\.\.\.value\]
 hasnt "craft.md does not restate the absent value"   "$craft"   "only an email"
 has "NOTICE records the performance material"        "$(cat "$skill/NOTICE")" "performance.md: the symptom table"
 has "and records what was refused"                   "$(cat "$skill/NOTICE")" "Not taken: its frequency table"
+
+# ------------------------------------------- folded rule sets and their credit
+# CC BY 4.0 requires the credit to travel with the adapted text.
+notice="$(cat "$skill/NOTICE")"
+has "NOTICE credits heydamir/unslop under CC BY"   "$notice" "heydamir/unslop, by Damir Sokolovsky (@heydamir), CC BY 4.0"
+has "NOTICE credits unslop-ui under MIT"           "$notice" "felipebasurto/unslop-ui, MIT"
+has "NOTICE credits ai-design-vault"               "$notice" "textura-agency/ai-design-vault, the Unlicense"
+has "slop-signs.md carries the CC BY credit"       "$(cat "$skill/references/slop-signs.md")" "Damir Sokolovsky"
+has "gates.md rule 51 is the narrated screen"      "$gates" "^51\. \*\*Text that narrates"
+has "gates.md rule 52 is chart text"               "$gates" "^52\. \*\*Chart text"
+# A reference nobody names is never loaded.
+for ref in slop-signs motion markup figma 3d-scene; do
+  has "SKILL.md names references/$ref.md" "$design_skill" "references/$ref.md"
+done
+has "review-the-ui names its copy checks"          "$review_skill" "references/copy.md"
+has "motion.md requires a reduced-motion path"     "$(cat "$skill/references/motion.md")" "## The reduced-motion path, for every animation"
 
 # Every rejection has a file, and the index names every file. An index that
 # drifts is a rejection nobody finds, which is how one gets proposed again.

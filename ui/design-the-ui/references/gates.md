@@ -1,15 +1,19 @@
 # Gates
 
-The floor. Read this immediately before the first UI edit, with
-[craft.md](craft.md).
+The floor. Read it immediately before the first UI edit. For copy, a colour
+or one prop: "The three tiers", the four Floor sections and "Before handing
+back", plus "Reflex: copy" for a copy change or "Reflex: the look a model
+defaults to" for a colour change. For a component or larger: the whole file.
+
+The three-tier shape and several rules are adapted from `Nutlope/hallmark`
+(MIT) and `nexu-io/open-design` (Apache-2.0). Copy rules 48 to 50, and the
+clause in Floor rule 3, come from `kosta4a/tactile-design` (MIT). Rules 51
+and 52, and the additions to 43 and 47, come from `felipebasurto/unslop-ui`
+(MIT). [NOTICE](../NOTICE) records what came from where.
 
 Every rule here exists because a model reaches for it by default. None is a
 matter of taste; each one names a real customer harmed, or a real claim that
-turns out to be false. The three-tier shape and several of the rules are
-adapted from `Nutlope/hallmark` (MIT) and `nexu-io/open-design` (Apache-2.0);
-the three copy rules at the end of the Reflex list, and the clause in Floor
-rule 3, come from `kosta4a/tactile-design` (MIT). [NOTICE](../NOTICE) records what came from
-where.
+turns out to be false.
 
 ## The three tiers
 
@@ -60,8 +64,10 @@ front of a customer.
 8. **Never status by colour alone.** A colour-blind customer gets the word, or
    the shape, or both.
 9. **Reduced motion.** Every animation has a `prefers-reduced-motion: reduce`
-   path. Setting duration to zero is enough. This is a vestibular-disorder
-   accommodation, not a preference.
+   path that leaves content at its end state: present, readable and still. For
+   a CSS transition, zero duration is enough. For anything else, see the table
+   in [motion.md](motion.md). This is a vestibular-disorder accommodation, not
+   a preference.
 10. **Content without scripting.** Content is visible at rest. Hide it only
     under a class the script adds, never the other way round, or a failed
     bundle leaves a blank page.
@@ -164,6 +170,9 @@ Each of these is what the training data holds, not what the product needs.
 42. **Placeholder names and clichéd companies**: Jane Doe, Acme, Nexus, lorem
     ipsum, "Feature one / Feature two".
 43. **The rebuttal cadence** used more than once: "Not a tool. A platform."
+    The staccato slogan is the same reflex: "One. Big. Thing.", "Ship
+    faster. Think less." Write one sentence that names the thing and what it
+    does, in words the page already uses.
 44. **The stock second action**: "Learn more" beside "Get started", where
     neither says what happens next.
 45. **A section heading that is a category label**: Features, Our story, Why
@@ -174,7 +183,10 @@ Each of these is what the training data holds, not what the product needs.
     tooltip that all say the same thing. Position, grouping and size already
     say what a thing is and what it belongs to. Keep a second line only where
     it carries what the layout cannot: a unit, a limit, a consequence, a
-    deadline. Delete the rest.
+    deadline. Delete the rest. In a form the visible label stays: cut a
+    placeholder that repeats it, unless it shows a format such as
+    `name@company.com`, and cut helper text that restates it. A constraint
+    the customer cannot guess, such as "At least 12 characters", stays.
 48. **Title Case on a label, three dots for an ellipsis, or an em dash in UI
     copy.** Sentence case throughout, with capitals kept for product names and
     acronyms. A real ellipsis character, so a loading label reads
@@ -187,6 +199,21 @@ Each of these is what the training data holds, not what the product needs.
 50. **A confirmation that does not state the consequence.** "This will remove
     access for 3 members", not "Are you sure?". The count and the object are
     what the customer is deciding about.
+51. **Text that narrates the screen.** A caption that says what the element
+    visibly does ("Click the button below to get started", "This chart shows
+    revenue over time"), a design note ("updates in real time", "powered by
+    AI"), or an instruction on how to read a chart ("Hover for details").
+    Delete it. An empty state, an error and a destructive confirmation stay,
+    cut to one or two sentences that say what happened and what to do next.
+    A disclosure the product must show (AI use, a legal notice) stays; report
+    it if it looks like decoration.
+52. **Chart text and scaffolding that compete with the data.** The title
+    names the data, not the chart type: "Monthly revenue", not "Bar chart of
+    monthly revenue". Each quantity gets one encoding, so a KPI keeps its
+    figure, one direction cue and its comparison period ("▲ 12% vs last
+    month"). Gridlines and baselines are hairlines, with no frame, 3D,
+    shadow or glow on the marks. Up to four series are labelled at the end of
+    the line or beside the bar, not through a legend.
 
 ## Finish: answer each, never blocked by it
 

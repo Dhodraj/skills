@@ -1,27 +1,35 @@
 ---
 name: grill-the-implementation
-description: "Grill the technical implementation details of a plan: the choices an agent would otherwise guess, such as API, webhook, event or queue, storage, auth, failure handling and deployment. Use when the user says 'grill the implementation', or before to-tickets when a plan leaves open how systems talk, where data lives or what happens on failure. A plain 'grill' is `grilling`."
+description: "Use when a plan is agreed, tickets are next, and how it is built is still open: how systems talk (API, webhook, event, queue), where data lives, auth, what happens on failure, how it ships. Also for 'grill the implementation'. Writes the decisions to a file that `to-tickets` reads. Not for what to build or whether: a plain 'grill' is `grilling`. Terms and ADRs are `domain-modeling`."
 ---
 
-Interview the user about the technical implementation details until every choice the build needs is settled, and nothing is left for a builder to guess. What the feature does is already agreed; this skill settles how it is built.
+Settle every technical choice the build needs, so no builder guesses. What the feature does is already agreed; this settles how it is built.
 
-**Why:** An agent builds whatever it is asked, and fills every unsettled technical choice with a guess. A guess about how two systems talk, where data lives or what happens on failure is cheap to make and expensive to undo. Settle those choices while they are still words.
+Call the Skill tool with "grilling", and run it on how the agreed plan is built, with these changes:
 
-## The rounds
+1. **Scope first.** Before round one, state in a few lines what is built and which parts of the system it touches. Mark each area below **in** (the build makes a choice there) or **out** (it makes none, with a one-line reason). The design tree holds only the areas marked in.
+2. **Ask with the question tool** instead of grilling's text format, recommended option first. Without the tool, use grilling's format. The tool takes up to four questions per call. A frontier of more than four takes several calls in the same round: ask first the four that unblock the most others.
+3. **Frame each question** by the rules under "Each question".
+4. **End with the result file.** In the last round, list the areas marked out so the user can pull one back in. Then write the result file and stop. Do not start building until the user says to.
 
-Map the choices as a **design tree**. The **frontier** is every choice whose prerequisites are settled. Ask the whole frontier in one round, number each question, and give your recommended answer. Then wait. Each answer moves the frontier; recompute it and ask the next round.
+## Triggers
 
-Ask each round with the question tool when one is available, up to four questions per call, recommended option first. If nobody can answer, stop and write the open questions into the file.
+- An option turns on how an outside service, library or protocol behaves (delivery guarantees, retries, rate limits, limits on size or time) → have a sub-agent read its current docs, and cite the page in the question.
+- The codebase already solves this choice somewhere → recommend that pattern, and show the file. Recommend a new one only when the deciding quality says so, and say which.
+- Tempted to ask about an area marked out → mark it in first, with the reason.
+- Nobody can answer → stop, and write the open questions under "Open" in the result file.
+- A question is about terms, the domain model or an ADR → run `domain-modeling` for that branch.
+- A skill named here is not installed → do that step as this file describes it, say which skill was missing, and do not install it without the user's consent. Without `grilling`, run the interview as in the next section.
 
-## Round one: what the build touches
+## Without grilling
 
-Before any technical question, state in a few lines what is being built and which parts of the system it touches. Then go through the areas below and mark each one **in** (the build makes a choice there) or **out** (it makes none, with a one-line reason). Ask only about areas marked in. List the areas marked out at the end, so the user can pull one back in.
+Map the choices as a design tree: each decision branches into the decisions that hang off it. The frontier is every decision whose prerequisites are settled. Each round, ask the whole frontier, numbered, each with your recommended answer, then wait for the answers. A question that depends on another one still open waits for a later round. Have a sub-agent find facts; never ask the user for one. The interview is done when the frontier is empty and the user confirms.
 
 ## The areas
 
 Each area names the choices to look for.
 
-- **Domain:** the data model and the process it follows. Terms and ADRs belong to `domain-modeling`.
+- **Domain:** the data model and the process it follows.
 - **Integration and communication:** who starts the exchange (push or pull); synchronous call or asynchronous message; API, webhook, event, queue, polling, schedule or file; the contract and its versioning; delivery (at most once, at least once), ordering and idempotency.
 - **Persistence:** where data lives, the read and write pattern, schema changes and migration, retention and deletion.
 - **Process control and business rules:** where each rule lives, state and its transitions, what runs in parallel, what runs in batches.
@@ -36,9 +44,7 @@ Each area names the choices to look for.
 
 - Say which choice it settles, and give two to four real options with their trade-offs.
 - Name the quality that decides between them, in ISO 25010 terms: performance (time, resources, capacity), compatibility, reliability (availability, fault tolerance, recoverability), security, maintainability, flexibility (scalability, replaceability), safety, interaction capability.
-- Recommend one. Prefer what the codebase already uses, unless the quality that decides says otherwise; say so when it does.
-- Show what already exists. Finding facts is your job: when a question needs a fact from the code, the config or the running system, send a sub-agent to find it. Questions downstream of an open fact wait; ask the rest now. Never ask the user for a fact you can look up.
-- One that only the user can decide (cost, a vendor, a deadline, a risk they accept) is theirs. Put it to them and wait.
+- Recommend one, and show what already exists: the file, config or service that does this today.
 
 ## The result
 
@@ -47,6 +53,6 @@ When the frontier is empty and the user confirms, write one file of decisions. P
 | Decision | Choice | Why | Quality it serves | Rejected, and why |
 |---|---|---|---|---|
 
-Under the table, list the areas marked out, each with its reason.
+Under the table, list the areas marked out, each with its reason, then any questions under "Open".
 
-Hand the file to `to-tickets`: each ticket names the decisions it implements, so a builder's brief carries the choice and never says "decide". Do not start building until the user says to.
+Hand the file to `to-tickets`: each ticket names the decisions it implements, so a builder's brief carries the choice and never says "decide".

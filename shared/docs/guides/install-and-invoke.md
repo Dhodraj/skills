@@ -7,7 +7,7 @@ ui/
   design-the-ui/
     SKILL.md                     the entry point and the eleven stages
     NOTICE                       what was borrowed, from where, under which licence
-    sources.json                 component sources, with the licence as read
+    sources.json                 sources by reuse tier, with the licence as read
     references/
       design-system.md           the DESIGN.md format, and both routes into it
       gates.md                   the floor, in three tiers: floor, reflex, finish
@@ -15,6 +15,11 @@ ui/
       directions.md              dealing three directions, the numbers, no default aesthetic
       tactile.md                 one direction with its values already decided, loaded on a pick
       craft.md                   depth, motion, optical correctness: the layer under layout
+      motion.md                  one motion library per project, springs, reduced motion
+      markup.md                  semantic HTML; content stays in the DOM whatever the motion
+      slop-signs.md              the signs of a generated-looking interface, and their fixes
+      figma.md                   building a section from a Figma frame
+      3d-scene.md                keeping a 3D scene fast, loaded only for 3D work
       journey-and-states.md      the journey table and the states a fixture hides
       playwright.md              browser mechanics, and what is blocked here
       regression.md              not breaking what worked
@@ -22,18 +27,22 @@ ui/
       find-components.js         searches 500+ registries, prints candidates
       measure.js                 measures a rendered page, in the browser
       check-sources.js           validates sources.json
+      covered.js                 lists visible controls another element covers
+      frames.js                  samples an element's position on every frame
     tests/
-      run.sh                     132 offline tests, 135 with --network
+      run.sh                     the offline tests; add --network for the rest
       fixtures/                  the dashboard before and after, a landing page, the geometry faults
   find-a-component/SKILL.md               find a component instead of writing one
   review-the-ui/
     SKILL.md                     review what exists, in two modes and two scopes
     references/
       changes.md                 reviewing a change rather than a screen
+      copy.md                    the rules for interface copy
       performance.md             motion that is right and still drops frames
   README.md                      the three skills, grouped by how they start
 review/
   tear-it-apart/SKILL.md          a staff engineer's review, round by round
+  check-the-instruction/SKILL.md  test a change to a rule, skill, hook or setting first
   README.md                      the bucket's skills
 orchestration/
   remember-my-words/SKILL.md     keep the user's constraints in a file
@@ -69,6 +78,10 @@ shared/
       console-plain.html           the same console before the craft pass
       console-light.html           the craft pass before the dark band
 ```
+
+Some skills call skills from the mstack and pstack packages. The README's
+Install section lists which. When one is missing, the skill does that step
+itself and says which skill was missing.
 
 `shared/demo/` is not part of the skill. It is what the skill produced, kept so the
 output can be looked at, and so `console-plain.html` can be put beside

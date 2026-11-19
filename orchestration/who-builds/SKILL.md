@@ -1,24 +1,25 @@
 ---
 name: who-builds
-description: "Apply before starting any sub-agent, and when writing a ticket or brief that another agent runs. Picks opus, sonnet or haiku for the task and shapes the brief for that model."
+description: "Use when about to start a sub-agent, or when writing a ticket or brief that another agent runs. Picks opus, sonnet or haiku, shapes the brief for that model, and sends the result to an opus review. Not for cutting a plan into tickets: that is `to-tickets`. A build of several tickets across workers is `colony:split-the-work`."
 ---
 
 # Who builds
 
-Opus plans, judges and reviews. Sonnet builds and verifies from a written brief. Haiku does one mechanical step whose result a command can check. Opus reviews every Sonnet or Haiku result before anyone acts on it.
-
-**Why:** A sub-agent with no model runs the planner's model, so routine work pays the planner's price. A smaller model left with an open choice fills it with a guess that passes the tests and fails review. Settle every choice in the brief, let a check prove the work, and let Opus judge the result.
+Opus plans, judges and reviews. Sonnet builds and verifies from a written brief. Haiku does one mechanical step whose result a command can check. Opus reviews every sonnet or haiku result before anyone acts on it.
 
 ## Triggers
 
-- About to call Agent → pick the first row of the table that fits, and pass `model:`. A call without one runs the agent definition's model, else `CLAUDE_CODE_SUBAGENT_MODEL` if set, else your own model.
-- Tempted to fork for a cheaper task → start a fresh agent instead. A fork always runs your own model.
+- About to call Agent → pick the first row of the table that fits, and pass `model:`.
+- Tempted to fork for a cheaper task → start a fresh agent instead.
 - Writing a ticket or brief → start it with `Model: <model>, because <the row that fits>.`
-- Writing a ticket, or a sonnet or haiku brief → use the `writing-for-agents` skill. End a sonnet or haiku brief with the worker rules below.
+- Writing a ticket, or a brief whose output is text an agent will keep reading (a skill, a rule, a prompt) → read the `writing-for-agents` skill first. A one-off sonnet or haiku brief needs only the checklist under "A sonnet or haiku brief".
+- Writing a sonnet or haiku brief → end it with the worker rules below.
 - The brief still says "decide", "design" or "choose" → the task is opus. Settle the choice yourself, or keep the task.
+- Tempted to hand sonnet findings to merge, rank, or weigh against each other → opus. Sonnet only confirms or rejects each finding, one at a time, against the evidence the brief names.
 - Unsure which row fits → opus.
 - A sonnet or haiku result comes back → do not act on the worker's summary. For a lookup or a command's output, read the output file yourself if you run opus, else start an opus review. For a build or a change, start an opus review sub-agent that reads the diff against the brief.
 - The review finds a gap in the brief → fix the brief as well as the result.
+- A skill named here is not installed → do that step as this file describes it (for `writing-for-agents`, the checklist under "A sonnet or haiku brief"), say which skill was missing, and do not install it without the user's consent.
 
 ## Pick the model
 
@@ -26,9 +27,9 @@ Opus plans, judges and reviews. Sonnet builds and verifies from a written brief.
 |---|---|
 | A plan, a design, a choice between options, or a decision that is the user's | opus |
 | A change to a rule, skill, hook, setting or permission, or anything that loosens or tightens a control | opus |
-| A review, or a merge of review findings | opus |
+| A review, or merging, ranking or weighing review findings | opus |
 | A build whose ticket leaves no design choice, with acceptance tests that decide pass or fail | sonnet |
-| Checking findings against evidence: confirm, reject or merge | sonnet |
+| Checking each finding against the evidence the brief names: confirm or reject it | sonnet |
 | A read-only search or lookup | sonnet |
 | One mechanical step with a command-checked result: run a given command and report its output, apply a given list of renames, copy named files, fill a template from given values | haiku |
 | Nothing above fits | opus |

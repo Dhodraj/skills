@@ -44,7 +44,8 @@ of the change, and two companion skills worth invoking on their own:
 Everything else is a reference document under the entry point, loaded when
 the stage needs it: the design system format, the gates, product thinking,
 directions, craft, the journey and its states, browser mechanics, regression
-checks.
+checks, motion, markup, the signs of a generated look, building from Figma,
+and 3D scene performance.
 
 `references/tactile.md` was added on 2026-11-13. A user's choice loads it,
 rather than a stage: it is one direction with its values already decided,

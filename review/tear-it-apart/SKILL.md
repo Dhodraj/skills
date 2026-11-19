@@ -1,15 +1,17 @@
 ---
 name: tear-it-apart
-description: Review substantial work the way a staff engineer would. Use only when the user asks for a review, an audit or a gap search, asks "would a tech lead approve this", or says yes to an offered review. Builds a coverage matrix, runs a fresh reviewer, fixes, and asks before each further round. Also defines the instruction check for every change that steers Claude.
+description: "Use only when the user asks for a review, an audit or a gap search, asks 'would a tech lead approve this', or says yes to an offered review of a spec, design, catalogue, contract, multi-file change or completeness claim. Builds a coverage matrix, runs a fresh reviewer, judges and fixes, and asks before each further round. A change that steers Claude (CLAUDE.md, a rule, skill, hook, setting or permission) also needs `check-the-instruction`. For a code change where only run-proven findings count, `interrogate` fits."
 ---
 
-Whoever wrote a piece of work shares its blind spots. A staff review finds the gaps before the user does, by making the work's claims checkable and handing them to a reviewer who did not write it.
+Review the work as a staff engineer who did not write it. Make each claim checkable, then hand the claims to a fresh reviewer.
 
-## When to offer it
+## Triggers
 
-Offer a review in one line before handing over a spec, a design or ADR, a catalogue or mapping, an API or schema contract, a change across several files or a public interface, or anything that claims to cover "all" or "every" case. Say what it covers. Run it only when the user says yes or asks for one. Skip it for one-line fixes, answers to questions, and drafts.
-
-The instruction check at the end is separate: it runs on every change that steers Claude.
+- The work claims "all", "every", "complete" or "any" → build the coverage matrix before the reviewer starts.
+- Part of the work changes CLAUDE.md, a rule, a skill, a hook, a setting or a permission → also run `check-the-instruction` on that part.
+- About to brief the reviewer → give it claims and evidence, not your reasons for believing the work is right.
+- A finding comes back → check it at its source before you fix or reject it.
+- Tempted to start another round → ask the user first, showing the open findings.
 
 ## 1. Acceptance criteria
 
@@ -28,7 +30,7 @@ A missing dimension is the worst miss, because every cell it would have made is 
 
 ## 3. The reviewer
 
-Never review your own work in your own context. Start a fresh `general-purpose` agent, read-only. Give it claims and evidence, not your reasons for believing the work is right. Keep any evidence against a claim, such as a caller, guard, test or source that contradicts it. Give it every file path in the work, the acceptance criteria, the matrix, and this brief word for word:
+Start a fresh read-only `general-purpose` agent on opus. Keep any evidence against a claim, such as a caller, guard, test or source that contradicts it. Give it every file path in the work, the acceptance criteria, the matrix, and this brief word for word:
 
 > You are a staff engineer deciding whether to approve this work. Your job is to find what is missing or wrong, not to confirm what is right; a review that finds nothing is only credible if you can show where you looked. Do not edit any file.
 >
@@ -42,31 +44,16 @@ Never review your own work in your own context. Start a fresh `general-purpose` 
 >
 > For each finding give: location, what is wrong or missing, why it matters, severity (blocking, should-fix, minor), and the evidence. End with a verdict: would you approve this, yes or no, and the blocking reasons if no.
 
+When the work is code, add to the brief: "Prove each finding with a command and its output; mark any finding you did not run as unproven."
+
 Bound the brief: name the files and cap the tool calls. One round suits a moderate change; a spec others will build on may need three.
 
 ## 4. Judge, then fix
 
-A finding is evidence, not a ruling. Before acting on a blocking or should-fix finding, check it at the source it names: that the reviewer read the current file, and that its claim survives a wider look. Fix what holds. List the findings you rejected and why, next to the ones you fixed. Never reject a finding about security, data loss or credentials on your own reading alone; if the source does not settle it, keep it open.
+A finding is evidence, not a ruling. Before acting on a blocking or should-fix finding, check it at the source it names: that the reviewer read the current file, and that its claim survives a wider look. Run an unproven code finding's check yourself. Fix what holds. List the findings you rejected and why, next to the ones you fixed. Never reject a finding about security, data loss or credentials on your own reading alone; if the source does not settle it, keep it open.
 
-Before another round, ask the user, showing the open findings. Each new round gets a new reviewer. Stop after three rounds and report whatever is still blocking.
+Each new round gets a new reviewer. Stop after three rounds and report whatever is still blocking.
 
 ## 5. Handover
 
 Hand over what was done against the criteria, the matrix (or its path) with counts per disposition, each round's verdict and findings by severity (fixed and rejected counted apart), the gaps and risks that remain, and what the user should still check. Never call the work complete while the matrix has open gaps.
-
-## The instruction check
-
-Any change that steers Claude (`CLAUDE.md`, a rule, a skill, a hook or a setting) gets this check before it is applied. A rule drafted from one project's misses tends to describe that project; the check makes it generic, needed and cheap to carry.
-
-Give a fresh read-only `general-purpose` reviewer the proposed text, the evidence behind it (each incident, its project, and who found it), and the current file. It returns the wording to apply and one line per test:
-
-1. **Spread.** How many projects the incidents come from, and who found them. Narrow evidence does not block a rule; it tells the reviewer how far to generalise the wording.
-2. **Generic wording.** Name the reasoning that failed, as generally as the evidence allows. No product names, domain terms or project specifics, except an example marked as one.
-3. **Transfer.** Read the rule against three unrelated tasks, such as writing a document, debugging, and researching a tool. It must help or stay silent on each.
-4. **Overlap.** If an existing line covers part of it, tighten that line instead.
-5. **Load.** Lines added and removed, and when the text loads: every request (`CLAUDE.md`, a skill description), matching files (a scoped rule), on use (a skill body), or when a hook fires. Prefer the narrowest. `CLAUDE.md` stays under 200 lines.
-6. **Conflict.** It must not contradict another rule or an accepted decision record.
-7. **Need.** Would deleting it change what Claude does, given what the system prompt, tool descriptions, hooks and other loaded files already say? Name the miss it prevents, or drop it.
-8. **Security.** Does it loosen or tighten a permission, check, secret or confirmation, and what does that reach, including runs nobody watches? A loosening needs the user's explicit approval.
-
-Apply the returned wording only with the user's approval, and record the results next to the change.

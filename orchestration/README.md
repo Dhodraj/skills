@@ -15,7 +15,7 @@ You can also name it.
 - [`grill-the-implementation`](grill-the-implementation/SKILL.md): grill the
   technical implementation details of an agreed plan, such as how systems
   talk, where data lives and what happens on failure, and write the decisions
-  down before the tickets.
+  down before the tickets. It runs `grilling` for the interview itself.
 - [`who-builds`](who-builds/SKILL.md): pick opus, sonnet or haiku for each
   sub-agent, write its brief for that model, and have opus review the result.
 

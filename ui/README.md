@@ -11,9 +11,9 @@ A model-invoked skill starts on its own when the work matches its description.
 You can also name it.
 
 - [`design-the-ui`](design-the-ui/SKILL.md): design or redesign a surface, from the
-  design system up. Eleven stages, two of them hard stops.
+  design system up. Eleven stages, one of them a hard stop.
 - [`find-a-component`](find-a-component/SKILL.md): find a component that already exists, in the
-  project or in 508 registries, instead of writing a new one.
+  project or in the shadcn-spec registries, instead of writing a new one.
 - [`review-the-ui`](review-the-ui/SKILL.md): review an interface that exists, or what
   a change did to one. Measures the live render and walks the journey.
 
@@ -24,21 +24,21 @@ a trigger description that says when it applies.
 
 ## What design-the-ui does
 
-Eleven stages that scale to the size of the change. A copy edit runs three of
-them. A new surface runs all eleven, with the direction approved before any
-code is written.
+Eleven stages that scale to the size of the change. A copy edit runs two of
+them and then looks at the result. A new surface runs all eleven, with the
+direction approved before any code is written.
 
 | | |
 |---|---|
 | 0 to 1 | Read what exists. Find or write `DESIGN.md`, and gate it with `pnpm dlx @google/design.md lint` |
 | 2 to 3 | Name the business outcome and criteria checkable in a browser. Deal three visual directions and stop for the user to pick one |
-| 4 to 5 | Map the journey and every state a single fixture hides. Search 508 component registries before writing a component |
-| 6 to 7 | Mock or build direct. Build against the gates and the craft rules, most important screen alone and first, reviewed cold |
+| 4 to 5 | Map the journey and every state a single fixture hides. Search the project and the component registries before writing a component |
+| 6 to 7 | Mock with the `prototype` skill inside the picked direction, or build direct. Build against the gates and the craft rules, most important screen alone and first, reviewed cold |
 | 8 to 9 | Start the application, walk it as the customer with real clicks and typing, measure, fix in severity order, check for regressions |
 | 10 | Report what was verified, by what means, and what was not |
 
-Two of those stages are hard stops. The agent does not build past the
-direction nobody picked, and does not call a mock finished without being told.
+One of those stages is a hard stop. On a new surface, the agent does not
+build past a direction that nobody picked.
 
 ## The same prompt, with and without the skill
 
@@ -59,11 +59,12 @@ measurement that went the other way are in
 
 ## Component discovery
 
-Search the project first, then 508 shadcn-spec registries, with no account
-and no MCP server:
+Search the project first, then the shadcn-spec registries, with no account
+and no MCP server. After install, the script is in the `design-the-ui` skill
+folder. Run it by its full path, so it works from any folder:
 
 ```bash
-node design-the-ui/scripts/find-components.js \
+node ~/.claude/skills/design-the-ui/scripts/find-components.js \
   timeline stepper activity --limit 10
 ```
 
@@ -82,8 +83,8 @@ licences marked "check at the source" were not read; read one before shipping a 
 The score is a text match, not a judgement. Candidates are then read: their
 real code, states, keyboard handling, dependencies and licence. They are
 ranked by fit, licence, stack, design system, accessibility and install cost,
-in that order. A licence that is not stated anywhere is a blocker, not a
-footnote.
+in that order. A component with no stated licence does not ship until the
+user decides.
 
 ## The design system comes first
 

@@ -18,6 +18,7 @@
     "./orchestration/grill-the-implementation",
     "./orchestration/who-builds",
     "./review/tear-it-apart",
+    "./review/check-the-instruction",
     "./ui/design-the-ui",
     "./ui/find-a-component",
     "./ui/review-the-ui"

@@ -1,10 +1,17 @@
 # Principles
 
-Ask every element on the screen against this catalogue: each label, value,
-icon, button, link, badge, status word, help text and callout. Ask every
-principle that applies to the element; the index below lists the rows for each
-element kind. Skip a principle only when it cannot apply to that element.
-Record skipped rows once per element kind on each screen, not once per element.
+Ask the elements on the screen against this catalogue; the index below lists
+the rows for each element kind.
+
+**The limit.** Ask every row the index lists for three kinds of element: the
+primary action, the densest list or table, and each distinct status word. For every
+other element, ask at most five rows: first the rows whose Ask cell names a
+gates rule, a craft rule or a copy rule (7a, 7b), then the rest of the index
+in its order. Ask one element of each repeated kind, not every instance. Say in
+the report which elements had the full list and which were sampled. A
+whole-product review is the exception: its `product.md` asks every row for
+every element kind.
+
 Where an Ask cell names a gates rule, apply that rule from
 [gates.md](gates.md). Where it names
 [craft.md](craft.md),
@@ -117,7 +124,7 @@ reduce short-term memory load (S8, 1.6).
 
 | ID | Principle | Ask of each element | A fault looks like |
 |---|---|---|---|
-| 5.1 | Aesthetic-usability effect (L) | SKILL.md section 4, checks 2 and 8, and craft.md, "Spacing and alignment". | One truncated label and one mismatched corner radius that make the screen feel broken. |
+| 5.1 | Aesthetic-usability effect (L) | SKILL.md section 3, the geometry confirmation, and section 4, check 2, and craft.md, "Spacing and alignment". | One truncated label and one mismatched corner radius that make the screen feel broken. |
 | 5.2 | Choice overload, Hick's law (L) | Does the element offer few enough choices to decide quickly, with a default, a search or groups where there are many? | A dropdown of 80 unsorted options with no search. |
 | 5.3 | Chunking, Miller's law (L) | Is long content in the element split into small, labelled groups? | A 16-digit reference shown as one unbroken string. |
 | 5.4 | Cognitive bias (L) | Does the element allow for the mental shortcuts people take, so that a default, an anchor or a framing does not lead the customer to a judgment they would not make on reflection? | A paid add-on ticked by default and accepted without being read. |

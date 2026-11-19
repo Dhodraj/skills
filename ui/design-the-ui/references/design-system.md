@@ -130,9 +130,8 @@ Write `Do's and Don'ts` as things an agent could actually violate:
 pnpm dlx @google/design.md lint DESIGN.md
 ```
 
-Published as `@google/design.md`, version 0.4.0 on 2026-07-27, under
-Apache-2.0. It exits 1 on an error. Eleven rules, of which four catch real
-defects before any code is written:
+It exits 1 on an error. Four of its rules catch real defects before any code is
+written:
 
 | Rule | Catches |
 |---|---|
@@ -152,6 +151,35 @@ pnpm dlx @google/design.md export --format dtcg           # W3C design tokens JS
 
 Check in the generated file alongside `DESIGN.md`. A token that exists in one
 and not the other is the drift this file exists to stop.
+
+## Token tiers in code
+
+Where the code holds the tokens, three tiers keep a re-theme to one block.
+Adapted from `textura-agency/ai-design-vault` (Unlicense).
+
+| Tier | Name | Example | In markup |
+|---|---|---|---|
+| Primitive | `--raw-<category>-<name>[-<shade>]` | `--raw-color-neutral-950` | Never |
+| Semantic | `--<role>[-<variant>][-<state>]` | `--action-primary-hover` | Only through its binding |
+| Component | `--<namespace>-<component>[-<property>]` | `--radius-button` | Yes, as `rounded-button` |
+
+- Only a primitive holds a literal. A hex, px or ms value anywhere else is a
+  defect.
+- A semantic token names a purpose, never a look: `--surface-raised`, not
+  `--grey-light`. If renaming the colour would force renaming the token, the
+  name is wrong.
+- Dark mode and themes override the semantic tier only.
+- Each tier references only the tier below it, and none is skipped. In
+  Tailwind v4 the binding is `@theme inline { --color-background:
+  var(--background); }`: binding a literal or a primitive there freezes it at
+  build time, and theming silently stops.
+- Component tokens are rare. A repeated pattern is a component, not a token
+  set.
+- Tailwind v4 has no `--duration-*` namespace, so `duration-fast` compiles to
+  nothing. Keep durations semantic and use them as
+  `duration-[var(--duration-fast)]`. `--ease-*` does exist.
+- A value with no token: add the primitive and the semantic token first, with
+  a comment saying where the value came from.
 
 ## Route A: codify a system that already exists
 

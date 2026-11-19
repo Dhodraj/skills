@@ -1,6 +1,6 @@
 # Not breaking what worked
 
-Loaded at stage K. An experience improvement that removes a control somebody
+Loaded at stage 9. An experience improvement that removes a control somebody
 used every day has cost more than the look it fixed.
 
 ## Before touching the code
@@ -10,7 +10,7 @@ used every day has cost more than the look it fixed.
    directory. Note which of them pass right now: a failure that was already
    there is not yours, and finding that out afterwards wastes an hour.
 2. **List the journeys that already work** on the surface you are about to
-   change, in one line each. This list is what stage K checks against. Where
+   change, in one line each. This list is what stage 9 checks against. Where
    the surface has no tests, walk the journeys once with `review-the-ui` first,
    so there is a recorded before.
 3. **Inventory the controls.** Every interactive element on the screen, with

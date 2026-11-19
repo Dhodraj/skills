@@ -521,8 +521,7 @@
   //
   // Bottom edges are not compared. Text boxes of different type sizes in one
   // row sit 1 to 3px apart at the foot when they are aligned correctly on
-  // their baselines, which produced three findings and no real fault across
-  // this skill's fixtures on 2026-11-12.
+  // their baselines, so comparing them reports faults that are not there.
   const nearTangents = [];
   const parents = new Set(all.map((element) => element.parentElement).filter(Boolean));
   for (const parent of parents) {

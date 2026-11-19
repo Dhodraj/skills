@@ -19,6 +19,7 @@ measured on each.
 | [`find-a-component`](ui/find-a-component/SKILL.md) | [`ui`](ui/README.md) | "Find me a timeline component with expandable logs" | Searches the project, then 508 component registries, and reads the real code and licence before it suggests anything |
 | [`review-the-ui`](ui/review-the-ui/SKILL.md) | [`ui`](ui/README.md) | "Audit this dashboard", "review my branch" | Measures the live render, walks the journey and checks it against your design principles. Changes no files unless asked |
 | [`tear-it-apart`](review/tear-it-apart/SKILL.md) | [`review`](review/README.md) | "Would a tech lead approve this?" | Reviews substantial work the way a staff engineer would: a coverage matrix, a fresh reviewer, fixes, and a question before each further round |
+| [`check-the-instruction`](review/check-the-instruction/SKILL.md) | [`review`](review/README.md) | "Check this rule before I add it" | Has a fresh reviewer test a change to CLAUDE.md, a rule, skill, hook or setting, and returns the wording to apply |
 | `split-the-work` | moved | "Split this across agents" | Now part of the colony plugin: [Dhodraj/colony](https://github.com/Dhodraj/colony), invoked as `colony:split-the-work` |
 | [`remember-my-words`](orchestration/remember-my-words/SKILL.md) | [`orchestration`](orchestration/README.md) | "Work on this while I'm away" | Writes every constraint you state to a file, so it survives long runs and compaction |
 | [`grill-the-implementation`](orchestration/grill-the-implementation/SKILL.md) | [`orchestration`](orchestration/README.md) | "Grill the implementation" | Grills the technical implementation details of an agreed plan, such as API or webhook, storage and failure handling, and writes the decisions down |
@@ -51,6 +52,17 @@ Playwright MCP server if one is set up. Without one, they fall back to
 headless Chrome and mark every journey claim as unverified. Full details are
 in [install and invoke](shared/docs/guides/install-and-invoke.md).
 
+Some skills call skills from other packages:
+
+| Skill | Needs | From |
+|---|---|---|
+| `grill-the-implementation` | `grilling`, `domain-modeling`, `to-tickets` | [mstack](https://github.com/Dhodraj/mstack) |
+| `who-builds`, `check-the-instruction` | `writing-for-agents` | [mstack](https://github.com/Dhodraj/mstack) |
+| `tear-it-apart` | Optional: `interrogate`, for code where only run-proven findings count | [pstack](https://github.com/Dhodraj/pstack) |
+
+If a needed skill is missing, the calling skill does that step itself, says
+which skill was missing, and installs nothing.
+
 ## Try it in five minutes
 
 1. Install `review-the-ui`.
@@ -64,7 +76,7 @@ reports each problem with its evidence and severity. It changes no files.
 
 ```
 ui/                 design-the-ui, find-a-component, review-the-ui
-review/             tear-it-apart
+review/             tear-it-apart, check-the-instruction
 orchestration/      remember-my-words, grill-the-implementation, who-builds
 shared/
   brand/            the banner and the social preview image

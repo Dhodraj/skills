@@ -49,8 +49,8 @@ Rules for the three:
 - **Never deal the same three twice.** Where a previous direction was picked
   in this repository, `DESIGN.md` records it; move away from it deliberately.
 
-Then stop. Put the three to the user with the interactive question tool, and
-do not build past it on an assumption. Where the user says "you pick", pick
+Then stop. Put the three to the user, and do not build past it on an
+assumption. Where the user says "you pick", pick
 one, say which and why in a line, and carry on.
 
 On a yes, write the picked direction into `DESIGN.md` as values and lint it.

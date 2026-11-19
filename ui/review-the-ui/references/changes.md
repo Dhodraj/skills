@@ -148,8 +148,6 @@ git worktree remove /tmp/review-<n>
 Where no render was possible, mark every visual claim unverified rather than
 judging from the diff.
 
-## Attribution
-
 The change-scope model on this page is adapted from `jakubkrehel/skills`
 (MIT). [NOTICE](../../design-the-ui/NOTICE) records what was taken and what was
 changed.

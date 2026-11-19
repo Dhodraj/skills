@@ -1,6 +1,6 @@
 # The journey and its states
 
-Loaded at stage D. A screen is a point on a journey, and most screens that
+Loaded at stage 4. A screen is a point on a journey, and most screens that
 satisfy their ticket fail because the journey around them was never drawn.
 
 ## Map the journey before designing the screen
@@ -85,7 +85,7 @@ state, not the populated screenshot in the design. Check:
 ## Acceptance criteria from the journey
 
 Turn each row of the table into something checkable in a browser. These are
-what stage L reports against.
+what stage 10 reports against.
 
 Good: "At 375px, a dispatcher can see which of 40 runs is late and reach its
 reassign control without horizontal scrolling."

@@ -5,8 +5,7 @@ decided. Loaded only when it is the one the user picks, or when the user asks
 for it by name. Never the default: a direction with values is still a choice
 the user makes, and `directions.md` still deals three.
 
-Adapted from `kosta4a/tactile-design` (MIT), read on 2026-11-13.
-[NOTICE](../NOTICE) records what was taken and what was left.
+Adapted from `kosta4a/tactile-design` (MIT).
 
 ## The three words
 
