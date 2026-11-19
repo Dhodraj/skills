@@ -21,6 +21,7 @@ measured on each.
 | [`staff-review`](review/staff-review/SKILL.md) | [`review`](review/README.md) | "Would a tech lead approve this?" | Reviews substantial work the way a staff engineer would: a coverage matrix, a fresh reviewer, fixes, and a question before each further round |
 | [`colony-orchestrate`](orchestration/colony-orchestrate/SKILL.md) | [`orchestration`](orchestration/README.md) | "Split this across agents" | Splits work across sub-agents, sessions or worktrees, and keeps the pieces from colliding |
 | [`constraint-ledger`](orchestration/constraint-ledger/SKILL.md) | [`orchestration`](orchestration/README.md) | "Work on this while I'm away" | Writes every constraint you state to a file, so it survives long runs and compaction |
+| [`grill-the-implementation`](orchestration/grill-the-implementation/SKILL.md) | [`orchestration`](orchestration/README.md) | "Grill the implementation" | Grills the technical implementation details of an agreed plan, such as API or webhook, storage and failure handling, and writes the decisions down |
 | [`who-builds`](orchestration/who-builds/SKILL.md) | [`orchestration`](orchestration/README.md) | "Split this into tickets for sub-agents" | Picks opus, sonnet or haiku for each sub-agent, writes its brief for that model, and has opus review the result |
 
 Each skill starts on its own when the work matches its description. You can
@@ -64,7 +65,7 @@ reports each problem with its evidence and severity. It changes no files.
 ```
 ui/                 ui-design, ui-find, ui-review
 review/             staff-review
-orchestration/      colony-orchestrate, constraint-ledger, who-builds
+orchestration/      colony-orchestrate, constraint-ledger, grill-the-implementation, who-builds
 shared/
   brand/            the banner and the social preview image
   docs/             decisions/, guides/, research/ and images/

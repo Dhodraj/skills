@@ -16,6 +16,7 @@
   "skills": [
     "./orchestration/colony-orchestrate",
     "./orchestration/constraint-ledger",
+    "./orchestration/grill-the-implementation",
     "./orchestration/who-builds",
     "./review/staff-review",
     "./ui/ui-design",
