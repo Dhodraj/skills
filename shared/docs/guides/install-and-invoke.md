@@ -36,7 +36,6 @@ review/
   tear-it-apart/SKILL.md          a staff engineer's review, round by round
   README.md                      the bucket's skills
 orchestration/
-  split-the-work/SKILL.md    split work across agents without collisions
   remember-my-words/SKILL.md     keep the user's constraints in a file
   grill-the-implementation/SKILL.md  settle the technical implementation details
   who-builds/SKILL.md            pick the model for each sub-agent

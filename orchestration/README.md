@@ -7,9 +7,8 @@ Skills that keep long or parallel agent work on track.
 A model-invoked skill starts on its own when the work matches its description.
 You can also name it.
 
-- [`split-the-work`](split-the-work/SKILL.md): split work across
-  sub-agents, sessions, workers or worktrees, and keep the pieces from
-  colliding.
+- `split-the-work` moved to the colony plugin,
+  [Dhodraj/colony](https://github.com/Dhodraj/colony), as `colony:split-the-work`.
 - [`remember-my-words`](remember-my-words/SKILL.md): keep every constraint the
   user stated in a file that later turns read, through long runs and
   compaction.
