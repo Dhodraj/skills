@@ -1,9 +1,9 @@
 ---
-name: ui-find
+name: find-a-component
 description: "Find a component that already exists instead of writing a new one. Use when the user describes a UI need in words (\"a workflow timeline with running, failed and retrying states and expandable logs\"), asks what component to use, asks for alternatives to one, or asks whether something is already in the project. Searches the project first, then 500+ shadcn-spec registries, reads the candidates' real code and dependencies, ranks them against the project's stack and licence needs, and returns exact names and links."
 ---
 
-# Component find
+# Find a component
 
 A described component is not a component to invent. Most of what gets
 described already exists, with its states, its keyboard handling and its edge
@@ -48,14 +48,14 @@ registries this project has already accepted.
 ## 3. Search the registries
 
 ```bash
-node ../ui-design/scripts/find-components.js \
+node ../design-the-ui/scripts/find-components.js \
   timeline stepper activity --limit 20
 ```
 
 Options that matter:
 
 - `--curated-only` searches only the sources in
-  [sources.json](../ui-design/sources.json), rather than the long tail. It is
+  [sources.json](../design-the-ui/sources.json), rather than the long tail. It is
   not a licence filter. Some entries there carry no licence that was read, so
   read the licence column on every hit before you ship one;
 - `--registries <n>` widens the long tail;
@@ -168,7 +168,7 @@ dependencies: confirm with the user before the first install from a source the
 project has not used before.
 
 Then map it onto the project's tokens, render it with the real data and the
-dense case, and walk it with `ui-review`. A component that was never
+dense case, and walk it with `review-the-ui`. A component that was never
 rendered in this product has not been evaluated.
 
 ## Report

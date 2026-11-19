@@ -4,7 +4,7 @@
 
 ```
 ui/
-  ui-design/
+  design-the-ui/
     SKILL.md                     the entry point and the eleven stages
     NOTICE                       what was borrowed, from where, under which licence
     sources.json                 component sources, with the licence as read
@@ -25,19 +25,19 @@ ui/
     tests/
       run.sh                     132 offline tests, 135 with --network
       fixtures/                  the dashboard before and after, a landing page, the geometry faults
-  ui-find/SKILL.md               find a component instead of writing one
-  ui-review/
+  find-a-component/SKILL.md               find a component instead of writing one
+  review-the-ui/
     SKILL.md                     review what exists, in two modes and two scopes
     references/
       changes.md                 reviewing a change rather than a screen
       performance.md             motion that is right and still drops frames
   README.md                      the three skills, grouped by how they start
 review/
-  staff-review/SKILL.md          a staff engineer's review, round by round
+  tear-it-apart/SKILL.md          a staff engineer's review, round by round
   README.md                      the bucket's skills
 orchestration/
-  colony-orchestrate/SKILL.md    split work across agents without collisions
-  constraint-ledger/SKILL.md     keep the user's constraints in a file
+  split-the-work/SKILL.md    split work across agents without collisions
+  remember-my-words/SKILL.md     keep the user's constraints in a file
   grill-the-implementation/SKILL.md  settle the technical implementation details
   who-builds/SKILL.md            pick the model for each sub-agent
   README.md                      the bucket's skills
@@ -58,7 +58,7 @@ shared/
       maintenance.md               adding a source, refreshing the research
     research/
       source-research.md           every supplied url, read on 2026-10-27, with four later rounds
-      ab-test.md                   one prompt built with and without ui-design
+      ab-test.md                   one prompt built with and without design-the-ui
       testing-report.md            what was run and what came back
     images/                        figures the docs and READMEs show
   demo/
@@ -95,9 +95,9 @@ installed skill. Re-run it after you add, remove, or rename a skill.
 To copy instead of linking:
 
 ```bash
-cp -R "$REPO/ui/ui-design" ~/.claude/skills/
-cp -R "$REPO/ui/ui-find" ~/.claude/skills/
-cp -R "$REPO/ui/ui-review" ~/.claude/skills/
+cp -R "$REPO/ui/design-the-ui" ~/.claude/skills/
+cp -R "$REPO/ui/find-a-component" ~/.claude/skills/
+cp -R "$REPO/ui/review-the-ui" ~/.claude/skills/
 ```
 
 On this machine `~/.claude` is installed from `~/Claude-System`, so the right
@@ -142,9 +142,9 @@ Each is the user's decision, and each is referenced rather than required.
 By name:
 
 ```
-/ui-design
-/ui-find
-/ui-review
+/design-the-ui
+/find-a-component
+/review-the-ui
 ```
 
 Or in plain words, which is what the descriptions are written for:
@@ -152,16 +152,16 @@ Or in plain words, which is what the descriptions are written for:
 | Say | What runs |
 |---|---|
 | "Build the run list screen for dispatchers" | the entry point, at screen depth |
-| "Find me a timeline component with expandable logs" | `ui-find` |
-| "Does the signup flow work on a phone?" | `ui-review`, which walks it |
-| "Audit this dashboard" | `ui-review`, review-only |
-| "Audit this dashboard and fix what you find" | `ui-review`, review and fix |
-| "Make this screen modern" | `ui-design`, in full |
+| "Find me a timeline component with expandable logs" | `find-a-component` |
+| "Does the signup flow work on a phone?" | `review-the-ui`, which walks it |
+| "Audit this dashboard" | `review-the-ui`, review-only |
+| "Audit this dashboard and fix what you find" | `review-the-ui`, review and fix |
+| "Make this screen modern" | `design-the-ui`, in full |
 
 ## Run the scripts directly
 
 ```bash
-S=ui/ui-design
+S=ui/design-the-ui
 
 node $S/scripts/find-components.js timeline stepper --limit 15
 node $S/scripts/find-components.js data table filter --curated-only

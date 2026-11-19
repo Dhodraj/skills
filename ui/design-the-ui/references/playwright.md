@@ -1,7 +1,7 @@
 # Driving the browser
 
-The mechanics behind stage 8 of `ui-design` and the browser work in
-`ui-review`. Everything stated as observed here was run on 2026-10-27 against
+The mechanics behind stage 8 of `design-the-ui` and the browser work in
+`review-the-ui`. Everything stated as observed here was run on 2026-10-27 against
 Playwright MCP 0.0.83, apart from Filming motion below, which was run on
 2026-11-12 against Chrome 157. Check it again rather than trusting this page
 if a tool behaves differently.

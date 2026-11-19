@@ -1,5 +1,5 @@
 ---
-name: staff-review
+name: tear-it-apart
 description: Review substantial work the way a staff engineer would. Use only when the user asks for a review, an audit or a gap search, asks "would a tech lead approve this", or says yes to an offered review. Builds a coverage matrix, runs a fresh reviewer, fixes, and asks before each further round. Also defines the instruction check for every change that steers Claude.
 ---
 

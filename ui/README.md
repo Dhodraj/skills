@@ -10,11 +10,11 @@ it done. Install them as the [repository README](../README.md#install) shows.
 A model-invoked skill starts on its own when the work matches its description.
 You can also name it.
 
-- [`ui-design`](ui-design/SKILL.md): design or redesign a surface, from the
+- [`design-the-ui`](design-the-ui/SKILL.md): design or redesign a surface, from the
   design system up. Eleven stages, two of them hard stops.
-- [`ui-find`](ui-find/SKILL.md): find a component that already exists, in the
+- [`find-a-component`](find-a-component/SKILL.md): find a component that already exists, in the
   project or in 508 registries, instead of writing a new one.
-- [`ui-review`](ui-review/SKILL.md): review an interface that exists, or what
+- [`review-the-ui`](review-the-ui/SKILL.md): review an interface that exists, or what
   a change did to one. Measures the live render and walks the journey.
 
 ## User-invoked
@@ -22,7 +22,7 @@ You can also name it.
 None. No skill here sets `disable-model-invocation`, because each one carries
 a trigger description that says when it applies.
 
-## What ui-design does
+## What design-the-ui does
 
 Eleven stages that scale to the size of the change. A copy edit runs three of
 them. A new surface runs all eleven, with the direction approved before any
@@ -46,7 +46,7 @@ direction nobody picked, and does not call a mock finished without being told.
 > data lineage, table freshness, and incidents.
 
 That prompt, twice. Same model. Once on a stock install, once with
-`ui-design`.
+`design-the-ui`.
 
 ![Without the skill](../shared/docs/images/without-skill.png)
 
@@ -63,7 +63,7 @@ Search the project first, then 508 shadcn-spec registries, with no account
 and no MCP server:
 
 ```bash
-node ui-design/scripts/find-components.js \
+node design-the-ui/scripts/find-components.js \
   timeline stepper activity --limit 10
 ```
 
@@ -88,8 +88,8 @@ footnote.
 ## The design system comes first
 
 A review with no stated principles is taste, and taste loses arguments. So
-`ui-design` writes the principles down before it builds, into one `DESIGN.md`
-at the project root, and `ui-review` measures against that file.
+`design-the-ui` writes the principles down before it builds, into one `DESIGN.md`
+at the project root, and `review-the-ui` measures against that file.
 
 Two layers. Tokens in YAML, which the linter and the Tailwind export read.
 Then ten prose sections, carrying what tokens cannot: the mood, the
@@ -127,12 +127,12 @@ side by side.
   the only part with a linter behind it.
 - Nothing can force the three directions to differ on a real axis. Three
   shades of one idea would pass the stage.
-- The Storybook path in `ui-review` has not been run against a real
+- The Storybook path in `review-the-ui` has not been run against a real
   Storybook.
 - `pnpm dlx @google/design.md lint` has not been run against a file these
   skills generated. The one at `shared/demo/ab/with-skill/DESIGN.md` was written
   without network access.
-- No component has been installed into a project through `ui-find`, and no
+- No component has been installed into a project through `find-a-component`, and no
   application with a dev server, sign-in and live data has been driven.
 - Walking a journey is not customer research. It finds friction. It says
   nothing about what customers do.

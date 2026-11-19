@@ -1,5 +1,5 @@
 ---
-name: colony-orchestrate
+name: split-the-work
 description: "Split work across sub-agents, sessions, workers or worktrees, and keep the pieces from colliding. Use when a task is too large for one context, when the user asks for parallel work or to use the colony or Herdr, when another session must take a piece, and when deciding whether to delegate at all."
 ---
 
@@ -16,7 +16,7 @@ The work moves through **phases**. Most phases follow an **installed skill** by 
 3. **Tickets** with `to-tickets`. See below.
 4. **Impact** with `blast-radius`, for any ticket that removes or changes an output. Find what reads it first with `trail callers <symbol> --depth all`.
 5. **Order**. Count the files two or more tickets may change. Run one ticket at a time, unless they share no file and the user asks for speed. If the user wants parallel work on tickets that share files, show the count and let them choose.
-6. **Execute** with `implement-spec`: one sub-agent per ticket, each with `isolation: "worktree"`, each following `tdd`. Use `swarm` for read-only fan-out or a race between approaches. Use colony workers only when the user names colony or Herdr; see below. A ticket that builds a screen uses `ui-find`, then `ui-design`.
+6. **Execute** with `implement-spec`: one sub-agent per ticket, each with `isolation: "worktree"`, each following `tdd`. Use `swarm` for read-only fan-out or a race between approaches. Use colony workers only when the user names colony or Herdr; see below. A ticket that builds a screen uses `find-a-component`, then `design-the-ui`.
 7. **Check**. See below.
 8. **State** with `handoff`. See below.
 
@@ -30,7 +30,7 @@ They were written for other setups, and they are never edited. Where they disagr
 - They print questions. Ask every question with the question tool.
 - They push branches and open pull requests. Do neither unless the user asks.
 - `implement-spec` aims for maximum concurrency. Follow the Order phase instead.
-- They test widely and end with `code-review`. Test only what the spec asks for, and offer `staff-review` instead.
+- They test widely and end with `code-review`. Test only what the spec asks for, and offer `tear-it-apart` instead.
 - `swarm` uses Cursor parameters. Use the `Agent` tool, with models picked by `rules/delegation.md`.
 - When a skill points to another skill, read that one the same way.
 
@@ -51,7 +51,7 @@ Before a worker starts a ticket, run `git diff --stat <Written at>..HEAD -- <its
 
 ## Check
 
-Compare each worker's changed files with its May change list, and send back anything outside it. Prove behaviour in the real app with the project's `verify-<app>` skill. If the project has none, offer `create-verification-skill`; if the app has outgrown it, use `maintain-verification-skill`. A changed screen also gets `ui-review`. Check any claim that something works before you pass it to the user.
+Compare each worker's changed files with its May change list, and send back anything outside it. Prove behaviour in the real app with the project's `verify-<app>` skill. If the project has none, offer `create-verification-skill`; if the app has outgrown it, use `maintain-verification-skill`. A changed screen also gets `review-the-ui`. Check any claim that something works before you pass it to the user.
 
 ## State
 

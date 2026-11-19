@@ -20,17 +20,17 @@ Use it word for word, once per image:
 "Consistent" or "deliberate" is never a reason to drop a candidate. Drop one
 when it is not on the image (zoom or read the DOM to check), or when the
 project's DESIGN.md allows the choice in writing. Cite that line. A Floor rule
-in gates.md cannot be allowed away. In ui-review, section 8's other exclusions
+in gates.md cannot be allowed away. In review-the-ui, section 8's other exclusions
 still apply.
 
-## In ui-design: fix until clean
+## In design-the-ui: fix until clean
 
 1. Fix every candidate that holds.
 2. Re-shoot every state and width the fix can reach.
 3. Run the prompt again on each new image.
 4. Stop when a pass returns no candidate that holds, or after 3 passes.
 
-## In ui-review: feed the findings
+## In review-the-ui: feed the findings
 
 Each candidate that holds becomes a finding, with the screenshot as its
 evidence.

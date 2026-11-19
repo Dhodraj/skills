@@ -9,8 +9,8 @@ Where an Ask cell names a gates rule, apply that rule from
 [gates.md](gates.md). Where it names
 [craft.md](craft.md),
 [journey-and-states.md](journey-and-states.md) or
-[SKILL.md](../../ui-review/SKILL.md), apply the part it names. A "no" is a candidate. It
-becomes a finding once it names who it hurts and how (SKILL.md section 8). Every "SKILL.md" below means ui-review's.
+[SKILL.md](../../review-the-ui/SKILL.md), apply the part it names. A "no" is a candidate. It
+becomes a finding once it names who it hurts and how (SKILL.md section 8). Every "SKILL.md" below means review-the-ui's.
 SKILL.md section 7 sets its severity; the principle's source sets nothing.
 
 The code in brackets after each principle names its sources. Where two sources
@@ -260,7 +260,7 @@ review, after the element pass.
 
 | Principle | How to check |
 |---|---|
-| Consistency across screens (N4, S1, W 3.2.4 Consistent Identification, NC consistent command words) | Build the four tables in [product.md](../../ui-review/references/product.md) section 3 and work from them. |
+| Consistency across screens (N4, S1, W 3.2.4 Consistent Identification, NC consistent command words) | Build the four tables in [product.md](../../review-the-ui/references/product.md) section 3 and work from them. |
 | Consistent navigation (W 3.2.3) | Compare the navigation on each screen. The repeated links must be in the same relative order everywhere. |
 | Consistent help (W 3.2.6) | Note where each screen puts help and contact. It must be in the same relative place on every screen that has it. |
 | Multiple ways (W 2.4.5) | For each page that is not a step in a process, find at least two ways to reach it, such as navigation, search or a site map. |

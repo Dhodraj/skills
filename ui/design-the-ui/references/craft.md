@@ -184,7 +184,7 @@ render by eye.
   middle of the viewport, so `transform-origin: center` is correct there.
 - When the motion is right and the frames are not, the symptom table, the
   frame budget and the React trap are in
-  [ui-review/references/performance.md](../../ui-review/references/performance.md).
+  [review-the-ui/references/performance.md](../../review-the-ui/references/performance.md).
 - Press gives `scale(.96)` on a button-sized target. Below `0.95` reads as a
   flinch at that size, but the figure is a distance, not a ratio: 4% of a 22px
   row icon is under a pixel and reads as nothing. So the squeeze follows the

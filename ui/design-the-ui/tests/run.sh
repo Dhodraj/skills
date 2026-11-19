@@ -172,8 +172,8 @@ has "the target floor follows the pointer"    "$measure" "thumbExpected ? 44 : 2
 has "and a visually hidden control is exempt" "$measure" "visuallyHidden"
 hasnt "no blanket 44px floor is left"         "$measure" "44x44 (Apple HIG comfortable target)"
 # The curated flag is not a licence filter, and both files now say so.
-findskill="$(cat "$skill/../ui-find/SKILL.md")"
-has   "ui-find says the curated flag is not a licence filter" "$findskill" "not a licence filter"
+findskill="$(cat "$skill/../find-a-component/SKILL.md")"
+has   "find-a-component says the curated flag is not a licence filter" "$findskill" "not a licence filter"
 hasnt "and no longer calls those sources licensed"            "$findskill" "read-and-licensed"
 has "check-sources counts the licences nobody read" "$(cat "$check")" "with no licence read"
 real="$(node "$check" 2>&1)"
@@ -229,13 +229,13 @@ has "it writes targets in px, not points"      "$tactile" "44pt\` in CSS is 58.7
 hasnt "its never-ship list stops repeating gates 48" "$tactile" "Title Case labels"
 has "directions.md counts the overrides"       "$(cat "$skill/references/directions.md")" "nine rows of the"
 has "and names the Reflex rules"               "$(cat "$skill/references/directions.md")" "25, 29, 35, 38 and 39"
-has "ui-review keeps the floor out of a waiver" "$(cat "$skill/../ui-review/SKILL.md")" "waive a Floor rule in"
+has "review-the-ui keeps the floor out of a waiver" "$(cat "$skill/../review-the-ui/SKILL.md")" "waive a Floor rule in"
 
 has "craft.md excepts the dark lift ring"      "$craft" "lift ring above is the exception"
 has "its travel ladder matches its keyframe"   "$craft" "10 to 12px for a page"
 
 design_skill="$(cat "$skill/SKILL.md")"
-review_skill="$(cat "$skill/../ui-review/SKILL.md")"
+review_skill="$(cat "$skill/../review-the-ui/SKILL.md")"
 has "stage 9 states the loop's exit"           "$design_skill" "ends on the list, not on the screenshot"
 has "a screenshot is not the Floor walk"       "$design_skill" "is not that walk"
 has "a surviving Floor breach is escalated"    "$design_skill" "stop and ask rather than hand it back"
@@ -248,11 +248,11 @@ has "a wide edit is re-looked everywhere"      "$regression" "everywhere that us
 
 # ------ what was taken from emilkowalski/skills on 2026-11-17, and what was not
 journey="$(cat "$skill/references/journey-and-states.md")"
-perf_path="$skill/../ui-review/references/performance.md"
+perf_path="$skill/../review-the-ui/references/performance.md"
 if [[ -f "$perf_path" ]]; then
   pass=$((pass+1))
 else
-  fail=$((fail+1)); printf 'FAIL ui-review/references/performance.md is missing
+  fail=$((fail+1)); printf 'FAIL review-the-ui/references/performance.md is missing
 '
 fi
 perf="$(cat "$perf_path" 2>/dev/null)"

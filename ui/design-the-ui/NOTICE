@@ -63,13 +63,13 @@ Taken as ideas, reworded and reduced:
   per-category reference files are not reproduced.
 
 - jakubkrehel/skills, MIT. https://github.com/jakubkrehel/skills
-  Taken into ui-review, section 5. A cue on each scenario axis, and the rule
+  Taken into review-the-ui, section 5. A cue on each scenario axis, and the rule
   that a dropped axis is named. The content-shape axis: emoji, right-to-left,
   mixed direction, tall scripts. The container tested as a fixed box rather
   than a viewport resize, the flex-sibling squeeze included. Ten times the
   realistic item count. The warning that re-declaring dark tokens under a
   class observes a different component.
-  Taken into ui-review/references/changes.md. Resolve a base, and never fall
+  Taken into review-the-ui/references/changes.md. Resolve a base, and never fall
   back to HEAD~1..HEAD. Expand a changed file to the surfaces it renders in.
   Read the removed side of each hunk against a signal table. Clear a signal
   that an equivalent replacement explains. Status every finding by cause. Keep
@@ -87,7 +87,7 @@ Taken as ideas, reworded and reduced:
   duration bands per interaction, never animating from scale(0), transitions
   for interruptible state against keyframes for sequences, and anchoring a
   popover's scale to its trigger rather than its centre.
-  Taken into ui-review/references/performance.md: the symptom table, the
+  Taken into review-the-ui/references/performance.md: the symptom table, the
   16.7ms and 8ms frame budgets, writing to a ref rather than through React
   state, the inherited CSS variable trap, the 20px cap on an animated blur,
   and the discipline on will-change.
@@ -246,7 +246,7 @@ Read and deliberately not adapted:
   The Commons Clause permits use inside an application, website or product
   but forbids selling, sublicensing or redistributing the components
   themselves, alone, bundled or ported. Nothing from either is reproduced
-  here. GitHub reports both as NOASSERTION, so ui-find names them as the
+  here. GitHub reports both as NOASSERTION, so find-a-component names them as the
   worked example of why a licence must be read in the repository's own
   LICENSE file rather than taken from the sidebar label.
 

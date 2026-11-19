@@ -32,11 +32,11 @@ Write the grid first: one row per screen and state, each cell "to render",
 Render the cell at 1440 and 375 and run step 3 of the main skill. Then judge
 it in three layers, in this order:
 
-1. **The critique.** Run [critique.md](../../ui-design/references/critique.md)
+1. **The critique.** Run [critique.md](../../design-the-ui/references/critique.md)
    on each screenshot, one at a time.
 2. **The principle rows.** List every element a person can see or press. An
    element left off the list is an element nobody judged. Ask each element
-   the rows the [principles.md](../../ui-design/references/principles.md)
+   the rows the [principles.md](../../design-the-ui/references/principles.md)
    index lists for its kind. Record the element kinds found and the row IDs
    skipped for each kind. A principle never asked anywhere goes under "Not
    checked" with the reason. Then ask of the arrangement:
@@ -55,7 +55,7 @@ it in three layers, in this order:
 
 After every cell, build these tables from the element lists, and work through
 the "Principles a single element cannot show" section of
-[principles.md](../../ui-design/references/principles.md):
+[principles.md](../../design-the-ui/references/principles.md):
 
 | Table | One row per | A fault looks like |
 |---|---|---|

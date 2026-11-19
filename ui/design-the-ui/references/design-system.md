@@ -192,7 +192,7 @@ The project has tokens, a theme or a brand. The file records what is there.
 ## Route B: a new system
 
 No brand, no tokens, nothing to codify. The file is a proposal until the user
-picks a direction at stage 3 of `ui-design`.
+picks a direction at stage 3 of `design-the-ui`.
 
 Start from these defaults and change them for a reason, not for variety:
 
@@ -215,7 +215,7 @@ nobody wrote down is drift the next review will file as a finding.
 
 ## The one thing this file is for
 
-Every screen built after it is measured against it. `ui-review` reads it
+Every screen built after it is measured against it. `review-the-ui` reads it
 first and treats drift from it as a finding. That only works if the file
 describes the product that exists. When a build has to depart from it, change
 the file in the same piece of work. **The change is not done while

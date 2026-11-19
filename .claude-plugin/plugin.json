@@ -14,13 +14,13 @@
     "agent-skills"
   ],
   "skills": [
-    "./orchestration/colony-orchestrate",
-    "./orchestration/constraint-ledger",
+    "./orchestration/split-the-work",
+    "./orchestration/remember-my-words",
     "./orchestration/grill-the-implementation",
     "./orchestration/who-builds",
-    "./review/staff-review",
-    "./ui/ui-design",
-    "./ui/ui-find",
-    "./ui/ui-review"
+    "./review/tear-it-apart",
+    "./ui/design-the-ui",
+    "./ui/find-a-component",
+    "./ui/review-the-ui"
   ]
 }

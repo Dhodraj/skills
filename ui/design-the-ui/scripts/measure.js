@@ -22,7 +22,7 @@
 // near-tangent and a wrapped unit. Tight inset and uneven padding have to
 // recognise a surface first, which they do from the computed background,
 // border and shadow: a surface drawn with a pseudo-element is missed, and
-// uneven padding also misses one drawn with a background image. ui-review's
+// uneven padding also misses one drawn with a background image. review-the-ui's
 // own table states what each fault means and what it cannot see.
 //
 // It reports measurements, not findings. A number here is a candidate: confirm

@@ -20,11 +20,11 @@ failure stays open as a discussion, not a change.
 ## Before you open a pull request
 
 1. Read the `SKILL.md` you change from top to bottom.
-2. If you change `ui/ui-design`, run its tests:
+2. If you change `ui/design-the-ui`, run its tests:
 
    ```bash
-   bash ui/ui-design/tests/run.sh
-   bash ui/ui-design/tests/run.sh --network
+   bash ui/design-the-ui/tests/run.sh
+   bash ui/design-the-ui/tests/run.sh --network
    ```
 
 3. When you add, rename or remove a skill, update three lists: its bucket

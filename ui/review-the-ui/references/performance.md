@@ -2,7 +2,7 @@
 
 Read at step 5, where the journey is walked and the motion is filmed. Which
 properties to animate is in
-[craft.md](../../ui-design/references/craft.md), Motion. This file is for
+[craft.md](../../design-the-ui/references/craft.md), Motion. This file is for
 motion that is already correct and still stutters.
 
 Name the cause before proposing a fix. "Added `will-change`, looks smoother"

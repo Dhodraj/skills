@@ -6,7 +6,7 @@ labels: bug
 
 ## Skill
 
-<!-- For example: ui-review -->
+<!-- For example: review-the-ui -->
 
 ## What you asked
 

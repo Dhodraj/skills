@@ -40,15 +40,15 @@ Rules the validator enforces, and why each exists:
 Then:
 
 ```bash
-node ui/ui-design/scripts/check-sources.js
-node ui/ui-design/scripts/check-sources.js --links
-./ui/ui-design/tests/run.sh --network
+node ui/design-the-ui/scripts/check-sources.js
+node ui/design-the-ui/scripts/check-sources.js --links
+./ui/design-the-ui/tests/run.sh --network
 ```
 
 Check the new source is actually reachable before trusting it:
 
 ```bash
-node ui/ui-design/scripts/find-components.js \
+node ui/design-the-ui/scripts/find-components.js \
   button --curated-only | grep '@example'
 ```
 
@@ -133,7 +133,7 @@ If `browser_evaluate` ever gains a way to load a function from a file,
 ## Extending measure.js
 
 It returns measurements, never verdicts. Keep it that way: a check that
-decides whether something is a problem belongs in `ui-review`, where a
+decides whether something is a problem belongs in `review-the-ui`, where a
 human-readable rule can say who it hurts.
 
 For the same reason, never write a stop condition against it. It returns no
@@ -213,7 +213,7 @@ this one:
   distrust.
 - **The waiver is only legitimate once `DESIGN.md` records it.** That is
   already how `gates.md` works; a direction does not get a second mechanism.
-  `ui-review` reads `DESIGN.md` first and skips what it allows, so the waiver
+  `review-the-ui` reads `DESIGN.md` first and skips what it allows, so the waiver
   list is also what a review stops looking at. On 2026-11-13 that bullet was
   tightened to exclude the Floor tier, which is what makes the mechanism safe
   to write a whole list into.
@@ -227,7 +227,7 @@ this one:
 The eleven stages are the skill. Anything that grows past a short section
 belongs in `references/` and is loaded when its stage runs. A companion skill
 is justified only when someone would invoke it on its own, and when it would
-still be worth invoking alone once the main skill is running. `ui-find` and
-`ui-review` pass both tests. `journey-walk` passed the first and failed the
-second, so on 2026-11-01 it became stage 4 of `ui-review`. Product thinking
+still be worth invoking alone once the main skill is running. `find-a-component` and
+`review-the-ui` pass both tests. `journey-walk` passed the first and failed the
+second, so on 2026-11-01 it became stage 4 of `review-the-ui`. Product thinking
 failed the first and stayed a reference document.

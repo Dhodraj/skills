@@ -1,9 +1,9 @@
 ---
-name: ui-design
-description: "Design or redesign a product surface, from the design system up. Use when building, redesigning or modernising a SaaS screen, dashboard, data platform, landing page, onboarding flow or any customer-facing interface, and when the user says a product looks dated, generic or AI-generated. Writes a DESIGN.md design system when the project has none, proposes visual directions and gets one picked, builds a mock for approval when the user wants one, then builds the real thing and verifies it in a browser. Companions: ui-find, ui-review."
+name: design-the-ui
+description: "Design or redesign a product surface, from the design system up. Use when building, redesigning or modernising a SaaS screen, dashboard, data platform, landing page, onboarding flow or any customer-facing interface, and when the user says a product looks dated, generic or AI-generated. Writes a DESIGN.md design system when the project has none, proposes visual directions and gets one picked, builds a mock for approval when the user wants one, then builds the real thing and verifies it in a browser. Companions: find-a-component, review-the-ui."
 ---
 
-# UI design
+# Design the UI
 
 An agent asked for a screen writes the screen. This skill closes the gap on either
 side of that. First, deciding what the surface is for and what it should look
@@ -20,8 +20,8 @@ first file. Drive the running product before saying it works.**
 | One component, one state | 1, 4, 6, 7, 9 |
 | A screen, a form, a flow | 0 to 10, briefly |
 | A new surface, or "make this modern" | 0 to 10 in full, with stage 3 approved before stage 7 |
-| "Audit this" | Use `ui-review`. Do not start editing |
-| "Find me a component for…" | Use `ui-find` |
+| "Audit this" | Use `review-the-ui`. Do not start editing |
+| "Find me a component for…" | Use `find-a-component` |
 
 Say which depth you picked, in one line, before starting. A stage is skipped
 only when the change cannot reach what that stage protects.
@@ -118,10 +118,10 @@ finished screen fails on contact with a customer.
 
 ## 5. Find components before writing them
 
-Run `ui-find`, or its script directly:
+Run `find-a-component`, or its script directly:
 
 ```bash
-node ui/ui-design/scripts/find-components.js <terms> --limit 15
+node ui/design-the-ui/scripts/find-components.js <terms> --limit 15
 ```
 
 Search the project's own components first. A second implementation of a
@@ -181,7 +181,7 @@ Look at the screenshots. Reading a file list is not looking.
 
 ## 9. Review and fix
 
-Run `ui-review` against what you built. It measures the live render, walks the
+Run `review-the-ui` against what you built. It measures the live render, walks the
 journey, checks the result against `DESIGN.md`, and sorts findings by harm.
 
 Fix in severity order. A change you cannot justify against the outcome in
@@ -194,7 +194,7 @@ screenshot that looks right is not that walk. Where a Floor breach survives
 three rounds of fixing, stop and ask rather than hand it back as a finding
 left with a reason.
 
-`ui-review` runs [references/critique.md](references/critique.md) first. In
+`review-the-ui` runs [references/critique.md](references/critique.md) first. In
 this loop, run the critique again on every state and width a fix reaches, in
 a subagent with no memory of the build. Stop when a pass returns no candidate
 that holds, or after three passes. After the third pass, a candidate that

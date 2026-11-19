@@ -8,19 +8,19 @@ before it calls a screen done. Another writes down every limit you set before
 a long run. The skills are grouped in buckets by the kind of work they cover.
 
 The [ui README](ui/README.md#the-same-prompt-with-and-without-the-skill) shows
-one prompt built twice, with and without `ui-design`, and what a browser
+one prompt built twice, with and without `design-the-ui`, and what a browser
 measured on each.
 
 ## The skills
 
 | Skill | Bucket | Say | What it does |
 |---|---|---|---|
-| [`ui-design`](ui/ui-design/SKILL.md) | [`ui`](ui/README.md) | "Make the pipeline health screen modern" | Writes the design system down, offers three directions for you to pick from, builds, then walks the running app and fixes what it measures |
-| [`ui-find`](ui/ui-find/SKILL.md) | [`ui`](ui/README.md) | "Find me a timeline component with expandable logs" | Searches the project, then 508 component registries, and reads the real code and licence before it suggests anything |
-| [`ui-review`](ui/ui-review/SKILL.md) | [`ui`](ui/README.md) | "Audit this dashboard", "review my branch" | Measures the live render, walks the journey and checks it against your design principles. Changes no files unless asked |
-| [`staff-review`](review/staff-review/SKILL.md) | [`review`](review/README.md) | "Would a tech lead approve this?" | Reviews substantial work the way a staff engineer would: a coverage matrix, a fresh reviewer, fixes, and a question before each further round |
-| [`colony-orchestrate`](orchestration/colony-orchestrate/SKILL.md) | [`orchestration`](orchestration/README.md) | "Split this across agents" | Splits work across sub-agents, sessions or worktrees, and keeps the pieces from colliding |
-| [`constraint-ledger`](orchestration/constraint-ledger/SKILL.md) | [`orchestration`](orchestration/README.md) | "Work on this while I'm away" | Writes every constraint you state to a file, so it survives long runs and compaction |
+| [`design-the-ui`](ui/design-the-ui/SKILL.md) | [`ui`](ui/README.md) | "Make the pipeline health screen modern" | Writes the design system down, offers three directions for you to pick from, builds, then walks the running app and fixes what it measures |
+| [`find-a-component`](ui/find-a-component/SKILL.md) | [`ui`](ui/README.md) | "Find me a timeline component with expandable logs" | Searches the project, then 508 component registries, and reads the real code and licence before it suggests anything |
+| [`review-the-ui`](ui/review-the-ui/SKILL.md) | [`ui`](ui/README.md) | "Audit this dashboard", "review my branch" | Measures the live render, walks the journey and checks it against your design principles. Changes no files unless asked |
+| [`tear-it-apart`](review/tear-it-apart/SKILL.md) | [`review`](review/README.md) | "Would a tech lead approve this?" | Reviews substantial work the way a staff engineer would: a coverage matrix, a fresh reviewer, fixes, and a question before each further round |
+| [`split-the-work`](orchestration/split-the-work/SKILL.md) | [`orchestration`](orchestration/README.md) | "Split this across agents" | Splits work across sub-agents, sessions or worktrees, and keeps the pieces from colliding |
+| [`remember-my-words`](orchestration/remember-my-words/SKILL.md) | [`orchestration`](orchestration/README.md) | "Work on this while I'm away" | Writes every constraint you state to a file, so it survives long runs and compaction |
 | [`grill-the-implementation`](orchestration/grill-the-implementation/SKILL.md) | [`orchestration`](orchestration/README.md) | "Grill the implementation" | Grills the technical implementation details of an agreed plan, such as API or webhook, storage and failure handling, and writes the decisions down |
 | [`who-builds`](orchestration/who-builds/SKILL.md) | [`orchestration`](orchestration/README.md) | "Split this into tickets for sub-agents" | Picks opus, sonnet or haiku for each sub-agent, writes its brief for that model, and has opus review the result |
 
@@ -32,28 +32,28 @@ also name it.
 Install one skill with [APM](https://github.com/microsoft/apm):
 
 ```bash
-apm install -g Dhodraj/skills/ui/ui-design
+apm install -g Dhodraj/skills/ui/design-the-ui
 ```
 
 Change the path to install another skill, for example
-`Dhodraj/skills/review/staff-review`. Add `#<commit>` to pin a version. To
+`Dhodraj/skills/review/tear-it-apart`. Add `#<commit>` to pin a version. To
 update, run `apm update`.
 
 Without APM, copy a skill folder into `~/.claude/skills/`:
 
 ```bash
 git clone https://github.com/Dhodraj/skills.git
-cp -R skills/ui/ui-design ~/.claude/skills/
+cp -R skills/ui/design-the-ui ~/.claude/skills/
 ```
 
-The UI skills need Node 20 or newer. `ui-design` and `ui-review` use a
+The UI skills need Node 20 or newer. `design-the-ui` and `review-the-ui` use a
 Playwright MCP server if one is set up. Without one, they fall back to
 headless Chrome and mark every journey claim as unverified. Full details are
 in [install and invoke](shared/docs/guides/install-and-invoke.md).
 
 ## Try it in five minutes
 
-1. Install `ui-review`.
+1. Install `review-the-ui`.
 2. Start your web app, then open Claude Code in its project.
 3. Ask: "Review the main screen of this app."
 
@@ -63,9 +63,9 @@ reports each problem with its evidence and severity. It changes no files.
 ## How the repository is laid out
 
 ```
-ui/                 ui-design, ui-find, ui-review
-review/             staff-review
-orchestration/      colony-orchestrate, constraint-ledger, grill-the-implementation, who-builds
+ui/                 design-the-ui, find-a-component, review-the-ui
+review/             tear-it-apart
+orchestration/      split-the-work, remember-my-words, grill-the-implementation, who-builds
 shared/
   brand/            the banner and the social preview image
   docs/             decisions/, guides/, research/ and images/
@@ -93,5 +93,5 @@ follow [SECURITY](.github/SECURITY.md) and do not open a public issue.
 
 ## Licence
 
-MIT, see [LICENSE](LICENSE). [NOTICE](ui/ui-design/NOTICE) lists every source
+MIT, see [LICENSE](LICENSE). [NOTICE](ui/design-the-ui/NOTICE) lists every source
 the UI skills adapted, with its licence.

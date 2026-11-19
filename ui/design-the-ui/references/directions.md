@@ -199,7 +199,7 @@ and mixing them is why design feedback gets ignored:
 Then recommend a specific change and say which customer problem it removes.
 "Improve the hierarchy" is not a recommendation. "Make the late-run count the
 one dominant figure, drop the other eleven tiles to a single row of labels"
-is. `ui-review` holds the severity model and the report format.
+is. `review-the-ui` holds the severity model and the report format.
 
 ## Preserve what is sound
 

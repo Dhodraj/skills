@@ -1,5 +1,5 @@
 ---
-name: constraint-ledger
+name: remember-my-words
 description: "Keep every constraint the user stated where a later turn will still find it. Use at the start of a long or autonomous run, when the user says to work on without them, after a compaction or /clear, and before any step that is hard to undo. Also use when the user says \"I said\" or \"as I said\" about something already stated."
 ---
 

@@ -1,9 +1,9 @@
 ---
-name: ui-review
+name: review-the-ui
 description: "Review a user interface that already exists and report what harms its customers, with evidence and severity. Use when asked to audit, review, critique or check a page, screen, dashboard, component or flow, or to audit a whole product across every screen and state, to test a journey such as signup or checkout, to check a screen on a phone, or before claiming a change works. Also use to review what a change did to an interface: a diff, a branch, a pull request or uncommitted work. Also use when the user says a product looks off, looks AI-generated, feels dated or asks whether it is ready to ship. Works against a running application or a Storybook, measures the live render, walks the journey as a customer, checks the result against the project's design principles, and sorts findings by harm. Two modes: review only, which changes no files, and review and fix."
 ---
 
-# UI review
+# Review the UI
 
 Two modes, and the mode is settled before anything else.
 
@@ -52,12 +52,12 @@ what this interface is being measured against, in this order:
    what it reports as findings about the system itself.
 2. **The project's own system in code**: a token file, a theme, a Tailwind
    config, a component library. Values off that system are drift.
-3. **[gates.md](../ui-design/references/gates.md)**, the floor that holds for
+3. **[gates.md](../design-the-ui/references/gates.md)**, the floor that holds for
    any product.
-4. **[craft.md](../ui-design/references/craft.md)**, the layer above the floor.
+4. **[craft.md](../design-the-ui/references/craft.md)**, the layer above the floor.
 
 Where the project has none of the first two, say so in the report and review
-against 3 and 4 alone. Offer to write a `DESIGN.md` with `ui-design`; do not
+against 3 and 4 alone. Offer to write a `DESIGN.md` with `design-the-ui`; do not
 write one inside a review.
 
 ## 2. Pick the target: running app, Storybook, or both
@@ -82,9 +82,9 @@ surrounding chrome to measure around.
 ## 3. Measure the render
 
 Measure at 1440, 1024 and 375.
-[playwright.md](../ui-design/references/playwright.md) has the mechanics.
+[playwright.md](../design-the-ui/references/playwright.md) has the mechanics.
 
-Pass the whole contents of [measure.js](../ui-design/scripts/measure.js) as the
+Pass the whole contents of [measure.js](../design-the-ui/scripts/measure.js) as the
 `function` argument of `browser_evaluate`, once per width. It returns overflow,
 text contrast, target sizes, controls with no accessible name, heading order,
 unsized media and text below 12px. It also returns a census of the type sizes,
@@ -98,7 +98,7 @@ Cite the floor beside the number, because a 36px control is correct on a
 pointer-first console and a failure on a phone.
 
 It reports five geometry faults by name, each one a rule in
-[craft.md](../ui-design/references/craft.md), Spacing and alignment:
+[craft.md](../design-the-ui/references/craft.md), Spacing and alignment:
 
 | Fault | What the number means |
 |---|---|
@@ -145,7 +145,7 @@ finding.
 
 The script cannot see hierarchy, rhythm, crowding, visual weight or whether
 the page is any good. First run
-[critique.md](../ui-design/references/critique.md) on each screenshot, one at
+[critique.md](../design-the-ui/references/critique.md) on each screenshot, one at
 a time. Then open every screenshot at every width and walk these nine. Each
 one is a failure that renders wrong while the source reads fine.
 
@@ -179,7 +179,7 @@ one is a failure that renders wrong while the source reads fine.
    avatar instead of at the name, a title spread from its own subtitle.
 
 9. **Meaning.** For each element a person can see or press, ask the rows the
-   [principles.md](../ui-design/references/principles.md) index lists for its
+   [principles.md](../design-the-ui/references/principles.md) index lists for its
    kind: look rows here, act rows in the step 5 walk.
 
 Say which of the nine each finding is, or `critique`. Where you could not
@@ -266,7 +266,7 @@ What each of the others catches, and where it is easy to get wrong:
   keyboard would never show.
 - **Anything that moves is filmed, not inferred.** Slow it down and capture
   every appear, disappear, press and loop seam, then reduced motion.
-  [playwright.md](../ui-design/references/playwright.md), Filming motion, has
+  [playwright.md](../design-the-ui/references/playwright.md), Filming motion, has
   the mechanics. A hidden element that still takes clicks, an entrance that
   fires on every keystroke and an element left invisible under reduced motion
   all read as correct in the source and in a still.
@@ -417,7 +417,7 @@ instead of fixing the blocker.
 3. Fix one cause at a time. Re-measure and re-render after each.
 4. Walk the journey again. A fix nobody re-walked is a claim, not a result.
 5. Run the project's checks for the area changed, then the broader suite once.
-   [regression.md](../ui-design/references/regression.md) has the rules,
+   [regression.md](../design-the-ui/references/regression.md) has the rules,
    including how to tell your failures from the ones already failing.
 6. Report each finding as fixed, left with a reason, or not verified.
 

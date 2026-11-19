@@ -41,7 +41,7 @@ State the facts, offer these, and wait:
 - the open pull request on this branch, first where there is one;
 - `HEAD~1..HEAD`, named by short SHA and subject so the choice is visible;
 - a target the user names;
-- a whole-surface review, which is the ordinary `ui-review` and does not use
+- a whole-surface review, which is the ordinary `review-the-ui` and does not use
   this file.
 
 Never report a review of nothing as passing.
@@ -151,5 +151,5 @@ judging from the diff.
 ## Attribution
 
 The change-scope model on this page is adapted from `jakubkrehel/skills`
-(MIT). [NOTICE](../../ui-design/NOTICE) records what was taken and what was
+(MIT). [NOTICE](../../design-the-ui/NOTICE) records what was taken and what was
 changed.
