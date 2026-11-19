@@ -45,17 +45,47 @@ build past a direction that nobody picked.
 > Build a data platform observability console. It should show pipeline runs,
 > data lineage, table freshness, and incidents.
 
-That prompt, twice. Same model. Once on a stock install, once with
-`design-the-ui`.
+Same model, same prompt. Once on a stock install, once with `design-the-ui`.
+This is the first thing each screen tells an on-call engineer.
 
-![Without the skill](../shared/docs/images/without-skill.png)
+**Without the skill:** four equal tiles. No tile says what to do now.
 
-![With the skill](../shared/docs/images/with-skill.png)
+![Without the skill: four equal tiles for success rate, runs, tables breaching SLA and open incidents](../shared/docs/images/first-glance-without.png)
 
-Measured in a browser at 1440: contrast failures 23 to 0, text under 12px 47
-to 0, console errors 1 to 0. The method, the rest of the numbers, and the one
-measurement that went the other way are in
-[shared/docs/research/ab-test.md](../shared/docs/research/ab-test.md).
+**With the skill:** one fact, the reason it matters, and two actions.
+
+![With the skill: 4 tables past their deadline, so the 09:00 finance pack is not safe](../shared/docs/images/first-glance-with.png)
+
+A browser measured both pages at 1440 px:
+
+| Measured in the browser | Without | With |
+|---|---|---|
+| Text below its contrast floor | 23 | 0 |
+| Text under 12 px | 47 | 0 |
+| Console errors on load | 1 | 0 |
+| Level 1 heading | 1 | 0 (a miss) |
+
+The last row went the wrong way. This is one run per arm, not a benchmark,
+and it ran an earlier version of the skill. The full screens, the method and
+every caveat are in
+[the A/B write-up](../shared/docs/research/ab-test.md).
+
+## Sources and what the agent may copy
+
+42 curated design sources, each with a reuse tier. Each licence was read at
+the source. See [`sources.json`](design-the-ui/sources.json), and
+[NOTICE](design-the-ui/NOTICE) for every source the skills adapted.
+
+| Tier | Sources | What the agent may do |
+|---|---|---|
+| `use` | 25 | Copy, change and ship it (MIT, Apache-2.0, Unlicense) |
+| `credit` | 1 | Use it with attribution (CC-BY-4.0) |
+| `check-licence` | 12 | Tell you about the condition before anything ships |
+| `inspiration` | 3 | Take direction only. No code, no assets |
+| `browse-only` | 1 | Never fetch it. You browse it and paste in what you want |
+
+The skills need Node 20 or newer. 173 offline tests cover the
+`design-the-ui` scripts: run `bash ui/design-the-ui/tests/run.sh`.
 
 ## Component discovery
 

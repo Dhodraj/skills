@@ -1,0 +1,107 @@
+<!doctype html>
+<!-- The README GIF. render.mjs calls show(t) for each frame time t, in seconds. -->
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 960px; height: 540px; overflow: hidden; }
+  body {
+    background: #0d1017 radial-gradient(#ffffff10 1.2px, transparent 1.2px) 0 0 / 24px 24px;
+    color: #f4f6fb; font: 17px/1.45 -apple-system, "Helvetica Neue", sans-serif;
+  }
+  .card { position: absolute; inset: 0; display: none; padding: 70px 52px; }
+  .card.on { display: block; }
+  .center { display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .center.on { display: flex; }
+  h1 { font-size: 46px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
+  h1 .dim { color: #8b93a7; }
+  .prompt { font: 15px Menlo, monospace; color: #8b93a7; margin-bottom: 26px; }
+  .prompt b { color: #f4f6fb; font-weight: 600; }
+  .cols { display: grid; grid-template-columns: 1fr 1.35fr; gap: 22px; }
+  .col { border-radius: 12px; padding: 20px 22px; min-height: 250px; }
+  .stock { background: #161a23; border: 1px solid #262c3a; }
+  .skill { background: #10221c; border: 1px solid #1f4a3b; }
+  .label { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; font-weight: 600; }
+  .stock .label { color: #8b93a7; }
+  .skill .label { color: #5fd4a8; }
+  .line { font: 15px/1.5 Menlo, monospace; margin-bottom: 10px; visibility: hidden; }
+  .line.on { visibility: visible; }
+  .stock .line { color: #c9cedb; }
+  .skill .line { color: #e3f5ee; }
+  .num { color: #ff8a66; }
+  .ok { color: #5fd4a8; }
+  .grey { color: #6b7385; }
+  .end .cmd { margin-top: 28px; font: 18px Menlo, monospace; background: #161a23; border: 1px solid #262c3a; padding: 12px 20px; border-radius: 10px; color: #5fd4a8; }
+  .end .url { margin-top: 18px; color: #8b93a7; font-size: 16px; }
+</style>
+
+<section class="card center" data-from="0" data-to="2.6">
+  <h1>Your agent says “done”.<br><span class="dim" data-at="1.1">These skills make it show you.</span></h1>
+</section>
+
+<section class="card" data-from="2.6" data-to="8.6">
+  <p class="prompt">you › <b>Build the pipeline health screen</b></p>
+  <div class="cols">
+    <div class="col stock"><p class="label">Stock agent</p>
+      <p class="line" data-at="3.4">✓ Done. The dashboard is ready.</p>
+    </div>
+    <div class="col skill"><p class="label">With design-the-ui</p>
+      <p class="line" data-at="3.6">› Wrote DESIGN.md</p>
+      <p class="line" data-at="4.3">› Three directions. Waiting for your pick.</p>
+      <p class="line" data-at="5.0">› Opened the running page</p>
+      <p class="line" data-at="5.8">› Measured: <span class="num">23</span> low-contrast texts,<br>&nbsp;&nbsp;<span class="num">47</span> texts under 12 px</p>
+      <p class="line" data-at="6.9">› Fixed. Measured again: <span class="ok">0</span> and <span class="ok">0</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="card" data-from="8.6" data-to="13.4">
+  <p class="prompt">you › <b>Would a tech lead approve this?</b></p>
+  <div class="cols">
+    <div class="col stock"><p class="label">Stock agent</p>
+      <p class="line" data-at="9.3">✓ Looks good to me.</p>
+    </div>
+    <div class="col skill"><p class="label">With tear-it-apart</p>
+      <p class="line" data-at="9.5">› Built the coverage matrix</p>
+      <p class="line" data-at="10.2">› Fresh reviewer: <span class="num">2</span> blocking,<br>&nbsp;&nbsp;<span class="num">7</span> should-fix</p>
+      <p class="line" data-at="11.1">› Fixed <span class="ok">12</span>, rejected 2 with reasons</p>
+      <p class="line" data-at="11.9">› Another round? Asking you first.</p>
+    </div>
+  </div>
+</section>
+
+<section class="card" data-from="13.4" data-to="18.2">
+  <p class="prompt">you › <b>Don't push. Work on this while I'm away.</b></p>
+  <div class="cols">
+    <div class="col stock"><p class="label">Stock agent</p>
+      <p class="line grey" data-at="14.2">… context compacted …</p>
+      <p class="line" data-at="15.2">Your “don't push” is gone<br>with the old context.</p>
+    </div>
+    <div class="col skill"><p class="label">With remember-my-words</p>
+      <p class="line" data-at="14.0">› Saved your limits to a file</p>
+      <p class="line grey" data-at="14.7">… context compacted …</p>
+      <p class="line" data-at="15.5">› Read the limits again</p>
+      <p class="line" data-at="16.2">› <span class="ok">Not pushing.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="card center end" data-from="18.2" data-to="99">
+  <h1>Eight skills.<br><span class="dim">One habit each.</span></h1>
+  <p class="cmd">apm install -g Dhodraj/skills/&lt;kit&gt;/&lt;skill&gt;</p>
+  <p class="url">github.com/Dhodraj/skills</p>
+</section>
+
+<script>
+  function show(t) {
+    for (const card of document.querySelectorAll(".card")) {
+      const on = t >= +card.dataset.from && t < +card.dataset.to;
+      card.classList.toggle("on", on);
+    }
+    for (const el of document.querySelectorAll("[data-at]")) {
+      const on = t >= +el.dataset.at;
+      if (el.classList.contains("line")) el.classList.toggle("on", on);
+      else el.style.visibility = on ? "visible" : "hidden";
+    }
+  }
+  show(0);
+</script>

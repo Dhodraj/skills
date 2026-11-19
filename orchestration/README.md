@@ -22,3 +22,12 @@ You can also name it.
 ## User-invoked
 
 None.
+
+## Needs
+
+- `grill-the-implementation` uses `grilling`, `domain-modeling` and
+  `to-tickets` from [mstack](https://github.com/Dhodraj/mstack).
+- `who-builds` uses `writing-for-agents` from mstack.
+
+If a needed skill is missing, the calling skill does that step itself, tells
+you which skill was missing, and installs nothing.
