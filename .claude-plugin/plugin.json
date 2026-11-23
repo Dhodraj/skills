@@ -17,6 +17,7 @@
     "./orchestration/remember-my-words",
     "./orchestration/grill-the-implementation",
     "./orchestration/who-builds",
+    "./orchestration/keep-a-wiki",
     "./review/tear-it-apart",
     "./review/check-the-instruction",
     "./ui/design-the-ui",
