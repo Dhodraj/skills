@@ -23,7 +23,7 @@ def links(text):
 
 
 def lint(wiki):
-    wiki = os.path.normpath(wiki)
+    wiki = os.path.abspath(wiki)  # a relative "." must compare equal to its pages' folder
     index = os.path.join(wiki, "index.md")
     if not os.path.isfile(index):
         return [f"{index}: missing"], []
@@ -68,6 +68,7 @@ def self_test():
         script = os.path.abspath(__file__)
         rc = lambda *args: subprocess.run([sys.executable, "-I", script, *args], capture_output=True).returncode
         assert rc(d) == 1 and rc() == 2, "exit codes"
+        assert subprocess.run([sys.executable, "-I", script, "."], cwd=d, capture_output=True, text=True).stdout.count("does not list") == 1, "relative path"
         os.remove(os.path.join(d, "index.md")); os.remove(os.path.join(d, "a.md")); os.remove(os.path.join(d, "auth.md"))
         w("index.md", "## A\n")
         assert rc(d) == 0, "clean wiki exits 0"
