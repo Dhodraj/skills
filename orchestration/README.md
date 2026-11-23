@@ -18,6 +18,9 @@ You can also name it.
   down before the tickets. It runs `grilling` for the interview itself.
 - [`who-builds`](who-builds/SKILL.md): pick opus, sonnet or haiku for each
   sub-agent, write its brief for that model, and have opus review the result.
+- [`keep-a-wiki`](keep-a-wiki/SKILL.md): keep a repo's history in
+  `docs/wiki/`, an index plus one dated page per topic, through ingest, query
+  and lint. It writes only in a repo that already has `docs/wiki/index.md`.
 
 ## User-invoked
 
