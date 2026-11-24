@@ -18,6 +18,7 @@
     "./orchestration/grill-the-implementation",
     "./orchestration/who-builds",
     "./orchestration/keep-a-wiki",
+    "./orchestration/to-codex",
     "./review/tear-it-apart",
     "./review/check-the-instruction",
     "./ui/design-the-ui",
