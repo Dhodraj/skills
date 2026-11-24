@@ -13,7 +13,7 @@ already has, and that a coding agent skips when nobody tells it otherwise.
 
 | You ask | A stock agent | With the skill |
 |---|---|---|
-| "Build the pipeline health screen" | Writes the page and says it is finished | Writes `DESIGN.md`, offers three directions, then opens the running page, measures it and fixes what it finds ([`design-the-ui`](ui/design-the-ui/SKILL.md)) |
+| "Build the pipeline health screen" | Writes the page and says it is finished | Shows a gallery of styles in your brand to pick from, deals three directions inside your pick, writes `DESIGN.md`, then opens the running page, measures it and fixes what it finds ([`design-the-ui`](ui/design-the-ui/SKILL.md)) |
 | "I need a timeline with expandable logs" | Writes a new one from scratch | Searches your project and the component registries, and reads the code and licence before it suggests one ([`find-a-component`](ui/find-a-component/SKILL.md)) |
 | "Is this ready to ship?" | Reads the code and says yes | Measures the live page, walks the journey and lists each harm with evidence ([`review-the-ui`](ui/review-the-ui/SKILL.md)) |
 | "Would a tech lead approve this?" | Reviews its own work and approves it | Builds a coverage matrix and gives the work to a fresh reviewer who did not write it ([`tear-it-apart`](review/tear-it-apart/SKILL.md)) |

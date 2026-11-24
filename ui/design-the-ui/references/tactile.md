@@ -1,9 +1,9 @@
 # The tactile direction
 
-One direction among the three dealt at stage 3, with its values already
-decided. Loaded only when it is the one the user picks, or when the user asks
-for it by name. Never the default: a direction with values is still a choice
-the user makes, and `directions.md` still deals three.
+Style 13 in [styles.md](styles.md), with its values already decided. Loaded
+only when the user picks it from the style gallery at stage 3, or asks for it
+by name. Never the default: a style with values is still a choice the user
+makes, and `directions.md` still deals three directions inside it.
 
 Adapted from `kosta4a/tactile-design` (MIT).
 

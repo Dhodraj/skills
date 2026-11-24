@@ -471,8 +471,10 @@ Report findings as a table with Before, After and Why columns, never as loose
 
 ## A house style with its values decided
 
-[tactile.md](tactile.md) is a whole direction with its values already set. The
-user picks it at stage 3; it is not a rule on this page.
+[styles.md](styles.md) holds thirteen styles with their values set, and
+[tactile.md](tactile.md) is one of them in full. The user picks a style at
+stage 3. A style's values may override a number on this page, and the style
+entry records it; none is a rule here.
 
 The values on this page are adapted from four MIT sources:
 `jakubkrehel/make-interfaces-feel-better`, `emilkowalski/skills`,

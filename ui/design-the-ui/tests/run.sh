@@ -212,6 +212,18 @@ done < <(node "$here/covered.test.js" 2>&1 || echo "FAIL the covered.js test did
 while read -r verdict name; do
   if [[ "$verdict" == "ok" ]]; then pass=$((pass+1)); else fail=$((fail+1)); printf 'FAIL frames.js: %s\n' "$verdict $name"; fi
 done < <(node "$here/frames.test.js" 2>&1 || echo "FAIL the frames.js test did not finish")
+# style-gallery.js runs in node; each line is one case.
+while read -r verdict name; do
+  if [[ "$verdict" == "ok" ]]; then pass=$((pass+1)); else fail=$((fail+1)); printf 'FAIL style-gallery.js: %s\n' "$verdict $name"; fi
+done < <(node "$here/style-gallery.test.js" 2>&1 || echo "FAIL the style-gallery.js test did not finish")
+gallery="$skill/scripts/style-gallery.js"
+out="$(node "$gallery" --name Test --brand "#F05B36" --out "$tmp/gallery.html" 2>&1; echo "exit=$?")"
+has "the gallery writes a page"          "$out" "exit=0"
+has "and says to ask the user"           "$out" "ask the user to pick"
+has "the page names the client"          "$(cat "$tmp/gallery.html" 2>/dev/null)" "Pick a style for Test"
+out="$(node "$gallery" --brand "#F05B36" 2>&1; echo "exit=$?")"
+has "the gallery refuses a missing name" "$out" "exit=1"
+has "and prints its usage"               "$out" "usage: style-gallery.js"
 # The curated flag is not a licence filter, and both files now say so.
 findskill="$(cat "$skill/../find-a-component/SKILL.md")"
 has   "find-a-component says the curated flag is not a licence filter" "$findskill" "not a licence filter"
@@ -239,8 +251,25 @@ has "it lists what it overrides"          "$tactile" "gates.md\` 39"
 has "it keeps the Floor rules"            "$tactile" "A Floor rule outranks it"
 has "it carries its own never-ship list"  "$tactile" "## Never ship, in this direction"
 has "it names the sheet flick threshold"  "$tactile" "0.11 px/ms"
-has "directions.md deals it as one of three" "$(cat "$skill/references/directions.md")" "It is still one of three"
+has "directions.md deals it as one style of thirteen" "$(cat "$skill/references/directions.md")" "It is still one style of thirteen"
 has "SKILL.md points at it from stage 3"  "$(cat "$skill/SKILL.md")" "references/tactile.md"
+has "styles.md links tactile as one style" "$(cat "$skill/references/styles.md")" "\[tactile.md\](tactile.md)"
+
+# The style catalogue: a pick before any direction, and the floor still wins.
+styles="$(cat "$skill/references/styles.md")"
+has "SKILL.md points at the catalogue"     "$(cat "$skill/SKILL.md")" "references/styles.md"
+has "SKILL.md runs the gallery at stage 3" "$(cat "$skill/SKILL.md")" "scripts/style-gallery.js"
+has "directions.md deals inside the style" "$(cat "$skill/references/directions.md")" "inside the picked style"
+has "a style never overrides a Floor rule" "$styles" "It never overrides a Floor"
+has "a redesign keeps the brand"           "$styles" "## A redesign keeps the brand"
+has "a fault is fixed inside the look"     "$styles" "fixed inside the look, never by deleting"
+has "glass contrast is computed"           "$styles" "lightest colour behind it"
+has "and reduced transparency is honoured" "$styles" "prefers-reduced-transparency"
+hasnt "no style is called the default"     "$styles" "the default style"
+# Every rule a style says it overrides has to exist under that number.
+for n in 23 25 27 30 31 33 37 40; do
+  has "gates.md rule $n exists for an override" "$gates" "^$n\. \*\*"
+done
 has "craft.md points at it"               "$craft" "tactile.md"
 has "NOTICE records the source"           "$(cat "$skill/NOTICE")" "kosta4a/tactile-design, MIT"
 

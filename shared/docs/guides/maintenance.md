@@ -198,19 +198,22 @@ copy the shape `taste-skill` uses: make the agent produce three directions,
 choose one with a written reason, then judge the result cold against a list
 of default looks before calling it done.
 
-## Add or change a direction with values
+## Add or change a style with values
 
-`references/tactile.md` is the only one so far. Adding a second, or changing
-this one:
+`references/styles.md` holds thirteen styles, and `references/tactile.md` is
+the thirteenth in full. Adding one, or changing one:
 
-- **It is dealt as one of three, never alone and never by default.**
-  `references/directions.md` says so, and `SKILL.md` stage 3 repeats it. A
-  direction file that becomes the automatic answer is the default aesthetic the
-  skill was written to prevent.
+- **It is shown in the gallery beside the others, never alone and never by
+  default.** Add a tile with the same name and position to
+  `scripts/style-gallery.js`. `tests/style-gallery.test.js` fails until the
+  two lists match. The style must differ from every other style on at least
+  two axes of the table in `styles.md`. A style that becomes the automatic
+  answer is the default aesthetic. The skill was written to prevent it.
 - **Every override is listed in the file, with the rule it overrides.** A
   direction may override a number in `directions.md` or a Reflex rule in
   `gates.md`. `tests/run.sh` checks that each rule a direction claims to
-  override still exists under the number it names. It cannot check that the
+  override still exists under the number it names, for the numbers listed in
+  the test. It cannot check that the
   list is complete, so read the numbers table and the Reflex list against the
   direction line by line. The first version of `tactile.md` listed three of
   the nine numbers and three of the five Reflex rules it contradicted.

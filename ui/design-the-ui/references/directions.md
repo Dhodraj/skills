@@ -1,16 +1,18 @@
 # Directions
 
-Loaded at stage 3. It decides what the surface looks like, and it is a
-different decision inside a live product than on a new surface.
+Loaded at stage 3, after the user has picked a style from
+[styles.md](styles.md). It decides what the surface looks like inside that
+style, and it is a different decision inside a live product than on a new
+surface.
 
 ## Which job this is
 
 | Situation | The job |
 |---|---|
 | A new screen inside a live product | Match. Read the nearest screen, take its tokens, scale and patterns, and change nothing that is not the point of this work |
-| A new surface with an existing brand | The brand fixes type and colour. Quality comes from hierarchy, rhythm, density and alignment inside it |
+| A new surface with an existing brand | The brand fixes type and colour. The picked style frames them. Quality comes from hierarchy, rhythm, density and alignment inside it |
 | A new product with nothing fixed | Decide a direction and write it down as values, before any component |
-| A redesign | The old look is evidence, not a starting point. Keep the product truth, the content and the function; replace the look as a whole rather than polishing it |
+| A redesign | Keep the product truth, the content, the function and the brand's own imagery, colour and type unless the user asks to replace them. The picked style changes how they are framed, as a whole rather than by polishing. A review fault is fixed inside the look, never by deleting the element ([styles.md](styles.md), "A redesign keeps the brand") |
 
 The commonest failure is the third job being done when it was the first.
 Inventing a second visual system inside a product that already has one costs
@@ -18,10 +20,12 @@ more than the screen is worth.
 
 ## Deal three directions, never one
 
-For the third and fourth jobs, and only those. A single proposal is the
-model's default aesthetic wearing a rationale. The user has nothing to compare
-it against. So they either accept it, or ask for "something else" with no
-vocabulary to say what.
+For the third and fourth jobs, and only those, and only once the user has
+picked a style from the gallery in [styles.md](styles.md). A single proposal
+is the model's default aesthetic wearing a rationale. The user has nothing to
+compare it against. So they either accept it, or ask for "something else" with
+no vocabulary to say what. The gallery gives them that vocabulary; the three
+directions then work inside the picked style.
 
 Each direction gets four lines:
 
@@ -35,6 +39,8 @@ SIGNATURE   The late count is the largest thing on the screen, always
 
 Rules for the three:
 
+- **Deal all three inside the picked style.** Use its values as written in
+  `styles.md`. With two styles picked, take one or two directions from each.
 - **Separate them on a real axis.** Three shades of the same idea is one
   direction with three palettes. Move the density, or the structure, or what
   the screen makes dominant.
@@ -49,11 +55,12 @@ Rules for the three:
 - **Never deal the same three twice.** Where a previous direction was picked
   in this repository, `DESIGN.md` records it; move away from it deliberately.
 
-Then stop. Put the three to the user, and do not build past it on an
-assumption. Where the user says "you pick", pick
+Then stop. Put the three to the user with the question tool, and do not
+build past it on an assumption. Where the user says "you pick", pick
 one, say which and why in a line, and carry on.
 
-On a yes, write the picked direction into `DESIGN.md` as values and lint it.
+On a yes, write the picked style and direction into `DESIGN.md` as values,
+with every override the style lists, and lint it.
 [design-system.md](design-system.md) holds the format. The two directions not
 picked go in one line each under `Overview`, so a later session knows what was
 already considered and rejected.
@@ -89,22 +96,25 @@ saying which one it overrules is part of the proposal.
 Contrast ratios are WCAG 2.2 AA. 24 × 24 is WCAG 2.5.8. The 44px target is
 Apple's Human Interface Guidelines.
 
-## A direction that comes with values
+## Styles that come with values
 
-[tactile.md](tactile.md) is one direction already decided down to its tokens:
-tactile, layered and quiet, for a dense product whose controls are pressed all
-day. It is loaded only when the user picks it, or asks for it by name.
+[styles.md](styles.md) holds thirteen styles, each decided down to its
+values. [tactile.md](tactile.md) is the thirteenth, kept in its own file
+because its values are longer: tactile, layered and quiet, for a dense product
+whose controls are pressed all day. A style's file is loaded only when the
+user picks it from the gallery, or asks for it by name.
 
-It exists because deciding a direction from nothing and deciding it against a
-worked example are different costs, and a console is the surface a model gets
-wrong most. Three rules hold:
+They exist because deciding a look from nothing and deciding it against a
+worked example are different costs, and a weak build of a look nobody decided
+is the commonest failure. Three rules hold:
 
-- **It is still one of three.** Dealing it alone is dealing one direction. It
-  goes into the three where the product suits it, against two taken from the
-  product's own world, and the user picks.
-- **It is not the default.** A marketing page, an editorial surface or a brand
-  that carries the screen gets nothing from a 13px base and a 0.5px line.
-- **It overrides numbers and Reflex rules, never Floor rules.** It contradicts
+- **It is still one style of thirteen.** The user picks it from the gallery
+  beside the others, and three directions are dealt inside it.
+- **No style is the default.** Each one names where it does not fit. A
+  marketing page, an editorial surface or a brand that carries the screen
+  gets nothing from tactile's 13px base and 0.5px line.
+- **It overrides numbers and Reflex rules, never Floor rules.** Each style in
+  `styles.md` lists its own overrides. Tactile contradicts
   nine rows of the table above — body text, line length, heading line height,
   type sizes, font weights, the spacing scale, the number of greys, the shades
   of a brand colour, and shadows at rest — and five `gates.md` Reflex rules:
@@ -155,7 +165,7 @@ A product does not need, and does not get by default:
 - a monospace caption under a centred headline.
 
 Each of those is a choice that has to earn its place on this surface for this
-audience. The reason to name them is that they are what a model reaches for
+audience. A style the user picks from `styles.md` is how one earns it. The reason to name them is that they are what a model reaches for
 when nothing was decided, and together they are the look people now recognise
 as machine-made.
 

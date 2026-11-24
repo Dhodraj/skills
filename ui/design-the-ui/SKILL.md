@@ -13,9 +13,13 @@ before saying it works.
 - The project has a `DESIGN.md` → it outranks every default here and your own taste. The work needs a value it lacks → add the value to `DESIGN.md`, not to a stylesheet.
 - Tempted to propose one direction → deal three (stage 3). One proposal is your default look with a rationale.
 - A new surface and no direction picked yet → stop at stage 3 until the user picks. "You pick" → pick one, say which and why in one line, carry on.
+- A redesign → keep the brand's imagery, colour and type unless the user asks to replace them. Fix a review fault inside the look; never delete the element ([references/styles.md](references/styles.md), "A redesign keeps the brand").
 - About to write a component → run the `find-a-component` skill first.
 - About to copy code, an asset or a look from an outside source → read its `tier` in [sources.json](sources.json) first. `check-licence` → tell the user its `condition` before it ships. `inspiration` or `browse-only` → copy no code and no assets. Never fetch a `browse-only` site; ask the user to paste in what they want.
 - The user calls it generic, dated or AI-made → audit it against [references/slop-signs.md](references/slop-signs.md) before changing anything.
+- The user names a site as inspiration → screenshot it at 1440 and 375, and list in a table what it makes dominant and what it leaves out. Take those traits into the client's brand; copy nothing ([references/directions.md](references/directions.md), "Using a reference").
+- The page sells a change in the client's own terms, such as legacy to modern → define each term on the page, side by side, in words and in the visual, before building on it.
+- The user approves a version → save a copy beside it, with the date in its name, before the next change.
 - The user wants a mock → stage 6.
 - About to make the first UI edit → read what the depth table names for this depth, and no more.
 - Building against one fixture → render every state from stage 4 as well.
@@ -61,7 +65,7 @@ both routes into it.
 | A `DESIGN.md` | Follow it, and say so in one line |
 | Tokens, a theme file or a Tailwind config | Codify them into `DESIGN.md` by reading the values out of the code, never by guessing |
 | A live product or brand with no written system | Render it, read the computed values, record them |
-| Nothing | Write one at stage 3, from the direction the user picks |
+| Nothing | Write one at stage 3, from the style and direction the user picks |
 
 A codified `DESIGN.md` records only values the product uses. A new one is a
 proposal until the user picks it. Lint it, and fix what it reports before
@@ -84,19 +88,28 @@ Then acceptance criteria, each checkable in a browser. "Looks good" is not one.
 horizontal scrolling" is. Where there is no evidence, write the assumption and
 label it.
 
-## 3. Directions, and the user's pick
+## 3. A style, then directions, and the user's pick
 
-[references/directions.md](references/directions.md) holds the method and the
-vocabulary. Deal three directions. Give each a name, the anchor hue, the type
-pairing, the density and the one memorable thing, in four lines.
+For a new surface, a redesign or "make this modern", the style comes first:
 
-One of the three may be [references/tactile.md](references/tactile.md), a
-direction already decided down to its tokens, for a dense product whose
-controls are pressed all day. Deal it only beside two taken from the product's
-own world, and never as the default.
+1. Run `node scripts/style-gallery.js --name NAME --brand "#HEX" --font FONT`,
+   with `--image` for the client's own hero picture. Open the page and look at
+   it.
+2. Ask the user with the question tool to pick one or two styles by number.
+   Never pick for them; on "you pick", follow the trigger above.
+3. Read only the picked entries in [references/styles.md](references/styles.md).
+   Their values replace your taste.
+
+Then [references/directions.md](references/directions.md): deal three
+directions inside the picked style. Give each a name, the anchor hue, the type
+pairing, the density and the one memorable thing, in four lines. A new screen
+inside a live product skips the gallery and matches the product.
+
+Style 13 is [references/tactile.md](references/tactile.md), a style decided
+down to its tokens, for a dense product whose controls are pressed all day.
 
 This is the approval gate. On a yes, write or update `DESIGN.md` with the
-picked direction's real values, and lint it.
+picked style's values, its overrides and the direction, and lint it.
 
 ## 4. The journey and its states
 
@@ -170,7 +183,7 @@ as a finding left with a reason.
 ## 10. Report
 
 - The customer outcome, and whether it is met.
-- The direction picked, and by whom.
+- The style and direction picked, and by whom.
 - What was built or changed, by file.
 - What was verified, by what means, at which widths, in which states.
 - What was not verified, and why. Mark every stand-in, and every claim not

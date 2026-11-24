@@ -31,7 +31,7 @@ direction approved before any code is written.
 | | |
 |---|---|
 | 0 to 1 | Read what exists. Find or write `DESIGN.md`, and gate it with `pnpm dlx @google/design.md lint` |
-| 2 to 3 | Name the business outcome and criteria checkable in a browser. Deal three visual directions and stop for the user to pick one |
+| 2 to 3 | Name the business outcome and criteria checkable in a browser. Show a gallery of thirteen styles in the client's own name, colour and font, and stop for the user to pick one or two. Deal three directions inside the pick and stop again |
 | 4 to 5 | Map the journey and every state a single fixture hides. Search the project and the component registries before writing a component |
 | 6 to 7 | Mock with the `prototype` skill inside the picked direction, or build direct. Build against the gates and the craft rules, most important screen alone and first, reviewed cold |
 | 8 to 9 | Start the application, walk it as the customer with real clicks and typing, measure, fix in severity order, check for regressions |
@@ -137,7 +137,7 @@ Two routes in. Where the project already has tokens, a theme or a live
 product, the file **records what is there**. Values come out of the code, or
 off the rendered page as computed values. Never estimated from a screenshot.
 Where there is nothing, the file is a proposal, and stays marked as one until
-the user picks a direction.
+the user picks a style and a direction.
 
 ## The demo
 

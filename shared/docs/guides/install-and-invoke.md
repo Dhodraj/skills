@@ -12,8 +12,9 @@ ui/
       design-system.md           the DESIGN.md format, and both routes into it
       gates.md                   the floor, in three tiers: floor, reflex, finish
       product-thinking.md        business, customer and product questions; evidence rules
-      directions.md              dealing three directions, the numbers, no default aesthetic
-      tactile.md                 one direction with its values already decided, loaded on a pick
+      styles.md                  thirteen styles with their values, picked from the gallery
+      directions.md              dealing three directions inside the picked style, the numbers
+      tactile.md                 style 13 in full, loaded on a pick
       craft.md                   depth, motion, optical correctness: the layer under layout
       motion.md                  one motion library per project, springs, reduced motion
       markup.md                  semantic HTML; content stays in the DOM whatever the motion
@@ -29,6 +30,7 @@ ui/
       check-sources.js           validates sources.json
       covered.js                 lists visible controls another element covers
       frames.js                  samples an element's position on every frame
+      style-gallery.js           writes a page showing every style in the client's brand
     tests/
       run.sh                     the offline tests; add --network for the rest
       fixtures/                  the dashboard before and after, a landing page, the geometry faults
