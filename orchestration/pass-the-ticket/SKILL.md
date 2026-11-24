@@ -3,7 +3,7 @@ name: pass-the-ticket
 description: Pass implementation tickets to another agent CLI, such as Codex, in Herdr Core terminals and take the results back. Use when the user asks to give tickets to another agent, or to split a batch between Claude and another agent.
 ---
 
-You are the Master. A worker agent builds one ticket in its own worktree, commits there and writes the result file. A background wait tells you when it stops. You review and merge its work as you would a Claude worker's.
+You are the Master. A worker agent builds one ticket in its own worktree, commits there and writes the result file. A background watcher tells you when it stops. You review and merge its work as you would a Claude worker's.
 
 Each agent has an adapter in `adapters/<agent>.md`: its model table, start command, session lookup and known failures. Read the adapter before you start a worker. If no adapter exists for the agent the user names, say so and stop.
 
@@ -14,8 +14,8 @@ Each agent has an adapter in `adapters/<agent>.md`: its model table, start comma
 - `HC_TERMINAL_ID` is empty → you are not in a Herdr Core terminal. Say so and stop.
 - The worker shows an error the adapter lists under known failures → do what the adapter says, even if it ended with a `question` line.
 - Choosing tickets for another agent → only tickets with no open blocker whose `who-builds` row is sonnet or haiku. Keep opus rows, tickets that touch `.claude/`, an agent's own config folder, instructions or credentials, and tickets that need the user.
-- The background wait for `<agent>-NN` ends → read its last line with `hc read <agent>-NN`. A `done` line names the result file. A `question` line needs an answer: send it with `hc send <agent>-NN`, or bring it to the user if the choice is theirs, then start the wait again.
-- `hc read` shows no `done` or `question` line → the worker stopped for another reason. Check the adapter's known failures, then read more of its screen. Do not resend the prompt blindly.
+- The watcher for `<agent>-NN` ends → read its last line with `hc read <agent>-NN`. A `done` line names the result file. A `question` line needs an answer: send it with `hc send <agent>-NN` (`--if idle` only when the state is `idle`; a `done` worker takes input without `--if`), or bring it to the user if the choice is theirs, then start the wait again.
+- The watcher prints `stalled` or `no-status`, or `hc read` shows no `done` or `question` line → the worker is stuck or stopped for another reason. If `hc get` still shows `working` and the working timer is moving, start the watcher again. Check the adapter's known failures, then read more of its screen. Do not resend the prompt blindly.
 
 ## Start one worker
 
@@ -26,8 +26,8 @@ Run from the repo root. `RUN` is the run folder that holds the ticket, `queue.md
    git fetch origin
    git worktree add ".claude/worktrees/<agent>-NN" -b "worktree-<agent>-NN" origin/main
    ```
-2. Start the worker with the adapter's start command, named `<agent>-NN`, in that worktree. The worker gets no network and no access to Herdr Core, since with the Herdr Core socket it could run commands outside its sandbox. If the adapter's command does not ensure both, do not start the worker and tell the user.
-3. Poll `hc get <agent>-NN | jq -r '.status.state'` every few seconds until it prints `idle`. Then send the prompt below through a quoted heredoc, so the shell expands nothing in it:
+2. Start the worker with the adapter's start command, named `<agent>-NN`, in that worktree. The adapter says what the worker can reach; use no wider access than it gives.
+3. Poll `hc get <agent>-NN | jq -r '.status.state'` every few seconds until it prints `idle`. Save `hc get <agent>-NN | jq -r '.turn'` as `<turn>`. If it is not `idle` within 90 seconds, read the screen with `hc read <agent>-NN` and check the adapter's known failures; a startup dialog is the usual cause. Then send the prompt below through a quoted heredoc, so the shell expands nothing in it:
    ```bash
    hc send --if idle <agent>-NN "$(cat <<'EOF'
    <filled prompt>
@@ -35,10 +35,11 @@ Run from the repo root. `RUN` is the run folder that holds the ticket, `queue.md
    )"
    ```
    Do not pass the task to `hc run`: a task sent while the agent boots can be dropped.
-4. Start the wait with the Bash tool's `run_in_background`, so you are told when it ends:
+4. Start the watcher with the Bash tool's `run_in_background`, so you are told when the worker needs you:
    ```bash
-   until hc wait <agent>-NN --timeout 600 | jq -e '.ended' >/dev/null; do :; done
+   <this skill's folder>/scripts/watch-worker.sh <agent>-NN <turn>
    ```
+   It prints one line: `stopped <state>`, `gone`, `stalled` (no screen change for 20 minutes) or `no-status`.
 5. In `queue.md`, set the ticket's owner to `<agent>-NN`. Once it has started, add its session ID as the adapter says.
 
 ## The prompt
@@ -61,5 +62,5 @@ To ask a question, end your turn with exactly one line: RUN <run id> #<NN> quest
 
 1. Read `RUN/results/NN.md`.
 2. Start an opus review of `git diff origin/main...worktree-<agent>-NN` against the ticket, as `who-builds` says for any sonnet or haiku result. Check also that `.git/hooks` and `.git/config` are unchanged.
-3. Merge through the project's usual path, such as its `merge.sh`. If that path expects a pushed branch or an open PR, push and open it yourself. Update `queue.md`.
+3. Merge through the project's usual path, such as its `merge.sh`. If that path expects a pushed branch or an open PR, push and open it yourself. With no such path, merge the branch locally after the review. Update `queue.md`.
 4. Close the worker with `hc kill <agent>-NN`, then `hc rm <agent>-NN`. Remove the worktree and its branch after the merge.
