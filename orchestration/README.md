@@ -21,9 +21,10 @@ You can also name it.
 - [`keep-a-wiki`](keep-a-wiki/SKILL.md): keep a repo's history in
   `docs/wiki/`, an index plus one dated page per topic, through ingest, query
   and lint. It writes only in a repo that already has `docs/wiki/index.md`.
-- [`to-codex`](to-codex/SKILL.md): hand implementation tickets to OpenAI
-  Codex workers in Herdr Core terminals, each in its own worktree. Review and
-  merge their commits as for a Claude worker.
+- [`pass-the-ticket`](pass-the-ticket/SKILL.md): pass implementation tickets
+  to another agent CLI in Herdr Core terminals, each in its own worktree.
+  Review and merge its commits as for a Claude worker. One adapter per agent;
+  Codex is the first.
 
 ## User-invoked
 

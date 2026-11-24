@@ -31,7 +31,7 @@ also call it by name.
 |---|---|---|
 | [ui](ui/README.md) | `design-the-ui`, `find-a-component`, `review-the-ui` | Building and reviewing a product interface. The before-and-after test is in this README |
 | [review](review/README.md) | `tear-it-apart`, `check-the-instruction` | Checking work before it is handed over |
-| [orchestration](orchestration/README.md) | `remember-my-words`, `grill-the-implementation`, `who-builds`, `keep-a-wiki`, `to-codex` | Keeping long or parallel agent work on track |
+| [orchestration](orchestration/README.md) | `remember-my-words`, `grill-the-implementation`, `who-builds`, `keep-a-wiki`, `pass-the-ticket` | Keeping long or parallel agent work on track |
 
 `split-the-work` is now in the colony plugin,
 [Dhodraj/colony](https://github.com/Dhodraj/colony).
