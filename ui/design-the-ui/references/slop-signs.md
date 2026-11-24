@@ -33,7 +33,7 @@ A `DESIGN.md` value outranks a sign here, as it outranks a Reflex rule.
 - Too many sizes and weights on one screen → gates.md 33, and a few sizes from the scale.
 - Numbers in mixed formats (`$48,210` beside `$124,860.40`, or `07`) → one format, tabular figures.
 - Negative letter-spacing on small text → zero or slightly positive.
-- Italic for emphasis → weight or colour instead.
+- Italic for emphasis → weight or colour instead. In a headline, one style for every word.
 
 ## Icons
 
@@ -81,7 +81,7 @@ A `DESIGN.md` value outranks a sign here, as it outranks a Reflex rule.
 - Everything stacked and centred: headline, text, buttons, picture → an asymmetric split, or text over a large product view.
 - Three or more buttons, or chips and avatars under them → one primary and at most one secondary action.
 - `Trusted by 10,000+ teams`, avatar rows or a five-star rating with no source → gates.md 1: ask whether it is real, then make it quiet and specific, or remove it.
-- Feature cards, each an emoji, a bold title and a vague line → fewer features, concrete copy, line icons or none.
+- Feature cards, each an emoji, a bold title and a vague line → fewer features and concrete copy; gates.md 26 and 27 for the icons and the row.
 
 ## Visuals
 
@@ -119,6 +119,7 @@ Not slop, but what a cleaned screen falls back to when nobody decided. Look for
 these after the passes.
 
 - A neutral grey page, the default system face, white text and the brand colour on one button, for a product whose world is warm or bright → a ramp tinted toward that world, and an accent taken from it.
+- A cream page and a serif headline for a product with no paper, print or warmth in its world → a ramp tinted toward that world, and a display face chosen for it.
 - A hero visual that is an empty box or a generic picture → a product preview in code, or an image from the product's world.
 - Every product given the same layout, type and palette → let the direction from stage 3 choose.
 

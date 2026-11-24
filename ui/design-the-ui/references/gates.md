@@ -142,7 +142,8 @@ Each of these is what the training data holds, not what the product needs.
 
 31. **Decorative chrome with no content**: blurred floating orbs, aurora
     blobs, wave dividers, rotated vertical text, scroll hints, a "BETA" pill,
-    a mono-capitals strip, a `01 / 04` counter.
+    a mono-capitals strip, a `01 / 04` counter, a dithered or ASCII-art
+    image.
 32. **Template punctuation**: middle dots joining metadata, an arrow glued to
     link text, a coloured dot that means nothing. Use a line break, a column
     or a hairline.

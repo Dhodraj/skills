@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-19",
+  "updated": "2026-11-24",
   "note": "Curated sources, ordered by reuse tier, each read at the source on the date in its licence-read note. 'licence' records what was read, not what is assumed. 'tier' says what may be copied, and 'tiers' below defines each one. 'kind' says what the source is. Entries of kind component with a 'registry' url are searchable by scripts/find-components.js; the public directory at https://ui.shadcn.com/r/registries.json covers the other registries.",
   "tiers": {
     "use": "The licence allows copying, changing and shipping (MIT, Apache-2.0, Unlicense). Pull a component in and change it to fit.",
@@ -751,6 +751,174 @@
       "licence-read": "styles.refero.design robots.txt and home page, 2026-11-19",
       "install": "the user browses it",
       "notes": "Colours, type, spacing and a DESIGN.md per site, for over 2,000 sites. robots.txt disallows ClaudeBot, Claude-Web and anthropic-ai, so agents never fetch it. The user browses it and pastes in what they want."
+    },
+    {
+      "id": "@flowbite",
+      "url": "https://flowbite.com",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "The open-source code is MIT. Flowbite Pro blocks on the same site are under a separate EULA, which was not read. Copy only components marked free.",
+      "registry": null,
+      "for": [
+        "plain-tailwind",
+        "marketing-section",
+        "dashboard",
+        "block"
+      ],
+      "stack": "tailwind plugin + vanilla JS, no react (flowbite-react is a separate repo)",
+      "licence": "MIT for the open-source code; docs text CC BY 3.0; Pro under a separate EULA",
+      "licence-read": "themesberg/flowbite repository licence and flowbite.com/docs/getting-started/license, 2026-11-24",
+      "install": "pnpm add flowbite and add it as a Tailwind plugin, or copy the HTML from the docs page",
+      "notes": "Free and Pro blocks sit on the same site. Check each block before copying."
+    },
+    {
+      "id": "@float-ui",
+      "url": "https://floatui.com",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "Custom Float UI licence. End products, client work and sold products are allowed. Distributing the components on their own, or in a website builder, theme, template or starter kit, is not. Ship it in an app, never in a kit.",
+      "registry": null,
+      "for": [
+        "plain-tailwind",
+        "marketing-section",
+        "hero",
+        "block"
+      ],
+      "stack": "tailwind, no react required (HTML and JSX snippets)",
+      "licence": "Custom Float UI licence (GitHub label NOASSERTION)",
+      "licence-read": "MarsX-dev/floatui repository licence, 2026-11-24",
+      "install": "copy from the page",
+      "notes": "Last push 2025-03, so check the markup against the project's Tailwind version."
+    },
+    {
+      "id": "@preline",
+      "url": "https://preline.co",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "Dual licence: MIT and the Preline UI Fair Use License. Clauses 1 to 3 forbid a competing product and limit derivative templates. Redistribution needs both licences and a link to the original repo. Pro blocks and templates are paid.",
+      "registry": null,
+      "for": [
+        "plain-tailwind",
+        "marketing-section",
+        "dashboard",
+        "block"
+      ],
+      "stack": "tailwind plugin + vanilla JS, no react",
+      "licence": "MIT AND Preline UI Fair Use License; Pro paid",
+      "licence-read": "htmlstreamofficial/preline repository licence and preline.co/pricing.html, 2026-11-24",
+      "install": "pnpm add preline and add it as a Tailwind plugin, or copy from the page",
+      "notes": "Read the Fair Use clauses before any of it goes into a template or kit."
+    },
+    {
+      "id": "@meraki-ui",
+      "url": "https://merakiui.com",
+      "tier": "use",
+      "kind": "component",
+      "registry": null,
+      "for": [
+        "plain-tailwind",
+        "marketing-section",
+        "form",
+        "block"
+      ],
+      "stack": "tailwind, no react (HTML snippets; some use Alpine.js)",
+      "licence": "MIT",
+      "licence-read": "merakiuilabs/merakiui repository licence, 2026-11-24",
+      "install": "copy from the page",
+      "notes": "Markup, not components. Last push 2025-07, so check it against the project's Tailwind version."
+    },
+    {
+      "id": "@daisyui",
+      "url": "https://daisyui.com",
+      "tier": "use",
+      "kind": "component",
+      "registry": null,
+      "for": [
+        "plain-tailwind",
+        "form",
+        "dashboard",
+        "theme"
+      ],
+      "stack": "tailwind plugin (CSS classes), no react, no JS framework",
+      "licence": "MIT",
+      "licence-read": "saadeghi/daisyui repository licence, 2026-11-24",
+      "install": "pnpm add -D daisyui, then add @plugin \"daisyui\" to the CSS",
+      "notes": "Class names such as btn and card, not copy-in markup. Its own theme tokens compete with DESIGN.md tokens; map them or skip it. The daisyUI store was not read."
+    },
+    {
+      "id": "@lightswind",
+      "url": "https://lightswind.com",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "The repo and npm package are MIT. A paid Pro tier exists, and its terms were not read. Ship a Pro item only after the user reads those terms.",
+      "registry": "https://lightswind.com/r/{name}.json",
+      "catalogue": "https://lightswind.com/registry.json",
+      "for": [
+        "animation",
+        "marketing-section",
+        "hero",
+        "block"
+      ],
+      "stack": "react+tailwind+shadcn",
+      "licence": "MIT for the repo and npm package; Pro under the site's terms",
+      "licence-read": "codewithMUHILAN/Lightswind-UI-Library repository licence and lightswind.com/pricing, 2026-11-24",
+      "install": "pnpm dlx shadcn@latest add https://lightswind.com/r/<name>.json",
+      "notes": "Catalogue has 218 registry:ui items. Not in the shadcn directory, so use the full item url, not @lightswind/<name>."
+    },
+    {
+      "id": "@jolly-ui",
+      "url": "https://jollyui.dev",
+      "tier": "use",
+      "kind": "component",
+      "registry": "https://jollyui.dev/r/styles/default/{name}.json",
+      "catalogue": "https://jollyui.dev/r/index.json",
+      "for": [
+        "react-aria",
+        "form",
+        "primitives"
+      ],
+      "stack": "react+tailwind+react-aria-components",
+      "licence": "MIT",
+      "licence-read": "jolbol1/jolly-ui repository licence, 2026-11-24",
+      "install": "pnpm dlx shadcn@latest add https://jollyui.dev/r/styles/default/<name>.json",
+      "notes": "Archived. Its README points to shadcn/ui's own React Aria base (--base aria); the registry is still online. Prefer that base in a new project. Not in the shadcn directory, so use the full item url."
+    },
+    {
+      "id": "@flyonui",
+      "url": "https://flyonui.com",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "FlyonUI's own code is MIT, but it bundles Preline UI, so Preline's Fair Use License applies too: no competing product, and attribution on redistribution. A Pro tier exists, and its terms were not read.",
+      "registry": null,
+      "for": [
+        "plain-tailwind",
+        "marketing-section",
+        "dashboard",
+        "block"
+      ],
+      "stack": "tailwind plugin + vanilla JS (daisyUI classes, Preline JS), no react",
+      "licence": "MIT for its own code, plus bundled Preline UI under MIT and the Preline UI Fair Use License (GitHub label NOASSERTION)",
+      "licence-read": "themeselection/flyonui repository licence, 2026-11-24",
+      "install": "pnpm add flyonui and add it as a Tailwind plugin, or copy from the page",
+      "notes": "Built on daisyUI and Preline. Where the project needs only one of them, take that one instead."
+    },
+    {
+      "id": "@skiper-ui",
+      "url": "https://skiper-ui.com",
+      "tier": "check-licence",
+      "kind": "component",
+      "condition": "No licence text found: no official repository and no licence page. Most components are paid, and premium registry items need a licence key. Ask the user before anything from it ships.",
+      "registry": null,
+      "for": [
+        "animation",
+        "hero",
+        "block"
+      ],
+      "stack": "react+tailwind+shadcn, framer-motion",
+      "licence": "none found",
+      "licence-read": "skiper-ui.com/pricing and a GitHub search, 2026-11-24; no licence text exists to read",
+      "install": "the user copies it from the site; agents do not fetch its registry",
+      "notes": "robots.txt disallows /*.json$ for every agent, so the registry stays null and the finder never fetches it. Listed in the shadcn directory as @skiper-ui. Added at the user's request on 2026-11-24."
     }
   ],
   "rejected": [
