@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>find-a-component: "the ring ring thing"</title>
+<style>
+  :root { --ink: #1c1c1a; --muted: #5d5d58; --line: #e2e1dc; --bg: #fbfbf9; --ok: #1d6b3a; --no: #9b2c1f; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 16px/1.55 system-ui, -apple-system, sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 48px 24px 96px; }
+  h1 { font-size: 28px; line-height: 1.2; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 56px 0 12px; }
+  h3 { font-size: 17px; margin: 0 0 4px; }
+  p { max-width: 65ch; margin: 0 0 12px; }
+  .muted { color: var(--muted); }
+  code { font: 14px/1.4 ui-monospace, Menlo, monospace; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; }
+  .pick { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 32px 0 0; }
+  .pick img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 1px 3px rgb(0 0 0 / .12); }
+  .facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 8px 0 0; }
+  .facts dt { color: var(--muted); }
+  .facts dd { margin: 0; }
+  .yes { color: var(--ok); }
+  .no { color: var(--no); }
+  pre { background: #f0efea; padding: 12px; border-radius: 6px; overflow-x: auto; margin: 8px 0 0; }
+  @media (min-width: 860px) { .pick { grid-template-columns: 3fr 2fr; align-items: start; } }
+</style>
+</head>
+<body>
+<main>
+
+<h1>"What's the ring ring thing I can add here?"</h1>
+<p class="muted">A vague request, run through find-a-component on 24 November 2026.</p>
+
+<h2>Recommendation</h2>
+<p>Use the free Arc notification center. It has a bell with an unread count, a popover with All and Unread views, mark all read, clear read, and dismiss. It respects reduced motion. Its licence is MIT.</p>
+<p>The runner-up is the MiniDev notification inbox. Pick it if you want a Mentions tab or a Base UI product. It needs MiniDev's own token stylesheet, and its tab count is 10px text, which fails the 12px floor.</p>
+
+<h2>1. The words, turned into a requirement</h2>
+<table>
+  <tr><th>Kind</th><th>From "the ring ring thing"</th></tr>
+  <tr><td>What it is</td><td>A bell button that opens a list of recent notifications</td></tr>
+  <tr><td>States</td><td>Unread count, nothing unread, empty list, a read item, an unread item</td></tr>
+  <tr><td>Behaviour</td><td>Open and close from the keyboard, mark one or all read, link out of each item</td></tr>
+  <tr><td>Names people use</td><td>Notification center, notification inbox, notifications popover, activity feed</td></tr>
+</table>
+
+<h2>2. The project</h2>
+<p>This repo is a skill pack and has no product components, so this step found nothing. In a real product, step 2 searches the code for a bell or inbox first.</p>
+
+<h2>3. Search</h2>
+<pre><code>find-components.js notifications notification-center notification-popover \
+  notification-inbox activity-feed --type any --registries 30</code></pre>
+<p>The first search, with "bell" and "badge", returned mostly icons. The second search, with the names people use, returned 29 items. Six were read in full.</p>
+
+<h2>4. The three serious candidates</h2>
+
+<div class="pick">
+  <img src="uiarc.png" alt="Arc notification center open on its docs page: a popover with All and Unread tabs, Mark all read, five notifications with unread dots, and Clear read in the footer.">
+  <div>
+    <h3>1. Arc, notification-center</h3>
+    <dl class="facts">
+      <dt>Licence</dt><dd>MIT for the free tier, read at uiarc.dev/license</dd>
+      <dt>Tier</dt><dd>check-licence: free items only, Arc Pro needs a bought licence</dd>
+      <dt>Adds</dt><dd>@radix-ui/react-popover, lucide-react, motion</dd>
+      <dt>States</dt><dd class="yes">Unread, empty, read, dismissed</dd>
+      <dt>Keyboard</dt><dd class="yes">Radix popover: Escape and focus come from Radix</dd>
+      <dt>Reduced motion</dt><dd class="yes">Yes</dd>
+    </dl>
+    <pre><code>pnpm dlx shadcn@latest add @uiarc/notification-center</code></pre>
+  </div>
+</div>
+
+<div class="pick">
+  <img src="minidev.png" alt="MiniDev notification inbox open on its docs page: All and Mentions tabs, Mark all read, five notifications with initials avatars and unread dots, View all activity in the footer.">
+  <div>
+    <h3>2. MiniDev, notification-inbox</h3>
+    <dl class="facts">
+      <dt>Licence</dt><dd>MIT, read in the repository LICENSE file</dd>
+      <dt>Tier</dt><dd>Not in sources.json: a new source</dd>
+      <dt>Adds</dt><dd>@base-ui/react, lucide-react, MiniDev token stylesheet</dd>
+      <dt>States</dt><dd class="yes">Unread, empty, mentions</dd>
+      <dt>Keyboard</dt><dd class="yes">Base UI popover, focus returns on close</dd>
+      <dt>Small text</dt><dd class="no">10px tab count</dd>
+    </dl>
+    <pre><code>pnpm dlx shadcn@latest add @minidev/notification-inbox</code></pre>
+  </div>
+</div>
+
+<div class="pick">
+  <img src="boardui.png" alt="BoardUI notification center on its docs page: an always-open panel with All, Mentions and System tabs and inline Reply and View thread buttons.">
+  <div>
+    <h3>3. BoardUI, notification-center</h3>
+    <dl class="facts">
+      <dt>Licence</dt><dd>MIT for free source, read at boardui.com/license</dd>
+      <dt>Tier</dt><dd>Not in sources.json: a new source</dd>
+      <dt>Adds</dt><dd>@remixicon/react and five BoardUI parts</dd>
+      <dt>States</dt><dd class="yes">Unread, empty, grouped by day, inline actions</dd>
+      <dt>Bell</dt><dd class="no">None: a panel, not a popover</dd>
+      <dt>Keyboard</dt><dd class="no">No key handling found in the code</dd>
+    </dl>
+  </div>
+</div>
+
+<h2>Rejected</h2>
+<table>
+  <tr><th>Item</th><th>Why</th></tr>
+  <tr><td>@uiable/popover-notifications</td><td>No aria attributes, no unread state, no empty state</td></tr>
+  <tr><td>uday-a/notifications-popover</td><td>No aria attributes and no key handling</td></tr>
+  <tr><td>uibrik/notification-center</td><td>Registry item is empty (81 bytes)</td></tr>
+  <tr><td>Bell and badge icons</td><td>An icon, not the component</td></tr>
+</table>
+
+<h2>Not checked</h2>
+<p>None of the three was installed or rendered in a product, so token fit and the 375px width are unverified. The screenshots come from each source's own docs page. Accessibility was judged by reading the code, not with a screen reader.</p>
+
+</main>
+</body>
+</html>
