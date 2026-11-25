@@ -10,6 +10,10 @@
 
 When a model retires, check the slugs against `~/.codex/models_cache.json`.
 
+## Tickets in another repository
+
+Use a clone in the folder for the account that owns the target repository. Run `git-whoami` in that clone and confirm the identity matches the owner. From the clone root, create the worktree and run the start command below so both git `--add-dir` paths point into that clone.
+
 ## Start command
 
 The worker has network access, which the user chose. With network on, it can also reach the Herdr Core socket, and through it run commands outside its sandbox, so treat it as an unsandboxed worker.

@@ -61,6 +61,6 @@ To ask a question, end your turn with exactly one line: RUN <run id> #<NN> quest
 ## Take the result back
 
 1. Read `RUN/results/NN.md`.
-2. For every result from another agent, start an opus review of `git diff origin/main...worktree-<agent>-NN` against the ticket. Check also that `.git/hooks` and `.git/config` are unchanged.
+2. For every result from another agent, start an opus review of `git diff origin/main...worktree-<agent>-NN` against the ticket. Have the reviewer run the repository's full check command (for example, `checks/run.sh`) in the worker's worktree if the repository defines one. Check also that `.git/hooks` and `.git/config` are unchanged.
 3. Merge through the project's usual path, such as its `merge.sh`. If that path expects a pushed branch or an open PR, push and open it yourself. With no such path, merge the branch locally after the review. Update `queue.md`.
 4. Close the worker with `hc kill <agent>-NN`, then `hc rm <agent>-NN`. Remove the worktree and its branch after the merge.
