@@ -4,8 +4,11 @@
 
 | `who-builds` row | Model | Effort |
 |---|---|---|
-| sonnet | `gpt-6.1-terra` | `high` |
+| opus | `gpt-6.2-astra` | `high` |
+| sonnet | `gpt-6.2-sol` | `high` |
 | haiku | `gpt-6-luna` | `medium` |
+
+When a model retires, check the slugs against `~/.codex/models_cache.json`.
 
 ## Start command
 

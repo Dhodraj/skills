@@ -13,7 +13,7 @@ Each agent has an adapter in `adapters/<agent>.md`: its model table, start comma
 
 - `HC_TERMINAL_ID` is empty → you are not in a Herdr Core terminal. Say so and stop.
 - The worker shows an error the adapter lists under known failures → do what the adapter says, even if it ended with a `question` line.
-- Choosing tickets for another agent → only tickets with no open blocker whose `who-builds` row is sonnet or haiku. Keep opus rows, tickets that touch `.claude/`, an agent's own config folder, instructions or credentials, and tickets that need the user.
+- Choosing tickets for another agent → keep tickets with an open blocker or a pending user decision. Choose sonnet or haiku tickets and keep instruction changes. When the user names work for the agent (for example, "use Codex"), send that work on any `who-builds` row, including instruction changes. Use the adapter's model for that row. Keep credentials, `.claude/` and the agent's own config folder excluded unless the user explicitly names them.
 - The watcher for `<agent>-NN` ends → read its last line with `hc read <agent>-NN`. A `done` line names the result file. A `question` line needs an answer: send it with `hc send <agent>-NN` (`--if idle` only when the state is `idle`; a `done` worker takes input without `--if`), or bring it to the user if the choice is theirs, then start the wait again.
 - The watcher prints `stalled` or `no-status`, or `hc read` shows no `done` or `question` line → the worker is stuck or stopped for another reason. If `hc get` still shows `working` and the working timer is moving, start the watcher again. Check the adapter's known failures, then read more of its screen. Do not resend the prompt blindly.
 
@@ -61,6 +61,6 @@ To ask a question, end your turn with exactly one line: RUN <run id> #<NN> quest
 ## Take the result back
 
 1. Read `RUN/results/NN.md`.
-2. Start an opus review of `git diff origin/main...worktree-<agent>-NN` against the ticket, as `who-builds` says for any sonnet or haiku result. Check also that `.git/hooks` and `.git/config` are unchanged.
+2. For every result from another agent, start an opus review of `git diff origin/main...worktree-<agent>-NN` against the ticket. Check also that `.git/hooks` and `.git/config` are unchanged.
 3. Merge through the project's usual path, such as its `merge.sh`. If that path expects a pushed branch or an open PR, push and open it yourself. With no such path, merge the branch locally after the review. Update `queue.md`.
 4. Close the worker with `hc kill <agent>-NN`, then `hc rm <agent>-NN`. Remove the worktree and its branch after the merge.
