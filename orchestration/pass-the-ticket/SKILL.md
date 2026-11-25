@@ -48,7 +48,7 @@ Fill every `<...>`. Take the commit format from the `commit` skill for this repo
 
 ```text
 RUN <run id> ticket #<NN>. You are a build worker for a Claude Master that reads your last line.
-1. Read <ticket path>, then <brief path, or "no brief">. Where they name Claude-only tools (the Skill tool, sub-agents, .claude/rules, trail MCP), use the plain equivalent: rg, git, and the commands they name.
+1. Read <ticket path>, then <brief path, or "no brief">. Where they name Claude-only tools (the Skill tool, sub-agents, .claude/rules), use git and the commands they name. Search code with the trail CLI first (`trail ask "<what you need>" --source`); use rg only where trail has no answer.
 2. Work only in <worktree path>, on branch worktree-<agent>-<NN>. Start no other agents. Do not push or open a pull request.
 3. Run every acceptance command the ticket names. Each must pass.
 4. Commit with a one-line message in this form: <commit format>. Add no co-author trailer and no AI attribution.
