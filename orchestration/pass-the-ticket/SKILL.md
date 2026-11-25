@@ -25,6 +25,8 @@ Run from the repo root. `RUN` is the run folder that holds the ticket, `queue.md
    ```bash
    git fetch origin
    git worktree add ".claude/worktrees/<agent>-NN" -b "worktree-<agent>-NN" origin/main
+   # A new worktree has no trail code map; build it so the worker can search with trail.
+   (cd ".claude/worktrees/<agent>-NN" && [ -d .trail ] && trail build)
    ```
 2. Start the worker with the adapter's start command, named `<agent>-NN`, in that worktree. The adapter says what the worker can reach; use no wider access than it gives.
 3. Poll `hc get <agent>-NN | jq -r '.status.state'` every few seconds until it prints `idle`. Save `hc get <agent>-NN | jq -r '.turn'` as `<turn>`. If it is not `idle` within 90 seconds, read the screen with `hc read <agent>-NN` and check the adapter's known failures; a startup dialog is the usual cause. Then send the prompt below through a quoted heredoc, so the shell expands nothing in it:
@@ -48,7 +50,7 @@ Fill every `<...>`. Take the commit format from the `commit` skill for this repo
 
 ```text
 RUN <run id> ticket #<NN>. You are a build worker for a Claude Master that reads your last line.
-1. Read <ticket path>, then <brief path, or "no brief">. Where they name Claude-only tools (the Skill tool, sub-agents, .claude/rules), use git and the commands they name. Search code with the trail CLI first (`trail ask "<what you need>" --source`); use rg only where trail has no answer.
+1. Read <ticket path>, then <brief path, or "no brief">. Where they name Claude-only tools (the Skill tool, sub-agents, .claude/rules), use git and the commands they name. Search code with the trail CLI first (`trail ask "<what you need>" --source`, `trail grep`, `trail skeleton`, `trail callers`); use rg only where trail has no answer.
 2. Work only in <worktree path>, on branch worktree-<agent>-<NN>. Start no other agents. Do not push or open a pull request.
 3. Run every acceptance command the ticket names. Each must pass.
 4. Commit with a one-line message in this form: <commit format>. Add no co-author trailer and no AI attribution.
