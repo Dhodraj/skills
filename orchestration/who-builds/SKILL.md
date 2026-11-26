@@ -18,6 +18,7 @@ Opus plans, judges and reviews. Sonnet builds and verifies from a written brief.
 - Tempted to hand sonnet findings to merge, rank, or weigh against each other → opus. Sonnet only confirms or rejects each finding, one at a time, against the evidence the brief names.
 - Unsure which row fits → opus.
 - A sonnet or haiku result comes back → do not act on the worker's summary. For a lookup or a command's output, read the output file yourself if you run opus, else start an opus review. For a build or a change, start an opus review sub-agent that reads the diff against the brief.
+- A result deletes a check as covered by another → name the fault both catch. If the remaining check misses a case the deleted one caught, or the worker's report names such a case, keep the check and ask the user.
 - The review finds a gap in the brief → fix the brief as well as the result.
 - A skill named here is not installed → do that step as this file describes it (for `writing-for-agents`, the checklist under "A sonnet or haiku brief"), say which skill was missing, and do not install it without the user's consent.
 
