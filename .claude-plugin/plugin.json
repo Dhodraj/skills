@@ -23,6 +23,7 @@
     "./review/check-the-instruction",
     "./ui/design-the-ui",
     "./ui/find-a-component",
+    "./ui/match-the-prototype",
     "./ui/review-the-ui"
   ]
 }

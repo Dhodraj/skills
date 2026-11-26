@@ -13,7 +13,7 @@ ui/
       gates.md                   the floor, in three tiers: floor, reflex, finish
       product-thinking.md        business, customer and product questions; evidence rules
       styles.md                  thirteen styles with their values, picked from the gallery
-      directions.md              dealing three directions inside the picked style, the numbers
+      directions.md              naming the three live variants, the numbers
       tactile.md                 style 13 in full, loaded on a pick
       craft.md                   depth, motion, optical correctness: the layer under layout
       motion.md                  one motion library per project, springs, reduced motion
@@ -35,13 +35,22 @@ ui/
       run.sh                     the offline tests; add --network for the rest
       fixtures/                  the dashboard before and after, a landing page, the geometry faults
   find-a-component/SKILL.md               find a component instead of writing one
+  match-the-prototype/
+    SKILL.md                     build or check a screen against its approved prototype
+    references/pairs.md          the pairs file that both scripts read
+    scripts/
+      plan.js                    prints the Playwright MCP calls that capture each state
+      capture.js                 measures the first and settled frames, in the browser
+      compare.js                 lists every difference into differences.md
+      pairs.js                   reads the pairs file
+    tests/match.test.js          the scripts on hand-written frames, run by run.sh
   review-the-ui/
     SKILL.md                     review what exists, in two modes and two scopes
     references/
       changes.md                 reviewing a change rather than a screen
       copy.md                    the rules for interface copy
       performance.md             motion that is right and still drops frames
-  README.md                      the three skills, grouped by how they start
+  README.md                      the four skills, grouped by how they start
 review/
   tear-it-apart/SKILL.md          a staff engineer's review, round by round
   check-the-instruction/SKILL.md  test a change to a rule, skill, hook or setting first
@@ -61,6 +70,7 @@ shared/
   docs/
     decisions/
       adr-0001-architecture.md     why this shape
+      adr-0003-pick-the-look-from-live-variants.md  the look is picked from live variants
       restructure-plan.md          the plan to adopt the upstream skills layout
     guides/
       install-and-invoke.md        this file
@@ -124,7 +134,7 @@ move there is to copy into `~/Claude-System/claude/skills/` and run
 |---|---|---|
 | Node 20 or newer | the two scripts | no component search, no measuring |
 | Network | the registry directory and catalogues | `--curated-only` still works from the cache; the rest of the skill is unaffected |
-| A Playwright MCP server | stages H and I, and both companion skills that use a browser | fall back to headless Chrome for renders; interaction is not possible, and the report says so |
+| A Playwright MCP server | stages 8 and 9, `match-the-prototype`, and the companion skills that use a browser | fall back to headless Chrome for renders; interaction is not possible, and the report says so. `match-the-prototype` stops |
 
 Check the browser before relying on it:
 

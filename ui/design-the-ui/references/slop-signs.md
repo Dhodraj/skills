@@ -121,7 +121,7 @@ these after the passes.
 - A neutral grey page, the default system face, white text and the brand colour on one button, for a product whose world is warm or bright → a ramp tinted toward that world, and an accent taken from it.
 - A cream page and a serif headline for a product with no paper, print or warmth in its world → a ramp tinted toward that world, and a display face chosen for it.
 - A hero visual that is an empty box or a generic picture → a product preview in code, or an image from the product's world.
-- Every product given the same layout, type and palette → let the direction from stage 3 choose.
+- Every product given the same layout, type and palette → let the variant picked at stage 3 choose.
 
 ---
 

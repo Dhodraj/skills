@@ -26,7 +26,7 @@ Then answer three questions about the whole journey:
 - **What follows success?** The next action belongs on the screen that
   completes the last one.
 
-## The states, listed before the first file
+## The states, listed once the composition exists
 
 A screen built on one fixture is a screen with one state. List the real ones:
 

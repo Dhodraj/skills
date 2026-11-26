@@ -3,7 +3,7 @@
 Style 13 in [styles.md](styles.md), with its values already decided. Loaded
 only when the user picks it from the style gallery at stage 3, or asks for it
 by name. Never the default: a style with values is still a choice the user
-makes, and `directions.md` still deals three directions inside it.
+makes, and three live variants are still built inside it.
 
 Adapted from `kosta4a/tactile-design` (MIT).
 

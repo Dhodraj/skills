@@ -6,14 +6,14 @@
 
 ![A stock agent and the same agent with these skills, side by side, on three requests: build a screen, approve a change, and keep a limit through compaction](shared/brand/readme.gif)
 
-Eight skills for Claude Code. Each one adds a habit that a careful engineer
+Eleven skills for Claude Code. Each one adds a habit that a careful engineer
 already has, and that a coding agent skips when nobody tells it otherwise.
 
 ## The difference
 
 | You ask | A stock agent | With the skill |
 |---|---|---|
-| "Build the pipeline health screen" | Writes the page and says it is finished | Shows a gallery of styles in your brand to pick from, deals three directions inside your pick, writes `DESIGN.md`, then opens the running page, measures it and fixes what it finds ([`design-the-ui`](ui/design-the-ui/SKILL.md)) |
+| "Build the pipeline health screen" | Writes the page and says it is finished | Takes your brand, builds three live variants for you to pick from in the browser, writes `DESIGN.md`, then opens the running page, measures it and fixes what it finds ([`design-the-ui`](ui/design-the-ui/SKILL.md)) |
 | "I need a timeline with expandable logs" | Writes a new one from scratch | Searches your project and the component registries, and reads the code and licence before it suggests one ([`find-a-component`](ui/find-a-component/SKILL.md)) |
 | "Is this ready to ship?" | Reads the code and says yes | Measures the live page, walks the journey and lists each harm with evidence ([`review-the-ui`](ui/review-the-ui/SKILL.md)) |
 | "Would a tech lead approve this?" | Reviews its own work and approves it | Builds a coverage matrix and gives the work to a fresh reviewer who did not write it ([`tear-it-apart`](review/tear-it-apart/SKILL.md)) |
@@ -29,7 +29,7 @@ also call it by name.
 
 | Kit | Skills | For |
 |---|---|---|
-| [ui](ui/README.md) | `design-the-ui`, `find-a-component`, `review-the-ui` | Building and reviewing a product interface. The before-and-after test is in this README |
+| [ui](ui/README.md) | `design-the-ui`, `match-the-prototype`, `find-a-component`, `review-the-ui` | Building and reviewing a product interface. The before-and-after test is in this README |
 | [review](review/README.md) | `tear-it-apart`, `check-the-instruction` | Checking work before it is handed over |
 | [orchestration](orchestration/README.md) | `remember-my-words`, `grill-the-implementation`, `who-builds`, `keep-a-wiki`, `pass-the-ticket` | Keeping long or parallel agent work on track |
 

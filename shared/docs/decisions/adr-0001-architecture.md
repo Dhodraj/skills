@@ -64,7 +64,7 @@ dense-screen rules and `inspect`'s seven checks were absorbed, and
 `references/craft.md` was added after the first build. The skill as first
 written could prove a screen was not wrong. It could not stop the screen
 being forgettable, which is a different failure, and the one the brief cares
-about. The file is loaded at stage G before every UI edit, including a small
+about. Superseded by [ADR 0003](adr-0003-pick-the-look-from-live-variants.md): the file is loaded at stage G before every UI edit, including a small
 one. Craft is applied while the code is written; it cannot be added at review
 time.
 
@@ -125,19 +125,22 @@ Plus `scripts/check-sources.js` and `tests/run.sh`.
   asymmetry, near-tangents and a wrapped unit. Padding asymmetry is no longer
   only a matter for the look. Baselines, gutters, concentric corners and
   alignment compared across rows are still unmeasured.
-- `craft.md` is read before every UI edit, so every rule added to it is paid
+- Superseded by [ADR 0003](adr-0003-pick-the-look-from-live-variants.md):
+  `craft.md` is read before every UI edit, so every rule added to it is paid
   for on every build. On 2026-11-13 it went from 368 to 467 lines, about a
   quarter longer. That bought the worst-case data table, the touch rules and
   the sheet drag numbers. The test for a new rule is whether it holds whatever
   the project looks like. One house's taste belongs in a direction file
   instead, loaded only when that direction is picked.
-- Nothing enforces `craft.md` or `gates.md`. Both are read at stage 7 and
+- Superseded by [ADR 0003](adr-0003-pick-the-look-from-live-variants.md):
+  nothing enforces `craft.md` or `gates.md`. Both are read at stage 7 and
   then relied on. The demo in `shared/demo/` was built to them by hand, and the
   difference is visible against `shared/demo/console/console-plain.html`. An agent that
   skips those files produces the plain version and still passes every
   automated check. `DESIGN.md` is the one exception, because
   `pnpm dlx @google/design.md lint` is a real gate with a non-zero exit code.
-- Dealing three directions is now a stage with a hard stop, which closes part
+- Superseded by [ADR 0003](adr-0003-pick-the-look-from-live-variants.md):
+  Dealing three directions is now a stage with a hard stop, which closes part
   of the gap `taste-skill` closes differently. It does not close all of it:
   nothing can force the three to differ on a real axis, so three shades of
   one idea would pass the stage and fail the purpose.

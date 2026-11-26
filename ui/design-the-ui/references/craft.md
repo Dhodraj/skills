@@ -1,6 +1,6 @@
 # Craft
 
-Loaded at stage 7, at the depth the `design-the-ui` depth table names: the
+Loaded at stage 9, to check the built screen, at the depth the `design-the-ui` depth table names: the
 sections a component touches, or the whole file for a screen. The numbers in
 [directions.md](directions.md) stop a screen being wrong. These stop it being
 forgettable. A correct screen and a screen people like are not the same

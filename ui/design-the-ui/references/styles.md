@@ -1,8 +1,7 @@
 # Styles
 
 Loaded at stage 3 for a new surface, a redesign or "make this modern". The
-user picks a style by looking at it, then three directions are dealt inside
-it. Each entry carries values a build can follow without taste of its own.
+user picks a style by looking at it when no live brand exists. Each entry carries values a build can follow without taste of its own.
 
 No style is the default. The gallery shows them all, in a fixed order, and the
 user picks.
@@ -21,12 +20,9 @@ user picks.
    question tool, which one or two styles the user wants, by number. Offer
    "none of these" as an answer, and on it ask what the page should feel like
    in their own words.
-3. Read only the entries picked. Deal three directions inside the picked
-   style ([directions.md](directions.md)): they differ in density, structure
-   or what the screen makes dominant, never in style. With two styles picked,
-   deal one or two directions from each.
-4. On a pick, write the style's values into `DESIGN.md`, with its overrides
-   listed, and lint it.
+3. Read only the entries picked. The picked style passes on only its ground,
+   colour, type and imagery; `SKILL.md` stage 3 builds the live variants
+   inside it and records the pick.
 
 "You pick" at step 2: pick the style whose **Fits** row names this product,
 say which and why in one line, and carry on.

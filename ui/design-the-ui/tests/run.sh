@@ -216,6 +216,10 @@ done < <(node "$here/frames.test.js" 2>&1 || echo "FAIL the frames.js test did n
 while read -r verdict name; do
   if [[ "$verdict" == "ok" ]]; then pass=$((pass+1)); else fail=$((fail+1)); printf 'FAIL style-gallery.js: %s\n' "$verdict $name"; fi
 done < <(node "$here/style-gallery.test.js" 2>&1 || echo "FAIL the style-gallery.js test did not finish")
+# match-the-prototype's scripts run on hand-written frames; each line is one case.
+while read -r verdict name; do
+  if [[ "$verdict" == "ok" ]]; then pass=$((pass+1)); else fail=$((fail+1)); printf 'FAIL match-the-prototype: %s\n' "$verdict $name"; fi
+done < <(node "$skill/../match-the-prototype/tests/match.test.js" 2>&1 || echo "FAIL the match-the-prototype test did not finish")
 gallery="$skill/scripts/style-gallery.js"
 out="$(node "$gallery" --name Test --brand "#F05B36" --out "$tmp/gallery.html" 2>&1; echo "exit=$?")"
 has "the gallery writes a page"          "$out" "exit=0"

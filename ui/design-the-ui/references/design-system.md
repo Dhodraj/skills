@@ -105,7 +105,7 @@ components:
 
 | Section | What it must answer |
 |---|---|
-| **Overview** | What this product is, who uses it, and the feeling. Dense or spacious, warm or cool, playful or utilitarian. This is the fallback whenever no token covers a decision |
+| **Overview** | What this product is, who uses it, and the feeling. Dense or spacious, warm or cool, playful or utilitarian. This is the fallback whenever no token covers a decision. Once a variant is picked, one line: `Approved mock: <folder>, <address>`, which `match-the-prototype` reads |
 | **Colors** | Each colour's **role**, not only its value. Which one is the single most important action. What never gets the accent |
 | **Typography** | The full hierarchy as a table, and the rule for which level a thing takes |
 | **Layout & Spacing** | The grid, the maximum width, the gutter, and the scale. Say the step size and the half-step |
@@ -220,7 +220,7 @@ The project has tokens, a theme or a brand. The file records what is there.
 ## Route B: a new system
 
 No brand, no tokens, nothing to codify. The file is a proposal until the user
-picks a direction at stage 3 of `design-the-ui`.
+picks a variant at stage 3 of `design-the-ui`.
 
 Start from these defaults and change them for a reason, not for variety:
 
@@ -234,7 +234,7 @@ Start from these defaults and change them for a reason, not for variety:
 | Contrast | 4.5:1 body, 3:1 large text and controls | WCAG 2.2 AA |
 | Target size | 24 × 24 minimum, 44 × 44 comfortable | WCAG 2.5.8 and Apple's guidance |
 
-These are starting values, not a house style. The direction the user picks at
+These are starting values, not a house style. The variant the user picks at
 stage 3 overrides any of them, and `Do's and Don'ts` records the override so
 the next session does not undo it. A direction that arrives with its own
 values, such as [tactile.md](tactile.md), brings a list of overrides with it;

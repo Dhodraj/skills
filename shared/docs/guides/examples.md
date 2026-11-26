@@ -1,29 +1,19 @@
 # Four worked invocations
 
-Each shows what to say, what the skill does, and what comes back. The
-component search output is from a real run on 2026-10-27; the rest is the
-shape of the exchange.
+Each shows what to say, what the skill does, and what comes back.
 
 ## 1. A new product surface
 
 > Build the operations console for Consign. Dispatchers watch runs against a
 > schedule and move the ones that are slipping.
 
-**Depth**: a new surface, so every stage, with the proposal approved before
-any code.
+**Depth**: a new surface, so stages 0 to 10 in full. Nothing is built until the
+user picks a live variant.
 
-**Stage A** reads the repository first, then writes three answers, two lines
-each, with assumptions marked:
+**Stage 0** reads the repository, then finds the live brand: the live site,
+its repository or a brand file.
 
-```
-Business  Fewer late deliveries explained after the fact. (assumption: no
-          figures were supplied, so this is not measured here.)
-Customer  A dispatcher with 40 open runs, watching for slippage all day.
-Smallest  One screen: which runs are slipping, and reassign.
-Not now   Reporting, billing, the driver's own app.
-```
-
-**Stage C** turns that into something checkable:
+**Stage 2** writes the outcome and criteria a browser can check:
 
 ```
 Outcome    A dispatcher sees which run is late and reassigns it without
@@ -35,21 +25,52 @@ Accept  1  The late count is the largest thing on the screen.
         4  The empty state says what to do first.
 ```
 
-Then it stops and puts the proposal to the user: skeleton, components with
-sources, scales as values, states, cost, one alternative. Nothing is built on
-silence.
+**Stage 3** takes colour, type and imagery from the live brand. With no brand,
+the user picks a style from the gallery. The `prototype` skill then builds
+three live variants beside the real header and navigation, with sample data
+marked as sample. Each variant has its own layout, hierarchy and primary
+action:
 
-**Stages D to G** map the journey and its states, set the direction from the
-product's own world, search for components before writing any, and build
-every state rather than the happy path. Stage G reads
-`references/craft.md` first, every time: depth as a shadow rather than a
-border, concentric radii, ease-out under 300ms, an entrance that fires once
-and never on a repeated interaction, tabular figures. `shared/demo/console/console.html` is
-what that stage produced here, and `shared/demo/console/console-plain.html` is the same
-screen without it.
+```
+A  Control room   one dense table, late runs pinned on top, reassign in the row
+B  Timeline       runs on a schedule axis, the late ones drawn past their deadline
+C  Inbox          one late run at a time, with its reassign choices beside it
+```
 
-**Stages H to L** start the application, walk the journey, measure, fix, run
-the project's checks, and report what was verified and what was not.
+The skill gives the address and stops. The user flips through the variants in
+the browser and picks one. The picked variant stays in a lasting mock folder,
+and `DESIGN.md` records its values and the mock's address.
+
+**Stage 7** builds the picked variant with `match-the-prototype`. A screen no
+prototype draws is composed whole in one pass. Then `find-a-component` swaps in
+the project's own components. Last, every state from stage 4 is built: empty,
+one item, many, loading, partial failure, error, no permission.
+
+**Stages 8 and 9** start the application and walk the journey as a
+dispatcher. The review reads `gates.md`, `craft.md` and `markup.md`, and
+checks the built screen against them. It measures, then fixes in severity
+order until a pass finds nothing new.
+
+**Stage 10** reports what was verified, by what means, at which widths, and
+what was not.
+
+### The build matches the mock
+
+> Build the runs screen from the approved mock.
+
+`match-the-prototype` lists every state from the mock and from the product,
+then builds from the mock's markup, styles and words. `plan.js` prints the
+Playwright MCP calls that capture both sides. `compare.js` lists every
+difference:
+
+```
+| state | width | frame   | element         | prototype | product | difference                    |
+| many  | 1280  | settled | late count: font-size | 40px | 32px    | not the same                  |
+| many  | 1280  | first   | first row       | drawn     | absent  | product lacks it              |
+```
+
+The screen is done when the table is empty, or the user has ruled on each row
+left.
 
 ## 2. Find a component
 

@@ -12,6 +12,8 @@ You can also name it.
 
 - [`design-the-ui`](design-the-ui/SKILL.md): design or redesign a surface, from the
   design system up. Eleven stages, one of them a hard stop.
+- [`match-the-prototype`](match-the-prototype/SKILL.md): build or check a screen against
+  its approved prototype, state by state, by measuring both sides.
 - [`find-a-component`](find-a-component/SKILL.md): find a component that already exists, in the
   project or in the shadcn-spec registries, instead of writing a new one.
 - [`review-the-ui`](review-the-ui/SKILL.md): review an interface that exists, or what
@@ -26,19 +28,19 @@ a trigger description that says when it applies.
 
 Eleven stages that scale to the size of the change. A copy edit runs two of
 them and then looks at the result. A new surface runs all eleven, with the
-direction approved before any code is written.
+look picked by eye from live variants before any code is written.
 
 | | |
 |---|---|
 | 0 to 1 | Read what exists. Find or write `DESIGN.md`, and gate it with `pnpm dlx @google/design.md lint` |
-| 2 to 3 | Name the business outcome and criteria checkable in a browser. Show a gallery of thirteen styles in the client's own name, colour and font, and stop for the user to pick one or two. Deal three directions inside the pick and stop again |
-| 4 to 5 | Map the journey and every state a single fixture hides. Search the project and the component registries before writing a component |
-| 6 to 7 | Mock with the `prototype` skill inside the picked direction, or build direct. Build against the gates and the craft rules, most important screen alone and first, reviewed cold |
-| 8 to 9 | Start the application, walk it as the customer with real clicks and typing, measure, fix in severity order, check for regressions |
+| 2 to 3 | Name the business outcome and criteria checkable in a browser. Take the brand from the live site, its repo or a brand file; with none, show a gallery of thirteen styles in the client's own name, colour and font, for the user to pick one or two. Build three structurally different live variants with the `prototype` skill, inside a product mock, and stop until the user picks one in the browser |
+| 4 to 5 | Map the journey. Components and the full list of states wait for the composition |
+| 6 to 7 | A new look goes through the mock; build direct only where the look is set. Compose the whole screen in one pass, then swap in the product's components and build every state. A screen an approved prototype draws goes to `match-the-prototype` |
+| 8 to 9 | Start the application, walk it as the customer with real clicks and typing, check it against the gates and the craft rules, measure, fix in severity order, check for regressions |
 | 10 | Report what was verified, by what means, and what was not |
 
 One of those stages is a hard stop. On a new surface, the agent does not
-build past a direction that nobody picked.
+build past a look that nobody picked.
 
 ## The same prompt, with and without the skill
 
@@ -137,7 +139,7 @@ Two routes in. Where the project already has tokens, a theme or a live
 product, the file **records what is there**. Values come out of the code, or
 off the rendered page as computed values. Never estimated from a screenshot.
 Where there is nothing, the file is a proposal, and stays marked as one until
-the user picks a style and a direction.
+the user picks a variant.
 
 ## The demo
 
@@ -156,8 +158,8 @@ side by side.
 - The gates and the craft rules are instructions, not mechanisms. An agent
   that skips those files still passes every automated check. `DESIGN.md` is
   the only part with a linter behind it.
-- Nothing can force the three directions to differ on a real axis. Three
-  shades of one idea would pass the stage.
+- Nothing can force the three variants to differ in structure. Three shades
+  of one idea would pass the stage.
 - The Storybook path in `review-the-ui` has not been run against a real
   Storybook.
 - `pnpm dlx @google/design.md lint` has not been run against a file these

@@ -231,7 +231,8 @@ Block one, the six invariants:
 
 - The gates file has three tiers.
 - A Floor rule is never waivable.
-- `craft.md` and `gates.md` load before every UI edit.
+- `craft.md` and `gates.md` load before every UI edit. (Superseded by
+  [ADR 0003](adr-0003-pick-the-look-from-live-variants.md): they are read at the stage 9 review.)
 - A direction with values lists every override it makes.
 - A new rule needs a test in `tests/run.sh`.
 - `measure.js` returns measurements, never verdicts.

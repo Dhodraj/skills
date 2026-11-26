@@ -1,7 +1,7 @@
 # Gates
 
-The floor. Read it immediately before the first UI edit. For copy, a colour
-or one prop: "The three tiers", the four Floor sections and "Before handing
+The floor. Stage 9 reads it and checks the built screen against it. For copy,
+a colour or one prop, read before the edit: "The three tiers", the four Floor sections and "Before handing
 back", plus "Reflex: copy" for a copy change or "Reflex: the look a model
 defaults to" for a colour change. For a component or larger: the whole file.
 

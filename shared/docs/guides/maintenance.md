@@ -172,8 +172,8 @@ Keep two things out. Anything that reduces to taste, and anything that applies
 to one framework only. Where `measure.js` measures a craft value, craft.md
 still states the rule and marks it **measured**, so the fault and its pixels
 carry one name in both places. That replaces the earlier rule that craft.md
-leave the measurable parts to the script: a rule nobody reads before the edit
-is a rule nobody follows. Changed on 2026-11-12.
+leave the measurable parts to the script: a rule nobody reads is a rule nobody
+follows. Changed on 2026-11-12.
 
 When a value is added, say where it was read. The page's attribution section
 and `NOTICE` both name its four sources. A value with no provenance cannot be
@@ -191,12 +191,11 @@ disagreement does. A hidden conflict surfaces later as a rule that looks
 arbitrary.
 
 **Known gap, recorded rather than fixed.** Nothing enforces this file. Stage
-G tells the agent to read it before every UI edit, then relies on that. The
+9 tells the agent to check the built screen against it, then relies on that. The
 demo in `shared/demo/` was built to it by hand. `shared/demo/console/console-plain.html` is the
 same screen without it, and both pass every automated check. To close this,
-copy the shape `taste-skill` uses: make the agent produce three directions,
-choose one with a written reason, then judge the result cold against a list
-of default looks before calling it done.
+make the agent judge the result cold against a list of default looks before
+calling it done.
 
 ## Add or change a style with values
 

@@ -1,9 +1,8 @@
 # Directions
 
-Loaded at stage 3, after the user has picked a style from
-[styles.md](styles.md). It decides what the surface looks like inside that
-style, and it is a different decision inside a live product than on a new
-surface.
+Stage 3 reads "Which job this is" and "Three variants, never one", once the
+live brand or a style picked from [styles.md](styles.md) fixes colour and
+type. Stage 9 reads the rest and checks the built screen against it.
 
 ## Which job this is
 
@@ -18,57 +17,46 @@ The commonest failure is the third job being done when it was the first.
 Inventing a second visual system inside a product that already has one costs
 more than the screen is worth.
 
-## Deal three directions, never one
+## Three variants, never one
 
-For the third and fourth jobs, and only those, and only once the user has
-picked a style from the gallery in [styles.md](styles.md). A single proposal
-is the model's default aesthetic wearing a rationale. The user has nothing to
-compare it against. So they either accept it, or ask for "something else" with
-no vocabulary to say what. The gallery gives them that vocabulary; the three
-directions then work inside the picked style.
-
-Each direction gets four lines:
+For the third and fourth jobs, and only those. A single proposal is the
+model's default aesthetic wearing a rationale. The `prototype` skill's UI
+branch builds the three live variants and keeps them apart in structure. Name
+each in four lines:
 
 ```
 NAME        Control room
-ANCHOR      One hue, taken from the subject: the amber of a late warning
-TYPE        A condensed grotesque for figures, the body face for everything else
+STRUCTURE   One dense table; late runs pinned on top; reassign inside the row
 DENSITY     High. 32px rows, hairlines, no card ever
 SIGNATURE   The late count is the largest thing on the screen, always
 ```
 
 Rules for the three:
 
-- **Deal all three inside the picked style.** Use its values as written in
-  `styles.md`. With two styles picked, take one or two directions from each.
-- **Separate them on a real axis.** Three shades of the same idea is one
-  direction with three palettes. Move the density, or the structure, or what
-  the screen makes dominant.
-- **Take the anchor from the subject**, not the category. Look at the
-  product's own world: its material, its data, its place, what it produces. A
-  palette from there beats one chosen because other tools in the category use
-  it.
+- **Build all three inside the picked style**, or the live brand: hold its
+  ground, colour, type and imagery, and take nothing else from it. With two
+  styles picked, take one or two variants from each.
+- **No brand colour yet → take the anchor hue from the subject**, not the
+  category: the product's material, its data, its place, what it produces.
 - **Name the signature**: the one thing a customer would remember and
   describe to a colleague. A direction with no signature is a theme.
 - **Say what each costs**: a licensed font, a photography budget, a component
   that must be built rather than found.
-- **Never deal the same three twice.** Where a previous direction was picked
+- **Never build the same three twice.** Where a previous variant was picked
   in this repository, `DESIGN.md` records it; move away from it deliberately.
 
-Then stop. Put the three to the user with the question tool, and do not
-build past it on an assumption. Where the user says "you pick", pick
-one, say which and why in a line, and carry on.
+Then stop until the user picks one by eye in the browser. A text pick settles
+structure only. Where the user says "you pick", pick one, say which and why in
+a line, and carry on.
 
-On a yes, write the picked style and direction into `DESIGN.md` as values,
-with every override the style lists, and lint it.
-[design-system.md](design-system.md) holds the format. The two directions not
-picked go in one line each under `Overview`, so a later session knows what was
-already considered and rejected.
+On a pick, `SKILL.md` stage 3 step 4 records it, with every override the style
+lists, in the format of [design-system.md](design-system.md). The two variants
+not picked go in one line each under `Overview`.
 
 ## The numbers
 
-Defaults for building a screen. The brief can overrule any of them, and
-saying which one it overrules is part of the proposal.
+Defaults the review holds a built screen to. The brief can overrule any of
+them, and saying which one it overrules is part of the proposal.
 
 | What | Rule |
 |---|---|
@@ -109,7 +97,7 @@ worked example are different costs, and a weak build of a look nobody decided
 is the commonest failure. Three rules hold:
 
 - **It is still one style of thirteen.** The user picks it from the gallery
-  beside the others, and three directions are dealt inside it.
+  beside the others, and three live variants are built inside it.
 - **No style is the default.** Each one names where it does not fit. A
   marketing page, an editorial surface or a brand that carries the screen
   gets nothing from tactile's 13px base and 0.5px line.
