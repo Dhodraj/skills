@@ -109,7 +109,7 @@ is out, whatever it looks like.
 | 5 | Accessibility | Keyboard operable, named controls, status never by colour alone, focus visible |
 | 6 | Responsive behaviour | Check at 375px, not only on the desktop preview |
 | 7 | Customer usability | Does it suit the real density and labels, or only the demo's six tidy rows |
-| 8 | Source quality | Readable code, a maintained repository, a stated version. Note the last push date where it is old |
+| 8 | Source quality | Readable code, a stated version, and a maintained repository: read the package page (for example npm) and the README for a deprecation, "security fixes only" or "use X instead" notice, and state what it says in the recommendation. A recent release can be a security-only release |
 | 9 | Install cost | New dependencies, peer versions, a build step, a font, a licence key |
 | 10 | Maintenance | Copied code is code the project now owns. Prefer fewer, larger, well-built pieces |
 

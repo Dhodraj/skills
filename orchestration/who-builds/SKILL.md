@@ -9,9 +9,9 @@ Opus plans, judges and reviews. Sonnet builds and verifies from a written brief.
 
 ## Triggers
 
-- About to call Agent → pick the first row of the table that fits, and pass `model:`.
+- About to call Agent → if the user named a model or agent for this task or phase, use it; otherwise pick the first row of the table that fits. Pass it as `model:`. A model from another agent CLI (for example, a Codex model) goes through `pass-the-ticket`, not Agent.
 - Tempted to fork for a cheaper task → start a fresh agent instead.
-- Writing a ticket or brief → start it with `Model: <model>, because <the row that fits>.`
+- Writing a ticket or brief → start it with `Model: <model>, because <the row that fits, or "the user named it">.`
 - Writing a ticket, or a brief whose output is text an agent will keep reading (a skill, a rule, a prompt) → read the `writing-for-agents` skill first. A one-off sonnet or haiku brief needs only the checklist under "A sonnet or haiku brief".
 - Writing a sonnet or haiku brief → end it with the worker rules below.
 - The brief still says "decide", "design" or "choose" → the task is opus. Settle the choice yourself, or keep the task.

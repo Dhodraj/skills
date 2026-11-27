@@ -14,6 +14,7 @@ Each agent has an adapter in `adapters/<agent>.md`: its model table, start comma
 - `HC_TERMINAL_ID` is empty → you are not in a Herdr Core terminal. Say so and stop.
 - The worker shows an error the adapter lists under known failures → do what the adapter says, even if it ended with a `question` line.
 - Choosing tickets for another agent → keep tickets with an open blocker or a pending user decision. Choose sonnet or haiku tickets and keep instruction changes. When the user names work for the agent (for example, "use Codex"), send that work on any `who-builds` row, including instruction changes. Use the adapter's model for that row. Keep credentials, `.claude/` and the agent's own config folder excluded unless the user explicitly names them.
+- About to start the first worker of a batch → in `queue.md`, list the checks the agent's sandbox cannot run in this repo (guard hooks, browser tests, process inspection) and whether a new worktree has its dependencies installed. Put both in every prompt. The opus review runs those checks.
 - The watcher for `<agent>-NN` ends → read its last line with `hc read <agent>-NN`. A `done` line names the result file. A `question` line needs an answer: send it with `hc send <agent>-NN` (`--if idle` only when the state is `idle`; a `done` worker takes input without `--if`), or bring it to the user if the choice is theirs, then start the wait again.
 - The watcher prints `stalled` or `no-status`, or `hc read` shows no `done` or `question` line → the worker is stuck or stopped for another reason. If `hc get` still shows `working` and the working timer is moving, start the watcher again. Check the adapter's known failures, then read more of its screen. Do not resend the prompt blindly.
 
@@ -52,7 +53,7 @@ Fill every `<...>`. Take the commit format from the `commit` skill for this repo
 RUN <run id> ticket #<NN>. You are a build worker for a Claude Master that reads your last line.
 1. Read <ticket path>, then <brief path, or "no brief">. Where they name Claude-only tools (the Skill tool, sub-agents, .claude/rules), use git and the commands they name. Search code with the trail CLI first (`trail ask "<what you need>" --source`, `trail grep`, `trail skeleton`, `trail callers`); use rg only where trail has no answer.
 2. Work only in <worktree path>, on branch worktree-<agent>-<NN>. Start no other agents. Do not push or open a pull request.
-3. Run every acceptance command the ticket names. Each must pass.
+3. Run every acceptance command the ticket names. Each must pass. These cannot run in your sandbox: <the list from queue.md, or "none known">. Dependencies: <installed | not installed>. Report each one you cannot run as not run, and leave it to the Master's review.
 4. Commit with a one-line message in this form: <commit format>. Add no co-author trailer and no AI attribution.
 5. Write <absolute RUN>/results/<NN>.md as Situation, Background, Assessment, Recommendation. List each acceptance criterion with the command you ran and its result.
 6. End your turn with exactly one line: RUN <run id> #<NN> done | <absolute RUN>/results/<NN>.md
