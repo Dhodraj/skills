@@ -3,9 +3,9 @@ name: pass-the-ticket
 description: Pass implementation tickets to another agent CLI, such as Codex, in Herdr Core terminals and take the results back. Use when the user asks to give tickets to another agent, or to split a batch between Claude and another agent.
 ---
 
-You are the Master. A worker agent builds one ticket in its own worktree, commits there and writes the result file. A background watcher tells you when it stops. You review and merge its work as you would a Claude worker's.
+You are the Master. A worker agent builds one ticket in its own worktree, commits there unless its adapter has a Commit section, and writes the result file. A background watcher tells you when it stops. You review and merge its work as you would a Claude worker's.
 
-Each agent has an adapter in `adapters/<agent>.md`: its model table, start command, session lookup and known failures. Read the adapter before you start a worker. If no adapter exists for the agent the user names, say so and stop.
+Each agent has an adapter in `adapters/<agent>.md`: its model table, start command, what it can reach, session lookup and known failures, and any prompt or commit steps that differ. Read the adapter before you start a worker. If no adapter exists for the agent the user names, say so and stop.
 
 `hc` below is `~/.local/bin/herdr-core`. `<agent>` is the adapter name, such as `codex`. `NN` is the two-digit ticket number.
 

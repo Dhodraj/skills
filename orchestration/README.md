@@ -23,8 +23,8 @@ You can also name it.
   and lint. It writes only in a repo that already has `docs/wiki/index.md`.
 - [`pass-the-ticket`](pass-the-ticket/SKILL.md): pass implementation tickets
   to another agent CLI in Herdr Core terminals, each in its own worktree.
-  Review and merge its commits as for a Claude worker. One adapter per agent;
-  Codex is the first.
+  Review and merge its work as for a Claude worker. One adapter per agent:
+  Codex commits its work, and for Antigravity (`agy`) the Master commits.
 
 ## User-invoked
 
