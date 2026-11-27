@@ -59,6 +59,7 @@ RUN <run id> ticket #<NN>. You are a build worker for a Claude Master that reads
 6. End your turn with exactly one line: RUN <run id> #<NN> done | <absolute RUN>/results/<NN>.md
 To ask a question, end your turn with exactly one line: RUN <run id> #<NN> question: <one line>. The answer comes as your next message.
 <the worker rules from the who-builds skill, word for word>
+<the lines under Prompt in the adapter, if it has that section>
 ```
 
 ## Take the result back
