@@ -13,6 +13,9 @@ You can also name it.
 - [`check-the-instruction`](check-the-instruction/SKILL.md): test a change to
   CLAUDE.md, a rule, a skill, a hook, a setting or a permission before it is
   applied. A fresh reviewer returns the wording to apply.
+- [`to-adr`](to-adr/SKILL.md): decide whether a decision is architecture,
+  then interrogate it and write it as an architecture decision record. Product,
+  convention and ops decisions go to the spec, rules or infra doc instead.
 
 ## User-invoked
 
@@ -29,3 +32,9 @@ None.
 
 If a needed skill is missing, the calling skill does that step itself, tells
 you which skill was missing, and installs nothing.
+
+## Credits
+
+`to-adr` interrogates a decision with the "Durable Decisions" framework by
+Rushabh Doshi. The framework comes from Ficus Kirkpatrick's internal framework
+and builds on ideas from Nikhil Chandhok.

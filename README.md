@@ -30,7 +30,7 @@ also call it by name.
 | Kit | Skills | For |
 |---|---|---|
 | [ui](ui/README.md) | `design-the-ui`, `match-the-prototype`, `find-a-component`, `review-the-ui` | Building and reviewing a product interface. The before-and-after test is in this README |
-| [review](review/README.md) | `tear-it-apart`, `check-the-instruction` | Checking work before it is handed over |
+| [review](review/README.md) | `tear-it-apart`, `check-the-instruction`, `to-adr` | Checking work before it is handed over |
 | [orchestration](orchestration/README.md) | `remember-my-words`, `grill-the-implementation`, `who-builds`, `keep-a-wiki`, `pass-the-ticket` | Keeping long or parallel agent work on track |
 
 `split-the-work` is now in the colony plugin,

@@ -1,6 +1,6 @@
 ---
 name: grill-the-implementation
-description: "Use when a plan is agreed, tickets are next, and how it is built is still open: how systems talk (API, webhook, event, queue), where data lives, auth, what happens on failure, how it ships. Also for 'grill the implementation'. Writes the decisions to a file that `to-tickets` reads. Not for what to build or whether: a plain 'grill' is `grilling`. Terms and ADRs are `domain-modeling`."
+description: "Use when a plan is agreed, tickets are next, and how it is built is still open: how systems talk (API, webhook, event, queue), where data lives, auth, what happens on failure, how it ships. Also for 'grill the implementation'. Writes the decisions to a file that `to-tickets` reads. Not for what to build or whether: a plain 'grill' is `grilling`. Terms are `domain-modeling`; ADRs are `to-adr`."
 ---
 
 Settle every technical choice the build needs, so no builder guesses. What the feature does is already agreed; this settles how it is built.
@@ -18,7 +18,7 @@ Call the Skill tool with "grilling", and run it on how the agreed plan is built,
 - The codebase already solves this choice somewhere → recommend that pattern, and show the file. Recommend a new one only when the deciding quality says so, and say which.
 - Tempted to ask about an area marked out → mark it in first, with the reason.
 - Nobody can answer → stop, and write the open questions under "Open" in the result file.
-- A question is about terms, the domain model or an ADR → run `domain-modeling` for that branch.
+- A question is about terms or the domain model → run `domain-modeling` for that branch. A question about an ADR → run `to-adr`.
 - A skill named here is not installed → do that step as this file describes it, say which skill was missing, and do not install it without the user's consent. Without `grilling`, run the interview as in the next section.
 
 ## Without grilling
