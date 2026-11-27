@@ -21,6 +21,7 @@
     "./orchestration/pass-the-ticket",
     "./review/tear-it-apart",
     "./review/check-the-instruction",
+    "./review/to-adr",
     "./ui/design-the-ui",
     "./ui/find-a-component",
     "./ui/match-the-prototype",
