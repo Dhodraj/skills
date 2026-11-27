@@ -20,6 +20,7 @@ The worker has network access, which the user chose. With network on, it can als
 
 ```bash
 hc run --bg --name codex-NN --cwd "$PWD/.claude/worktrees/codex-NN" -- \
+  env CLAUDE_CONTEXT_HANDOFF=off \
   codex -m <model> -c model_reasoning_effort=<effort> \
   -s workspace-write -a never \
   -c sandbox_workspace_write.network_access=true \
@@ -27,6 +28,8 @@ hc run --bg --name codex-NN --cwd "$PWD/.claude/worktrees/codex-NN" -- \
   --add-dir "$(git rev-parse --path-format=absolute --git-common-dir)/worktrees/codex-NN" \
   --add-dir "<absolute RUN>"
 ```
+
+`CLAUDE_CONTEXT_HANDOFF=off` stops the context-full Stop hook, which would ask the worker to start another agent.
 
 The sandbox keeps `.git` read-only, and the worktree's own git folder too, unless each is added. Both are what let Codex commit.
 
