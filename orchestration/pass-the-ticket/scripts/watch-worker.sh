@@ -8,7 +8,8 @@
 #   stalled           its screen has not changed for stall-minutes (default 20)
 #   no-status         no status for stall-minutes, such as a dialog Herdr Core
 #                     does not classify
-# Lines that tick on their own (the working timer) are ignored when the screen
+# Lines that tick on their own (the Codex working timer, the agy spinner line
+# ending in "..." or "... 12s") are ignored when the screen
 # is compared.
 set -euo pipefail
 hc="$HOME/.local/bin/herdr-core"
@@ -19,7 +20,7 @@ stall=$((minutes * 60))
 last=""
 since=$(date +%s)
 
-screen() { "$hc" read "$name" 2>/dev/null | grep -vE 'Working \(|esc to interrupt' | shasum; }
+screen() { "$hc" read "$name" 2>/dev/null | grep -vE 'Working \(|esc to interrupt|\.\.\.( [0-9]+s)?[[:space:]]*$' | shasum; }
 
 while :; do
   if ! info="$("$hc" get "$name" 2>/dev/null)"; then echo "gone"; exit 0; fi

@@ -47,7 +47,7 @@ Run from the repo root. `RUN` is the run folder that holds the ticket, `queue.md
 
 ## The prompt
 
-Fill every `<...>`. Take the commit format from the `commit` skill for this repo.
+Fill every `<...>`. Take the commit format from the `commit` skill for this repo. Where the adapter has a Prompt section, its steps replace the steps with the same numbers.
 
 ```text
 RUN <run id> ticket #<NN>. You are a build worker for a Claude Master that reads your last line.
@@ -59,12 +59,11 @@ RUN <run id> ticket #<NN>. You are a build worker for a Claude Master that reads
 6. End your turn with exactly one line: RUN <run id> #<NN> done | <absolute RUN>/results/<NN>.md
 To ask a question, end your turn with exactly one line: RUN <run id> #<NN> question: <one line>. The answer comes as your next message.
 <the worker rules from the who-builds skill, word for word>
-<the lines under Prompt in the adapter, if it has that section>
 ```
 
 ## Take the result back
 
-1. Read `RUN/results/NN.md`.
+1. Read `RUN/results/NN.md`. If the adapter has a Commit section, commit the worker's changes as it says.
 2. For every result from another agent, start an opus review of `git diff origin/main...worktree-<agent>-NN` against the ticket. Have the reviewer run the repository's full check command (for example, `checks/run.sh`) in the worker's worktree if the repository defines one. Check also that `.git/hooks` and `.git/config` are unchanged.
 3. Merge through the project's usual path, such as its `merge.sh`. If that path expects a pushed branch or an open PR, push and open it yourself. With no such path, merge the branch locally after the review. Update `queue.md`.
 4. Close the worker with `hc kill <agent>-NN`, then `hc rm <agent>-NN`. Remove the worktree and its branch after the merge.
