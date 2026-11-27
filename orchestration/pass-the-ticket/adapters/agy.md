@@ -24,6 +24,12 @@ Use a clone in the folder for the account that owns the target repository. Run `
 
 ## Start command
 
+After `git worktree add`, which writes the new branch into `.git/config`, save the git control files from the repository root:
+
+```bash
+shasum .git/config .git/hooks/* > "<absolute RUN>/agy-NN-git.txt"
+```
+
 ```bash
 WT="$(pwd -P)/.claude/worktrees/agy-NN"
 hc run --bg --name agy-NN --cwd "$WT" -- \
@@ -55,7 +61,7 @@ Use these in place of the prompt's steps 1, 3, 4 and 5:
 
 After reading the result file, in the worktree:
 
-1. Check that `.git/hooks` and `.git/config` are unchanged before you run git there. Git runs hooks and config commands, such as `core.fsmonitor`, as you.
+1. From the repository root, `shasum .git/config .git/hooks/* | diff "<absolute RUN>/agy-NN-git.txt" -` prints nothing. Run it before any git command in the worktree. Git runs hooks and config commands, such as `core.fsmonitor`, as you.
 2. `git log --oneline origin/main..HEAD` prints nothing. If it prints commits, the worker committed: run `git reset --soft origin/main` to keep the changes and drop the commits.
 3. `git status --porcelain` lists the same files as the result file. Read the diff of any file that only one of them lists.
 4. Run the acceptance commands from the result file. Each must pass.
